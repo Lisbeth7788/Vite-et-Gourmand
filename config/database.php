@@ -1,10 +1,12 @@
 <?php
 
+$isProduction = (getenv('APP_ENV') ?: 'local') === 'production';
+
 if (session_status() === PHP_SESSION_NONE) {
     session_set_cookie_params([
         'httponly' => true,
         'samesite' => 'Lax',
-        'secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+        'secure' => $isProduction || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
     ]);
     session_start();
 }
@@ -13,6 +15,11 @@ $databaseHost = getenv('DB_HOST') ?: '127.0.0.1';
 $databaseName = getenv('DB_NAME') ?: 'vite_et_gourmand';
 $databaseUser = getenv('DB_USER') ?: 'root';
 $databasePassword = getenv('DB_PASSWORD') ?: '';
+
+if ($isProduction && (!$databaseHost || !$databaseName || !$databaseUser || !$databasePassword)) {
+    http_response_code(500);
+    exit('Configuration de production incomplete.');
+}
 
 $pdo = new PDO(
     "mysql:host={$databaseHost};dbname={$databaseName};charset=utf8mb4",
@@ -27,6 +34,8 @@ $pdo = new PDO(
 function jsonResponse(array $data, int $status = 200): void
 {
     http_response_code($status);
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: no-store');
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;

@@ -32,6 +32,7 @@ $insert->execute([
     'client'
 ]);
 
+session_regenerate_id(true);
 $profile = [
     'id' => $id,
     'firstName' => trim($data['first_name']),

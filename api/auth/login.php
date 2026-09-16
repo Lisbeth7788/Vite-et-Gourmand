@@ -16,6 +16,7 @@ if (!$user || !password_verify($data['password'], $user['password_hash'])) {
     jsonResponse(['error' => 'Adresse e-mail ou mot de passe incorrect.'], 401);
 }
 
+session_regenerate_id(true);
 $profile = [
     'id' => $user['id'],
     'firstName' => $user['first_name'],
