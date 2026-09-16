@@ -1,0 +1,57 @@
+<?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'httponly' => true,
+        'samesite' => 'Lax',
+        'secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+    ]);
+    session_start();
+}
+
+$databaseHost = getenv('DB_HOST') ?: '127.0.0.1';
+$databaseName = getenv('DB_NAME') ?: 'vite_et_gourmand';
+$databaseUser = getenv('DB_USER') ?: 'root';
+$databasePassword = getenv('DB_PASSWORD') ?: '';
+
+$pdo = new PDO(
+    "mysql:host={$databaseHost};dbname={$databaseName};charset=utf8mb4",
+    $databaseUser,
+    $databasePassword,
+    [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]
+);
+
+function jsonResponse(array $data, int $status = 200): void
+{
+    http_response_code($status);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+function requestData(): array
+{
+    $data = json_decode(file_get_contents('php://input'), true);
+    return is_array($data) ? $data : $_POST;
+}
+
+function requiredFields(array $data, array $fields): array
+{
+    return array_values(array_filter($fields, fn ($field) => !isset($data[$field]) || trim((string) $data[$field]) === ''));
+}
+
+function requireRole(array $roles): array
+{
+    if (!isset($_SESSION['user'])) {
+        jsonResponse(['error' => 'Connexion requise.'], 401);
+    }
+
+    if (!in_array($_SESSION['user']['role'], $roles, true)) {
+        jsonResponse(['error' => 'Vous n’avez pas les droits nécessaires.'], 403);
+    }
+
+    return $_SESSION['user'];
+}

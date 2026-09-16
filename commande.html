@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Commander un menu Vite et Gourmand.">
+  <title>Commander - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="Vite et Gourmand - Accueil">Vite et Gourmand</a>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html">Nos menus</a></li>
+        <li><a href="histoire.html">À propos</a></li>
+        <li><a href="connexion.html">Connexion</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="order-page">
+    <div class="page-intro">
+      <p class="eyebrow">Votre prestation</p>
+      <h1>Passer une commande</h1>
+      <p>Renseignez les informations nécessaires à la préparation et à la livraison de votre menu.</p>
+    </div>
+
+    <form id="order-form" class="order-layout" action="#" method="post">
+      <div class="order-fields">
+        <section class="form-section" aria-labelledby="customer-title">
+          <h2 id="customer-title">Informations client</h2>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="order-first-name">Prénom</label>
+              <input id="order-first-name" name="first_name" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="form-field">
+              <label for="order-last-name">Nom</label>
+              <input id="order-last-name" name="last_name" type="text" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="order-email">Adresse e-mail</label>
+            <input id="order-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-field">
+            <label for="order-phone">GSM</label>
+            <input id="order-phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="delivery-title">
+          <h2 id="delivery-title">Prestation et livraison</h2>
+          <div class="form-field">
+            <label for="order-address">Adresse de livraison</label>
+            <textarea id="order-address" name="address" rows="3" autocomplete="street-address" required></textarea>
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="order-city">Ville</label>
+              <input id="order-city" name="city" type="text" value="Bordeaux" required>
+            </div>
+            <div class="form-field">
+              <label for="order-distance">Distance hors Bordeaux (km)</label>
+              <input id="order-distance" name="distance" type="number" min="0" step="0.1" value="0">
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="order-date">Date de la prestation</label>
+              <input id="order-date" name="date" type="date" required>
+            </div>
+            <div class="form-field">
+              <label for="order-time">Heure souhaitée</label>
+              <input id="order-time" name="time" type="time" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="order-place">Lieu de livraison</label>
+            <input id="order-place" name="place" type="text" placeholder="Salle, domicile, entreprise..." required>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="menu-choice-title">
+          <h2 id="menu-choice-title">Menu choisi</h2>
+          <div class="form-field">
+            <label for="order-menu">Sélection du menu</label>
+            <select id="order-menu" name="menu" required>
+              <option value="marche-bordeaux" data-price="24" data-min="6">Le marché de Bordeaux - 24 € / personne - minimum 6</option>
+              <option value="reveillon" data-price="38" data-min="8">Le réveillon généreux - 38 € / personne - minimum 8</option>
+              <option value="jardin-printemps" data-price="29" data-min="6">Le jardin de printemps - 29 € / personne - minimum 6</option>
+              <option value="fete-vegetale" data-price="32" data-min="10">La fête végétale - 32 € / personne - minimum 10</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="order-people">Nombre de personnes</label>
+            <input id="order-people" name="people" type="number" min="6" value="6" required>
+            <small id="people-help">Le minimum dépend du menu sélectionné.</small>
+          </div>
+        </section>
+      </div>
+
+      <aside class="order-summary" aria-labelledby="summary-title">
+        <h2 id="summary-title">Récapitulatif</h2>
+        <dl>
+          <div><dt>Menu</dt><dd id="summary-menu">Le marché de Bordeaux</dd></div>
+          <div><dt>Prix des menus</dt><dd id="summary-menu-price">144,00 €</dd></div>
+          <div><dt>Réduction</dt><dd id="summary-discount">0,00 €</dd></div>
+          <div><dt>Livraison</dt><dd id="summary-delivery">0,00 €</dd></div>
+          <div class="summary-total"><dt>Total</dt><dd id="summary-total">144,00 €</dd></div>
+        </dl>
+        <p class="summary-note">La livraison hors Bordeaux est facturée 5 € puis 0,59 € par kilomètre.</p>
+        <button class="button" type="submit">Valider la commande</button>
+      </aside>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p>&copy; 2026 Vite et Gourmand</p>
+      <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
+    </div>
+    <div class="opening-hours">
+      <h2>Horaires</h2>
+      <dl>
+        <div><dt>Lundi</dt><dd>11h30 - 14h00</dd></div>
+        <div><dt>Mardi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Mercredi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Jeudi</dt><dd>11h30 - 14h00 / 18h00 - 21h30</dd></div>
+        <div><dt>Vendredi</dt><dd>11h30 - 14h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Samedi</dt><dd>10h30 - 15h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Dimanche</dt><dd>10h30 - 14h30</dd></div>
+      </dl>
+    </div>
+    <nav aria-label="Liens secondaires">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">Conditions générales de vente</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

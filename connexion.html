@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Connexion et création de compte Vite et Gourmand.">
+  <title>Connexion - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="Vite et Gourmand - Accueil">Vite et Gourmand</a>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html">Nos menus</a></li>
+        <li><a href="histoire.html">À propos</a></li>
+        <li><a href="connexion.html" aria-current="page">Connexion</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="auth-page">
+    <div class="page-intro">
+      <h1>Connexion / Inscription</h1>
+      <p>Accédez à vos commandes ou créez votre compte client.</p>
+    </div>
+
+    <div class="auth-layout">
+      <section class="auth-panel" aria-labelledby="login-title">
+        <p class="eyebrow">Déjà client ?</p>
+        <h2 id="login-title">Se connecter</h2>
+        <form id="login-form" action="#" method="post">
+          <div class="form-field">
+            <label for="login-email">Adresse e-mail</label>
+            <input id="login-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-field">
+            <label for="login-password">Mot de passe</label>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+          </div>
+          <button class="button" type="submit">Se connecter</button>
+          <a class="form-link" href="#password-reset">Mot de passe oublié ?</a>
+        </form>
+      </section>
+
+      <section class="auth-panel" aria-labelledby="register-title">
+        <p class="eyebrow">Première commande ?</p>
+        <h2 id="register-title">Créer un compte</h2>
+        <form id="register-form" action="#" method="post">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="register-first-name">Prénom</label>
+              <input id="register-first-name" name="first_name" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="form-field">
+              <label for="register-last-name">Nom</label>
+              <input id="register-last-name" name="last_name" type="text" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="register-phone">Numéro de GSM</label>
+            <input id="register-phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="form-field">
+            <label for="register-email">Adresse e-mail</label>
+            <input id="register-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-field">
+            <label for="register-address">Adresse postale</label>
+            <textarea id="register-address" name="address" rows="3" autocomplete="street-address" required></textarea>
+          </div>
+          <div class="form-field">
+            <label for="register-password">Mot de passe</label>
+            <input id="register-password" name="password" type="password" minlength="10" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{10,}" aria-describedby="password-help" autocomplete="new-password" required>
+            <small id="password-help">10 caractères minimum, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
+          </div>
+          <div class="form-field">
+            <label for="register-password-confirm">Confirmer le mot de passe</label>
+            <input id="register-password-confirm" name="password_confirmation" type="password" autocomplete="new-password" required>
+          </div>
+          <div class="checkbox-field">
+            <input id="privacy-consent" name="privacy_consent" type="checkbox" required>
+            <label for="privacy-consent">J'accepte la politique de confidentialité.</label>
+          </div>
+          <button class="button" type="submit">Créer mon compte</button>
+        </form>
+      </section>
+    </div>
+
+    <section id="password-reset" class="reset-panel" aria-labelledby="reset-title">
+      <h2 id="reset-title">Réinitialiser mon mot de passe</h2>
+      <p>Recevez un lien de réinitialisation à l'adresse associée à votre compte.</p>
+      <form id="reset-form" class="reset-form" action="#" method="post">
+        <div class="form-field">
+          <label for="reset-email">Adresse e-mail</label>
+          <input id="reset-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <button class="button" type="submit">Recevoir le lien</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p>&copy; 2026 Vite et Gourmand</p>
+      <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
+    </div>
+    <div class="opening-hours">
+      <h2>Horaires</h2>
+      <dl>
+        <div><dt>Lundi</dt><dd>11h30 - 14h00</dd></div>
+        <div><dt>Mardi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Mercredi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Jeudi</dt><dd>11h30 - 14h00 / 18h00 - 21h30</dd></div>
+        <div><dt>Vendredi</dt><dd>11h30 - 14h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Samedi</dt><dd>10h30 - 15h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Dimanche</dt><dd>10h30 - 14h30</dd></div>
+      </dl>
+    </div>
+    <nav aria-label="Liens secondaires">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">Conditions générales de vente</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </footer>
+</body>
+</html>

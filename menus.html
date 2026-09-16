@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Découvrez tous les menus de Vite et Gourmand.">
+  <title>Nos menus - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="Vite et Gourmand - Accueil">Vite et Gourmand</a>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html" aria-current="page">Nos menus</a></li>
+        <li><a href="histoire.html">À propos</a></li>
+        <li><a href="index.html#connexion">Connexion</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="catalogue-page">
+    <section class="page-intro" aria-labelledby="menus-page-title">
+      <h1 id="menus-page-title">Tous nos menus</h1>
+      <p>Filtrez notre sélection et trouvez la formule adaptée à votre événement.</p>
+    </section>
+
+    <section class="catalogue-section" aria-labelledby="catalogue-title">
+      <div class="catalogue-layout">
+        <aside class="filters-panel" aria-labelledby="filters-title">
+          <h2 id="filters-title">Rechercher un menu</h2>
+          <form id="menu-filters">
+            <div class="form-field">
+              <label for="theme-filter">Thème</label>
+              <select id="theme-filter" name="theme">
+                <option value="">Tous les thèmes</option>
+                <option value="classique">Classique</option>
+                <option value="noel">Noël</option>
+                <option value="paques">Pâques</option>
+                <option value="evenement">Événement</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="regime-filter">Régime</label>
+              <select id="regime-filter" name="regime">
+                <option value="">Tous les régimes</option>
+                <option value="classique">Classique</option>
+                <option value="vegetarien">Végétarien</option>
+                <option value="vegan">Vegan</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="people-filter">Personnes minimum</label>
+              <input id="people-filter" name="people" type="number" min="1" placeholder="Ex. 6">
+            </div>
+            <div class="form-field">
+              <label for="price-filter">Prix maximum par personne</label>
+              <input id="price-filter" name="price" type="number" min="0" step="0.01" placeholder="Ex. 35">
+            </div>
+            <button class="button filter-button" type="reset">Réinitialiser les filtres</button>
+          </form>
+        </aside>
+
+        <div class="catalogue-results">
+          <div class="results-heading">
+            <h2 id="catalogue-title">Menus disponibles</h2>
+            <p id="results-count" aria-live="polite"></p>
+          </div>
+          <div id="menu-list" class="catalogue-grid">
+            <article class="catalogue-card" data-theme="classique" data-regime="classique" data-people="6" data-price="24">
+              <img class="menu-placeholder-image" src="images/images/menu-marche.jpg" alt="Plat du menu classique">
+              <div class="catalogue-card-content">
+                <p class="card-tag">Classique · Classique</p>
+                <h3>Le marché de Bordeaux</h3>
+                <p>Une formule équilibrée avec produits de saison, pensée pour les repas conviviaux.</p>
+                <p class="menu-meta"><strong>À partir de 24 € par personne</strong><br>Minimum 6 personnes</p>
+                <a class="button button-small" href="menu-detail.html?menu=marche-bordeaux">Voir le détail</a>
+              </div>
+            </article>
+
+            <article class="catalogue-card" data-theme="noel" data-regime="classique" data-people="8" data-price="38">
+              <img class="menu-placeholder-image" src="images/images/menu-reveillon.jpg" alt="Repas de fête du menu de Noël">
+              <div class="catalogue-card-content">
+                <p class="card-tag">Noël · Classique</p>
+                <h3>Le réveillon généreux</h3>
+                <p>Une sélection festive pour réunir vos proches autour d'un repas de fête.</p>
+                <p class="menu-meta"><strong>À partir de 38 € par personne</strong><br>Minimum 8 personnes</p>
+                <a class="button button-small" href="menu-detail.html?menu=reveillon">Voir le détail</a>
+              </div>
+            </article>
+
+            <article class="catalogue-card" data-theme="paques" data-regime="vegetarien" data-people="6" data-price="29">
+              <img class="menu-placeholder-image" src="images/images/menu-printemps.jpg" alt="Légumes frais du menu de Pâques">
+              <div class="catalogue-card-content">
+                <p class="card-tag">Pâques · Végétarien</p>
+                <h3>Le jardin de printemps</h3>
+                <p>Un menu végétarien coloré, composé de recettes fraîches et de saison.</p>
+                <p class="menu-meta"><strong>À partir de 29 € par personne</strong><br>Minimum 6 personnes</p>
+                <a class="button button-small" href="menu-detail.html?menu=jardin-printemps">Voir le détail</a>
+              </div>
+            </article>
+
+            <article class="catalogue-card" data-theme="evenement" data-regime="vegan" data-people="10" data-price="32">
+              <img class="menu-placeholder-image" src="images/images/menu-vegetal.jpg" alt="Buffet végétal pour un événement">
+              <div class="catalogue-card-content">
+                <p class="card-tag">Événement · Vegan</p>
+                <h3>La fête végétale</h3>
+                <p>Une formule entièrement végétale pour vos événements professionnels ou privés.</p>
+                <p class="menu-meta"><strong>À partir de 32 € par personne</strong><br>Minimum 10 personnes</p>
+                <a class="button button-small" href="menu-detail.html?menu=fete-vegetale">Voir le détail</a>
+              </div>
+            </article>
+          </div>
+          <p id="empty-results" class="empty-results" hidden>Aucun menu ne correspond à vos critères.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p>&copy; 2026 Vite et Gourmand</p>
+      <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
+    </div>
+    <div class="opening-hours">
+      <h2>Horaires</h2>
+      <dl>
+        <div><dt>Lundi</dt><dd>11h30 - 14h00</dd></div>
+        <div><dt>Mardi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Mercredi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Jeudi</dt><dd>11h30 - 14h00 / 18h00 - 21h30</dd></div>
+        <div><dt>Vendredi</dt><dd>11h30 - 14h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Samedi</dt><dd>10h30 - 15h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Dimanche</dt><dd>10h30 - 14h30</dd></div>
+      </dl>
+    </div>
+    <nav aria-label="Liens secondaires">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">Conditions générales de vente</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

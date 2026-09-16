@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Détail d'un menu Vite et Gourmand.">
+  <title>Détail du menu - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="Vite et Gourmand - Accueil">Vite et Gourmand</a>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html" aria-current="page">Nos menus</a></li>
+        <li><a href="histoire.html">À propos</a></li>
+        <li><a href="connexion.html">Connexion</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="menu-detail" class="detail-page" aria-labelledby="menu-detail-title">
+    <div class="detail-heading">
+      <a class="back-link" href="menus.html">&larr; Retour aux menus</a>
+      <p class="eyebrow" id="menu-detail-category">Menu sélectionné</p>
+      <h1 id="menu-detail-title">Le marché de Bordeaux</h1>
+      <p id="menu-detail-description">Une formule équilibrée avec produits de saison, pensée pour les repas conviviaux.</p>
+    </div>
+
+    <div class="detail-layout">
+      <section class="detail-gallery" aria-label="Galerie du menu">
+        <img class="detail-main-image" id="menu-detail-image" src="images/images/menu-marche.jpg" alt="Le marché de Bordeaux">
+        <div class="detail-thumbnails" aria-hidden="true">
+          <div>Entrée</div>
+          <div>Plat</div>
+          <div>Dessert</div>
+        </div>
+      </section>
+
+      <aside class="detail-summary" aria-label="Résumé du menu">
+        <p class="detail-price" id="menu-detail-price">24 € <span>par personne</span></p>
+        <p><strong>Minimum :</strong> <span id="menu-detail-people">6 personnes</span></p>
+        <p><strong>Stock disponible :</strong> <span id="menu-detail-stock">5 commandes</span></p>
+        <p><strong>Régime :</strong> <span id="menu-detail-regime">Classique</span></p>
+        <a class="button" href="connexion.html?redirect=commande">Commander ce menu</a>
+      </aside>
+    </div>
+
+    <div class="detail-information">
+      <section aria-labelledby="composition-title">
+        <h2 id="composition-title">Composition du menu</h2>
+        <div class="dish-list">
+          <article>
+            <h3>Entrée</h3>
+            <p id="menu-detail-starter">Salade de chèvre frais et légumes de saison</p>
+            <p class="allergen">Allergènes : lait, fruits à coque</p>
+          </article>
+          <article>
+            <h3>Plat</h3>
+            <p id="menu-detail-main">Boeuf braisé, pommes de terre grenaille et légumes rôtis</p>
+            <p class="allergen">Allergènes : aucun allergène majeur déclaré</p>
+          </article>
+          <article>
+            <h3>Dessert</h3>
+            <p id="menu-detail-dessert">Tarte fine aux pommes caramélisées</p>
+            <p class="allergen">Allergènes : gluten, lait, oeufs</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="conditions-panel" aria-labelledby="conditions-title">
+        <h2 id="conditions-title">Conditions de ce menu</h2>
+        <p>Commande à effectuer au minimum 7 jours avant la date de prestation.</p>
+        <p>Les plats doivent être conservés au réfrigérateur et consommés dans les 24 heures.</p>
+        <p class="important-notice"><strong>Information importante :</strong> veuillez vérifier les allergènes avant toute commande et nous signaler toute allergie dans le formulaire de commande.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p>&copy; 2026 Vite et Gourmand</p>
+      <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
+    </div>
+    <div class="opening-hours">
+      <h2>Horaires</h2>
+      <dl>
+        <div><dt>Lundi</dt><dd>11h30 - 14h00</dd></div>
+        <div><dt>Mardi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Mercredi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Jeudi</dt><dd>11h30 - 14h00 / 18h00 - 21h30</dd></div>
+        <div><dt>Vendredi</dt><dd>11h30 - 14h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Samedi</dt><dd>10h30 - 15h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Dimanche</dt><dd>10h30 - 14h30</dd></div>
+      </dl>
+    </div>
+    <nav aria-label="Liens secondaires">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">Conditions générales de vente</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

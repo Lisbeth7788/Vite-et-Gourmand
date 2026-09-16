@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vite et Gourmand, vos plats faits maison à commander en ligne.">
+  <title>Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="home-page">
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="Vite et Gourmand - Accueil">
+      Vite et Gourmand
+    </a>
+
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html" aria-current="page">Accueil</a></li>
+        <li><a href="menus.html">Nos menus</a></li>
+        <li><a href="histoire.html">À propos</a></li>
+        <li><a href="connexion.html">Connexion</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow">Des plats faits maison</p>
+        <h1 id="hero-title">Vite et Gourmand</h1>
+        <p>Découvrez des menus généreux, préparés avec soin et livrés directement chez vous.</p>
+        <a class="button" href="menus.html">Découvrir nos menus</a>
+      </div>
+    </section>
+
+    <section id="menus" class="menus-section" aria-labelledby="menus-title">
+      <div class="section-heading">
+        <p class="eyebrow">À la carte</p>
+        <h2 id="menus-title">Nos menus</h2>
+        <p>Choisissez la formule qui vous fait envie.</p>
+      </div>
+
+      <div class="menu-list">
+        <article class="menu-card">
+          <h3>Menu du jour</h3>
+          <p>Une sélection savoureuse renouvelée régulièrement.</p>
+          <a href="menus.html?theme=classique">En savoir plus</a>
+        </article>
+
+        <article class="menu-card">
+          <h3>Menu familial</h3>
+          <p>Des portions généreuses à partager avec vos proches.</p>
+          <a href="menus.html?theme=evenement">En savoir plus</a>
+        </article>
+
+        <article class="menu-card">
+          <h3>Menu gourmand</h3>
+          <p>Une formule complète pour les grandes faims.</p>
+          <a href="menus.html">En savoir plus</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="reviews-section" aria-labelledby="reviews-title">
+      <div class="section-heading">
+        <p class="eyebrow">Ils nous font confiance</p>
+        <h2 id="reviews-title">Avis de nos clients</h2>
+        <p>Les avis affichés sont sélectionnés et validés par notre équipe.</p>
+      </div>
+      <div class="review-list">
+        <article class="review-card">
+          <div class="review-rating" aria-label="Note : 5 sur 5">★★★★★</div>
+          <blockquote>« Un menu généreux et une livraison parfaitement organisée. »</blockquote>
+          <cite>Camille R.</cite>
+        </article>
+        <article class="review-card">
+          <div class="review-rating" aria-label="Note : 5 sur 5">★★★★★</div>
+          <blockquote>« Des produits savoureux, nos invités se sont régalés. »</blockquote>
+          <cite>Thomas B.</cite>
+        </article>
+        <article class="review-card">
+          <div class="review-rating" aria-label="Note : 4 sur 5">★★★★☆</div>
+          <blockquote>« Une équipe à l'écoute pour préparer notre événement. »</blockquote>
+          <cite>Sarah M.</cite>
+        </article>
+      </div>
+    </section>
+
+    <section id="connexion" class="login-section" aria-labelledby="login-title">
+      <div class="section-heading">
+        <p class="eyebrow">Votre espace</p>
+        <h2 id="login-title">Connectez-vous à votre compte</h2>
+        <p>Retrouvez vos commandes et suivez vos prestations depuis votre espace personnel.</p>
+      </div>
+      <a class="button" href="connexion.html">Accéder à la connexion</a>
+    </section>
+
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <div class="section-heading">
+        <p class="eyebrow">Une question ?</p>
+        <h2 id="contact-title">Contactez-nous</h2>
+        <p>Notre équipe est à votre écoute pour vous accompagner dans votre commande.</p>
+      </div>
+      <a class="button" href="contact.html">Nous écrire</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p>&copy; 2026 Vite et Gourmand</p>
+      <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
+    </div>
+    <div class="opening-hours">
+      <h2>Horaires</h2>
+      <dl>
+        <div><dt>Lundi</dt><dd>11h30 - 14h00</dd></div>
+        <div><dt>Mardi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Mercredi</dt><dd>11h30 - 14h00 / 18h00 - 21h00</dd></div>
+        <div><dt>Jeudi</dt><dd>11h30 - 14h00 / 18h00 - 21h30</dd></div>
+        <div><dt>Vendredi</dt><dd>11h30 - 14h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Samedi</dt><dd>10h30 - 15h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Dimanche</dt><dd>10h30 - 14h30</dd></div>
+      </dl>
+    </div>
+    <nav aria-label="Liens secondaires">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">Conditions générales de vente</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
