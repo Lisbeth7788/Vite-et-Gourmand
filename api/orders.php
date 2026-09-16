@@ -8,13 +8,17 @@ if (requiredFields($data, $fields)) {
     jsonResponse(['error' => 'Tous les champs de commande sont obligatoires.'], 400);
 }
 
+if (!validEmail($data['email'])) {
+    jsonResponse(['error' => 'Adresse e-mail invalide.'], 400);
+}
+
 $menuQuery = $pdo->prepare('SELECT id, name, price, minimum_people FROM menus WHERE id = ?');
 $menuQuery->execute([$data['menu']]);
 $menu = $menuQuery->fetch();
 $people = (int) $data['people'];
 $distance = (float) ($data['distance'] ?? 0);
 
-if (!$menu || $people < (int) $menu['minimum_people']) {
+if (!$menu || $people < (int) $menu['minimum_people'] || $distance < 0) {
     jsonResponse(['error' => 'Le menu ou le nombre de personnes est invalide.'], 400);
 }
 

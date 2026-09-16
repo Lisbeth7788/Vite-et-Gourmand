@@ -2,6 +2,11 @@
 
 $isProduction = (getenv('APP_ENV') ?: 'local') === 'production';
 
+if ($isProduction) {
+    ini_set('display_errors', '0');
+    ini_set('log_errors', '1');
+}
+
 if (session_status() === PHP_SESSION_NONE) {
     session_set_cookie_params([
         'httponly' => true,
@@ -50,6 +55,11 @@ function requestData(): array
 function requiredFields(array $data, array $fields): array
 {
     return array_values(array_filter($fields, fn ($field) => !isset($data[$field]) || trim((string) $data[$field]) === ''));
+}
+
+function validEmail(mixed $email): bool
+{
+    return is_string($email) && filter_var(trim($email), FILTER_VALIDATE_EMAIL) !== false;
 }
 
 function requireRole(array $roles): array

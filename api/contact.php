@@ -7,6 +7,10 @@ if (requiredFields($data, ['title', 'description', 'email'])) {
     jsonResponse(['error' => 'Tous les champs du message sont obligatoires.'], 400);
 }
 
+if (!validEmail($data['email'])) {
+    jsonResponse(['error' => 'Adresse e-mail invalide.'], 400);
+}
+
 $insert = $pdo->prepare('INSERT INTO messages (title, description, email) VALUES (?, ?, ?)');
 $insert->execute([
     trim($data['title']),

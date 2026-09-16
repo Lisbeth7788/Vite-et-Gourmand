@@ -3,5 +3,3 @@ Allow: /
 Disallow: /api/
 Disallow: /config/
 Disallow: /sql/
-
-Sitemap: http://localhost:3000/sitemap.xml
