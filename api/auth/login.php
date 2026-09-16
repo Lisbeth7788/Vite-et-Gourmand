@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+enforceRateLimit('login', 10, 900);
 
 $data = requestData();
 $missing = requiredFields($data, ['email', 'password']);

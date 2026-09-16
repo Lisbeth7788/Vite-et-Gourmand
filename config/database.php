@@ -62,6 +62,27 @@ function validEmail(mixed $email): bool
     return is_string($email) && filter_var(trim($email), FILTER_VALIDATE_EMAIL) !== false;
 }
 
+function enforceRateLimit(string $scope, int $limit, int $window): void
+{
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $file = sys_get_temp_dir() . '/vite-et-gourmand-' . hash('sha256', $scope . '|' . $ip) . '.json';
+    $now = time();
+    $attempts = [];
+
+    if (is_file($file)) {
+        $stored = json_decode((string) file_get_contents($file), true);
+        $attempts = is_array($stored) ? $stored : [];
+    }
+
+    $attempts = array_values(array_filter($attempts, fn ($timestamp) => is_int($timestamp) && $timestamp > $now - $window));
+    if (count($attempts) >= $limit) {
+        jsonResponse(['error' => 'Trop de tentatives. Réessayez plus tard.'], 429);
+    }
+
+    $attempts[] = $now;
+    file_put_contents($file, json_encode($attempts), LOCK_EX);
+}
+
 function requireRole(array $roles): array
 {
     if (!isset($_SESSION['user'])) {

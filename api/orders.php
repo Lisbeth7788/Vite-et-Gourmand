@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
+enforceRateLimit('orders', 10, 600);
 
 $data = requestData();
 $fields = ['first_name', 'last_name', 'email', 'phone', 'address', 'city', 'date', 'time', 'place', 'menu', 'people'];

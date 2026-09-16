@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
+enforceRateLimit('contact', 10, 600);
 
 $data = requestData();
 if (requiredFields($data, ['title', 'description', 'email'])) {

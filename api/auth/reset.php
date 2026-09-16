@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+enforceRateLimit('reset', 5, 3600);
 
 $data = requestData();
 if (requiredFields($data, ['email'])) {
