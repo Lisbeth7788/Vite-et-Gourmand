@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Espace personnel Vite et Gourmand.">
+  <title>Mon compte - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">Vite et Gourmand</a>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul><li><a href="index.html">Accueil</a></li><li><a href="menus.html">Menus</a></li><li><a href="commande.html">Commander</a></li><li><a href="api/auth/logout.php">Déconnexion</a></li></ul>
+    </nav>
+  </header>
+  <main class="catalogue-page">
+    <div class="page-intro"><p class="eyebrow">Espace personnel</p><h1>Mes commandes</h1><p id="account-identity">Vérification de votre session...</p></div>
+    <section class="form-section" aria-labelledby="profile-title">
+      <h2 id="profile-title">Mes informations</h2>
+      <form id="profile-form" class="grille-formulaire">
+        <div class="champ-formulaire"><label for="profile-first-name">Prénom</label><input id="profile-first-name" name="first_name" required></div>
+        <div class="champ-formulaire"><label for="profile-last-name">Nom</label><input id="profile-last-name" name="last_name" required></div>
+        <div class="champ-formulaire"><label for="profile-phone">Téléphone</label><input id="profile-phone" name="phone" required></div>
+        <div class="champ-formulaire"><label for="profile-email">E-mail</label><input id="profile-email" name="email" type="email" required></div>
+        <div class="champ-formulaire"><label for="profile-address">Adresse</label><textarea id="profile-address" name="address" required></textarea></div>
+        <button class="button" type="submit">Enregistrer mes informations</button>
+      </form>
+      <p id="profile-feedback" class="message-formulaire" role="status"></p>
+    </section>
+    <section class="form-section" aria-labelledby="account-orders-title"><h2 id="account-orders-title">Historique des commandes</h2><div id="account-orders"></div></section>
+  </main>
+  <script src="js/account.js"></script>
+</body>
+</html>

@@ -13,6 +13,38 @@
   --line: #ddccc4;
 }
 
+.stats-chart {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.stat-bar {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stat-bar > div {
+  height: 1rem;
+  overflow: hidden;
+  background: var(--couleur-fond-secondaire, #eee8df);
+}
+
+.stat-bar i {
+  display: block;
+  height: 100%;
+  background: var(--couleur-accent, #bd5b3b);
+}
+
+@media (max-width: 640px) {
+  .stat-bar {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -237,8 +269,11 @@ h3 {
 }
 
 .menus-section,
+.reviews-section,
+.login-section,
 .contact-section {
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 7vw, 7rem);
+  min-height: 280px;
+  padding: clamp(2.75rem, 5vw, 4rem) clamp(1.25rem, 6vw, 5rem);
 }
 
 .menus-section {
@@ -246,7 +281,7 @@ h3 {
 }
 
 .section-heading {
-  margin: 0 auto 3rem;
+  margin: 0 auto 1.75rem;
   max-width: 700px;
   text-align: center;
 }
@@ -258,10 +293,10 @@ h3 {
 
 .menu-list {
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0 auto;
-  max-width: 1120px;
+  max-width: 980px;
 }
 
 .carte-menu {
@@ -310,7 +345,7 @@ h3 {
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
   margin: 0 auto;
   max-width: 1120px;
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 7vw, 7rem);
+  padding: clamp(2.75rem, 5vw, 4rem) clamp(1.25rem, 6vw, 5rem);
 }
 
 .history-story-content h2 {
@@ -346,7 +381,7 @@ h3 {
   filter: sepia(0.18) saturate(0.82);
   border-radius: 10px;
   height: 100%;
-  max-height: 480px;
+  max-height: 340px;
   object-fit: cover;
   width: 100%;
 }
@@ -354,7 +389,7 @@ h3 {
 .history-values {
   background: #8a5e68;
   color: #fffdf8;
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 7vw, 7rem);
+  padding: clamp(2.75rem, 5vw, 4rem) clamp(1.25rem, 6vw, 5rem);
 }
 
 .history-values .section-heading > p:last-child {
@@ -382,9 +417,9 @@ h3 {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 10px;
-  margin: clamp(3rem, 7vw, 5rem) auto;
+  margin: clamp(2rem, 4vw, 3rem) auto;
   max-width: 760px;
-  padding: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
   text-align: center;
 }
 
@@ -400,10 +435,10 @@ h3 {
 .values-list,
 .liste-avis {
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0 auto;
-  max-width: 1120px;
+  max-width: 980px;
 }
 
 .value-item {
@@ -422,11 +457,19 @@ h3 {
 
 .reviews-section,
 .login-section {
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 7vw, 7rem);
+  padding: 0;
 }
 
 .reviews-section {
   background: var(--cream);
+  display: grid;
+  gap: 1rem 1.25rem;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.2fr);
+}
+.reviews-section > .section-heading {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+  width: 100%;
 }
 
 .carte-avis {
@@ -435,8 +478,8 @@ h3 {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  min-height: 160px;
-  padding: 1.25rem;
+  min-height: 130px;
+  padding: 1rem;
   text-align: center;
 }
 
@@ -463,9 +506,15 @@ h3 {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 10px;
-  margin: 0 auto 3rem;
-  max-width: 720px;
-  padding: clamp(1.5rem, 4vw, 2.25rem);
+  margin: 0;
+  max-width: none;
+  padding: 1.25rem;
+}
+
+.liste-avis {
+  grid-template-columns: 1fr;
+  margin: 0;
+  max-width: none;
 }
 
 .formulaire-avis h3 {
@@ -516,7 +565,7 @@ h3 {
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.25rem;
   justify-content: space-between;
   text-align: center;
 }
@@ -542,7 +591,7 @@ h3 {
 }
 
 .page-intro::before {
-  background: rgba(40, 37, 31, 0.42);
+  background: rgba(40, 37, 31, 0.24);
   content: '';
   inset: 0;
   position: absolute;
@@ -575,7 +624,7 @@ h1 + p {
 }
 
 .history-page .page-intro::before {
-  background: rgba(40, 37, 31, 0.42);
+  background: rgba(40, 37, 31, 0.24);
 }
 
 .catalogue-section {
@@ -1127,11 +1176,32 @@ form {
   min-height: 60vh;
 }
 
+.contact-page-body .site-header .logo,
+.contact-page-body .site-header a[aria-current='page'] {
+  color: var(--terracotta-dark);
+}
+
+.contact-page-body .page-intro {
+  background-color: #625345;
+  background-image: url('../images/images/menu-vegetal.jpg');
+  color: #fffdf8;
+}
+
+.contact-page-body .page-intro h1,
+.contact-page-body .page-intro p {
+  color: #fffdf8;
+}
+
+.contact-page-body .page-intro::before {
+  background: rgba(40, 37, 31, 0.2);
+}
+
 .contact-form-panel {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: 0 18px 40px rgba(77, 49, 41, 0.1);
+  background: #fff8f2;
+  border: 1px solid #ead2c6;
+  border-top: 5px solid #d58a72;
+  border-radius: 14px;
+  box-shadow: 0 14px 30px rgba(49, 91, 71, 0.12);
   margin: 0 auto clamp(3rem, 7vw, 5rem);
   max-width: 680px;
   padding: clamp(1.75rem, 5vw, 3rem);
@@ -1142,6 +1212,11 @@ form {
   font-size: clamp(1.6rem, 3vw, 2rem);
   margin-bottom: 1.75rem;
   text-align: center;
+}
+
+.contact-form-panel h2::before {
+  color: #d58a72;
+  content: '✦ ';
 }
 
 .contact-form-panel form {
@@ -1156,15 +1231,15 @@ form {
 .contact-form-panel .champ-formulaire input,
 .contact-form-panel .champ-formulaire textarea {
   background: #fff;
-  border-color: #d4c2bb;
-  border-radius: 6px;
+  border-color: #e2c8bb;
+  border-radius: 10px;
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .contact-form-panel .champ-formulaire input:not(.is-valid):focus,
 .contact-form-panel .champ-formulaire textarea:not(.is-valid):focus {
-  border-color: var(--terracotta);
-  box-shadow: 0 0 0 3px rgba(184, 79, 53, 0.13);
+  border-color: #d58a72;
+  box-shadow: 0 0 0 3px rgba(213, 138, 114, 0.18);
   outline: 0;
 }
 
@@ -1176,9 +1251,17 @@ form {
 }
 
 .contact-form-panel .button {
-  box-shadow: 0 8px 18px rgba(143, 56, 38, 0.18);
+  background: #d58a72;
+  border-color: #d58a72;
+  box-shadow: 0 8px 18px rgba(143, 56, 38, 0.16);
   margin-top: 0.75rem;
   min-width: 220px;
+}
+
+.contact-form-panel .button:hover,
+.contact-form-panel .button:focus-visible {
+  background: #b96d58;
+  border-color: #b96d58;
 }
 
 .auth-panel h2,
@@ -1286,6 +1369,10 @@ form .button {
 }
 
 @media (max-width: 760px) {
+  .reviews-section {
+    grid-template-columns: 1fr;
+  }
+
   .site-header,
   .login-section,
   .contact-section,
@@ -1300,6 +1387,7 @@ form .button {
 
   .site-header {
     gap: 1rem;
+    position: static;
   }
 
   .main-navigation {

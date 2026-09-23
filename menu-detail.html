@@ -15,8 +15,8 @@
         <li><a href="index.html">Accueil</a></li>
         <li><a href="menus.html" aria-current="page">Nos menus</a></li>
         <li><a href="histoire.html">À propos</a></li>
-        <li><a href="connexion.html">Connexion</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="connexion.html">Connexion</a></li>
       </ul>
     </nav>
   </header>
@@ -44,7 +44,7 @@
         <p><strong>Minimum :</strong> <span id="menu-detail-people">6 personnes</span></p>
         <p><strong>Stock disponible :</strong> <span id="menu-detail-stock">5 commandes</span></p>
         <p><strong>Régime :</strong> <span id="menu-detail-regime">Classique</span></p>
-        <a class="button" href="connexion.html?redirect=commande">Commander ce menu</a>
+        <a id="menu-order-link" class="button" href="connexion.html?redirect=commande">Commander ce menu</a>
       </aside>
     </div>
 
@@ -55,25 +55,24 @@
           <article>
             <h3>Entrée</h3>
             <p id="menu-detail-starter">Salade de chèvre frais et légumes de saison</p>
-            <p class="allergen">Allergènes : lait, fruits à coque</p>
+            <p id="menu-detail-starter-allergens" class="allergen">Allergènes : lait, fruits à coque</p>
           </article>
           <article>
             <h3>Plat</h3>
             <p id="menu-detail-main">Boeuf braisé, pommes de terre grenaille et légumes rôtis</p>
-            <p class="allergen">Allergènes : aucun allergène majeur déclaré</p>
+            <p id="menu-detail-main-allergens" class="allergen">Allergènes : aucun allergène majeur déclaré</p>
           </article>
           <article>
             <h3>Dessert</h3>
             <p id="menu-detail-dessert">Tarte fine aux pommes caramélisées</p>
-            <p class="allergen">Allergènes : gluten, lait, oeufs</p>
+            <p id="menu-detail-dessert-allergens" class="allergen">Allergènes : gluten, lait, oeufs</p>
           </article>
         </div>
       </section>
 
       <section class="conditions-panel" aria-labelledby="conditions-title">
         <h2 id="conditions-title">Conditions de ce menu</h2>
-        <p>Commande à effectuer au minimum 7 jours avant la date de prestation.</p>
-        <p>Les plats doivent être conservés au réfrigérateur et consommés dans les 24 heures.</p>
+        <p id="menu-conditions">Commande à effectuer au minimum 7 jours avant la date de prestation.</p>
         <p class="important-notice"><strong>Information importante :</strong> veuillez vérifier les allergènes avant toute commande et nous signaler toute allergie dans le formulaire de commande.</p>
       </section>
     </div>
@@ -104,5 +103,6 @@
   </footer>
 
   <script src="js/script.js"></script>
+  <script src="js/menu-detail.js"></script>
 </body>
 </html>

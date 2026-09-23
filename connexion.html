@@ -15,8 +15,8 @@
         <li><a href="index.html">Accueil</a></li>
         <li><a href="menus.html">Nos menus</a></li>
         <li><a href="histoire.html">À propos</a></li>
-        <li><a href="connexion.html" aria-current="page">Connexion</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="connexion.html" aria-current="page">Connexion</a></li>
       </ul>
     </nav>
   </header>
@@ -107,6 +107,14 @@
           <input id="reset-email" name="email" type="email" autocomplete="email" required>
         </div>
         <button class="button" type="submit">Recevoir le lien</button>
+      </form>
+      <form id="reset-confirm-form" class="reset-form" action="#" method="post" hidden>
+        <input id="reset-token" name="token" type="hidden">
+        <div class="champ-formulaire">
+          <label for="reset-new-password">Nouveau mot de passe</label>
+          <input id="reset-new-password" name="password" type="password" minlength="10" required>
+        </div>
+        <button class="button" type="submit">Modifier le mot de passe</button>
       </form>
     </section>
   </main>
