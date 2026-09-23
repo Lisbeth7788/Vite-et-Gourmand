@@ -6,6 +6,10 @@ Configurer sur l'hebergement : `APP_ENV`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_P
 
 Ne jamais publier `.env`, les mots de passe ou le dossier local `mongo-data`.
 
+## Hebergement cible : Hostinger
+
+Hostinger est l'hebergeur cible du projet. L'application ne sera consideree comme deployee qu'apres l'import de la base, la configuration PHP/MariaDB/MongoDB/SMTP, l'activation HTTPS et la recette sur l'URL publique.
+
 ## Etapes
 
 1. Creer la base MariaDB/MySQL et son utilisateur dedie.
