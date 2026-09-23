@@ -10,7 +10,7 @@ A completer apres deploiement public : `URL_DE_L_APPLICATION`
 
 ## Maquettes Figma
 
-A completer apres creation et partage du fichier Figma : `URL_DU_FICHIER_FIGMA`
+https://www.figma.com/design/enoC2yDD8BV1rO952yUAnR/Vite-et-gourmand
 
 Le fichier doit contenir six ecrans : accueil ordinateur, catalogue ordinateur, commande ordinateur, accueil mobile, detail menu mobile et compte mobile.
 
