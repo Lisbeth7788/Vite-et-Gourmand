@@ -35,14 +35,15 @@ $total = $menuTotal - $discount + $delivery;
 
 $insert = $pdo->prepare(
     'INSERT INTO orders (
-        id, first_name, last_name, email, phone, address, city, distance,
+        id, user_id, first_name, last_name, email, phone, address, city, distance,
         service_date, service_time, delivery_place, menu_id, people,
         menu_total, discount, delivery, total, status
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
 );
 $id = bin2hex(random_bytes(16));
 $insert->execute([
     $id,
+    $_SESSION['user']['id'] ?? null,
     trim($data['first_name']),
     trim($data['last_name']),
     strtolower(trim($data['email'])),

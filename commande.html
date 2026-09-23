@@ -32,53 +32,53 @@
       <div class="order-fields">
         <section class="form-section" aria-labelledby="customer-title">
           <h2 id="customer-title">Informations client</h2>
-          <div class="form-grid">
-            <div class="form-field">
+          <div class="grille-formulaire">
+            <div class="champ-formulaire">
               <label for="order-first-name">Prénom</label>
               <input id="order-first-name" name="first_name" type="text" autocomplete="given-name" required>
             </div>
-            <div class="form-field">
+            <div class="champ-formulaire">
               <label for="order-last-name">Nom</label>
               <input id="order-last-name" name="last_name" type="text" autocomplete="family-name" required>
             </div>
           </div>
-          <div class="form-field">
+          <div class="champ-formulaire">
             <label for="order-email">Adresse e-mail</label>
             <input id="order-email" name="email" type="email" autocomplete="email" required>
           </div>
-          <div class="form-field">
-            <label for="order-phone">GSM</label>
-            <input id="order-phone" name="phone" type="tel" autocomplete="tel" required>
+          <div class="champ-formulaire">
+            <label for="order-phone">Numéro de téléphone</label>
+            <input id="order-phone" name="phone" type="tel" autocomplete="tel" pattern="(?:\+33|0)[1-9](?:[ .-]?\d{2}){4}" title="Saisissez un numéro français, par exemple 06 12 34 56 78." required>
           </div>
         </section>
 
         <section class="form-section" aria-labelledby="delivery-title">
           <h2 id="delivery-title">Prestation et livraison</h2>
-          <div class="form-field">
+          <div class="champ-formulaire">
             <label for="order-address">Adresse de livraison</label>
             <textarea id="order-address" name="address" rows="3" autocomplete="street-address" required></textarea>
           </div>
-          <div class="form-grid">
-            <div class="form-field">
+          <div class="grille-formulaire">
+            <div class="champ-formulaire">
               <label for="order-city">Ville</label>
               <input id="order-city" name="city" type="text" value="Bordeaux" required>
             </div>
-            <div class="form-field">
+            <div class="champ-formulaire">
               <label for="order-distance">Distance hors Bordeaux (km)</label>
               <input id="order-distance" name="distance" type="number" min="0" step="0.1" value="0">
             </div>
           </div>
-          <div class="form-grid">
-            <div class="form-field">
+          <div class="grille-formulaire">
+            <div class="champ-formulaire">
               <label for="order-date">Date de la prestation</label>
               <input id="order-date" name="date" type="date" required>
             </div>
-            <div class="form-field">
+            <div class="champ-formulaire">
               <label for="order-time">Heure souhaitée</label>
               <input id="order-time" name="time" type="time" required>
             </div>
           </div>
-          <div class="form-field">
+          <div class="champ-formulaire">
             <label for="order-place">Lieu de livraison</label>
             <input id="order-place" name="place" type="text" placeholder="Salle, domicile, entreprise..." required>
           </div>
@@ -86,7 +86,7 @@
 
         <section class="form-section" aria-labelledby="menu-choice-title">
           <h2 id="menu-choice-title">Menu choisi</h2>
-          <div class="form-field">
+          <div class="champ-formulaire">
             <label for="order-menu">Sélection du menu</label>
             <select id="order-menu" name="menu" required>
               <option value="marche-bordeaux" data-price="24" data-min="6">Le marché de Bordeaux - 24 € / personne - minimum 6</option>
@@ -95,7 +95,7 @@
               <option value="fete-vegetale" data-price="32" data-min="10">La fête végétale - 32 € / personne - minimum 10</option>
             </select>
           </div>
-          <div class="form-field">
+          <div class="champ-formulaire">
             <label for="order-people">Nombre de personnes</label>
             <input id="order-people" name="people" type="number" min="6" value="6" required>
             <small id="people-help">Le minimum dépend du menu sélectionné.</small>

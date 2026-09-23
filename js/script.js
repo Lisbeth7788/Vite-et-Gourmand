@@ -54,10 +54,10 @@ const distanceInput = document.querySelector('#order-distance');
 const cityInput = document.querySelector('#order-city');
 
 function showFormFeedback(form, message, isError = false) {
-  let feedback = form.querySelector('.form-feedback');
+  let feedback = form.querySelector('.message-formulaire');
   if (!feedback) {
     feedback = document.createElement('p');
-    feedback.className = 'form-feedback';
+    feedback.className = 'message-formulaire';
     feedback.setAttribute('role', 'status');
     form.append(feedback);
   }
@@ -154,12 +154,69 @@ const registerForm = document.querySelector('#register-form');
 const loginForm = document.querySelector('#login-form');
 const resetForm = document.querySelector('#reset-form');
 const contactForm = document.querySelector('#contact-form');
+const formulaireAvis = document.querySelector('#formulaire-avis');
+const forms = document.querySelectorAll('form');
+const passwordToggles = document.querySelectorAll('.password-toggle');
+const choixNotes = document.querySelectorAll('.choix-note');
+
+function mettreAJourEtoiles(choixNote, note) {
+  choixNote.querySelectorAll('label').forEach((label) => {
+    const radio = document.querySelector(`#${label.htmlFor}`);
+    label.classList.toggle('is-highlighted', Number(radio.value) <= note);
+  });
+}
+
+choixNotes.forEach((choixNote) => {
+  choixNote.addEventListener('change', (event) => {
+    mettreAJourEtoiles(choixNote, Number(event.target.value));
+  });
+});
+
+function syncRegistrationPasswords() {
+  if (!registerForm) {
+    return;
+  }
+
+  const password = registerForm.querySelector('#register-password');
+  const confirmation = registerForm.querySelector('#register-password-confirm');
+  confirmation.setCustomValidity(confirmation.value && password.value !== confirmation.value ? 'Les mots de passe ne correspondent pas.' : '');
+}
+
+function updateFormFieldState(field) {
+  const hasValue = field.type === 'checkbox' ? field.checked : field.value.trim() !== '';
+  field.classList.toggle('is-valid', hasValue && field.checkValidity());
+}
+
+function refreshFormFieldState(field) {
+  if (field.id === 'register-password' || field.id === 'register-password-confirm') {
+    syncRegistrationPasswords();
+  }
+  updateFormFieldState(field);
+  if (field.id === 'register-password') {
+    updateFormFieldState(registerForm.querySelector('#register-password-confirm'));
+  }
+}
+
+forms.forEach((form) => {
+  form.querySelectorAll('input, textarea, select').forEach((field) => {
+    field.addEventListener('input', () => refreshFormFieldState(field));
+    field.addEventListener('change', () => refreshFormFieldState(field));
+  });
+});
+
+passwordToggles.forEach((toggle) => {
+  toggle.addEventListener('click', () => {
+    const passwordInput = toggle.closest('.password-input').querySelector('input');
+    const isVisible = passwordInput.type === 'text';
+    passwordInput.type = isVisible ? 'password' : 'text';
+    toggle.setAttribute('aria-label', isVisible ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
+    toggle.setAttribute('aria-pressed', String(!isVisible));
+  });
+});
 
 if (registerForm) {
   registerForm.addEventListener('submit', (event) => {
-    const password = registerForm.querySelector('#register-password');
-    const confirmation = registerForm.querySelector('#register-password-confirm');
-    confirmation.setCustomValidity(password.value === confirmation.value ? '' : 'Les mots de passe ne correspondent pas.');
+    syncRegistrationPasswords();
     submitFormToApi(event, registerForm, 'api/auth/register.php', 'Votre compte a bien été créé.');
   });
 }
@@ -177,3 +234,18 @@ if (registerForm) {
     submitFormToApi(event, form, endpoint, message);
   });
 });
+
+if (formulaireAvis) {
+  formulaireAvis.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!formulaireAvis.checkValidity()) {
+      formulaireAvis.reportValidity();
+      return;
+    }
+
+    formulaireAvis.reset();
+    mettreAJourEtoiles(formulaireAvis.querySelector('.choix-note'), 0);
+    formulaireAvis.querySelectorAll('.is-valid').forEach((field) => field.classList.remove('is-valid'));
+    showFormFeedback(formulaireAvis, 'Merci pour votre avis.');
+  });
+}
