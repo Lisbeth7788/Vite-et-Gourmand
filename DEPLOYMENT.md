@@ -29,9 +29,10 @@ L'hébergement doit prendre en charge PHP 8.2 ou une version plus récente, MySQ
 1. Créer une base MySQL et un utilisateur dédié, sans utiliser `root`.
 2. Importer `sql/schema.sql` dans cette base.
 3. Définir les variables présentes dans `.env.example` dans la configuration de l'hébergement : `DB_HOST`, `DB_NAME`, `DB_USER` et `DB_PASSWORD`.
-4. Copier les fichiers du projet dans le dossier public de l'hébergement.
-5. Activer HTTPS et vérifier que les sessions PHP fonctionnent.
-6. Tester l'inscription, la connexion, les menus, une commande, le formulaire de contact et les fonctions administrateur.
+5. Configurer le relais SMTP avec `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` et `SMTP_FROM`.
+6. Copier les fichiers du projet dans le dossier public de l'hébergement.
+7. Activer HTTPS et vérifier que les sessions PHP fonctionnent.
+8. Tester l'inscription, la connexion, les menus, une commande, les e-mails, le formulaire de contact et les fonctions administrateur.
 
 Le fichier `.env` ne doit jamais être envoyé sur le serveur public ou ajouté au dépôt. Le fichier `.env.example` sert uniquement de modèle.
 
