@@ -19,4 +19,9 @@ $insert->execute([
     strtolower(trim($data['email']))
 ]);
 
-jsonResponse(['message' => 'Votre demande a bien été enregistrée.'], 201);
+$recipient = getenv('CONTACT_EMAIL') ?: 'contact@vite-et-gourmand.fr';
+$subject = '[Vite et Gourmand] ' . trim($data['title']);
+$message = trim($data['description']) . "\n\nRépondre à : " . strtolower(trim($data['email']));
+@mail($recipient, $subject, $message, 'Reply-To: ' . strtolower(trim($data['email'])));
+
+jsonResponse(['message' => 'Votre demande a bien été enregistrée et transmise.'], 201);

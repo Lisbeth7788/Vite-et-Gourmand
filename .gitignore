@@ -1,4 +1,5 @@
 node_modules/
+mongo-data/
 .env
 npm-debug.log*
 Vite-et-Gourmand-deploiement.zip

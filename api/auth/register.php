@@ -46,7 +46,9 @@ $profile = [
     'id' => $id,
     'firstName' => trim($data['first_name']),
     'lastName' => trim($data['last_name']),
+    'phone' => trim($data['phone']),
     'email' => $email,
+    'address' => trim($data['address']),
     'role' => 'client'
 ];
 $_SESSION['user'] = $profile;
