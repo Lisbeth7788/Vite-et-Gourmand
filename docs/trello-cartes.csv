@@ -1,6 +1,7 @@
 Liste;Carte;Description;Priorite
 A faire;Analyser les besoins ECF;Profils, menus, commandes, employe, administrateur, SQL et NoSQL;Haute
 A faire;Creer les maquettes;3 maquettes ordinateur et 3 maquettes mobile;Haute
+A faire;Créer la maquette Figma;Reproduire les six écrans et partager le fichier Figma avec le correcteur;Haute
 A faire;Configurer l'environnement;XAMPP, PHP, MariaDB, MongoDB et extension PHP mongodb;Haute
 En cours;Developper le catalogue;Menus, details dynamiques, filtres et conditions;Haute
 En cours;Developper l'authentification;Inscription, connexion, sessions et reinitialisation;Haute
