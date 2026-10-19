@@ -123,8 +123,20 @@ async function submitFormToApi(event, form, endpoint, successMessage) {
     showFormFeedback(form, result.message || successMessage);
     form.reset();
   } catch (error) {
-    showFormFeedback(form, error.message, true);
+    showFormFeedback(form, friendlyError(error), true);
   }
+}
+
+function friendlyError(error) {
+  if (error instanceof TypeError) {
+    return window.location.protocol === 'file:'
+      ? 'Le site doit être ouvert via http://localhost/Vite-et-Gourmand/ (pas en double-cliquant sur le fichier).'
+      : 'Serveur injoignable. Vérifiez que Apache et MySQL sont démarrés dans XAMPP.';
+  }
+  if (error instanceof SyntaxError) {
+    return 'Erreur serveur (réponse invalide). Vérifiez la base de données et la configuration PHP.';
+  }
+  return error.message;
 }
 
 function formatPrice(value) {
@@ -347,11 +359,17 @@ if (loginForm) {
         throw new Error(result.error || 'La connexion a échoué.');
       }
       showFormFeedback(loginForm, 'Connexion réussie.');
-      window.alert('Vous êtes connecté.');
+      if (window.PasswordCredential && window.confirm('Voulez-vous enregistrer le mot de passe sur cet ordinateur ?')) {
+        try {
+          await navigator.credentials.store(new PasswordCredential(loginForm));
+        } catch (storeError) {
+          // L'enregistrement est facultatif.
+        }
+      }
       const redirect = new URLSearchParams(window.location.search).get('redirect');
       window.location.href = redirect === 'admin.html' ? 'admin.html' : (redirect || 'index.html');
     } catch (error) {
-      showFormFeedback(loginForm, error.message, true);
+      showFormFeedback(loginForm, friendlyError(error), true);
     }
   });
 }

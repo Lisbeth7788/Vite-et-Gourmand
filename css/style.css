@@ -1081,7 +1081,13 @@ form {
 
 .reset-panel {
   margin: 2rem auto clamp(3rem, 7vw, 5rem);
-  max-width: 1120px;
+  max-width: calc(1120px - 2 * clamp(1.25rem, 7vw, 7rem));
+  width: calc(100% - 2 * clamp(1.25rem, 7vw, 7rem));
+}
+
+.reset-form {
+  margin-inline: auto;
+  max-width: 480px;
 }
 
 .reset-panel p {
