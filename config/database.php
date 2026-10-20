@@ -1,5 +1,13 @@
 <?php
 
+// Fichier non versionné créé sur le serveur (Hostinger) avec les identifiants de production
+$localConfig = __DIR__ . '/env.local.php';
+if (is_file($localConfig)) {
+    foreach ((require $localConfig) as $key => $value) {
+        putenv("{$key}={$value}");
+    }
+}
+
 $isProduction = (getenv('APP_ENV') ?: 'local') === 'production';
 
 if ($isProduction) {

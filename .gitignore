@@ -3,3 +3,4 @@ mongo-data/
 .env
 npm-debug.log*
 Vite-et-Gourmand-deploiement.zip
+config/env.local.php
