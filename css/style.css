@@ -205,10 +205,10 @@ a {
 
 .hero p:not(.eyebrow),
 .page-intro p:last-child {
-  background: rgba(96, 77, 62, 0.7);
-  border-radius: 14px;
-  color: #ffe3cf;
-  padding: 0.8rem 1.2rem;
+  background: rgba(96, 77, 62, 0.55);
+  border-radius: 12px;
+  color: #ffe9d9;
+  padding: 0.5rem 1rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -274,9 +274,11 @@ h3 {
 }
 
 .hero p:not(.eyebrow) {
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  margin: 0 0 2rem;
-  max-width: 560px;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 400;
+  margin: 0 0 1.5rem;
+  max-width: 520px;
 }
 
 .button {
@@ -318,6 +320,8 @@ h3 {
 
 .section-heading > p:last-child {
   color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
   margin-bottom: 0;
 }
 
@@ -657,9 +661,9 @@ h1 + p {
 }
 
 .page-intro p:last-child {
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   margin: 0 auto;
-  max-width: 620px;
+  max-width: 560px;
 }
 
 .history-page .page-intro::before {
@@ -685,13 +689,15 @@ h1 + p {
 
 .page-intro p:not(.eyebrow),
 .contact-page-body .page-intro p:not(.eyebrow) {
-  background: rgba(96, 77, 62, 0.7);
-  border-radius: 14px;
-  color: #ffe3cf;
-  font-size: 1.15rem;
+  background: rgba(96, 77, 62, 0.55);
+  border-radius: 12px;
+  color: #ffe9d9;
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 400;
   margin: 0 auto;
-  max-width: 620px;
-  padding: 0.8rem 1.2rem;
+  max-width: 560px;
+  padding: 0.5rem 1rem;
 }
 
 .catalogue-section {
