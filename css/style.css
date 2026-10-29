@@ -1317,11 +1317,15 @@ form {
 
 .contact-page-body .page-intro h1,
 .contact-page-body .page-intro p {
-  color: #fffdf8;
+  color: #ffd0ad;
+}
+
+.contact-page-body .page-intro .eyebrow {
+  color: #ffd4b1;
 }
 
 .contact-page-body .page-intro::before {
-  background: rgba(40, 37, 31, 0.2);
+  background: rgba(40, 37, 31, 0.42);
 }
 
 .contact-form-panel {
