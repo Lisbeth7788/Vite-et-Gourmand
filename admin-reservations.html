@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Réservations - Espace de gestion - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=46244147">
+  <link rel="stylesheet" href="css/style.css?v=c81e97f0">
 </head>
 <body>
   <header class="site-header">
@@ -28,18 +28,13 @@
 
     <nav class="admin-nav" aria-label="Espace de gestion">
       <ol>
-        <li><a href="admin.html" data-admin-only>1. Messages</a></li>
+        <li data-admin-only><a href="admin.html">1. Messages</a></li>
         <li><a href="admin-reservations.html" aria-current="page">2. Réservations</a></li>
-        <li><a href="admin-menus.html">3. Menus et plats</a></li>
-        <li><a href="admin-horaires.html">4. Horaires</a></li>
-        <li><a href="admin-avis.html">5. Avis</a></li>
-        <li><a href="admin-stats.html">6. Statistiques</a></li>
-        <li data-admin-only><a href="admin-employes.html">7. Employés</a></li>
       </ol>
     </nav>
 
     <section class="form-section" aria-labelledby="orders-management-title">
-      <h2 id="orders-management-title">Réservations</h2>
+      <h2 id="orders-management-title">Réservations des clients</h2>
       <form id="order-filter-form" class="grille-formulaire">
         <div class="champ-formulaire"><label for="order-status-filter">Statut</label><select id="order-status-filter" name="status"><option value="">Tous</option><option value="pending">En attente</option><option value="accepted">Accepté</option><option value="preparing">En préparation</option><option value="delivery">Prête</option><option value="delivered">Retirée</option><option value="material_return">Retour matériel</option><option value="completed">Terminée</option><option value="cancelled">Annulée</option></select></div>
         <div class="champ-formulaire"><label for="order-client-filter">Client</label><input id="order-client-filter" name="email" type="search"></div>
@@ -68,6 +63,6 @@
     </nav>
   </footer>
 
-  <script src="js/admin.js?v=92bd0a54"></script>
+  <script src="js/admin.js?v=c83daad4"></script>
 </body>
 </html>

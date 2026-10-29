@@ -1921,3 +1921,37 @@ main > .page-intro ~ .contact-form-panel {
   margin-top: 0.25rem;
   padding: 0.6rem 1.1rem;
 }
+
+/* Menu de l'espace de gestion */
+.admin-nav {
+  margin: 1.5rem auto 0;
+  max-width: 1120px;
+  padding: 0 clamp(1rem, 5vw, 2rem);
+}
+
+.admin-nav ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-nav a {
+  background: #fff8f2;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--terracotta-dark);
+  display: inline-block;
+  font-weight: 700;
+  padding: 0.5rem 1.1rem;
+  text-decoration: none;
+}
+
+.admin-nav a[aria-current='page'] {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #fff;
+}
