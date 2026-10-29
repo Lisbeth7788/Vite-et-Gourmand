@@ -25,7 +25,7 @@ async function actualiserLienConnexion() {
       lien.addEventListener('click', async (event) => {
         event.preventDefault();
         await fetch('api/auth/logout.php', { credentials: 'same-origin' });
-        window.alert('Vous êtes déconnecté.');
+        sessionStorage.setItem('toast', 'Vous êtes déconnecté.');
         window.location.href = 'index.html';
       }, { once: true });
     });
@@ -87,6 +87,33 @@ const peopleInput = document.querySelector('#order-people');
 const distanceInput = document.querySelector('#order-distance');
 const cityInput = document.querySelector('#order-city');
 
+function showToast(message, isError = false) {
+  let zone = document.querySelector('.toast-zone');
+  if (!zone) {
+    zone = document.createElement('div');
+    zone.className = 'toast-zone';
+    zone.setAttribute('role', 'status');
+    zone.setAttribute('aria-live', 'polite');
+    document.body.append(zone);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.dataset.state = isError ? 'error' : 'success';
+  toast.textContent = message;
+  zone.append(toast);
+  setTimeout(() => {
+    toast.classList.add('is-leaving');
+    setTimeout(() => toast.remove(), 400);
+  }, 4500);
+}
+
+const toastEnAttente = sessionStorage.getItem('toast');
+if (toastEnAttente) {
+  sessionStorage.removeItem('toast');
+  showToast(toastEnAttente);
+}
+
 function showFormFeedback(form, message, isError = false) {
   let feedback = form.querySelector('.message-formulaire');
   if (!feedback) {
@@ -98,6 +125,7 @@ function showFormFeedback(form, message, isError = false) {
 
   feedback.textContent = message;
   feedback.dataset.state = isError ? 'error' : 'success';
+  showToast(message, isError);
 }
 
 async function submitFormToApi(event, form, endpoint, successMessage) {
@@ -377,6 +405,7 @@ if (loginForm) {
         throw new Error(result.error || 'La connexion a échoué.');
       }
       showFormFeedback(loginForm, 'Connexion réussie.');
+      sessionStorage.setItem('toast', 'Connexion réussie. Bienvenue !');
       if (window.PasswordCredential && window.confirm('Voulez-vous enregistrer le mot de passe sur cet ordinateur ?')) {
         try {
           await navigator.credentials.store(new PasswordCredential(loginForm));
