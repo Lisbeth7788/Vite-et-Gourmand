@@ -260,7 +260,8 @@ h1 {
 h2,
 h3 {
   font-family: var(--font-heading);
-  font-weight: 600;
+  font-style: italic;
+  font-weight: 400;
 }
 
 h2 {
