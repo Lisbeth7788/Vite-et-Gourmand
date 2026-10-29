@@ -1431,6 +1431,20 @@ form .button {
   color: var(--muted);
 }
 
+/* Espacement uniforme sous le bandeau et sur les cotes */
+main > .page-intro ~ .history-story,
+main > .page-intro ~ .legal-content,
+main > .page-intro ~ .contact-form-panel {
+  border-radius: 14px;
+  margin-inline: auto;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  width: calc(100% - 2 * clamp(1rem, 5vw, 2rem));
+}
+
+main > .page-intro ~ .history-story {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
 .site-footer {
   align-items: center;
   background: var(--ink);
