@@ -629,6 +629,31 @@ h1 + p {
   background: rgba(40, 37, 31, 0.24);
 }
 
+/* Bandeaux de titre harmonisés (hors accueil) */
+.page-intro::before,
+.history-page .page-intro::before,
+.contact-page-body .page-intro::before {
+  background: rgba(40, 37, 31, 0.42);
+}
+
+.page-intro .eyebrow {
+  color: #ffd4b1;
+}
+
+.page-intro h1,
+.contact-page-body .page-intro h1 {
+  color: #ffd0ad;
+  margin-bottom: 1.1rem;
+}
+
+.page-intro p:not(.eyebrow),
+.contact-page-body .page-intro p:not(.eyebrow) {
+  color: #ffd0ad;
+  font-size: 1.15rem;
+  margin: 0 auto;
+  max-width: 620px;
+}
+
 .catalogue-section {
   padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 7vw, 7rem);
 }
