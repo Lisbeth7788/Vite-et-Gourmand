@@ -42,20 +42,14 @@ function updateMenuResults() {
   }
 
   const formData = new FormData(filterForm);
-  const selectedTheme = formData.get('theme');
   const selectedRegime = formData.get('regime');
   const maximumPeople = Number(formData.get('people')) || 0;
-  const minimumPrice = Number(formData.get('minimum_price')) || 0;
-  const maximumPrice = Number(formData.get('price')) || 0;
   let visibleMenus = 0;
 
   menuCards.forEach((card) => {
-    const matchesTheme = !selectedTheme || card.dataset.theme === selectedTheme;
     const matchesRegime = !selectedRegime || card.dataset.regime === selectedRegime;
     const matchesPeople = !maximumPeople || Number(card.dataset.people) <= maximumPeople;
-    const menuPrice = Number(card.dataset.price);
-    const matchesPrice = (!minimumPrice || menuPrice >= minimumPrice) && (!maximumPrice || menuPrice <= maximumPrice);
-    const isVisible = matchesTheme && matchesRegime && matchesPeople && matchesPrice;
+    const isVisible = matchesRegime && matchesPeople;
 
     card.hidden = !isVisible;
     if (isVisible) {
@@ -68,12 +62,6 @@ function updateMenuResults() {
 }
 
 if (filterForm) {
-  const requestedTheme = new URLSearchParams(window.location.search).get('theme');
-  const themeFilter = filterForm.querySelector('#theme-filter');
-  if (requestedTheme && themeFilter && [...themeFilter.options].some((option) => option.value === requestedTheme)) {
-    themeFilter.value = requestedTheme;
-  }
-
   filterForm.addEventListener('input', updateMenuResults);
   filterForm.addEventListener('change', updateMenuResults);
   filterForm.addEventListener('reset', () => {
