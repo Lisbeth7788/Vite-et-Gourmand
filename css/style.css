@@ -1334,6 +1334,10 @@ form .button {
   margin: 0;
 }
 
+main > :last-child {
+  margin-bottom: 0;
+}
+
 .opening-hours h2 {
   font-family: 'DM Sans', 'Trebuchet MS', sans-serif;
   font-size: 0.85rem;
