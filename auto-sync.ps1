@@ -26,12 +26,43 @@ function Update-AssetVersions {
     }
 }
 
+$pageNames = @{
+    'index.html' = "la page d'accueil"; 'menus.html' = 'la page des menus'; 'menu-detail.html' = "la page détail d'un menu"
+    'commande.html' = 'la page de commande'; 'compte.html' = 'la page compte'; 'admin.html' = 'la page admin'
+    'connexion.html' = 'la page de connexion'; 'contact.html' = 'la page contact'; 'histoire.html' = 'la page à propos'
+    'cgv.html' = 'les CGV'; 'mentions-legales.html' = 'les mentions légales'; 'confidentialite.html' = 'la page confidentialité'
+}
+
+# Écrit un message de commit simple, comme une débutante : "Modification de ..."
+function Get-CommitMessage {
+    $files = @(git diff --cached --name-status | ForEach-Object { $_ })
+    $parts = New-Object System.Collections.ArrayList
+    foreach ($line in $files) {
+        $status, $path = $line -split "`t", 2
+        $name = Split-Path $path -Leaf
+        $label = $null
+        if ($pageNames.ContainsKey($name)) { $label = $pageNames[$name] }
+        elseif ($path -like 'css/*') { $label = 'le design (CSS)' }
+        elseif ($path -like 'js/*') { $label = 'le JavaScript' }
+        elseif ($path -like 'api/*') { $label = "l'API PHP" }
+        elseif ($path -like 'sql/*') { $label = 'la base de données' }
+        elseif ($path -like 'images/*') { $label = 'les images' }
+        elseif ($path -like '.git*' -or $name -eq 'auto-sync.ps1') { $label = 'la configuration' }
+        else { $label = "le fichier $name" }
+        if (-not $parts.Contains($label)) { [void]$parts.Add($label) }
+    }
+    if ($parts.Count -eq 0) { return 'Petite modification' }
+    $verb = if (($files | Where-Object { $_ -like 'A*' }).Count -eq $files.Count) { 'Ajout de' } else { 'Modification de' }
+    if ($parts.Count -gt 3) { return "$verb $($parts[0]), $($parts[1]) et d'autres fichiers" }
+    return "$verb " + ($parts -join ', ')
+}
+
 function Sync-Now {
     Update-AssetVersions
     git add -A | Out-Null
     git diff --cached --quiet
     if ($LASTEXITCODE -ne 0) {
-        git commit -m ("Auto-save " + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')) | Out-Null
+        git commit -m (Get-CommitMessage) | Out-Null
         git push origin HEAD
         Write-Host ("[{0}] Poussé sur GitHub" -f (Get-Date -Format 'HH:mm:ss'))
     }
