@@ -239,6 +239,7 @@ if (approvedReviews) {
     try {
       const response = await fetch('api/reviews.php');
       const reviews = await response.json();
+      if (reviews.length) document.querySelector('#no-reviews')?.remove();
       reviews.forEach((review) => {
         const card = document.createElement('article');
         card.className = 'carte-avis';
@@ -400,16 +401,36 @@ if (loginForm) {
 }
 
 if (formulaireAvis) {
-  formulaireAvis.addEventListener('submit', (event) => {
+  formulaireAvis.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!formulaireAvis.checkValidity()) {
       formulaireAvis.reportValidity();
       return;
     }
 
-    formulaireAvis.reset();
-    mettreAJourEtoiles(formulaireAvis.querySelector('.choix-note'), 0);
-    formulaireAvis.querySelectorAll('.is-valid').forEach((field) => field.classList.remove('is-valid'));
-    showFormFeedback(formulaireAvis, 'Merci pour votre avis.');
+    try {
+      const response = await fetch('api/reviews.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          rating: formulaireAvis.elements.rating.value,
+          comment: formulaireAvis.elements.message.value
+        })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (response.status === 401) {
+        throw new Error('Connectez-vous pour laisser un avis.');
+      }
+      if (!response.ok) {
+        throw new Error(result.error || 'Votre avis n’a pas pu être envoyé.');
+      }
+      formulaireAvis.reset();
+      mettreAJourEtoiles(formulaireAvis.querySelector('.choix-note'), 0);
+      formulaireAvis.querySelectorAll('.is-valid').forEach((field) => field.classList.remove('is-valid'));
+      showFormFeedback(formulaireAvis, result.message || 'Merci pour votre avis.');
+    } catch (error) {
+      showFormFeedback(formulaireAvis, error.message, true);
+    }
   });
 }

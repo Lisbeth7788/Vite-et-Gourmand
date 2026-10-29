@@ -1955,3 +1955,19 @@ main > .page-intro ~ .contact-form-panel {
   border-color: var(--terracotta);
   color: #fff;
 }
+
+/* Avis clients */
+.aucun-avis {
+  color: var(--muted);
+  font-style: italic;
+  grid-column: 1 / -1;
+  margin: 0;
+  text-align: center;
+}
+
+.aide-avis {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  margin: 0 0 0.75rem;
+}

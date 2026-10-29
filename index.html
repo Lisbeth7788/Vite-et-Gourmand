@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Vite et Gourmand, vos plats faits maison à commander en ligne.">
   <title>Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=c81e97f0">
+  <link rel="stylesheet" href="css/style.css?v=53f5960b">
 </head>
 <body class="home-page">
   <header class="site-header">
@@ -98,25 +98,12 @@
           <label for="review-message">Votre avis</label>
           <textarea id="review-message" name="message" rows="2" maxlength="220" placeholder="Partagez votre expérience en quelques mots." required></textarea>
         </div>
+        <p class="aide-avis">Réservé aux clients connectés après une réservation terminée.</p>
         <button class="button" type="submit">Ajouter mon avis</button>
       </form>
 
       <div id="approved-reviews" class="liste-avis">
-        <article class="carte-avis">
-          <div class="note-avis" aria-label="Note : 5 sur 5">★★★★★</div>
-          <blockquote>« Un menu généreux et une réservation très simple. »</blockquote>
-          <cite>Camille R.</cite>
-        </article>
-        <article class="carte-avis">
-          <div class="note-avis" aria-label="Note : 5 sur 5">★★★★★</div>
-          <blockquote>« Des produits savoureux, nos invités se sont régalés. »</blockquote>
-          <cite>Thomas B.</cite>
-        </article>
-        <article class="carte-avis">
-          <div class="note-avis" aria-label="Note : 4 sur 5">★★★★☆</div>
-          <blockquote>« Une équipe à l'écoute pour préparer notre événement. »</blockquote>
-          <cite>Sarah M.</cite>
-        </article>
+        <p id="no-reviews" class="aucun-avis">Les premiers avis de nos clients apparaîtront ici.</p>
       </div>
     </section>
 
@@ -158,6 +145,6 @@
     </nav>
   </footer>
 
-  <script src="js/script.js?v=9bd4c770"></script>
+  <script src="js/script.js?v=e6aa97b5"></script>
 </body>
 </html>
