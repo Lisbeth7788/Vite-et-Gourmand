@@ -23,9 +23,9 @@
 
   <main class="order-page">
     <div class="page-intro">
-      <p class="eyebrow">Votre prestation</p>
-      <h1>Passer une commande</h1>
-      <p>Renseignez les informations nécessaires à la préparation et à la livraison de votre menu.</p>
+      <p class="eyebrow">Votre réservation</p>
+      <h1>Réserver un menu</h1>
+      <p>Renseignez vos informations et choisissez la date de votre réservation.</p>
     </div>
 
     <form id="order-form" class="order-layout" action="#" method="post">
@@ -53,24 +53,10 @@
         </section>
 
         <section class="form-section" aria-labelledby="delivery-title">
-          <h2 id="delivery-title">Prestation et livraison</h2>
-          <div class="champ-formulaire">
-            <label for="order-address">Adresse de livraison</label>
-            <textarea id="order-address" name="address" rows="3" autocomplete="street-address" required></textarea>
-          </div>
+          <h2 id="delivery-title">Date de la réservation</h2>
           <div class="grille-formulaire">
             <div class="champ-formulaire">
-              <label for="order-city">Ville</label>
-              <input id="order-city" name="city" type="text" value="Bordeaux" required>
-            </div>
-            <div class="champ-formulaire">
-              <label for="order-distance">Distance hors Bordeaux (km)</label>
-              <input id="order-distance" name="distance" type="number" min="0" step="0.1" value="0">
-            </div>
-          </div>
-          <div class="grille-formulaire">
-            <div class="champ-formulaire">
-              <label for="order-date">Date de la prestation</label>
+              <label for="order-date">Date de la réservation</label>
               <input id="order-date" name="date" type="date" required>
             </div>
             <div class="champ-formulaire">
@@ -78,13 +64,9 @@
               <input id="order-time" name="time" type="time" required>
             </div>
           </div>
-          <div class="champ-formulaire">
-            <label for="order-place">Lieu de livraison</label>
-            <input id="order-place" name="place" type="text" placeholder="Salle, domicile, entreprise..." required>
-          </div>
         </section>
 
-        <section class="form-section" aria-labelledby="menu-choice-title">
+<section class="form-section" aria-labelledby="menu-choice-title">
           <h2 id="menu-choice-title">Menu choisi</h2>
           <div class="champ-formulaire">
             <label for="order-menu">Sélection du menu</label>
@@ -109,11 +91,9 @@
           <div><dt>Menu</dt><dd id="summary-menu">Le marché de Bordeaux</dd></div>
           <div><dt>Prix des menus</dt><dd id="summary-menu-price">144,00 €</dd></div>
           <div><dt>Réduction</dt><dd id="summary-discount">0,00 €</dd></div>
-          <div><dt>Livraison</dt><dd id="summary-delivery">0,00 €</dd></div>
           <div class="summary-total"><dt>Total</dt><dd id="summary-total">144,00 €</dd></div>
         </dl>
-        <p class="summary-note">La livraison hors Bordeaux est facturée 5 € puis 0,59 € par kilomètre.</p>
-        <button class="button" type="submit">Valider la commande</button>
+        <button class="button" type="submit">Valider la réservation</button>
       </aside>
     </form>
   </main>
