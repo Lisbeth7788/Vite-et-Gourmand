@@ -9,8 +9,6 @@ function chargerSession() {
 async function actualiserLienConnexion() {
   const liensConnexion = [...document.querySelectorAll('.main-navigation a')]
     .filter((lien) => lien.getAttribute('href')?.includes('connexion'));
-  if (!liensConnexion.length) return;
-
   try {
     const session = await chargerSession();
     if (!session.ok) return;
@@ -25,6 +23,7 @@ async function actualiserLienConnexion() {
       element.append(lien);
       liste.append(element);
     }
+    if (!liensConnexion.length) return;
     document.querySelectorAll('.login-section').forEach((section) => { section.hidden = true; });
     liensConnexion.forEach((lien) => {
       lien.textContent = 'Déconnexion';
