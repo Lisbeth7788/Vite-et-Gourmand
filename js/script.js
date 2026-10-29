@@ -27,28 +27,6 @@ async function actualiserLienConnexion() {
 
 actualiserLienConnexion();
 
-document.querySelectorAll('.opening-hours dl').forEach(async (listeHoraires) => {
-  try {
-    const response = await fetch('api/hours.php');
-    if (!response.ok) return;
-    const horaires = await response.json();
-    const groupes = [];
-    horaires.forEach((horaire) => {
-      const dernier = groupes[groupes.length - 1];
-      if (dernier && dernier.hours === horaire.opening_hours) {
-        dernier.end = horaire.day_name;
-      } else {
-        groupes.push({ start: horaire.day_name, end: horaire.day_name, hours: horaire.opening_hours });
-      }
-    });
-    listeHoraires.innerHTML = groupes.map((g) => {
-      const jours = g.start === g.end ? g.start : `${g.start} - ${g.end}`;
-      return `<div><dt>${jours}</dt><dd>${g.hours}</dd></div>`;
-    }).join('');
-  } catch (error) {
-  }
-});
-
 function updateMenuResults() {
   if (!filterForm || !menuCards.length) {
     return;
