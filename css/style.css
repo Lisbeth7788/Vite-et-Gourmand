@@ -33,8 +33,8 @@
   --paper: #f9f4f1;
   --ink: #28251f;
   --muted: #6e685e;
-  --terracotta: #a95a28;
-  --terracotta-dark: #7f4220;
+  --terracotta: #9a5b38;
+  --terracotta-dark: #744428;
   --sage: #667763;
   --gold: #f2b705;
   --line: #ddccc4;
@@ -1448,8 +1448,8 @@ form {
 
 .contact-form-panel .champ-formulaire input:not(.is-valid):focus,
 .contact-form-panel .champ-formulaire textarea:not(.is-valid):focus {
-  border-color: #cf9a6c;
-  box-shadow: 0 0 0 3px rgba(207, 154, 108, 0.2);
+  border-color: #c29a7a;
+  box-shadow: 0 0 0 3px rgba(194, 154, 122, 0.22);
   outline: 0;
 }
 
@@ -1461,9 +1461,9 @@ form {
 }
 
 .contact-form-panel .button {
-  background: #cf9a6c;
-  border-color: #cf9a6c;
-  box-shadow: 0 8px 18px rgba(127, 66, 32, 0.16);
+  background: #c29a7a;
+  border-color: #c29a7a;
+  box-shadow: 0 8px 18px rgba(116, 68, 40, 0.16);
   margin-top: 0.75rem;
   min-width: 220px;
 }
