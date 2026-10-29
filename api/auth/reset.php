@@ -21,7 +21,7 @@ if ($user) {
     $insert = $pdo->prepare('INSERT INTO password_reset_tokens (user_id, token_hash, expires_at) VALUES (?, ?, ?)');
     $insert->execute([$user['id'], $tokenHash, $expiresAt]);
     $appUrl = getenv('APP_URL');
-    if (!$appUrl) {
+    if (!$appUrl || (stripos($appUrl, 'localhost') !== false && stripos($_SERVER['HTTP_HOST'] ?? '', 'localhost') === false)) {
         $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
         $dir = rtrim(str_replace('\\', '/', dirname(dirname(dirname($_SERVER['SCRIPT_NAME'] ?? '')))), '/');
         $appUrl = $scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . $dir;
