@@ -4,6 +4,8 @@ const listeMenus = document.querySelector('#menu-list');
 const menuFeedback = document.querySelector('#menu-feedback');
 const formulaireFiltreCommandes = document.querySelector('#order-filter-form');
 const orderList = document.querySelector('#order-list');
+const messagesSection = document.querySelector('#messages-section');
+const messageList = document.querySelector('#message-list');
 const employeeSection = document.querySelector('#employee-section');
 const employeeForm = document.querySelector('#employee-form');
 const employeeList = document.querySelector('#employee-list');
@@ -78,6 +80,15 @@ async function chargerEmployes() {
   employeeList.innerHTML = employees.map((employee) => `<p>${echapperHtml(employee.email)} - ${employee.is_active ? 'actif' : 'désactivé'} <button class="button button-small" type="button" data-toggle-employee="${echapperHtml(employee.id)}">${employee.is_active ? 'Désactiver' : 'Activer'}</button></p>`).join('');
 }
 
+async function chargerMessages() {
+  const messages = await demanderJson('api/admin/messages.php');
+  if (!messages.length) {
+    messageList.textContent = 'Aucun message reçu.';
+    return;
+  }
+  messageList.innerHTML = `<table><caption>Messages envoyés depuis la page contact</caption><thead><tr><th>Date</th><th>De</th><th>Sujet</th><th>Message</th></tr></thead><tbody>${messages.map((message) => `<tr><td>${echapperHtml(message.created_at)}</td><td><a href="mailto:${echapperHtml(message.email)}">${echapperHtml(message.email)}</a></td><td>${echapperHtml(message.title)}</td><td>${echapperHtml(message.description)}</td></tr>`).join('')}</tbody></table>`;
+}
+
 async function chargerAvis() {
   const reviews = await demanderJson('api/admin/reviews.php');
   reviewList.innerHTML = reviews.map((review) => `<p>${'★'.repeat(Number(review.rating))} ${echapperHtml(review.comment)} - ${review.status === 'approved' ? 'Validé' : review.status === 'rejected' ? 'Refusé' : 'En attente'} <button class="button button-small" type="button" data-review-id="${review.id}" data-review-status="approved">Valider</button> <button class="button button-small" type="button" data-review-id="${review.id}" data-review-status="rejected">Refuser</button></p>`).join('');
@@ -107,7 +118,9 @@ async function initialiserAdministration() {
     identiteAdministration.textContent = `Connecté : ${session.user.email} (${session.user.role})`;
     if (session.user.role === 'admin') {
       employeeSection.hidden = false;
+      messagesSection.hidden = false;
       await chargerEmployes();
+      await chargerMessages().catch((error) => { messageList.textContent = error.message; });
     }
     await chargerMenus();
     await chargerHoraires();
@@ -115,7 +128,7 @@ async function initialiserAdministration() {
     await chargerAvis();
     await chargerStatistiques().catch((error) => { statsList.textContent = error.message; });
   } catch (error) {
-    window.location.href = 'connexion.html?redirect=admin.html';
+    window.location.href = 'admin-connexion.html';
   }
 }
 
