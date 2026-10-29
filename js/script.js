@@ -327,26 +327,6 @@ if (registerForm) {
 
 const resetPanel = document.querySelector('#password-reset');
 
-const panneauConnexion = document.querySelector('#login-panel');
-const panneauInscription = document.querySelector('#register-panel');
-
-if (panneauConnexion && panneauInscription) {
-  function afficherPanneau(id) {
-    panneauConnexion.hidden = id !== 'login-panel';
-    panneauInscription.hidden = id !== 'register-panel';
-    if (resetPanel && id === 'register-panel') resetPanel.hidden = true;
-  }
-
-  document.querySelectorAll('[data-auth-show]').forEach((lien) => {
-    lien.addEventListener('click', (event) => {
-      event.preventDefault();
-      afficherPanneau(lien.dataset.authShow);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  });
-
-  if (window.location.hash === '#inscription') afficherPanneau('register-panel');
-}
 
 function afficherReinitialisation() {
   resetPanel.hidden = false;

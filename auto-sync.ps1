@@ -29,7 +29,7 @@ function Update-AssetVersions {
 $pageNames = @{
     'index.html' = "la page d'accueil"; 'menus.html' = 'la page des menus'; 'menu-detail.html' = "la page détail d'un menu"
     'commande.html' = 'la page de commande'; 'compte.html' = 'la page compte'; 'admin.html' = 'la page admin'
-    'connexion.html' = 'la page de connexion'; 'contact.html' = 'la page contact'; 'histoire.html' = 'la page à propos'
+    'connexion.html' = 'la page de connexion'; 'inscription.html' = 'la page de création de compte'; 'contact.html' = 'la page contact'; 'histoire.html' = 'la page à propos'
     'cgv.html' = 'les CGV'; 'mentions-legales.html' = 'les mentions légales'; 'confidentialite.html' = 'la page confidentialité'
 }
 
