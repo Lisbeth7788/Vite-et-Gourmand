@@ -20,7 +20,13 @@ if ($user) {
     $pdo->prepare('DELETE FROM password_reset_tokens WHERE user_id = ? OR expires_at < NOW()')->execute([$user['id']]);
     $insert = $pdo->prepare('INSERT INTO password_reset_tokens (user_id, token_hash, expires_at) VALUES (?, ?, ?)');
     $insert->execute([$user['id'], $tokenHash, $expiresAt]);
-    $baseUrl = rtrim(getenv('APP_URL') ?: 'http://localhost/Vite-et-Gourmand', '/');
+    $appUrl = getenv('APP_URL');
+    if (!$appUrl) {
+        $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $dir = rtrim(str_replace('\\', '/', dirname(dirname(dirname($_SERVER['SCRIPT_NAME'] ?? '')))), '/');
+        $appUrl = $scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . $dir;
+    }
+    $baseUrl = rtrim($appUrl, '/');
     $link = $baseUrl . '/connexion.html?reset_token=' . urlencode($token);
     @mail($email, 'Réinitialisation de votre mot de passe', "Utilisez ce lien pendant une heure :\n\n$link");
 }
