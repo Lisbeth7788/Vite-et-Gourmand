@@ -1971,3 +1971,9 @@ main > .page-intro ~ .contact-form-panel {
   font-style: italic;
   margin: 0 0 0.75rem;
 }
+
+/* Espace sous la section avis */
+.reviews-section {
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+}
