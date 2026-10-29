@@ -66,7 +66,7 @@ async function chargerAvis() {
     return;
   }
   const statuts = { approved: 'Publié', rejected: 'Refusé', pending: 'En attente' };
-  reviewList.innerHTML = `<table><caption>Avis des clients</caption><thead><tr><th>Date</th><th>Note</th><th>Avis</th><th>Statut</th><th>Action</th></tr></thead><tbody>${avis.map((review) => `<tr><td>${echapperHtml(review.created_at)}</td><td>${'★'.repeat(Number(review.rating))}</td><td>${echapperHtml(review.comment)}</td><td>${statuts[review.status] || echapperHtml(review.status)}</td><td><button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="approved">Publier</button> <button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="rejected">Refuser</button></td></tr>`).join('')}</tbody></table>`;
+  reviewList.innerHTML = `<table><caption>Avis reçus</caption><thead><tr><th>Date</th><th>Note</th><th>Avis</th><th>Statut</th><th>Action</th></tr></thead><tbody>${avis.map((review) => `<tr><td>${echapperHtml(review.created_at)}</td><td>${'★'.repeat(Number(review.rating))}</td><td>${echapperHtml(review.comment)}</td><td>${statuts[review.status] || echapperHtml(review.status)}</td><td><button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="approved">Publier</button> <button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="rejected">Refuser</button></td></tr>`).join('')}</tbody></table>`;
 }
 
 async function initialiserAdministration() {
