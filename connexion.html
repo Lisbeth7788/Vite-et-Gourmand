@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Connexion et création de compte Vite et Gourmand.">
   <title>Connexion - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=1bba7665">
+  <link rel="stylesheet" href="css/style.css?v=8e7874c6">
 </head>
 <body>
   <header class="site-header">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="auth-layout">
-      <section class="auth-panel" aria-labelledby="login-title">
+      <section id="login-panel" class="auth-panel" aria-labelledby="login-title">
         <p class="eyebrow">Déjà client ?</p>
         <h2 id="login-title">Se connecter</h2>
         <form id="login-form" action="#" method="post">
@@ -47,9 +47,10 @@
           <button class="button" type="submit">Se connecter</button>
           <a class="lien-formulaire" href="#password-reset">Mot de passe oublié ?</a>
         </form>
+        <p class="auth-switch">Pas encore de compte ? <a href="#inscription" data-auth-show="register-panel">Créer un compte</a></p>
       </section>
 
-      <section class="auth-panel" aria-labelledby="register-title">
+      <section id="register-panel" class="auth-panel" aria-labelledby="register-title" hidden>
         <p class="eyebrow">Première commande ?</p>
         <h2 id="register-title">Créer un compte</h2>
         <form id="register-form" action="#" method="post">
@@ -96,6 +97,7 @@
           </div>
           <button class="button" type="submit">Créer mon compte</button>
         </form>
+        <p class="auth-switch">Déjà un compte ? <a href="#connexion" data-auth-show="login-panel">Se connecter</a></p>
       </section>
     </div>
 
@@ -141,6 +143,6 @@
       <a href="confidentialite.html">Politique de confidentialité</a>
     </nav>
   </footer>
-  <script src="js/script.js?v=a58c3cce"></script>
+  <script src="js/script.js?v=2a929ebf"></script>
 </body>
 </html>

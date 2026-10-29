@@ -1198,10 +1198,19 @@ form {
 .auth-layout {
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   margin: 0 auto;
-  max-width: 1120px;
+  max-width: 680px;
   padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 7vw, 7rem) 0;
+}
+
+.auth-panel[hidden] {
+  display: none;
+}
+
+.auth-switch {
+  margin: 1.5rem 0 0;
+  text-align: center;
 }
 
 .auth-panel,
