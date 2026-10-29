@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS reviews (
 
 INSERT INTO menus (id, name, price, minimum_people, theme, regime, description, image_path, conditions_text, stock)
 VALUES
-  ('marche-bordeaux', 'Le marché de Bordeaux', 24, 6, 'Midi', 'classique', 'Le menu du midi, composé chaque jour avec les produits de saison et du jour.', 'images/images/menu-marche.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.', 5),
+  ('marche-bordeaux', 'Le marché de Bordeaux', 24, 6, 'Midi', 'classique', 'La formule du 12h00, composée chaque jour avec les produits de saison et du jour.', 'images/images/menu-marche.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.', 5),
   ('formule-soir', 'La Table du Soir', 34, 6, 'Soir', 'classique', 'Une formule généreuse et raffinée pour vos dîners.', 'images/images/menu-reveillon.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur.', 4),
   ('formule-etudiant', 'Le Campus Gourmand', 15, 4, 'Étudiant', 'classique', 'Une formule complète à petit prix pour les étudiants et les repas de groupe.', 'images/images/menu-printemps.jpg', 'Commande au minimum 3 jours avant la prestation. Sur présentation de la carte étudiante.', 10),
   ('menu-enfant', 'Le Petit Gourmet', 12, 2, 'Enfant', 'classique', 'Un repas adapté aux plus jeunes, avec des plats simples et gourmands.', 'images/images/menu-vegetal.jpg', 'Commande au minimum 3 jours avant la prestation. Pour les enfants jusqu''à 12 ans.', 10)
