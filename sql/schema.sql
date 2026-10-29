@@ -152,9 +152,12 @@ VALUES
   ('marche-bordeaux', 'entree', 'Salade de chèvre frais et légumes de saison', 'lait, fruits à coque', 1),
   ('marche-bordeaux', 'plat', 'Boeuf braisé, pommes de terre grenaille et légumes rôtis', 'aucun allergène majeur déclaré', 2),
   ('marche-bordeaux', 'dessert', 'Tarte fine aux pommes caramélisées', 'gluten, lait, oeufs', 3),
-  ('reveillon', 'entree', 'Velouté de courge et éclats de noisette', 'fruits à coque', 1),
-  ('reveillon', 'plat', 'Volaille rôtie et légumes de fête', 'aucun allergène majeur déclaré', 2),
-  ('reveillon', 'dessert', 'Bûche chocolat et vanille', 'gluten, lait, oeufs', 3)
+  ('formule-soir', 'entree', 'Velouté de courge et éclats de noisette', 'fruits à coque', 1),
+  ('formule-soir', 'plat', 'Volaille rôtie et légumes de fête', 'aucun allergène majeur déclaré', 2),
+  ('formule-soir', 'dessert', 'Fondant au chocolat et crème vanille', 'gluten, lait, oeufs', 3),
+  ('formule-etudiant', 'entree', 'Salade de crudités de saison', 'aucun allergène majeur déclaré', 1),
+  ('formule-etudiant', 'plat', 'Pâtes crémeuses au poulet et légumes', 'gluten, lait', 2),
+  ('formule-etudiant', 'dessert', 'Compote de pommes maison', 'aucun allergène majeur déclaré', 3)
 ON DUPLICATE KEY UPDATE name = VALUES(name), allergens = VALUES(allergens);
 
 INSERT INTO users (id, first_name, last_name, phone, email, address, password_hash, role)
