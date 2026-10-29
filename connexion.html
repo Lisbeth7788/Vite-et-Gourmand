@@ -112,7 +112,10 @@
         <input id="reset-token" name="token" type="hidden">
         <div class="champ-formulaire">
           <label for="reset-new-password">Nouveau mot de passe</label>
-          <input id="reset-new-password" name="password" type="password" minlength="8" required>
+          <div class="password-input">
+            <input id="reset-new-password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+            <button class="password-toggle" type="button" aria-label="Afficher le mot de passe" aria-pressed="false"><span aria-hidden="true">&#128065;&#65038;</span></button>
+          </div>
         </div>
         <button class="button" type="submit">Modifier le mot de passe</button>
       </form>
