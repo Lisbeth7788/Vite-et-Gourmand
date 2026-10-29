@@ -324,9 +324,9 @@ h3 {
 .menu-list {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0 auto;
-  max-width: 980px;
+  max-width: 1120px;
 }
 
 .carte-menu {
@@ -466,9 +466,9 @@ h3 {
 .liste-avis {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0 auto;
-  max-width: 980px;
+  max-width: 1120px;
 }
 
 .value-item {
