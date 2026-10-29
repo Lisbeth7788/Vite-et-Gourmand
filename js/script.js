@@ -125,13 +125,14 @@ function updateOrderSummary() {
   const selectedMenu = menuChoice.options[menuChoice.selectedIndex];
   const price = Number(selectedMenu.dataset.price);
   const minimumPeople = Number(selectedMenu.dataset.min);
-  const people = Math.max(Number(peopleInput.value) || minimumPeople, minimumPeople);
+  const people = Math.min(Math.max(Number(peopleInput.value) || minimumPeople, minimumPeople), 6);
   const menuTotal = price * people;
   const discount = people >= minimumPeople + 5 ? menuTotal * 0.1 : 0;
 
   peopleInput.min = minimumPeople;
+  peopleInput.max = 6;
   peopleInput.value = people;
-  document.querySelector('#people-help').textContent = `Minimum obligatoire : ${minimumPeople} personne${minimumPeople > 1 ? 's' : ''}.`;
+  document.querySelector('#people-help').textContent = `Minimum : ${minimumPeople} personne${minimumPeople > 1 ? 's' : ''}, maximum : 6 personnes par réservation.`;
   document.querySelector('#summary-menu').textContent = selectedMenu.textContent.split(' - ')[0];
   document.querySelector('#summary-menu-price').textContent = formatPrice(menuTotal);
   document.querySelector('#summary-discount').textContent = discount ? `- ${formatPrice(discount)}` : formatPrice(0);

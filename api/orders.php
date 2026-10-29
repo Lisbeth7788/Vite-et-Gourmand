@@ -36,9 +36,9 @@ if (!$timeValid) {
     jsonResponse(['error' => 'Le créneau choisi est en dehors des horaires d’ouverture.'], 400);
 }
 
-if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people']) {
+if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people'] || $people > 6) {
     $pdo->rollBack();
-    jsonResponse(['error' => 'Le menu ou le nombre de personnes est invalide.'], 400);
+    jsonResponse(['error' => 'Le menu ou le nombre de personnes est invalide (6 personnes maximum par réservation).'], 400);
 }
 
 $menuTotal = (float) $menu['price'] * $people;
