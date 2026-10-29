@@ -34,15 +34,23 @@ if ($isProduction && (!$databaseHost || !$databaseName || !$databaseUser || !$da
     exit('Configuration de production incomplete.');
 }
 
-$pdo = new PDO(
-    "mysql:host={$databaseHost};dbname={$databaseName};charset=utf8mb4",
-    $databaseUser,
-    $databasePassword,
-    [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]
-);
+try {
+    $pdo = new PDO(
+        "mysql:host={$databaseHost};dbname={$databaseName};charset=utf8mb4",
+        $databaseUser,
+        $databasePassword,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
+    );
+} catch (PDOException $exception) {
+    error_log('Connexion base de données impossible : ' . $exception->getMessage());
+    http_response_code(500);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(['error' => 'Base de données indisponible. Vérifiez config/env.local.php sur le serveur.'], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 function jsonResponse(array $data, int $status = 200): void
 {
