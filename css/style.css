@@ -1153,6 +1153,21 @@ form {
   padding: 1.5rem;
 }
 
+.conditions-list {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.conditions-list li {
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+}
+
 .conditions-panel h2 {
   font-size: 1.75rem;
 }

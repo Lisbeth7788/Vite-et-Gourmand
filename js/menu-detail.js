@@ -23,7 +23,16 @@ if (pageDetail) {
         const orderLink = document.querySelector('#menu-order-link');
         const commandeUrl = `commande.html?menu=${menu.id}`;
         orderLink.href = `connexion.html?redirect=${encodeURIComponent(commandeUrl)}`;
-        document.querySelector('#menu-conditions').textContent = menu.conditions_text || 'Aucune condition particulière communiquée.';
+        const conditionsList = document.querySelector('#menu-conditions');
+        conditionsList.replaceChildren();
+        (menu.conditions_text || 'Aucune condition particulière communiquée.')
+          .split(/(?<=\.)\s+/)
+          .filter(Boolean)
+          .forEach((phrase) => {
+            const item = document.createElement('li');
+            item.textContent = phrase;
+            conditionsList.appendChild(item);
+          });
 
         const dishes = new Map(menu.dishes.map((dish) => [dish.dish_type, dish]));
         ['starter', 'main', 'dessert'].forEach((type) => {
