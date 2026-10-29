@@ -25,37 +25,53 @@
     <section class="page-intro" aria-labelledby="menus-page-title">
       <p class="eyebrow">À la carte</p>
       <h1 id="menus-page-title">Tous nos menus</h1>
-      <p>Filtrez notre sélection et trouvez la formule adaptée à votre événement.</p>
+      <p>Découvrez notre carte et nos menus tout faits, adaptés à chaque événement.</p>
+    </section>
+
+    <section class="carte-section" aria-labelledby="carte-title">
+      <div class="section-heading">
+        <p class="eyebrow">Notre carte</p>
+        <h2 id="carte-title">Entrées, plats et desserts</h2>
+        <p>Composez votre repas à partir de nos préparations maison, de saison.</p>
+      </div>
+      <div class="carte-grid">
+        <article class="carte-colonne">
+          <h3>Entrées</h3>
+          <ul>
+            <li>Salade de chèvre frais et légumes de saison</li>
+            <li>Velouté de courge et éclats de noisette</li>
+            <li>Carpaccio de légumes de printemps</li>
+            <li>Houmous de pois chiches et crudités</li>
+          </ul>
+        </article>
+        <article class="carte-colonne">
+          <h3>Plats</h3>
+          <ul>
+            <li>Bœuf braisé, pommes de terre grenaille et légumes rôtis</li>
+            <li>Volaille rôtie et légumes de fête</li>
+            <li>Risotto crémeux aux légumes du jardin</li>
+            <li>Curry de légumes et lait de coco</li>
+          </ul>
+        </article>
+        <article class="carte-colonne">
+          <h3>Desserts</h3>
+          <ul>
+            <li>Tarte fine aux pommes caramélisées</li>
+            <li>Bûche chocolat et vanille</li>
+            <li>Panna cotta aux fruits rouges</li>
+            <li>Salade de fruits frais</li>
+          </ul>
+        </article>
+      </div>
     </section>
 
     <section class="catalogue-section" aria-labelledby="catalogue-title">
-      <div class="catalogue-layout">
-        <aside class="filters-panel" aria-labelledby="filters-title">
-          <h2 id="filters-title">Rechercher un menu</h2>
-          <form id="menu-filters">
-            <div class="champ-formulaire">
-              <label for="regime-filter">Régime</label>
-              <select id="regime-filter" name="regime">
-                <option value="">Tous les régimes</option>
-                <option value="classique">Classique</option>
-                <option value="vegetarien">Végétarien</option>
-                <option value="vegan">Vegan</option>
-              </select>
-            </div>
-            <div class="champ-formulaire">
-              <label for="people-filter">Nombre de personnes</label>
-              <input id="people-filter" name="people" type="number" min="1" placeholder="Ex. 6">
-            </div>
-            <button class="button filter-button" type="reset">Réinitialiser les filtres</button>
-          </form>
-        </aside>
-
-        <div class="catalogue-results">
-          <div class="results-heading">
-            <h2 id="catalogue-title">Menus disponibles</h2>
-            <p id="results-count" aria-live="polite"></p>
-          </div>
-          <div id="menu-list" class="catalogue-grid">
+      <div class="section-heading">
+        <p class="eyebrow">Prêts à commander</p>
+        <h2 id="catalogue-title">Nos menus tout faits</h2>
+        <p>Des formules complètes, pensées pour vos repas et vos événements.</p>
+      </div>
+<div id="menu-list" class="catalogue-grid">
             <article class="catalogue-card" data-theme="classique" data-regime="classique" data-people="6" data-price="24">
               <img class="menu-placeholder-image" src="images/images/menu-marche.jpg" alt="Plat du menu classique">
               <div class="catalogue-card-content">
@@ -100,9 +116,6 @@
               </div>
             </article>
           </div>
-          <p id="empty-results" class="empty-results" hidden>Aucun menu ne correspond à vos critères.</p>
-        </div>
-      </div>
     </section>
   </main>
 
