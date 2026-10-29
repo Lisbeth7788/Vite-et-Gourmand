@@ -1630,39 +1630,25 @@ main > :last-child {
 }
 
 
-/* Section avis allégée */
+/* Section avis simplifiee */
 .reviews-section {
-  align-items: start;
-  gap: 1rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-inline: auto;
+  max-width: 760px;
+  padding: 0 1.5rem;
 }
 
-.formulaire-avis {
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-}
-
-.formulaire-avis h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.6rem;
-  text-align: left;
-}
-
-.formulaire-avis legend {
-  margin: 0 0 0.2rem;
-}
-
-.formulaire-avis .choix-note {
-  justify-content: flex-start;
-}
-
-.formulaire-avis textarea {
-  min-height: 0;
+.reviews-section > .section-heading {
+  margin-bottom: 0;
 }
 
 .liste-avis {
   gap: 0;
+  grid-template-columns: 1fr;
+  margin: 0;
+  order: 1;
 }
 
 .carte-avis {
@@ -1671,8 +1657,8 @@ main > :last-child {
   border-bottom: 1px solid var(--line);
   border-radius: 0;
   min-height: 0;
-  padding: 0.9rem 0;
-  text-align: left;
+  padding: 1.1rem 0;
+  text-align: center;
 }
 
 .carte-avis:first-child {
@@ -1684,10 +1670,34 @@ main > :last-child {
 }
 
 .carte-avis blockquote {
-  font-size: 0.95rem;
-  margin: 0.35rem 0;
+  font-size: 1rem;
+  margin: 0.4rem 0;
 }
 
 .carte-avis cite {
   margin-top: 0;
+}
+
+.formulaire-avis {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  order: 2;
+  padding: 1.5rem;
+}
+
+.formulaire-avis h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.formulaire-avis textarea {
+  min-height: 0;
+}
+
+@media (max-width: 760px) {
+  .reviews-section {
+    padding: 0 1rem;
+  }
 }
