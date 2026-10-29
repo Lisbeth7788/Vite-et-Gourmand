@@ -1877,3 +1877,11 @@ main > :last-child {
     padding: 0 1rem;
   }
 }
+
+/* Texte sous les titres des bandeaux : fin et beige, identique sur toutes les pages */
+.hero p:not(.eyebrow),
+.page-intro p:not(.eyebrow),
+.contact-page-body .page-intro p:not(.eyebrow) {
+  color: #e8d9c2;
+  font-weight: 300;
+}
