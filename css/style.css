@@ -1445,6 +1445,28 @@ main > :last-child {
     position: static;
   }
 
+  .site-footer {
+    font-size: 0.82rem;
+    gap: 0.5rem;
+    padding-block: 0.85rem;
+  }
+
+  .site-footer .opening-hours h2 {
+    margin-bottom: 0.25rem;
+  }
+
+  .site-footer .opening-hours dl {
+    gap: 0.1rem;
+  }
+
+  .site-footer nav {
+    gap: 0 1rem;
+  }
+
+  .site-footer nav a {
+    padding: 0.15rem 0;
+  }
+
   .main-navigation {
     width: 100%;
   }
