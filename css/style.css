@@ -27,12 +27,12 @@
 }
 :root {
   --font-body: 'Nunito', 'Segoe UI', sans-serif;
-  --font-heading: 'Nunito', 'Segoe UI', sans-serif;
+  --font-heading: 'Fraunces', Georgia, serif;
   --font-display: 'Fraunces', Georgia, serif;
   --cream: #e7dbd5;
   --paper: #f9f4f1;
-  --ink: #28251f;
-  --muted: #6e685e;
+  --ink: #3b2a20;
+  --muted: #6b5446;
   --terracotta: #9a5b38;
   --terracotta-dark: #744428;
   --sage: #667763;
