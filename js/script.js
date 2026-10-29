@@ -127,7 +127,7 @@ function updateOrderSummary() {
   const minimumPeople = Number(selectedMenu.dataset.min);
   const people = Math.min(Math.max(Number(peopleInput.value) || minimumPeople, minimumPeople), 6);
   const menuTotal = price * people;
-  const discount = people >= minimumPeople + 5 ? menuTotal * 0.1 : 0;
+  const total = price * people;
 
   peopleInput.min = minimumPeople;
   peopleInput.max = 6;
@@ -135,8 +135,7 @@ function updateOrderSummary() {
   document.querySelector('#people-help').textContent = `Minimum : ${minimumPeople} personne${minimumPeople > 1 ? 's' : ''}, maximum : 6 personnes par réservation.`;
   document.querySelector('#summary-menu').textContent = selectedMenu.textContent.split(' - ')[0];
   document.querySelector('#summary-menu-price').textContent = formatPrice(menuTotal);
-  document.querySelector('#summary-discount').textContent = discount ? `- ${formatPrice(discount)}` : formatPrice(0);
-  document.querySelector('#summary-total').textContent = formatPrice(menuTotal - discount);
+  document.querySelector('#summary-total').textContent = formatPrice(menuTotal);
 }
 
 if (orderForm) {

@@ -42,7 +42,7 @@ if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people
 }
 
 $menuTotal = (float) $menu['price'] * $people;
-$discount = $people >= (int) $menu['minimum_people'] + 5 ? $menuTotal * 0.1 : 0;
+$discount = 0;
 $delivery = 0;
 $total = $menuTotal - $discount;
 
