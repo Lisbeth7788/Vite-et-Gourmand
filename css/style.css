@@ -1886,3 +1886,38 @@ main > :last-child {
   color: #e8d9c2;
   font-weight: 300;
 }
+
+/* Formulaire de contact compact */
+.contact-form-panel {
+  max-width: 520px;
+  padding: 1.25rem 1.5rem;
+}
+
+main > .page-intro ~ .contact-form-panel {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.contact-form-panel h2 {
+  font-size: 1.35rem;
+  margin-bottom: 0.9rem;
+}
+
+.contact-form-panel form {
+  gap: 0;
+}
+
+.contact-form-panel .champ-formulaire {
+  margin-bottom: 0.5rem;
+}
+
+.contact-form-panel .champ-formulaire input,
+.contact-form-panel .champ-formulaire textarea {
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.contact-form-panel .button {
+  margin-top: 0.25rem;
+  padding: 0.6rem 1.1rem;
+}
