@@ -976,7 +976,8 @@ form {
 }
 
 .auth-panel h2,
-.reset-panel[hidden] {
+.reset-panel[hidden],
+.reset-form[hidden] {
   display: none;
 }
 
