@@ -31,6 +31,7 @@ $pageNames = @{
     'commande.html' = 'la page de commande'; 'compte.html' = 'la page compte'; 'admin.html' = 'la page admin'
     'connexion.html' = 'la page de connexion'; 'inscription.html' = 'la page de création de compte'; 'admin-connexion.html' = 'la connexion administrateur'; 'contact.html' = 'la page contact'; 'histoire.html' = 'la page à propos'
     'cgv.html' = 'les CGV'; 'mentions-legales.html' = 'les mentions légales'; 'confidentialite.html' = 'la page confidentialité'
+    'admin-avis.html' = "la gestion des avis"; 'admin-reservations.html' = "la gestion des réservations"
 }
 
 # Écrit un message de commit simple, comme une débutante : "Modification de ..."
@@ -48,13 +49,15 @@ function Get-CommitMessage {
         elseif ($path -like 'sql/*') { $label = 'la base de données' }
         elseif ($path -like 'images/*') { $label = 'les images' }
         elseif ($path -like '.git*' -or $name -eq 'auto-sync.ps1') { $label = 'la configuration' }
+        elseif ($path -like '*.md') { $label = 'la documentation' }
         else { $label = "le fichier $name" }
         if (-not $parts.Contains($label)) { [void]$parts.Add($label) }
     }
     if ($parts.Count -eq 0) { return 'Petite modification' }
-    $verb = if (($files | Where-Object { $_ -like 'A*' }).Count -eq $files.Count) { 'Ajout de' } else { 'Modification de' }
-    if ($parts.Count -gt 3) { return "$verb $($parts[0]), $($parts[1]) et d'autres fichiers" }
-    return "$verb " + ($parts -join ', ')
+    $verb = if (($files | Where-Object { $_ -like 'A*' }).Count -eq $files.Count) { 'Ajout' } else { 'Mise à jour' }
+    if ($parts.Count -gt 2) { $msg = "$verb de $($parts[0]) et de plusieurs autres éléments" }
+    else { $msg = "$verb de " + ($parts -join ' et de ') }
+    return $msg -replace '\bde le ', 'du ' -replace '\bde les ', 'des '
 }
 
 function Sync-Now {
