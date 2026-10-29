@@ -139,10 +139,10 @@ CREATE TABLE IF NOT EXISTS reviews (
 
 INSERT INTO menus (id, name, price, minimum_people, theme, regime, description, image_path, conditions_text, stock)
 VALUES
-  ('marche-bordeaux', 'Le marché de Bordeaux', 24, 1, 'Midi', 'classique', 'La formule du 12h00, composée chaque jour avec les produits de saison et du jour.', 'images/images/menu-marche.jpg', 'Commande une semaine à l''avance. Annulation 2 jours avant la prestation.', 5),
-  ('formule-soir', 'La Table du Soir', 34, 1, 'Soir', 'classique', 'Une formule généreuse et raffinée pour vos dîners.', 'images/images/menu-reveillon.jpg', 'Commande une semaine à l''avance. Annulation 2 jours avant la prestation.', 4),
-  ('formule-etudiant', 'Le Campus Gourmand', 15, 1, 'Étudiant', 'classique', 'Une formule complète à petit prix pour les étudiants et les repas de groupe.', 'images/images/menu-printemps.jpg', 'Commande une semaine à l''avance. Annulation 2 jours avant la prestation.', 10),
-  ('menu-enfant', 'Le Petit Gourmet', 12, 1, 'Enfant', 'classique', 'Un repas adapté aux plus jeunes, avec des plats simples et gourmands.', 'images/images/menu-vegetal.jpg', 'Commande une semaine à l''avance. Annulation 2 jours avant la prestation.', 10)
+  ('marche-bordeaux', 'Le marché de Bordeaux', 24, 1, 'Midi', 'classique', 'La formule du 12h00, composée chaque jour avec les produits de saison et du jour.', 'images/images/menu-marche.jpg', 'Commande une semaine à l''avance. Annulation 24 h avant la prestation.', 5),
+  ('formule-soir', 'La Table du Soir', 34, 1, 'Soir', 'classique', 'Une formule généreuse et raffinée pour vos dîners.', 'images/images/menu-reveillon.jpg', 'Commande une semaine à l''avance. Annulation 24 h avant la prestation.', 4),
+  ('formule-etudiant', 'Le Campus Gourmand', 15, 1, 'Étudiant', 'classique', 'Une formule complète à petit prix pour les étudiants et les repas de groupe.', 'images/images/menu-printemps.jpg', 'Commande une semaine à l''avance. Annulation 24 h avant la prestation.', 10),
+  ('menu-enfant', 'Le Petit Gourmet', 12, 1, 'Enfant', 'classique', 'Un repas adapté aux plus jeunes, avec des plats simples et gourmands.', 'images/images/menu-vegetal.jpg', 'Commande une semaine à l''avance. Annulation 24 h avant la prestation.', 10)
 ON DUPLICATE KEY UPDATE
   name = VALUES(name), price = VALUES(price), minimum_people = VALUES(minimum_people),
   theme = VALUES(theme), regime = VALUES(regime), description = VALUES(description),
