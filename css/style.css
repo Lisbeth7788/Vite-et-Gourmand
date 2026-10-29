@@ -1227,11 +1227,6 @@ form {
   text-align: center;
 }
 
-.contact-form-panel h2::before {
-  color: #d58a72;
-  content: '✦ ';
-}
-
 .contact-form-panel form {
   display: grid;
   gap: 0.35rem;
