@@ -341,6 +341,15 @@ h3 {
   transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
+.carte-menu img {
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  width: 100%;
+}
+
 .carte-menu p {
   color: var(--muted);
   margin-bottom: 1.5rem;
