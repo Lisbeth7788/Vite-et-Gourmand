@@ -3,14 +3,22 @@ const menuCards = document.querySelectorAll('.catalogue-card');
 const resultsCount = document.querySelector('#results-count');
 const emptyResults = document.querySelector('#empty-results');
 
+let sessionPromise;
+
+function chargerSession() {
+  sessionPromise ??= fetch('api/auth/session.php', { credentials: 'same-origin' })
+    .then(async (response) => ({ ok: response.ok, data: response.ok ? await response.json() : null }));
+  return sessionPromise;
+}
+
 async function actualiserLienConnexion() {
   const liensConnexion = [...document.querySelectorAll('.main-navigation a')]
     .filter((lien) => lien.getAttribute('href')?.includes('connexion'));
   if (!liensConnexion.length) return;
 
   try {
-    const response = await fetch('api/auth/session.php', { credentials: 'same-origin' });
-    if (!response.ok) return;
+    const session = await chargerSession();
+    if (!session.ok) return;
     liensConnexion.forEach((lien) => {
       lien.textContent = 'Déconnexion';
       lien.href = '#deconnexion';
@@ -163,10 +171,9 @@ function updateOrderSummary() {
 if (orderForm) {
   async function verifierSessionCommande() {
     try {
-      const response = await fetch('api/auth/session.php', { credentials: 'same-origin' });
-      if (!response.ok) throw new Error('Session requise');
-      const session = await response.json();
-      const user = session?.user;
+      const session = await chargerSession();
+      if (!session.ok) throw new Error('Session requise');
+      const user = session.data?.user;
       if (!user) throw new Error('Utilisateur absent');
       const firstName = document.querySelector('#order-first-name');
       const lastName = document.querySelector('#order-last-name');
