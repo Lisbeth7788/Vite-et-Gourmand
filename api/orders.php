@@ -21,6 +21,21 @@ $menuQuery->execute([$data['menu']]);
 $menu = $menuQuery->fetch();
 $people = (int) $data['people'];
 
+$dayOfWeek = (int) date('w', strtotime($data['date'] . ' 12:00:00'));
+$ranges = in_array($dayOfWeek, [0, 6], true)
+    ? [['10:30', '15:00'], ['18:00', '22:00']]
+    : [['11:30', '14:00'], ['18:00', '22:00']];
+$timeValid = false;
+foreach ($ranges as [$start, $end]) {
+    if ($data['time'] >= $start && $data['time'] < $end) {
+        $timeValid = true;
+    }
+}
+if (!$timeValid) {
+    $pdo->rollBack();
+    jsonResponse(['error' => 'Le créneau choisi est en dehors des horaires d’ouverture.'], 400);
+}
+
 if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people']) {
     $pdo->rollBack();
     jsonResponse(['error' => 'Le menu ou le nombre de personnes est invalide.'], 400);

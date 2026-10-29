@@ -166,8 +166,36 @@ if (orderForm) {
   }
 
   const dateInput = document.querySelector('#order-date');
+  const timeSelect = document.querySelector('#order-time');
+  const horairesOuverture = {
+    semaine: [['11:30', '14:00'], ['18:00', '22:00']],
+    weekend: [['10:30', '15:00'], ['18:00', '22:00']]
+  };
+  const enMinutes = (heure) => Number(heure.slice(0, 2)) * 60 + Number(heure.slice(3, 5));
+  const enHeure = (minutes) => `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`;
+
+  function actualiserCreneaux() {
+    if (!timeSelect) return;
+    timeSelect.replaceChildren();
+    if (!dateInput.value) {
+      timeSelect.add(new Option('Choisissez d’abord une date', ''));
+      timeSelect.disabled = true;
+      return;
+    }
+    const jour = new Date(`${dateInput.value}T12:00:00`).getDay();
+    const plages = jour === 0 || jour === 6 ? horairesOuverture.weekend : horairesOuverture.semaine;
+    timeSelect.add(new Option('Choisissez un créneau', ''));
+    plages.forEach(([debut, fin]) => {
+      for (let minutes = enMinutes(debut); minutes < enMinutes(fin); minutes += 30) {
+        timeSelect.add(new Option(enHeure(minutes).replace(':', 'h'), enHeure(minutes)));
+      }
+    });
+    timeSelect.disabled = false;
+  }
+
   if (dateInput) {
     dateInput.min = new Date().toISOString().split('T')[0];
+    dateInput.addEventListener('change', actualiserCreneaux);
   }
 
   orderForm.addEventListener('input', updateOrderSummary);
