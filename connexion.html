@@ -77,10 +77,10 @@
           <div class="champ-formulaire">
             <label for="register-password">Mot de passe</label>
             <div class="password-input">
-              <input id="register-password" name="password" type="password" minlength="10" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{10,}" aria-describedby="password-help" autocomplete="new-password" required>
+              <input id="register-password" name="password" type="password" minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}" aria-describedby="password-help" autocomplete="new-password" required>
               <button class="password-toggle" type="button" aria-label="Afficher le mot de passe" aria-pressed="false"><span aria-hidden="true">&#128065;&#65038;</span></button>
             </div>
-            <small id="password-help">10 caractères minimum, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
+            <small id="password-help">8 caractères minimum, avec une majuscule, une minuscule et un chiffre.</small>
           </div>
           <div class="champ-formulaire">
             <label for="register-password-confirm">Confirmer le mot de passe</label>
@@ -112,7 +112,7 @@
         <input id="reset-token" name="token" type="hidden">
         <div class="champ-formulaire">
           <label for="reset-new-password">Nouveau mot de passe</label>
-          <input id="reset-new-password" name="password" type="password" minlength="10" required>
+          <input id="reset-new-password" name="password" type="password" minlength="8" required>
         </div>
         <button class="button" type="submit">Modifier le mot de passe</button>
       </form>

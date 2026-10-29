@@ -14,8 +14,8 @@ if (!validEmail($email)) {
     jsonResponse(['error' => 'Adresse e-mail invalide.'], 400);
 }
 
-if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{10,}$/', (string) $data['password'])) {
-    jsonResponse(['error' => 'Le mot de passe doit contenir 10 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.'], 400);
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', (string) $data['password'])) {
+    jsonResponse(['error' => 'Le mot de passe doit contenir 8 caractères minimum, une majuscule, une minuscule et un chiffre.'], 400);
 }
 
 $check = $pdo->prepare('SELECT id FROM users WHERE email = ?');

@@ -12,7 +12,7 @@ if ($method === 'POST') {
     }
 
     $email = strtolower(trim($data['email']));
-    if (!validEmail($email) || strlen((string) $data['password']) < 10) {
+    if (!validEmail($email) || strlen((string) $data['password']) < 8) {
         jsonResponse(['error' => 'E-mail invalide ou mot de passe trop court.'], 400);
     }
 

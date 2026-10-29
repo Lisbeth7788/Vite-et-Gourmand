@@ -8,8 +8,8 @@ if (requiredFields($data, ['token', 'password'])) {
     jsonResponse(['error' => 'Jeton et nouveau mot de passe obligatoires.'], 400);
 }
 
-if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{10,}$/', (string) $data['password'])) {
-    jsonResponse(['error' => 'Le mot de passe doit contenir 10 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.'], 400);
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', (string) $data['password'])) {
+    jsonResponse(['error' => 'Le mot de passe doit contenir 8 caractères minimum, une majuscule, une minuscule et un chiffre.'], 400);
 }
 
 $tokenHash = hash('sha256', (string) $data['token']);
