@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS reviews (
 
 INSERT INTO menus (id, name, price, minimum_people, theme, regime, description, image_path, conditions_text, stock)
 VALUES
-  ('marche-bordeaux', 'Le marché de Bordeaux', 24, 6, 'Midi', 'classique', 'Le menu du midi : une formule équilibrée avec produits de saison.', 'images/images/menu-marche.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.', 5),
+  ('marche-bordeaux', 'Le marché de Bordeaux', 24, 6, 'Midi', 'classique', 'Le menu du midi, composé chaque jour avec les produits de saison et du jour.', 'images/images/menu-marche.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.', 5),
   ('formule-soir', 'La formule du soir', 34, 6, 'Soir', 'classique', 'Une formule généreuse et raffinée pour vos dîners.', 'images/images/menu-reveillon.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur.', 4),
   ('formule-etudiant', 'La formule étudiant', 15, 4, 'Étudiant', 'classique', 'Une formule complète à petit prix pour les étudiants et les repas de groupe.', 'images/images/menu-printemps.jpg', 'Commande au minimum 3 jours avant la prestation. Sur présentation de la carte étudiante.', 10)
 ON DUPLICATE KEY UPDATE
@@ -149,9 +149,9 @@ ON DUPLICATE KEY UPDATE
 
 INSERT INTO menu_dishes (menu_id, dish_type, name, allergens, position)
 VALUES
-  ('marche-bordeaux', 'entree', 'Salade de chèvre frais et légumes de saison', 'lait, fruits à coque', 1),
-  ('marche-bordeaux', 'plat', 'Boeuf braisé, pommes de terre grenaille et légumes rôtis', 'aucun allergène majeur déclaré', 2),
-  ('marche-bordeaux', 'dessert', 'Tarte fine aux pommes caramélisées', 'gluten, lait, oeufs', 3),
+  ('marche-bordeaux', 'entree', 'Entrée du jour selon le marché', 'selon les produits du jour', 1),
+  ('marche-bordeaux', 'plat', 'Plat du jour selon le marché', 'selon les produits du jour', 2),
+  ('marche-bordeaux', 'dessert', 'Dessert du jour selon le marché', 'selon les produits du jour', 3),
   ('formule-soir', 'entree', 'Velouté de courge et éclats de noisette', 'fruits à coque', 1),
   ('formule-soir', 'plat', 'Volaille rôtie et légumes de fête', 'aucun allergène majeur déclaré', 2),
   ('formule-soir', 'dessert', 'Fondant au chocolat et crème vanille', 'gluten, lait, oeufs', 3),
