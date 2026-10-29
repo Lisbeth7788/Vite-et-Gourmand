@@ -34,8 +34,6 @@ actualiserLienConnexion();
 const orderForm = document.querySelector('#order-form');
 const menuChoice = document.querySelector('#order-menu');
 const peopleInput = document.querySelector('#order-people');
-const distanceInput = document.querySelector('#order-distance');
-const cityInput = document.querySelector('#order-city');
 
 function showToast(message, isError = false) {
   let zone = document.querySelector('.toast-zone');
@@ -130,11 +128,6 @@ function updateOrderSummary() {
   const people = Math.max(Number(peopleInput.value) || minimumPeople, minimumPeople);
   const menuTotal = price * people;
   const discount = people >= minimumPeople + 5 ? menuTotal * 0.1 : 0;
-  const distance = Number(distanceInput.value) || 0;
-  const isOutsideBordeaux = cityInput.value.trim().toLowerCase() !== 'bordeaux';
-  const delivery = isOutsideBordeaux && distance > 0 ? 5 + (distance * 0.59) : 0;
-
-  distanceInput.setCustomValidity(isOutsideBordeaux && distance <= 0 ? 'Indiquez la distance hors Bordeaux.' : '');
 
   peopleInput.min = minimumPeople;
   peopleInput.value = people;
@@ -142,8 +135,7 @@ function updateOrderSummary() {
   document.querySelector('#summary-menu').textContent = selectedMenu.textContent.split(' - ')[0];
   document.querySelector('#summary-menu-price').textContent = formatPrice(menuTotal);
   document.querySelector('#summary-discount').textContent = discount ? `- ${formatPrice(discount)}` : formatPrice(0);
-  document.querySelector('#summary-delivery').textContent = formatPrice(delivery);
-  document.querySelector('#summary-total').textContent = formatPrice(menuTotal - discount + delivery);
+  document.querySelector('#summary-total').textContent = formatPrice(menuTotal - discount);
 }
 
 if (orderForm) {
@@ -157,12 +149,10 @@ if (orderForm) {
       const lastName = document.querySelector('#order-last-name');
       const email = document.querySelector('#order-email');
       const phone = document.querySelector('#order-phone');
-      const address = document.querySelector('#order-address');
       if (firstName) firstName.value = user.firstName || '';
       if (lastName) lastName.value = user.lastName || '';
       if (email) email.value = user.email || '';
       phone?.setAttribute('value', user.phone || '');
-      address?.setAttribute('value', user.address || '');
     } catch (error) {
       window.location.href = `connexion.html?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
     }

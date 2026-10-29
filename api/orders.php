@@ -6,7 +6,7 @@ requireRole(['client', 'employe', 'admin']);
 enforceRateLimit('orders', 10, 600);
 
 $data = requestData();
-$fields = ['first_name', 'last_name', 'email', 'phone', 'address', 'city', 'date', 'time', 'place', 'menu', 'people'];
+$fields = ['first_name', 'last_name', 'email', 'phone', 'date', 'time', 'menu', 'people'];
 if (requiredFields($data, $fields)) {
     jsonResponse(['error' => 'Tous les champs de commande sont obligatoires.'], 400);
 }
@@ -20,23 +20,16 @@ $menuQuery = $pdo->prepare('SELECT id, name, price, minimum_people, stock FROM m
 $menuQuery->execute([$data['menu']]);
 $menu = $menuQuery->fetch();
 $people = (int) $data['people'];
-$distance = (float) ($data['distance'] ?? 0);
 
-if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people'] || $distance < 0) {
+if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people']) {
     $pdo->rollBack();
     jsonResponse(['error' => 'Le menu ou le nombre de personnes est invalide.'], 400);
 }
 
-$isOutsideBordeaux = strtolower(trim($data['city'])) !== 'bordeaux';
-if ($isOutsideBordeaux && $distance <= 0) {
-    $pdo->rollBack();
-    jsonResponse(['error' => 'La distance est obligatoire hors Bordeaux.'], 400);
-}
-
 $menuTotal = (float) $menu['price'] * $people;
 $discount = $people >= (int) $menu['minimum_people'] + 5 ? $menuTotal * 0.1 : 0;
-$delivery = $isOutsideBordeaux ? 5 + ($distance * 0.59) : 0;
-$total = $menuTotal - $discount + $delivery;
+$delivery = 0;
+$total = $menuTotal - $discount;
 
 $insert = $pdo->prepare(
     'INSERT INTO orders (
@@ -54,12 +47,12 @@ try {
         trim($data['last_name']),
         strtolower(trim($data['email'])),
         trim($data['phone']),
-        trim($data['address']),
-        trim($data['city']),
-        $distance,
+        'Réservation sur place',
+        'Bordeaux',
+        0,
         $data['date'],
         $data['time'],
-        trim($data['place']),
+        'Sur place',
         $menu['id'],
         $people,
         $menuTotal,
