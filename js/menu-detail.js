@@ -14,7 +14,7 @@ if (pageDetail) {
         document.querySelector('#menu-detail-title').textContent = menu.name;
         document.querySelector('#menu-detail-description').textContent = menu.description;
         document.querySelector('#menu-detail-price').firstChild.textContent = `${Number(menu.price).toFixed(2).replace('.', ',')} € `;
-        document.querySelector('#menu-detail-people').textContent = `${menu.minimum} personnes`;
+        document.querySelector('#menu-detail-people').textContent = menu.minimum > 1 ? `${menu.minimum} personnes` : "À partir d’une personne";
         document.querySelector('#menu-detail-stock').textContent = `${menu.stock} commandes`;
         document.querySelector('#menu-detail-regime').textContent = menu.regime;
         const image = document.querySelector('#menu-detail-image');
