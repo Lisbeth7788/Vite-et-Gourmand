@@ -127,7 +127,6 @@ function updateOrderSummary() {
   const minimumPeople = Number(selectedMenu.dataset.min);
   const people = Math.min(Math.max(Number(peopleInput.value) || minimumPeople, minimumPeople), 6);
   const menuTotal = price * people;
-  const total = price * people;
 
   peopleInput.min = minimumPeople;
   peopleInput.max = 6;
