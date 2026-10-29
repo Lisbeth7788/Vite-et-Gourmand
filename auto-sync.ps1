@@ -1,12 +1,9 @@
-# Commit + push automatique à chaque modification (debounce de 5 s).
+﻿# Commit + push automatique à chaque modification (debounce de 5 s).
 # Lancer : powershell -ExecutionPolicy Bypass -File .\auto-sync.ps1
 $ErrorActionPreference = 'Continue'
 Set-Location $PSScriptRoot
 $delay = 5
 
-$fsw = New-Object System.IO.FileSystemWatcher $PSScriptRoot
-$fsw.IncludeSubdirectories = $true
-$fsw.EnableRaisingEvents = $true
 
 $utf8 = New-Object System.Text.UTF8Encoding $false
 
@@ -41,12 +38,15 @@ function Sync-Now {
 }
 
 Write-Host "Surveillance active (Ctrl+C pour arrêter)..."
-Sync-Now
 while ($true) {
-    $r = $fsw.WaitForChanged([System.IO.WatcherChangeTypes]::All, 2000)
-    if ($r.TimedOut) { continue }
-    if ($r.Name -like '.git*' -or $r.Name -like 'node_modules*' -or $r.Name -like 'mongo-data*') { continue }
-    # Attendre la fin de la rafale de modifications
-    do { $r = $fsw.WaitForChanged([System.IO.WatcherChangeTypes]::All, $delay * 1000) } until ($r.TimedOut)
-    Sync-Now
+    try {
+        if (git status --porcelain) {
+            # Laisser finir les enregistrements en cours avant de commiter
+            Start-Sleep -Seconds $delay
+            Sync-Now
+        }
+    } catch {
+        Write-Host ("Erreur : " + $_.Exception.Message)
+    }
+    Start-Sleep -Seconds 3
 }
