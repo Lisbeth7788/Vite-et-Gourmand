@@ -1629,3 +1629,65 @@ main > :last-child {
   }
 }
 
+
+/* Section avis allégée */
+.reviews-section {
+  align-items: start;
+  gap: 1rem 2.5rem;
+}
+
+.formulaire-avis {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+.formulaire-avis h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+  text-align: left;
+}
+
+.formulaire-avis legend {
+  margin: 0 0 0.2rem;
+}
+
+.formulaire-avis .choix-note {
+  justify-content: flex-start;
+}
+
+.formulaire-avis textarea {
+  min-height: 0;
+}
+
+.liste-avis {
+  gap: 0;
+}
+
+.carte-avis {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  min-height: 0;
+  padding: 0.9rem 0;
+  text-align: left;
+}
+
+.carte-avis:first-child {
+  padding-top: 0;
+}
+
+.carte-avis:last-child {
+  border-bottom: 0;
+}
+
+.carte-avis blockquote {
+  font-size: 0.95rem;
+  margin: 0.35rem 0;
+}
+
+.carte-avis cite {
+  margin-top: 0;
+}
