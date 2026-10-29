@@ -139,10 +139,9 @@ CREATE TABLE IF NOT EXISTS reviews (
 
 INSERT INTO menus (id, name, price, minimum_people, theme, regime, description, image_path, conditions_text, stock)
 VALUES
-  ('marche-bordeaux', 'Le marché de Bordeaux', 24, 6, 'classique', 'classique', 'Une formule équilibrée avec produits de saison.', 'images/images/menu-marche.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.', 5),
-  ('reveillon', 'Le réveillon généreux', 38, 8, 'noel', 'classique', 'Une sélection festive pour réunir vos proches.', 'images/images/menu-reveillon.jpg', 'Commande au minimum 14 jours avant la prestation. Conservation au réfrigérateur.', 4),
-  ('jardin-printemps', 'Le jardin de printemps', 29, 6, 'paques', 'vegetarien', 'Un menu végétarien coloré et de saison.', 'images/images/menu-printemps.jpg', 'Commande au minimum 7 jours avant la prestation.', 6),
-  ('fete-vegetale', 'La fête végétale', 32, 10, 'evenement', 'vegan', 'Une formule entièrement végétale pour vos événements professionnels ou privés.', 'images/images/menu-vegetal.jpg', 'Commande au minimum 10 jours avant la prestation.', 3)
+  ('marche-bordeaux', 'Le marché de Bordeaux', 24, 6, 'Midi', 'classique', 'Le menu du midi : une formule équilibrée avec produits de saison.', 'images/images/menu-marche.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.', 5),
+  ('formule-soir', 'La formule du soir', 34, 6, 'Soir', 'classique', 'Une formule généreuse et raffinée pour vos dîners.', 'images/images/menu-reveillon.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur.', 4),
+  ('formule-etudiant', 'La formule étudiant', 15, 4, 'Étudiant', 'classique', 'Une formule complète à petit prix pour les étudiants et les repas de groupe.', 'images/images/menu-printemps.jpg', 'Commande au minimum 3 jours avant la prestation. Sur présentation de la carte étudiante.', 10)
 ON DUPLICATE KEY UPDATE
   name = VALUES(name), price = VALUES(price), minimum_people = VALUES(minimum_people),
   theme = VALUES(theme), regime = VALUES(regime), description = VALUES(description),
