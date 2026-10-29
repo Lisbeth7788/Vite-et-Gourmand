@@ -19,8 +19,8 @@ const statusLabels = {
   pending: 'En attente',
   accepted: 'Acceptée',
   preparing: 'En préparation',
-  delivery: 'En cours de livraison',
-  delivered: 'Livrée',
+  delivery: 'Prête',
+  delivered: 'Retirée',
   material_return: 'En attente du retour du matériel',
   completed: 'Terminée',
   cancelled: 'Annulée'
@@ -66,7 +66,7 @@ async function chargerCommandes() {
     orderList.textContent = 'Aucune commande trouvée.';
     return;
   }
-  orderList.innerHTML = `<table><caption>Commandes enregistrées</caption><thead><tr><th>Client</th><th>Menu</th><th>Date</th><th>Total</th><th>Statut</th><th>Action</th></tr></thead><tbody>${orders.map((order) => `<tr><td>${echapperHtml(order.first_name)} ${echapperHtml(order.last_name)}<br>${echapperHtml(order.email)}</td><td>${echapperHtml(order.menu_id)}</td><td>${echapperHtml(order.service_date)}</td><td>${Number(order.total).toFixed(2)} €</td><td>${echapperHtml(statusLabels[order.status] || order.status)}</td><td><select data-order-status="${echapperHtml(order.id)}"><option value="pending">En attente</option><option value="accepted">Acceptée</option><option value="preparing">En préparation</option><option value="delivery">En cours de livraison</option><option value="delivered">Livrée</option><option value="material_return">Retour matériel</option><option value="completed">Terminée</option><option value="cancelled">Annulée</option></select></td></tr>`).join('')}</tbody></table>`;
+  orderList.innerHTML = `<table><caption>Commandes enregistrées</caption><thead><tr><th>Client</th><th>Menu</th><th>Date</th><th>Total</th><th>Statut</th><th>Action</th></tr></thead><tbody>${orders.map((order) => `<tr><td>${echapperHtml(order.first_name)} ${echapperHtml(order.last_name)}<br>${echapperHtml(order.email)}</td><td>${echapperHtml(order.menu_id)}</td><td>${echapperHtml(order.service_date)}</td><td>${Number(order.total).toFixed(2)} €</td><td>${echapperHtml(statusLabels[order.status] || order.status)}</td><td><select data-order-status="${echapperHtml(order.id)}"><option value="pending">En attente</option><option value="accepted">Acceptée</option><option value="preparing">En préparation</option><option value="delivery">Prête</option><option value="delivered">Retirée</option><option value="material_return">Retour matériel</option><option value="completed">Terminée</option><option value="cancelled">Annulée</option></select></td></tr>`).join('')}</tbody></table>`;
   orders.forEach((order) => {
     const select = document.querySelector(`[data-order-status="${order.id}"]`);
     if (select) select.value = order.status;

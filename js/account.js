@@ -7,8 +7,8 @@ const libellesStatuts = {
   pending: 'En attente',
   accepted: 'Acceptée',
   preparing: 'En préparation',
-  delivery: 'En cours de livraison',
-  delivered: 'Livrée',
+  delivery: 'Prête',
+  delivered: 'Retirée',
   material_return: 'En attente du retour du matériel',
   completed: 'Terminée',
   cancelled: 'Annulée'
