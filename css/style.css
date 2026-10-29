@@ -976,6 +976,10 @@ form {
 }
 
 .auth-panel h2,
+.reset-panel[hidden] {
+  display: none;
+}
+
 .reset-panel h2 {
   font-size: 2rem;
 }

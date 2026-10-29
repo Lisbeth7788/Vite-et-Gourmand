@@ -323,11 +323,29 @@ if (registerForm) {
   });
 });
 
-if (resetConfirmForm) {
+const resetPanel = document.querySelector('#password-reset');
+
+function afficherReinitialisation() {
+  resetPanel.hidden = false;
+  resetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+if (resetPanel) {
+  document.querySelectorAll('a[href="#password-reset"]').forEach((lien) => {
+    lien.addEventListener('click', (event) => {
+      event.preventDefault();
+      afficherReinitialisation();
+    });
+  });
+
   const resetToken = new URLSearchParams(window.location.search).get('reset_token');
-  if (resetToken) {
+  if (resetToken && resetConfirmForm) {
+    resetPanel.hidden = false;
+    resetForm.hidden = true;
     resetConfirmForm.hidden = false;
     resetConfirmForm.elements.token.value = resetToken;
+  } else if (window.location.hash === '#password-reset') {
+    resetPanel.hidden = false;
   }
 }
 
