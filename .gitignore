@@ -4,3 +4,4 @@ mongo-data/
 npm-debug.log*
 Vite-et-Gourmand-deploiement.zip
 config/env.local.php
+*.lnk
