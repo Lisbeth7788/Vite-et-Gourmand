@@ -1153,6 +1153,19 @@ form {
   padding: 1.5rem;
 }
 
+.dish-choices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.dish-choices .allergen {
+  display: block;
+  font-size: 0.9rem;
+}
+
 .conditions-list {
   list-style: none;
   margin: 1rem 0;

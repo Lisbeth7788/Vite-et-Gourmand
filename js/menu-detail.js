@@ -73,15 +73,23 @@ if (pageDetail) {
             conditionsList.appendChild(item);
           });
 
-        const dishes = new Map(menu.dishes.map((dish) => [dish.dish_type, dish]));
-        ['starter', 'main', 'dessert'].forEach((type) => {
-          let typePlat = 'dessert';
-          if (type === 'starter') typePlat = 'entree';
-          if (type === 'main') typePlat = 'plat';
-          const dish = dishes.get(typePlat);
-          if (!dish) return;
-          document.querySelector(`#menu-detail-${type}`).textContent = dish.name;
-          document.querySelector(`#menu-detail-${type}-allergens`).textContent = `Allergènes : ${dish.allergens || 'aucun allergène déclaré'}`;
+        const choix = {
+          starter: [['Tartare de saumon, avocat et citron vert', 'poisson'], ['Samossas de légumes et chutney de mangue', 'gluten'], ['Bâtonnets de légumes et sauce yaourt-citron', 'lait']],
+          main: [['Magret de canard laqué au miel et gingembre, patates douces rôties', 'aucun allergène majeur déclaré'], ['Poulet tikka masala et riz basmati', 'lait'], ['Wrap de poulet croustillant et frites de patate douce', 'gluten, oeufs']],
+          dessert: [['Cœur coulant au chocolat et mangue fraîche', 'gluten, lait, oeufs'], ['Riz au lait de coco et fruits de la passion', 'fruits à coque'], ['Brochette de fruits exotiques et chocolat fondu', 'lait']]
+        };
+        Object.entries(choix).forEach(([type, plats]) => {
+          const liste = document.querySelector(`#menu-detail-${type}-list`);
+          liste.replaceChildren();
+          [...plats].sort(() => Math.random() - 0.5).forEach(([nom, allergenes]) => {
+            const item = document.createElement('li');
+            item.textContent = nom;
+            const detail = document.createElement('span');
+            detail.className = 'allergen';
+            detail.textContent = `Allergènes : ${allergenes}`;
+            item.appendChild(detail);
+            liste.appendChild(item);
+          });
         });
       } catch (error) {
         document.querySelector('#menu-detail-title').textContent = 'Menu introuvable';
