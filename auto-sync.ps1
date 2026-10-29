@@ -23,7 +23,7 @@ function Update-AssetVersions {
         $new = [regex]::Replace($text, '(?<p>(?:css|js)/[\w\-./]+\.(?:css|js))(?:\?v=[\w]*)?(?=")', {
             param($m)
             $p = $m.Groups['p'].Value
-            if ($versions.ContainsKey($p)) { "$p?v=$($versions[$p])" } else { $m.Value }
+            if ($versions.ContainsKey($p)) { "${p}?v=$($versions[$p])" } else { $m.Value }
         })
         if ($new -ne $text) { [IO.File]::WriteAllText($page.FullName, $new, $utf8) }
     }
