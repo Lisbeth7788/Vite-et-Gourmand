@@ -658,6 +658,60 @@ h1 + p {
   padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 7vw, 7rem);
 }
 
+.carte-section {
+  margin-inline: auto;
+  max-width: 1120px;
+  padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 2rem) 0;
+}
+
+.carte-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.carte-colonne {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.carte-colonne h3 {
+  border-bottom: 1px solid var(--line);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+}
+
+.carte-colonne ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carte-colonne li {
+  color: var(--muted);
+  padding: 0.55rem 0;
+}
+
+.catalogue-section > .section-heading,
+.carte-section > .section-heading {
+  margin-bottom: 2rem;
+}
+
+.catalogue-section .catalogue-grid {
+  margin: 0 auto;
+  max-width: 1120px;
+}
+
+@media (max-width: 760px) {
+  .carte-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .catalogue-layout {
   align-items: start;
   display: grid;

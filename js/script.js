@@ -1,8 +1,3 @@
-const filterForm = document.querySelector('#menu-filters');
-const menuCards = document.querySelectorAll('.catalogue-card');
-const resultsCount = document.querySelector('#results-count');
-const emptyResults = document.querySelector('#empty-results');
-
 let sessionPromise;
 
 function chargerSession() {
@@ -35,40 +30,6 @@ async function actualiserLienConnexion() {
 }
 
 actualiserLienConnexion();
-
-function updateMenuResults() {
-  if (!filterForm || !menuCards.length) {
-    return;
-  }
-
-  const formData = new FormData(filterForm);
-  const selectedRegime = formData.get('regime');
-  const maximumPeople = Number(formData.get('people')) || 0;
-  let visibleMenus = 0;
-
-  menuCards.forEach((card) => {
-    const matchesRegime = !selectedRegime || card.dataset.regime === selectedRegime;
-    const matchesPeople = !maximumPeople || Number(card.dataset.people) <= maximumPeople;
-    const isVisible = matchesRegime && matchesPeople;
-
-    card.hidden = !isVisible;
-    if (isVisible) {
-      visibleMenus += 1;
-    }
-  });
-
-  resultsCount.textContent = `${visibleMenus} menu${visibleMenus > 1 ? 's' : ''} disponible${visibleMenus > 1 ? 's' : ''}`;
-  emptyResults.hidden = visibleMenus !== 0;
-}
-
-if (filterForm) {
-  filterForm.addEventListener('input', updateMenuResults);
-  filterForm.addEventListener('change', updateMenuResults);
-  filterForm.addEventListener('reset', () => {
-    window.setTimeout(updateMenuResults, 0);
-  });
-  updateMenuResults();
-}
 
 const orderForm = document.querySelector('#order-form');
 const menuChoice = document.querySelector('#order-menu');
