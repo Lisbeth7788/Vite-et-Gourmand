@@ -688,19 +688,41 @@ form {
 }
 
 .message-formulaire {
+  align-items: center;
   background: #eef5ec;
-  border-left: 4px solid #3f7d4e;
-  border-radius: 10px;
+  border: 1px solid #b9d6bf;
+  border-radius: 12px;
   color: #2c5a37;
+  display: flex;
   font-weight: 600;
+  gap: 0.6rem;
   margin: 1rem 0 0;
   padding: 0.75rem 1rem;
 }
 
+.message-formulaire::before {
+  align-items: center;
+  background: #3f7d4e;
+  border-radius: 50%;
+  color: #ffffff;
+  content: '✓';
+  display: inline-flex;
+  flex: none;
+  font-size: 0.75rem;
+  height: 1.3rem;
+  justify-content: center;
+  width: 1.3rem;
+}
+
 .message-formulaire[data-state='error'] {
   background: #fbeceb;
-  border-color: #b3382c;
+  border-color: #e4b4af;
   color: #8a2a21;
+}
+
+.message-formulaire[data-state='error']::before {
+  background: #b3382c;
+  content: '!';
 }
 
 .toast-zone {
@@ -716,7 +738,7 @@ form {
 .toast {
   animation: toast-in 0.3s ease-out;
   background: #ffffff;
-  border-left: 5px solid #3f7d4e;
+  border: 1px solid #b9d6bf;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   color: #2c5a37;
@@ -744,7 +766,7 @@ form {
 }
 
 .toast[data-state='error'] {
-  border-color: #b3382c;
+  border-color: #e4b4af;
   color: #8a2a21;
 }
 
