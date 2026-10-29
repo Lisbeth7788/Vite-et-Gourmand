@@ -25,9 +25,9 @@ Le fichier SQL cree les menus, les utilisateurs de test, les commandes, les mess
 ## Parcours de test
 
 - Visiteur : accueil, menus, filtres, detail et contact.
-- Client : inscription, connexion, commande et session.
-- Employe : gestion des menus, filtrage et mise a jour des commandes, moderation des avis.
-- Administrateur : fonctions employe, creation/desactivation des comptes employes.
+- Client : inscription, connexion, reservation sur place (creneaux d'ouverture, 6 personnes maximum), avis apres une reservation terminee.
+- Employe : liste des reservations et mise a jour de leur statut.
+- Administrateur : messages de contact, reservations et moderation des avis (connexion via `admin-connexion.html`).
 
 Les comptes de test sont indiques dans `DEPLOYMENT.md`. Les mots de passe doivent etre modifies avant la mise en production.
 
@@ -46,7 +46,8 @@ Les comptes de test sont indiques dans `DEPLOYMENT.md`. Les mots de passe doiven
 
 - `index.html`, `menus.html`, `menu-detail.html` : parcours public.
 - `connexion.html`, `commande.html` : authentification et commande.
-- `admin.html` : espace de gestion protege.
+- `admin-connexion.html` : connexion administrateur.
+- `admin.html`, `admin-reservations.html`, `admin-avis.html` : espace de gestion (messages, reservations, avis).
 - `api/` : routes PHP JSON.
 - `config/database.php` : connexion PDO, sessions et fonctions communes.
 - `sql/schema.sql` : creation et alimentation de la base relationnelle.

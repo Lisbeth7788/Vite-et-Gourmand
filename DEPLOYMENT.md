@@ -49,11 +49,12 @@ Les comptes présents dans `sql/schema.sql` sont des comptes de test. Ils doiven
 - `api/orders.php` : validation et enregistrement d'une commande.
 - `api/admin/orders.php` : commandes réservées à l'administrateur connecté.
 - `api/admin/messages.php` : messages réservés à l'administrateur connecté.
-- `api/admin/menus.php` : menus réservés à l'administrateur connecté.
+- `api/admin/reviews.php` : modération des avis, réservée à l'équipe connectée.
+- `api/reviews.php` : lecture des avis publiés et dépôt d'un avis par un client.
 
 ## Droits utilisateurs
 
 - Le `client` peut consulter les menus, créer un compte, se connecter, commander et envoyer un message.
-- L'`admin` possède une session PHP avec des droits supplémentaires pour consulter les commandes, les messages et les menus.
+- L'`admin` possède une session PHP avec des droits supplémentaires pour consulter les réservations et les messages, et modérer les avis.
 
 Les mots de passe sont protégés avec les fonctions natives PHP `password_hash()` et `password_verify()`. Les requêtes utilisent PDO et des paramètres préparés.
