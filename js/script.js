@@ -14,7 +14,17 @@ async function actualiserLienConnexion() {
   try {
     const session = await chargerSession();
     if (!session.ok) return;
-    document.querySelectorAll('.login-section').forEach((section) => { section.hidden = true; });
+    const role = session.data?.user?.role;
+    const liste = document.querySelector('.main-navigation ul');
+    if (liste && ['admin', 'employe'].includes(role) && !liste.querySelector('.lien-gestion')) {
+      const element = document.createElement('li');
+      const lien = document.createElement('a');
+      lien.className = 'lien-gestion';
+      lien.href = role === 'admin' ? 'admin.html' : 'admin-reservations.html';
+      lien.textContent = 'Espace de gestion';
+      element.append(lien);
+      liste.append(element);
+    }('.login-section').forEach((section) => { section.hidden = true; });
     liensConnexion.forEach((lien) => {
       lien.textContent = 'Déconnexion';
       lien.href = '#deconnexion';
