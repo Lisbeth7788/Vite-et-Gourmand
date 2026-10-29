@@ -141,7 +141,8 @@ INSERT INTO menus (id, name, price, minimum_people, theme, regime, description, 
 VALUES
   ('marche-bordeaux', 'Le marché de Bordeaux', 24, 6, 'Midi', 'classique', 'Le menu du midi, composé chaque jour avec les produits de saison et du jour.', 'images/images/menu-marche.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.', 5),
   ('formule-soir', 'La formule du soir', 34, 6, 'Soir', 'classique', 'Une formule généreuse et raffinée pour vos dîners.', 'images/images/menu-reveillon.jpg', 'Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur.', 4),
-  ('formule-etudiant', 'La formule étudiant', 15, 4, 'Étudiant', 'classique', 'Une formule complète à petit prix pour les étudiants et les repas de groupe.', 'images/images/menu-printemps.jpg', 'Commande au minimum 3 jours avant la prestation. Sur présentation de la carte étudiante.', 10)
+  ('formule-etudiant', 'La formule étudiant', 15, 4, 'Étudiant', 'classique', 'Une formule complète à petit prix pour les étudiants et les repas de groupe.', 'images/images/menu-printemps.jpg', 'Commande au minimum 3 jours avant la prestation. Sur présentation de la carte étudiante.', 10),
+  ('menu-enfant', 'Le menu enfant', 12, 2, 'Enfant', 'classique', 'Un repas adapté aux plus jeunes, avec des plats simples et gourmands.', 'images/images/menu-vegetal.jpg', 'Commande au minimum 3 jours avant la prestation. Pour les enfants jusqu''à 12 ans.', 10)
 ON DUPLICATE KEY UPDATE
   name = VALUES(name), price = VALUES(price), minimum_people = VALUES(minimum_people),
   theme = VALUES(theme), regime = VALUES(regime), description = VALUES(description),
@@ -157,7 +158,10 @@ VALUES
   ('formule-soir', 'dessert', 'Fondant au chocolat et crème vanille', 'gluten, lait, oeufs', 3),
   ('formule-etudiant', 'entree', 'Salade de crudités de saison', 'aucun allergène majeur déclaré', 1),
   ('formule-etudiant', 'plat', 'Pâtes crémeuses au poulet et légumes', 'gluten, lait', 2),
-  ('formule-etudiant', 'dessert', 'Compote de pommes maison', 'aucun allergène majeur déclaré', 3)
+  ('formule-etudiant', 'dessert', 'Compote de pommes maison', 'aucun allergène majeur déclaré', 3),
+  ('menu-enfant', 'entree', 'Bâtonnets de légumes et sauce douce', 'lait', 1),
+  ('menu-enfant', 'plat', 'Nuggets de poulet maison et purée', 'gluten, lait, oeufs', 2),
+  ('menu-enfant', 'dessert', 'Mousse au chocolat', 'lait, oeufs', 3)
 ON DUPLICATE KEY UPDATE name = VALUES(name), allergens = VALUES(allergens);
 
 INSERT INTO users (id, first_name, last_name, phone, email, address, password_hash, role)
