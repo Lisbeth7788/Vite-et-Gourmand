@@ -2,6 +2,7 @@ const identiteAdministration = document.querySelector('#admin-identity');
 const messageList = document.querySelector('#message-list');
 const formulaireFiltreCommandes = document.querySelector('#order-filter-form');
 const orderList = document.querySelector('#order-list');
+const reviewList = document.querySelector('#review-list');
 
 const statusLabels = {
   pending: 'En attente',
@@ -40,7 +41,7 @@ async function chargerMessages() {
     messageList.textContent = 'Aucun message reçu.';
     return;
   }
-  messageList.innerHTML = `<table><caption>Messages envoyés depuis la page contact</caption><thead><tr><th>Date</th><th>De</th><th>Sujet</th><th>Message</th></tr></thead><tbody>${messages.map((message) => `<tr><td>${echapperHtml(message.created_at)}</td><td><a href="mailto:${echapperHtml(message.email)}">${echapperHtml(message.email)}</a></td><td>${echapperHtml(message.title)}</td><td>${echapperHtml(message.description)}</td></tr>`).join('')}</tbody></table>`;
+  messageList.innerHTML = `<table><caption>Messages envoyés depuis la page contact</caption><thead><tr><th>Date</th><th>De</th><th>Sujet</th><th>Message</th><th>Action</th></tr></thead><tbody>${messages.map((message) => `<tr><td>${echapperHtml(message.created_at)}</td><td><a href="mailto:${echapperHtml(message.email)}">${echapperHtml(message.email)}</a></td><td>${echapperHtml(message.title)}</td><td>${echapperHtml(message.description)}</td><td><button class="button button-small" type="button" data-delete-message="${Number(message.id)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`;
 }
 
 async function chargerCommandes() {
@@ -56,6 +57,16 @@ async function chargerCommandes() {
     const select = orderList.querySelector(`[data-order-status="${order.id}"]`);
     if (select) select.value = order.status;
   });
+}
+
+async function chargerAvis() {
+  const avis = await demanderJson('api/admin/reviews.php');
+  if (!avis.length) {
+    reviewList.textContent = 'Aucun avis à modérer.';
+    return;
+  }
+  const statuts = { approved: 'Publié', rejected: 'Refusé', pending: 'En attente' };
+  reviewList.innerHTML = `<table><caption>Avis des clients</caption><thead><tr><th>Date</th><th>Note</th><th>Avis</th><th>Statut</th><th>Action</th></tr></thead><tbody>${avis.map((review) => `<tr><td>${echapperHtml(review.created_at)}</td><td>${'★'.repeat(Number(review.rating))}</td><td>${echapperHtml(review.comment)}</td><td>${statuts[review.status] || echapperHtml(review.status)}</td><td><button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="approved">Publier</button> <button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="rejected">Refuser</button></td></tr>`).join('')}</tbody></table>`;
 }
 
 async function initialiserAdministration() {
@@ -78,8 +89,9 @@ async function initialiserAdministration() {
   try {
     if (messageList) await chargerMessages();
     if (orderList) await chargerCommandes();
+    if (reviewList) await chargerAvis();
   } catch (error) {
-    (messageList || orderList).textContent = error.message;
+    (messageList || orderList || reviewList).textContent = error.message;
   }
 }
 
@@ -104,6 +116,32 @@ if (orderList) {
     } catch (error) {
       window.alert(error.message);
       await chargerCommandes();
+    }
+  });
+}
+
+if (reviewList) {
+  reviewList.addEventListener('click', async (event) => {
+    const button = event.target.closest('[data-review-id]');
+    if (!button) return;
+    try {
+      await demanderJson('api/admin/reviews.php', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: button.dataset.reviewId, status: button.dataset.reviewStatus }) });
+      await chargerAvis();
+    } catch (error) {
+      window.alert(error.message);
+    }
+  });
+}
+
+if (messageList) {
+  messageList.addEventListener('click', async (event) => {
+    const button = event.target.closest('[data-delete-message]');
+    if (!button || !window.confirm('Supprimer ce message ?')) return;
+    try {
+      await demanderJson('api/admin/messages.php', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: button.dataset.deleteMessage }) });
+      await chargerMessages();
+    } catch (error) {
+      window.alert(error.message);
     }
   });
 }
