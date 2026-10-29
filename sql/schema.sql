@@ -153,15 +153,15 @@ VALUES
   ('marche-bordeaux', 'entree', 'Entrée du jour selon le marché', 'selon les produits du jour', 1),
   ('marche-bordeaux', 'plat', 'Plat du jour selon le marché', 'selon les produits du jour', 2),
   ('marche-bordeaux', 'dessert', 'Dessert du jour selon le marché', 'selon les produits du jour', 3),
-  ('formule-soir', 'entree', 'Velouté de courge et éclats de noisette', 'fruits à coque', 1),
-  ('formule-soir', 'plat', 'Volaille rôtie et légumes de fête', 'aucun allergène majeur déclaré', 2),
-  ('formule-soir', 'dessert', 'Fondant au chocolat et crème vanille', 'gluten, lait, oeufs', 3),
-  ('formule-etudiant', 'entree', 'Salade de crudités de saison', 'aucun allergène majeur déclaré', 1),
-  ('formule-etudiant', 'plat', 'Pâtes crémeuses au poulet et légumes', 'gluten, lait', 2),
-  ('formule-etudiant', 'dessert', 'Compote de pommes maison', 'aucun allergène majeur déclaré', 3),
-  ('menu-enfant', 'entree', 'Bâtonnets de légumes et sauce douce', 'lait', 1),
-  ('menu-enfant', 'plat', 'Nuggets de poulet maison et purée', 'gluten, lait, oeufs', 2),
-  ('menu-enfant', 'dessert', 'Mousse au chocolat', 'lait, oeufs', 3)
+  ('formule-soir', 'entree', 'Tartare de saumon, avocat et citron vert', 'poisson', 1),
+  ('formule-soir', 'plat', 'Magret de canard laqué au miel et gingembre, patates douces rôties', 'aucun allergène majeur déclaré', 2),
+  ('formule-soir', 'dessert', 'Cœur coulant au chocolat et mangue fraîche', 'gluten, lait, oeufs', 3),
+  ('formule-etudiant', 'entree', 'Samossas de légumes et chutney de mangue', 'gluten', 1),
+  ('formule-etudiant', 'plat', 'Poulet tikka masala et riz basmati', 'lait', 2),
+  ('formule-etudiant', 'dessert', 'Riz au lait de coco et fruits de la passion', 'fruits à coque', 3),
+  ('menu-enfant', 'entree', 'Bâtonnets de légumes et sauce yaourt-citron', 'lait', 1),
+  ('menu-enfant', 'plat', 'Wrap de poulet croustillant et frites de patate douce', 'gluten, oeufs', 2),
+  ('menu-enfant', 'dessert', 'Brochette de fruits exotiques et chocolat fondu', 'lait', 3)
 ON DUPLICATE KEY UPDATE name = VALUES(name), allergens = VALUES(allergens);
 
 INSERT INTO users (id, first_name, last_name, phone, email, address, password_hash, role)
