@@ -19,6 +19,7 @@ async function actualiserLienConnexion() {
   try {
     const session = await chargerSession();
     if (!session.ok) return;
+    document.querySelectorAll('.login-section').forEach((section) => { section.hidden = true; });
     liensConnexion.forEach((lien) => {
       lien.textContent = 'Déconnexion';
       lien.href = '#deconnexion';

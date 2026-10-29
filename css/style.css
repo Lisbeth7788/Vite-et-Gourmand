@@ -687,6 +687,10 @@ form {
   width: 100%;
 }
 
+.login-section[hidden] {
+  display: none;
+}
+
 .message-formulaire {
   align-items: center;
   background: #eef5ec;
