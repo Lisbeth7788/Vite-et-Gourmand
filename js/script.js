@@ -351,6 +351,9 @@ if (resetPanel) {
     resetForm.hidden = true;
     resetConfirmForm.hidden = false;
     resetConfirmForm.elements.token.value = resetToken;
+    const intro = resetPanel.querySelector('#reset-title + p');
+    if (intro) intro.textContent = 'Choisissez votre nouveau mot de passe (8 caractères minimum, avec une majuscule, une minuscule et un chiffre).';
+    resetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else if (window.location.hash === '#password-reset') {
     resetPanel.hidden = false;
   }
