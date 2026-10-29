@@ -15,10 +15,7 @@
 4. Importer le fichier `sql/schema.sql`.
 5. Ouvrir le site avec `http://localhost/Vite-et-Gourmand/index.html`.
 
-Le script SQL crée les menus et deux profils de test :
-
-- Client : `test@vite-et-gourmand.fr` / `ViteGourmand2026!`
-- Administrateur : `admin@vite-et-gourmand.fr` / `AdminVite2026!`
+Le script SQL crée les menus et deux profils de test (client et administrateur). Leurs identifiants figurent dans `sql/schema.sql` et doivent être supprimés ou changés avant la mise en production : le compte administrateur réel se crée avec un `UPDATE users SET role = 'admin'` dans phpMyAdmin.
 
 Les messages de contact sont maintenant stockés dans MySQL, dans la table `messages`.
 
