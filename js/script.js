@@ -24,7 +24,8 @@ async function actualiserLienConnexion() {
       lien.textContent = 'Espace de gestion';
       element.append(lien);
       liste.append(element);
-    }('.login-section').forEach((section) => { section.hidden = true; });
+    }
+    document.querySelectorAll('.login-section').forEach((section) => { section.hidden = true; });
     liensConnexion.forEach((lien) => {
       lien.textContent = 'Déconnexion';
       lien.href = '#deconnexion';
