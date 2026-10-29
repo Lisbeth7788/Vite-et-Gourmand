@@ -89,15 +89,15 @@
           <div class="champ-formulaire">
             <label for="order-menu">Sélection du menu</label>
             <select id="order-menu" name="menu" required>
-              <option value="marche-bordeaux" data-price="24" data-min="6">Le marché de Bordeaux (midi) - 24 € / personne - minimum 6</option>
-              <option value="formule-soir" data-price="34" data-min="6">La Table du Soir - 34 € / personne - minimum 6</option>
-              <option value="formule-etudiant" data-price="15" data-min="4">Le Campus Gourmand - 15 € / personne - minimum 4</option>
-              <option value="menu-enfant" data-price="12" data-min="2">Le Petit Gourmet - 12 € / personne - minimum 2</option>
+              <option value="marche-bordeaux" data-price="24" data-min="1">Le marché de Bordeaux (midi) - 24 € / personne - à partir d'une personne</option>
+              <option value="formule-soir" data-price="34" data-min="1">La Table du Soir - 34 € / personne - à partir d'une personne</option>
+              <option value="formule-etudiant" data-price="15" data-min="1">Le Campus Gourmand - 15 € / personne - à partir d'une personne</option>
+              <option value="menu-enfant" data-price="12" data-min="1">Le Petit Gourmet - 12 € / personne - à partir d'une personne</option>
             </select>
           </div>
           <div class="champ-formulaire">
             <label for="order-people">Nombre de personnes</label>
-            <input id="order-people" name="people" type="number" min="6" value="6" required>
+            <input id="order-people" name="people" type="number" min="1" value="1" required>
             <small id="people-help">Le minimum dépend du menu sélectionné.</small>
           </div>
         </section>
