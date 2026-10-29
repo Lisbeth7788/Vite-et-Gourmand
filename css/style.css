@@ -1449,7 +1449,7 @@ form {
 .contact-form-panel .champ-formulaire input:not(.is-valid):focus,
 .contact-form-panel .champ-formulaire textarea:not(.is-valid):focus {
   border-color: #cf9a6c;
-  box-shadow: 0 0 0 3px rgba(213, 138, 114, 0.18);
+  box-shadow: 0 0 0 3px rgba(207, 154, 108, 0.2);
   outline: 0;
 }
 
