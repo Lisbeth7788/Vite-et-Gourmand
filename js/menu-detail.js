@@ -60,7 +60,21 @@ if (pageDetail) {
         image.src = menu.image_path;
         image.alt = menu.name;
         const lienReservation = document.querySelector('#menu-order-link');
-        lienReservation.href = `reservation.html?menu=${encodeURIComponent(menu.id)}`;
+        const adresseReservation = `reservation.html?menu=${encodeURIComponent(menu.id)}`;
+        lienReservation.href = adresseReservation;
+        lienReservation.onclick = async (evenement) => {
+          evenement.preventDefault();
+          let connecte = false;
+          try {
+            const reponse = await fetch('api/auth/session.php', { credentials: 'same-origin', cache: 'no-store' });
+            connecte = reponse.ok;
+          } catch (erreurSession) {
+            connecte = false;
+          }
+          window.location.href = connecte
+            ? adresseReservation
+            : `connexion.html?redirect=${encodeURIComponent(adresseReservation)}`;
+        };
         const conditionsList = document.querySelector('#menu-conditions');
         conditionsList.replaceChildren();
         (menu.conditions_text || 'Aucune condition particulière communiquée.')
