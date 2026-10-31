@@ -20,6 +20,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'PATCH') {
 
     $history = $pdo->prepare("INSERT INTO order_status_history (order_id, status, note) VALUES (?, 'cancelled', 'Annulation demandée par le client')");
     $history->execute([trim($data['id'])]);
+    $stock = $pdo->prepare('UPDATE menus SET stock = stock + 1 WHERE id = (SELECT menu_id FROM orders WHERE id = ?)');
+    $stock->execute([trim($data['id'])]);
     jsonResponse(['message' => 'Commande annulée.']);
 }
 
