@@ -31,8 +31,8 @@
   --font-display: 'Fraunces', Georgia, serif;
   --cream: #e7dbd5;
   --paper: #f9f4f1;
-  --ink: #744428;
-  --muted: #744428;
+  --ink: #9a5b38;
+  --muted: #9a5b38;
   --terracotta: #9a5b38;
   --terracotta-dark: #744428;
   --sage: #667763;
@@ -249,7 +249,7 @@ select:-webkit-autofill {
 }
 
 .eyebrow {
-  color: var(--terracotta-dark);
+  color: var(--terracotta);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.14em;
