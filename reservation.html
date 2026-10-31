@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Réserver et payer en ligne un menu Vite et Gourmand.">
   <title>Réservation et paiement - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=436b63bf">
+  <link rel="stylesheet" href="css/style.css?v=6e53cbc3">
 </head>
 <body>
   <header class="site-header">
@@ -82,8 +82,10 @@
               <input id="paiement-cryptogramme" type="text" inputmode="numeric" autocomplete="cc-csc" maxlength="4" required>
             </div>
           </div>
-          <button class="button" type="submit" id="bouton-payer">Payer</button>
-          <button class="button button-small" type="button" id="bouton-retour">Modifier ma réservation</button>
+          <div class="actions-paiement">
+            <button class="button" type="submit" id="bouton-payer">Payer</button>
+            <button class="button bouton-secondaire" type="button" id="bouton-retour">Modifier ma réservation</button>
+          </div>
         </form>
 
         <section id="confirmation" class="form-section" hidden aria-live="polite">

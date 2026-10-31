@@ -1010,8 +1010,28 @@ form {
   align-self: center;
 }
 
-#formulaire-paiement #bouton-retour {
-  margin: 1.25rem 0 0 1rem;
+.actions-paiement {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.actions-paiement .button {
+  cursor: pointer;
+  flex: 1 1 14rem;
+  text-align: center;
+}
+
+.actions-paiement .bouton-secondaire {
+  background: transparent;
+  color: var(--terracotta);
+}
+
+.actions-paiement .bouton-secondaire:hover,
+.actions-paiement .bouton-secondaire:focus-visible {
+  background: var(--terracotta);
+  color: #fff;
 }
 
 .empty-results {
