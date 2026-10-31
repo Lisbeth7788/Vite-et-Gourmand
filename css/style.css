@@ -1629,7 +1629,7 @@ main > .page-intro ~ .history-story {
 
 .site-footer {
   align-items: center;
-  background: var(--ink);
+  background: #3b2a20;
   color: #eee6da;
   display: flex;
   flex-direction: column;
