@@ -413,7 +413,7 @@ h3 {
 }
 
 .history-story-content h2 {
-  color: #754c55;
+  color: var(--terracotta);
   font-size: clamp(2rem, 4vw, 3.5rem);
 }
 
@@ -488,7 +488,7 @@ h3 {
 }
 
 .history-callout h2 {
-  color: #754c55;
+  color: var(--terracotta);
 }
 
 .history-callout p {
