@@ -59,14 +59,8 @@ if (pageDetail) {
         const image = document.querySelector('#menu-detail-image');
         image.src = menu.image_path;
         image.alt = menu.name;
-        const orderLink = document.querySelector('#menu-order-link');
-        const commandeUrl = `reservation.html?menu=${menu.id}`;
-        orderLink.href = `connexion.html?redirect=${encodeURIComponent(commandeUrl)}`;
-        chargerSession()
-          .then((session) => {
-            if (session.ok && session.data?.user) orderLink.href = commandeUrl;
-          })
-          .catch(() => {});
+        const lienReservation = document.querySelector('#menu-order-link');
+        lienReservation.href = `reservation.html?menu=${encodeURIComponent(menu.id)}`;
         const conditionsList = document.querySelector('#menu-conditions');
         conditionsList.replaceChildren();
         (menu.conditions_text || 'Aucune condition particulière communiquée.')
