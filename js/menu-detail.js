@@ -60,7 +60,7 @@ if (pageDetail) {
         image.src = menu.image_path;
         image.alt = menu.name;
         const orderLink = document.querySelector('#menu-order-link');
-        const commandeUrl = `commande.html?menu=${menu.id}`;
+        const commandeUrl = `reservation.html?menu=${menu.id}`;
         orderLink.href = `connexion.html?redirect=${encodeURIComponent(commandeUrl)}`;
         chargerSession()
           .then((session) => {
