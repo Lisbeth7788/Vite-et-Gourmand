@@ -1010,6 +1010,10 @@ form {
   align-self: center;
 }
 
+#formulaire-paiement #bouton-retour {
+  margin-top: 1.25rem;
+}
+
 .empty-results {
   color: var(--muted);
   margin: 2rem 0;
@@ -1977,3 +1981,4 @@ main > .page-intro ~ .contact-form-panel {
   margin-bottom: 4rem;
   padding-bottom: 2rem;
 }
+
