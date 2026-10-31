@@ -1023,13 +1023,16 @@ form {
   text-align: center;
 }
 
-.actions-paiement .bouton-secondaire {
+.actions-paiement .bouton-secondaire,
+.bouton-secondaire {
   background: transparent;
   color: var(--terracotta);
 }
 
 .actions-paiement .bouton-secondaire:hover,
-.actions-paiement .bouton-secondaire:focus-visible {
+.actions-paiement .bouton-secondaire:focus-visible,
+.bouton-secondaire:hover,
+.bouton-secondaire:focus-visible {
   background: var(--terracotta);
   color: #fff;
 }

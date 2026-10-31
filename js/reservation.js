@@ -45,6 +45,9 @@
   });
   const menuDemande = new URLSearchParams(window.location.search).get('menu');
   if (menus.some((menu) => menu.id === menuDemande)) choixMenu.value = menuDemande;
+  if (menuDemande) {
+    document.querySelector('#lien-retour').href = `menu-detail.html?menu=${encodeURIComponent(menuDemande)}`;
+  }
 
   const horaires = {
     semaine: [['11:30', '14:00'], ['18:00', '22:00']],
