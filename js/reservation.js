@@ -21,12 +21,18 @@
   } catch (erreur) {
     utilisateur = null;
   }
-  if (!utilisateur) {
-    window.location.href = `connexion.html?redirect=${encodeURIComponent(window.location.pathname.split('/').pop() + window.location.search)}`;
-    return;
+  const adresseConnexion = `connexion.html?redirect=${encodeURIComponent(window.location.pathname.split('/').pop() + window.location.search)}`;
+  const zoneClient = document.querySelector('#reservation-client');
+  if (utilisateur) {
+    zoneClient.textContent = `Réservation au nom de ${utilisateur.firstName || ''} ${utilisateur.lastName || ''} (${utilisateur.email || ''}).`;
+    formulaire.elements.telephone.value = utilisateur.phone || '';
+  } else {
+    zoneClient.append('Vous n’êtes pas connecté. ');
+    const lienConnexion = document.createElement('a');
+    lienConnexion.href = adresseConnexion;
+    lienConnexion.textContent = 'Connectez-vous';
+    zoneClient.append(lienConnexion, ' pour valider votre réservation.');
   }
-  document.querySelector('#reservation-client').textContent = `Réservation au nom de ${utilisateur.firstName || ''} ${utilisateur.lastName || ''} (${utilisateur.email || ''}).`;
-  formulaire.elements.telephone.value = utilisateur.phone || '';
 
   try {
     const reponse = await fetch('api/menus.php', { credentials: 'same-origin' });
@@ -103,6 +109,10 @@
     actualiserRecapitulatif();
     if (!formulaire.checkValidity()) {
       formulaire.reportValidity();
+      return;
+    }
+    if (!utilisateur) {
+      window.location.href = adresseConnexion;
       return;
     }
     const bouton = formulaire.querySelector('button[type="submit"]');
