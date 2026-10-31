@@ -200,8 +200,26 @@
     }
   });
 
-  document.querySelector('#bouton-retour').addEventListener('click', () => {
-    showToast('Votre réservation est enregistrée en attente de paiement. Vous pouvez la retrouver dans votre compte.');
-    window.location.href = 'compte.html';
+  document.querySelector('#bouton-retour').addEventListener('click', async (evenement) => {
+    const bouton = evenement.currentTarget;
+    bouton.disabled = true;
+    try {
+      const reponse = await fetch('api/user/orders.php', {
+        method: 'PATCH',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: commande.orderId })
+      });
+      if (!reponse.ok) throw new Error('Votre réservation n’a pas pu être modifiée. Consultez votre compte.');
+      commande = null;
+      formulairePaiement.hidden = true;
+      formulaire.hidden = false;
+      introduction.textContent = 'Étape 1 sur 2 : choisissez votre menu et votre créneau.';
+      formulaire.querySelector('select').focus();
+    } catch (erreur) {
+      showToast(friendlyError(erreur), true);
+    } finally {
+      bouton.disabled = false;
+    }
   });
 })();
