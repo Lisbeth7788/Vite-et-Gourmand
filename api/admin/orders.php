@@ -49,6 +49,10 @@ if (!empty($_GET['status'])) {
     $conditions[] = 'o.status = ?';
     $parameters[] = $_GET['status'];
 }
+if (!empty($_GET['paiement']) && in_array($_GET['paiement'], ['paye', 'impaye'], true)) {
+    $conditions[] = 'o.statut_paiement = ?';
+    $parameters[] = $_GET['paiement'];
+}
 if (!empty($_GET['email'])) {
     $conditions[] = 'o.email LIKE ?';
     $parameters[] = '%' . $_GET['email'] . '%';
@@ -57,7 +61,7 @@ $where = $conditions ? ' WHERE ' . implode(' AND ', $conditions) : '';
 
 $query = $pdo->prepare(
     'SELECT id, first_name, last_name, email, city, service_date, service_time,
-            menu_id, people, total, status, cancellation_reason,
+            phone, menu_id, people, total, status, statut_paiement, paye_le, cancellation_reason,
             cancellation_contact_method, created_at, updated_at
      FROM orders o' . $where . ' ORDER BY created_at DESC'
 );
