@@ -62,6 +62,11 @@ if (pageDetail) {
         const orderLink = document.querySelector('#menu-order-link');
         const commandeUrl = `commande.html?menu=${menu.id}`;
         orderLink.href = `connexion.html?redirect=${encodeURIComponent(commandeUrl)}`;
+        chargerSession()
+          .then((session) => {
+            if (session.ok && session.data?.user) orderLink.href = commandeUrl;
+          })
+          .catch(() => {});
         const conditionsList = document.querySelector('#menu-conditions');
         conditionsList.replaceChildren();
         (menu.conditions_text || 'Aucune condition particulière communiquée.')
