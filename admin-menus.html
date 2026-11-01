@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Menus et horaires - Espace de gestion - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css?v=jours-visibles">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">Vite et Gourmand</a>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html">Menus</a></li>
+        <li><a href="api/auth/logout.php">Déconnexion</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="catalogue-page admin-page">
+    <div class="page-intro">
+      <p class="eyebrow">Espace professionnel</p>
+      <h1>Menus et horaires</h1>
+      <p id="admin-identity">Vérification de votre session...</p>
+    </div>
+
+    <nav class="admin-nav" aria-label="Espace de gestion">
+      <ol>
+        <li data-admin-only><a href="admin.html">Messages</a></li>
+        <li><a href="admin-reservations.html">Réservations</a></li>
+        <li><a href="admin-avis.html" >Avis</a></li>
+        <li data-admin-only><a href="admin-activite.html">Activité</a></li>
+        <li data-admin-only><a href="admin-employes.html">Employés</a></li>
+        <li><a href="admin-menus.html" aria-current="page">Menus et horaires</a></li>
+        <li data-admin-only><a href="admin-comptes.html">Comptes employés</a></li>
+      </ol>
+    </nav>
+
+    <section class="form-section" aria-labelledby="menu-form-title">
+      <h2 id="menu-form-title">Ajouter ou modifier un menu</h2>
+      <form id="menu-form" class="grille-formulaire">
+        <input type="hidden" name="id">
+        <div class="champ-formulaire"><label for="menu-nom">Titre</label><input id="menu-nom" name="name" required></div>
+        <div class="champ-formulaire"><label for="menu-prix">Prix pour le nombre minimum (€)</label><input id="menu-prix" name="price" type="number" min="1" step="0.01" required></div>
+        <div class="champ-formulaire"><label for="menu-min">Nombre minimum de personnes</label><input id="menu-min" name="minimum_people" type="number" min="1" required></div>
+        <div class="champ-formulaire"><label for="menu-stock">Stock (réservations possibles)</label><input id="menu-stock" name="stock" type="number" min="0" required></div>
+        <div class="champ-formulaire"><label for="menu-theme">Thème</label><input id="menu-theme" name="theme" list="themes" required><datalist id="themes"><option value="Noël"><option value="Pâques"><option value="Classique"><option value="Événement"><option value="Midi"><option value="Soir"></datalist></div>
+        <div class="champ-formulaire"><label for="menu-regime">Régime</label><select id="menu-regime" name="regime" required><option value="classique">Classique</option><option value="vegetarien">Végétarien</option><option value="vegan">Vegan</option></select></div>
+        <div class="champ-formulaire"><label for="menu-image">Image (chemin dans le site)</label><input id="menu-image" name="image_path" placeholder="images/menu-marche.jpg"></div>
+        <div class="champ-formulaire"><label for="menu-description">Description</label><textarea id="menu-description" name="description" rows="3" required></textarea></div>
+        <div class="champ-formulaire"><label for="menu-conditions">Conditions (délai de commande, stockage…)</label><textarea id="menu-conditions" name="conditions_text" rows="3"></textarea></div>
+        <div class="champ-formulaire"><label for="menu-entrees">Entrées (une par ligne ; allergènes après un point-virgule)</label><textarea id="menu-entrees" name="entrees" rows="3" placeholder="Velouté de potimarron ; lait"></textarea></div>
+        <div class="champ-formulaire"><label for="menu-plats">Plats</label><textarea id="menu-plats" name="plats" rows="3"></textarea></div>
+        <div class="champ-formulaire"><label for="menu-desserts">Desserts</label><textarea id="menu-desserts" name="desserts" rows="3"></textarea></div>
+        <button class="button button-small" type="submit">Enregistrer le menu</button>
+        <button class="button button-small bouton-secondaire" type="reset" id="menu-nouveau">Nouveau menu</button>
+      </form>
+      <output id="menu-retour" class="message-formulaire"></output>
+    </section>
+
+    <section class="form-section" aria-labelledby="menu-liste-title">
+      <h2 id="menu-liste-title">Les menus</h2>
+      <div id="menu-liste" class="table-responsive"></div>
+    </section>
+
+    <section class="form-section" aria-labelledby="horaires-title">
+      <h2 id="horaires-title">Horaires d'ouverture</h2>
+      <p class="aide-section">Ces horaires s'affichent dans le pied de page du site.</p>
+      <div id="horaires-liste" class="table-responsive"></div>
+      <output id="horaires-retour" class="message-formulaire"></output>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p>&copy; 2026 Vite et Gourmand</p>
+      <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
+    </div>
+    <div class="opening-hours">
+      <h2>Horaires</h2>
+      <dl>
+        <div><dt>Lun - Ven</dt><dd>11h30 - 14h00 / 18h00 - 22h00</dd></div>
+        <div><dt>Sam - Dim</dt><dd>10h30 - 15h00 / 18h00 - 22h00</dd></div>
+      </dl>
+    </div>
+    <nav aria-label="Liens secondaires">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">Conditions générales de vente</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </footer>
+
+  <script type="module" src="js/script.js?v=selecteur-admin"></script>
+  <script src="js/admin.js?v=equipe-sans-gestion"></script>
+  <script type="module" src="js/admin-menus.js?v=2d113648"></script>
+</body>
+</html>
