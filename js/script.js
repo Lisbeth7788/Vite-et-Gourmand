@@ -405,7 +405,10 @@ if (loginForm) {
         }
       }
       const redirect = new URLSearchParams(window.location.search).get('redirect');
-      window.location.href = result.user?.role === 'admin' ? 'admin.html' : (redirect === 'admin.html' ? 'admin.html' : (redirect || 'compte.html'));
+      // Le formulaire client mène toujours à l'espace client, même avec un compte administrateur.
+      const pageEspaceGestion = /^\/?(admin|espace-employe|employe)/;
+      const pageDemandee = redirect && !pageEspaceGestion.test(redirect) ? redirect : 'compte.html';
+      window.location.href = pageDemandee;
     } catch (error) {
       showFormFeedback(loginForm, friendlyError(error), true);
     }
