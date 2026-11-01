@@ -65,18 +65,23 @@ const libellesPostes = { patron: 'Patron', chef: 'Chef', 'sous-chef': 'Sous-chef
 async function chargerEspaceEmploye() {
   const parametres = new URLSearchParams();
   if (employeConsulte) parametres.set('user_id', employeConsulte);
-  const reponse = await fetch(apiEspace + '?' + parametres.toString(), { credentials: 'same-origin' });
-  if (reponse.status === 401 || reponse.status === 403) {
-    location.href = 'employe-connexion.html';
-    return;
+  try {
+    const reponse = await fetch(apiEspace + '?' + parametres.toString(), { credentials: 'same-origin' });
+    if (reponse.status === 401 || reponse.status === 403) {
+      location.href = 'employe-connexion.html';
+      return;
+    }
+    const d = await reponse.json();
+    const p = d.profile || {};
+    const poste = libellesPostes[p.job_title] || '';
+    document.querySelector('#employe-sous-titre').textContent =
+      (p.first_name || '') + (poste ? ' · Mon rôle dans l’équipe : ' + poste : '');
+  } catch {
+    document.querySelector('#employe-sous-titre').textContent = '';
   }
-  const d = await reponse.json();
-  const p = d.profile || {};
-  const poste = libellesPostes[p.job_title] || '';
-  document.querySelector('#employe-sous-titre').textContent =
-    (p.first_name || '') + (poste ? ' · Mon rôle dans l’équipe : ' + poste : '');
-  document.querySelector('#planning-simule').innerHTML = tableauSemaine(0, p.first_name) + tableauSemaine(1, p.first_name);
 }
+
+document.querySelector('#planning-simule').innerHTML = tableauSemaine(0, '') + tableauSemaine(1, '');
 
 async function initialiserChoixEmploye() {
   const session = await chargerSession();

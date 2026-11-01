@@ -42,16 +42,8 @@ $tasks = $pdo->prepare(
 );
 $tasks->execute([$targetId]);
 
-$weekStart = new DateTimeImmutable(preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($_GET['week'] ?? '')) ? $_GET['week'] : 'today');
+$weekStart = new DateTimeImmutable('today');
 $weekStart = $weekStart->modify('monday this week');
-
-// Le planning de la semaine est créé automatiquement s'il n'existe pas encore.
-$count = $pdo->prepare("SELECT COUNT(*) FROM employee_shifts s JOIN users u ON u.id = s.user_id WHERE u.role = 'employe' AND u.is_active = 1 AND s.shift_date BETWEEN ? AND ?");
-$count->execute([$weekStart->format('Y-m-d'), $weekStart->modify('+6 days')->format('Y-m-d')]);
-if ((int) $count->fetchColumn() === 0) {
-    generateWeek($pdo, $weekStart->format('Y-m-d'));
-}
-
 $team = $pdo->prepare(
     "SELECT u.id AS user_id, u.first_name, u.job_title, s.shift_date, SUBSTRING(s.start_time, 1, 5) AS start_time, SUBSTRING(s.end_time, 1, 5) AS end_time
      FROM users u LEFT JOIN employee_shifts s ON s.user_id = u.id AND s.shift_date BETWEEN ? AND ?
