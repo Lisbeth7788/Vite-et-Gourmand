@@ -28,43 +28,22 @@ $menuQuery->execute([$data['menu']]);
 $menu = $menuQuery->fetch();
 $people = (int) $data['people'];
 
-$dayOfWeek = (int) date('w', strtotime($data['date'] . ' 12:00:00'));
-$ranges = in_array($dayOfWeek, [0, 6], true)
-    ? [['10:30', '15:00'], ['18:00', '22:00']]
-    : [['11:30', '14:00'], ['18:00', '22:00']];
-$timeValid = false;
-foreach ($ranges as [$start, $end]) {
-    if ($data['time'] >= $start && $data['time'] < $end) {
-        $timeValid = true;
-    }
-}
-if (!$timeValid) {
+if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) $data['date']) || !preg_match('/^\d{2}:\d{2}$/', (string) $data['time']) || $data['date'] < date('Y-m-d')) {
     $pdo->rollBack();
-    jsonResponse(['error' => 'Le créneau choisi est en dehors des horaires d’ouverture.'], 400);
+    jsonResponse(['error' => 'Date ou heure de livraison invalide.'], 400);
 }
 
-if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people'] || $people > 10) {
+if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people']) {
     $pdo->rollBack();
-    jsonResponse(['error' => 'Le menu ou le nombre de personnes est invalide (10 personnes maximum par réservation).'], 400);
+    jsonResponse(['error' => 'Le menu est indisponible ou le nombre de personnes est inférieur au minimum du menu.'], 400);
 }
 
-$isLunch = $data['time'] < '16:00';
-$capacityQuery = $pdo->prepare(
-    "SELECT COALESCE(SUM(people), 0) FROM orders
-     WHERE service_date = ? AND status <> 'cancelled' AND (service_time < '16:00:00') = ? FOR UPDATE"
-);
-$capacityQuery->execute([$data['date'], $isLunch ? 1 : 0]);
-$alreadyBooked = (int) $capacityQuery->fetchColumn();
-$serviceName = $isLunch ? 'midi' : 'soir';
-if ($alreadyBooked + $people > 60) {
-    $pdo->rollBack();
-    jsonResponse(['error' => "Ce créneau du $serviceName n’est plus disponible pour cette date. Merci de choisir un autre créneau ou une autre date."], 409);
-}
-
-$menuTotal = (float) $menu['price'] * $people;
-$discount = 0;
-$delivery = 0;
-$total = $menuTotal - $discount;
+$tarifs = calculerTarifs((float) $menu['price'], (int) $menu['minimum_people'], $people, $ville, $distance);
+$menuTotal = $tarifs['menuTotal'];
+$discount = $tarifs['discount'];
+$delivery = $tarifs['delivery'];
+$total = $tarifs['total'];
+$lieu = trim((string) ($data['delivery_place'] ?? '')) ?: 'Adresse de livraison';
 
 $insert = $pdo->prepare(
     'INSERT INTO orders (
@@ -82,12 +61,12 @@ try {
         trim($data['last_name']),
         strtolower(trim($data['email'])),
         trim($data['phone']),
-        'Réservation sur place',
-        'Bordeaux',
-        0,
+        trim($data['address']),
+        $ville,
+        $distance,
         $data['date'],
         $data['time'],
-        'Sur place',
+        $lieu,
         $menu['id'],
         $people,
         $menuTotal,
@@ -110,7 +89,7 @@ try {
     jsonResponse(['error' => 'La commande n’a pas pu être enregistrée.'], 500);
 }
 
-@mail($data['email'], 'Confirmation de votre réservation', "Bonjour,\n\nNous avons bien reçu votre réservation pour le {$data['date']} (" . (int) $people . " personnes).\nMontant : " . number_format((float) $total, 2, ',', ' ') . " €.\n\nÀ bientôt chez Vite et Gourmand.");
+@mail($data['email'], 'Confirmation de votre réservation', "Bonjour,\n\nNous avons bien reçu votre commande pour le {$data['date']} à {$data['time']} (" . (int) $people . " personnes).\nMenu : " . number_format($menuTotal, 2, ',', ' ') . " €\nRemise : -" . number_format($discount, 2, ',', ' ') . " €\nLivraison : " . number_format($delivery, 2, ',', ' ') . " €\nTotal : " . number_format($total, 2, ',', ' ') . " €.\n\nMerci de votre confiance, Vite et Gourmand.");
 
 jsonResponse([
     'orderId' => $id,
