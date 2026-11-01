@@ -27,7 +27,7 @@ async function actualiserLienConnexion() {
       const lien = document.createElement('a');
       lien.className = 'lien-gestion';
       lien.href = 'admin.html';
-      lien.textContent = 'Espace de gestion';
+      lien.textContent = 'Retour à mon espace administrateur';
       element.append(lien);
       liste.append(element);
     }

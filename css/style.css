@@ -2263,3 +2263,11 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
 }
 .badge-role-employe { background: #b36b00; }
 .badge-role-admin { background: #8c2f39; }
+
+.main-navigation .lien-gestion {
+  background: #8c2f39;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
