@@ -78,9 +78,12 @@
     const menu = menuSelectionne();
     if (!menu) return;
     const minimum = Number(menu.minimum) || 1;
-    champPersonnes.min = minimum;
-    champPersonnes.max = 6;
-    const personnes = Math.min(Math.max(Number(champPersonnes.value) || minimum, minimum), 6);
+    const precedent = Number(champPersonnes.value) || minimum;
+    const personnes = Math.min(Math.max(precedent, minimum), 6);
+    champPersonnes.replaceChildren();
+    for (let n = Math.min(minimum, 6); n <= 6; n += 1) {
+      champPersonnes.add(new Option(`${n} personne${n > 1 ? 's' : ''}`, n));
+    }
     champPersonnes.value = personnes;
     document.querySelector('#reservation-aide-personnes').textContent = `Minimum : ${minimum}, maximum : 6 personnes par réservation.`;
     document.querySelector('#recapitulatif-menu').textContent = `${menu.name} × ${personnes}`;

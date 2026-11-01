@@ -40,7 +40,14 @@
           </div>
           <div class="champ-formulaire">
             <label for="reservation-personnes">Nombre de personnes</label>
-            <input id="reservation-personnes" name="personnes" type="number" min="1" max="6" value="1" required>
+            <select id="reservation-personnes" name="personnes" required>
+              <option value="1">1 personne</option>
+              <option value="2">2 personnes</option>
+              <option value="3">3 personnes</option>
+              <option value="4">4 personnes</option>
+              <option value="5">5 personnes</option>
+              <option value="6">6 personnes</option>
+            </select>
             <small id="reservation-aide-personnes">Maximum : 6 personnes par réservation.</small>
           </div>
           <div class="grille-formulaire">
@@ -128,6 +135,6 @@
   </footer>
 
   <script src="js/script.js?v=e6aa97b5"></script>
-  <script src="js/reservation.js?v=d1f9e54c"></script>
+  <script src="js/reservation.js?v=7659314c"></script>
 </body>
 </html>
