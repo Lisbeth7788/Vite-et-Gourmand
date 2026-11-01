@@ -2171,3 +2171,7 @@ ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.
 .bloc-semaine{margin-bottom:3rem}
 .bloc-semaine + .bloc-semaine{padding-top:2rem;border-top:2px dashed var(--line,#e6dccf)}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.bandeau-jour{background:#f6ece4;border-radius:12px;padding:.8rem 1rem;font-weight:600}
+.bouton-imprimer{display:block;margin:1.5rem auto 0}
+@media print{.site-header,.site-footer,#employe-choix,.bouton-imprimer,.bloc-jour,[aria-labelledby='titre-contacts']{display:none}#planning-simule{max-width:100%}}
