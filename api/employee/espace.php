@@ -42,12 +42,6 @@ $tasks = $pdo->prepare(
 );
 $tasks->execute([$targetId]);
 
-$orders = $pdo->query(
-    "SELECT SUBSTRING(o.service_time, 1, 5) AS service_time, o.people, o.city, o.delivery_place, COALESCE(m.name, o.menu_id) AS menu
-     FROM orders o LEFT JOIN menus m ON m.id = o.menu_id
-     WHERE o.service_date = CURDATE() AND o.status NOT IN ('cancelled', 'completed') ORDER BY o.service_time"
-)->fetchAll();
-
 $weekStart = new DateTimeImmutable('today');
 $weekStart = $weekStart->modify('monday this week');
 $team = $pdo->prepare(
@@ -63,7 +57,6 @@ jsonResponse([
     'me' => $targetId,
     'weekStart' => $weekStart->format('Y-m-d'),
     'team' => $team->fetchAll(),
-    'orders' => $orders,
     'shifts' => $shifts->fetchAll(),
     'tasks' => $tasks->fetchAll()
 ]);
