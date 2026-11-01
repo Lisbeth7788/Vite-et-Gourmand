@@ -205,6 +205,8 @@
       const titre = confirmation.querySelector('h2');
       titre.setAttribute('tabindex', '-1');
       titre.focus();
+      sessionStorage.setItem('toast', 'Paiement reçu : votre réservation est confirmée.');
+      window.setTimeout(() => { window.location.href = 'compte.html'; }, 2500);
     } catch (erreurPaiement) {
       showToast(friendlyError(erreurPaiement), true);
       bouton.disabled = false;

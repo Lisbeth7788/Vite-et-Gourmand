@@ -2037,3 +2037,6 @@ main > .page-intro ~ .contact-form-panel {
 .compteur-fleches button:active { background: #dfc9a6; }
 .compteur-fleches button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
 .compteur-fleches svg { fill: none; height: 10px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.2; width: 14px; }
+
+#confirmation .actions-paiement { column-gap: 1.25rem; row-gap: 1rem; }
+#confirmation .actions-paiement .button { display: inline-block; margin: 0; }
