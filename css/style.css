@@ -2055,9 +2055,8 @@ main > .page-intro ~ .contact-form-panel {
 .profil-formulaire .champ-formulaire textarea { text-align: left; }
 .profil-formulaire textarea { resize: vertical; }
 .profil-actions { display: flex; justify-content: flex-end; }
-.profil-actions .button { margin: 0; }
+.profil-formulaire .profil-actions .button { display: inline-block; font-size: 0.9rem; margin: 0; padding: 0.5rem 1.1rem; width: auto; }
 @media (max-width: 640px) {
   .profil-ligne { grid-template-columns: 1fr; }
-  .profil-actions { justify-content: stretch; }
-  .profil-actions .button { width: 100%; }
+  .profil-actions { justify-content: center; }
 }
