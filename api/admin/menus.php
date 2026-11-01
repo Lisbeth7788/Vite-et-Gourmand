@@ -1,7 +1,9 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../config/menu_images.php';
 requireRole(['admin', 'employe']);
+assurerTableImages($pdo);
 
 const TYPES_PLATS = ['entree' => 'entrees', 'plat' => 'plats', 'dessert' => 'desserts'];
 
@@ -27,6 +29,7 @@ if ($methode === 'GET') {
     $requetePlats = $pdo->prepare('SELECT dish_type, name, allergens FROM menu_dishes WHERE menu_id = ? ORDER BY position');
     foreach ($menus as &$menu) {
         $requetePlats->execute([$menu['id']]);
+        $menu['images'] = implode("\n", imagesDuMenu($pdo, $menu['id'], (string) $menu['image_path']));
         $menu['plats'] = [];
         foreach (TYPES_PLATS as $type => $cle) {
             $menu['plats'][$cle] = '';
@@ -74,6 +77,14 @@ if ($prix <= 0 || $minimum < 1) {
     jsonResponse(['error' => 'Prix et nombre minimum de personnes doivent être positifs.'], 400);
 }
 
+$images = array_values(array_unique(array_filter(array_map('trim', preg_split('/\R/', (string) ($data['images'] ?? ''))))));
+foreach ($images as $chemin) {
+    if (!cheminImageValide($chemin)) {
+        jsonResponse(['error' => 'Image invalide : « ' . mb_substr($chemin, 0, 60) . ' ». Utilisez un chemin comme images/images/menu-marche.jpg, un par ligne.'], 400);
+    }
+}
+$data['image_path'] = $images[0] ?? '';
+
 $id = trim((string) ($data['id'] ?? ''));
 $nouveau = $id === '';
 if ($nouveau) {
@@ -97,6 +108,11 @@ try {
         foreach (lirePlats((string) ($data[$cle] ?? '')) as [$nom, $allergenes]) {
             $insertion->execute([$id, $type, $nom, $allergenes, $position++]);
         }
+    }
+    $pdo->prepare('DELETE FROM menu_images WHERE menu_id = ?')->execute([$id]);
+    $insertionImage = $pdo->prepare('INSERT INTO menu_images (menu_id, path, position) VALUES (?, ?, ?)');
+    foreach ($images as $rang => $chemin) {
+        $insertionImage->execute([$id, $chemin, $rang + 1]);
     }
     $pdo->commit();
 } catch (Throwable $erreur) {

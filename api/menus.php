@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/menu_images.php';
 
 $menuId = trim((string) ($_GET['id'] ?? ''));
 if ($menuId !== '') {
@@ -20,6 +21,8 @@ if ($menuId !== '') {
     );
     $dishes->execute([$menuId]);
     $menu['dishes'] = $dishes->fetchAll();
+    assurerTableImages($pdo);
+    $menu['images'] = imagesDuMenu($pdo, $menuId, (string) $menu['image_path']);
     jsonResponse($menu);
 }
 
