@@ -40,6 +40,7 @@ if ($method === 'PATCH') {
     $client->execute([trim($data['id'])]);
     $destinataire = $client->fetch();
     $messagesStatut = [
+        'accepted' => 'Bonne nouvelle : votre réservation a été acceptée. Nous la préparons avec soin. Vous pouvez suivre son avancement depuis votre espace client.',
         'material_return' => "Du matériel vous a été prêté. S'il n'est pas rendu sous 10 jours ouvrés, 600 € de frais vous seront facturés (voir nos conditions générales de vente). Pour organiser le retour, contactez-nous.",
         'completed' => 'Votre réservation est terminée. Connectez-vous à votre compte pour donner votre avis (note de 1 à 5 et commentaire).'
     ];
