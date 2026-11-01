@@ -47,6 +47,21 @@ async function chargerMessages() {
   messageList.innerHTML = `<table><caption>Messages envoyés depuis la page contact</caption><thead><tr><th>Date</th><th>De</th><th>Sujet</th><th>Message</th><th>Action</th></tr></thead><tbody>${messages.map((message) => `<tr><td>${echapperHtml(message.created_at)}</td><td><a href="mailto:${echapperHtml(message.email)}">${echapperHtml(message.email)}</a></td><td>${echapperHtml(message.title)}</td><td>${echapperHtml(message.description)}</td><td><button class="button button-small" type="button" data-delete-message="${Number(message.id)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`;
 }
 
+function carteReservation(order, options) {
+  const paye = order.statut_paiement === 'paye';
+  const heure = String(order.service_time).slice(0, 5);
+  const menu = nomsMenus[order.menu_id] || order.menu_id;
+  const paiement = paye ? 'Payé' : 'Paiement en attente';
+  return '<article class="carte-reservation" data-statut="' + echapperHtml(order.status) + '">' +
+    '<header><div><h3>' + echapperHtml(menu) + '</h3><p>' + echapperHtml(order.service_date) + ' à ' + echapperHtml(heure) + ' · ' + echapperHtml(order.people) + ' personnes</p></div>' +
+    '<span class="badge-paiement ' + (paye ? 'badge-ok' : 'badge-attente') + '">' + paiement + '</span></header>' +
+    '<dl><div><dt>Client</dt><dd>' + echapperHtml(order.first_name) + ' ' + echapperHtml(order.last_name) + '</dd></div>' +
+    '<div><dt>Contact</dt><dd><a href="mailto:' + echapperHtml(order.email) + '">' + echapperHtml(order.email) + '</a><br>' + echapperHtml(order.phone) + '</dd></div>' +
+    '<div><dt>Total</dt><dd>' + Number(order.total).toFixed(2) + ' €</dd></div>' +
+    '<div><dt>Réservée le</dt><dd>' + echapperHtml(order.created_at) + '</dd></div></dl>' +
+    '<label>Statut <select data-order-status="' + echapperHtml(order.id) + '" aria-label="Statut de la réservation">' + options + '</select></label></article>';
+}
+
 async function chargerCommandes() {
   const parameters = new URLSearchParams(new FormData(formulaireFiltreCommandes));
   const orders = await demanderJson(`api/admin/orders.php?${parameters}`);
@@ -55,7 +70,7 @@ async function chargerCommandes() {
     return;
   }
   const options = Object.entries(statusLabels).map(([valeur, libelle]) => `<option value="${valeur}">${libelle}</option>`).join('');
-  orderList.innerHTML = `<table><caption>Réservations enregistrées</caption><thead><tr><th>Réservée le</th><th>Client</th><th>Menu</th><th>Date</th><th>Heure</th><th>Personnes</th><th>Total</th><th>Paiement</th><th>Statut</th></tr></thead><tbody>${orders.map((order) => `<tr><td>${echapperHtml(order.created_at)}</td><td>${echapperHtml(order.first_name)} ${echapperHtml(order.last_name)}<br>${echapperHtml(order.email)}<br>${echapperHtml(order.phone)}</td><td>${echapperHtml(nomsMenus[order.menu_id] || order.menu_id)}</td><td>${echapperHtml(order.service_date)}</td><td>${echapperHtml(String(order.service_time).slice(0, 5))}</td><td>${echapperHtml(order.people)}</td><td>${Number(order.total).toFixed(2)} €</td><td>${order.statut_paiement === 'paye' ? `Payé<br>${echapperHtml(order.paye_le || '')}` : 'En attente de paiement'}</td><td><select data-order-status="${echapperHtml(order.id)}" aria-label="Statut de la réservation">${options}</select></td></tr>`).join('')}</tbody></table>`;
+  orderList.innerHTML = '<div class="grille-reservations">' + orders.map((order) => carteReservation(order, options)).join('') + '</div>';
   orders.forEach((order) => {
     const select = orderList.querySelector(`[data-order-status="${order.id}"]`);
     if (select) select.value = order.status;

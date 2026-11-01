@@ -2175,3 +2175,21 @@ ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.
 .bandeau-jour{background:#f6ece4;border-radius:12px;padding:.8rem 1rem;font-weight:600}
 .bouton-imprimer{display:block;margin:1.5rem auto 0}
 @media print{.site-header,.site-footer,#employe-choix,.bouton-imprimer,.bloc-jour,[aria-labelledby='titre-contacts']{display:none}}
+
+.grille-reservations{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+.carte-reservation{background:#fff;border:1px solid var(--line,#e6dccf);border-left:5px solid #c9b8a4;border-radius:14px;padding:1rem 1.1rem;box-shadow:0 4px 14px rgba(59,47,39,.06);display:grid;gap:.8rem}
+.carte-reservation[data-statut='pending']{border-left-color:#e0a030}
+.carte-reservation[data-statut='accepted'],.carte-reservation[data-statut='preparing'],.carte-reservation[data-statut='delivery']{border-left-color:#3b82c4}
+.carte-reservation[data-statut='delivered'],.carte-reservation[data-statut='completed']{border-left-color:#2f8f4e}
+.carte-reservation[data-statut='cancelled']{border-left-color:#c0392b;opacity:.75}
+.carte-reservation header{display:flex;justify-content:space-between;gap:.6rem;align-items:flex-start}
+.carte-reservation h3{margin:0;font-size:1.05rem}
+.carte-reservation header p{margin:.15rem 0 0;color:#7a6c5d;font-size:.9rem}
+.carte-reservation dl{display:grid;grid-template-columns:1fr 1fr;gap:.6rem .8rem;margin:0;font-size:.88rem}
+.carte-reservation dt{color:#7a6c5d;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em}
+.carte-reservation dd{margin:0;overflow-wrap:anywhere}
+.carte-reservation label{display:flex;align-items:center;gap:.6rem;font-weight:600}
+.carte-reservation select{flex:1}
+.badge-paiement{white-space:nowrap;padding:.2rem .6rem;border-radius:999px;font-size:.75rem;font-weight:700}
+.badge-ok{background:#dff1e1;color:#1f6b35}
+.badge-attente{background:#fdeccf;color:#8a5a00}
