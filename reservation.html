@@ -41,13 +41,13 @@
           <div class="champ-formulaire">
             <label for="reservation-personnes">Nombre de personnes</label>
             <div class="compteur-personnes">
-                          <input id="reservation-personnes" name="personnes" type="number" inputmode="numeric" min="1" max="10" step="1" value="1" required>
+                          <input id="reservation-personnes" name="personnes" type="number" inputmode="numeric" min="1" step="1" value="1" required>
                           <div class="compteur-fleches">
                             <button type="button" class="compteur-haut" aria-label="Augmenter le nombre de personnes"><svg viewBox="0 0 14 10" aria-hidden="true"><path d="M2 7.5 7 2.5l5 5"/></svg></button>
                             <button type="button" class="compteur-bas" aria-label="Diminuer le nombre de personnes"><svg viewBox="0 0 14 10" aria-hidden="true"><path d="M2 2.5 7 7.5l5-5"/></svg></button>
                           </div>
                         </div>
-            <small id="reservation-aide-personnes">Maximum : 10 personnes par réservation.</small>
+            <small id="reservation-aide-personnes">Remise de 10 % dès 5 personnes de plus que le minimum du menu.</small>
           </div>
           <div class="grille-formulaire">
             <div class="champ-formulaire">
@@ -55,11 +55,27 @@
               <input id="reservation-date" name="date" type="date" required>
             </div>
             <div class="champ-formulaire">
-              <label for="reservation-heure">Heure</label>
-              <select id="reservation-heure" name="heure" required disabled>
-                <option value="">Choisissez d’abord une date</option>
-              </select>
+              <label for="reservation-heure">Heure de livraison</label>
+              <input id="reservation-heure" name="heure" type="time" required>
             </div>
+          </div>
+          <div class="champ-formulaire">
+            <label for="reservation-adresse">Adresse de livraison</label>
+            <input id="reservation-adresse" name="adresse" type="text" autocomplete="street-address" required>
+          </div>
+          <div class="grille-formulaire">
+            <div class="champ-formulaire">
+              <label for="reservation-ville">Ville</label>
+              <input id="reservation-ville" name="ville" type="text" autocomplete="address-level2" value="Bordeaux" required>
+            </div>
+            <div class="champ-formulaire" id="champ-distance" hidden>
+              <label for="reservation-distance">Distance depuis Bordeaux (km)</label>
+              <input id="reservation-distance" name="distance" type="number" min="1" max="500" step="0.1">
+            </div>
+          </div>
+          <div class="champ-formulaire">
+            <label for="reservation-lieu">Lieu de livraison (facultatif)</label>
+            <input id="reservation-lieu" name="lieu" type="text" placeholder="Salle des fêtes, domicile, bureau…">
           </div>
           <div class="champ-formulaire">
             <label for="reservation-telephone">Numéro de téléphone</label>
@@ -110,6 +126,8 @@
         <dl>
           <div><dt>Menu</dt><dd id="recapitulatif-menu">-</dd></div>
           <div><dt>Date</dt><dd id="recapitulatif-date">-</dd></div>
+          <div><dt>Remise</dt><dd id="recapitulatif-remise">-</dd></div>
+          <div><dt>Livraison</dt><dd id="recapitulatif-livraison">-</dd></div>
           <div class="summary-total"><dt>Total</dt><dd id="recapitulatif-total">-</dd></div>
         </dl>
       </aside>
