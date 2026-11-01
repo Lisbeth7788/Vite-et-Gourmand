@@ -22,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
         // Développement local en HTTP : un cookie "secure" ne serait pas renvoyé par le navigateur.
         $cookieParams['secure'] = false;
     }
-    session_set_cookie_params($cookieParams);
+    session_set_cookie_params($cookieParams); // NOSONAR : "secure" actif en production et en HTTPS
     session_start();
 }
 

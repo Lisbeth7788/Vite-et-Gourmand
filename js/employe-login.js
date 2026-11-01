@@ -16,7 +16,7 @@ formulaireEmploye.addEventListener('submit', async (event) => {
     });
     const resultat = await reponse.json();
     if (!reponse.ok) throw new Error(resultat.error || 'La connexion a échoué.');
-    window.location.href = resultat.user.role === 'admin' ? 'admin.html' : 'espace-employe.html';
+    window.location.href = 'espace-employe.html';
   } catch (erreur) {
     retourEmploye.textContent = erreur.message;
     retourEmploye.dataset.state = 'error';
