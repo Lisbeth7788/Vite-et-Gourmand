@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Espace employé - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css?v=40e431ea">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="Vite et Gourmand - Accueil">Vite et Gourmand</a>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html">Nos menus</a></li>
+        <li><a href="histoire.html">À propos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="connexion.html">Connexion</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="auth-page">
+    <div class="page-intro">
+      <p class="eyebrow">Votre espace</p>
+      <h1>Connexion</h1>
+      <p>Choisissez votre espace de connexion.</p>
+    </div>
+
+    <nav class="choix-espace" aria-label="Espace de connexion">
+      <a href="connexion.html">Client</a>
+      <a href="employe-connexion.html" aria-current="page">Employé</a>
+      <a href="admin-connexion.html">Administrateur</a>
+    </nav>
+
+    <div class="auth-layout">
+      <section class="auth-panel" aria-labelledby="employe-login-title">
+        <h2 id="employe-login-title">Connexion employé</h2>
+        <form id="employe-login-form" action="#" method="post">
+          <div class="champ-formulaire">
+            <label for="employe-login-email">Adresse e-mail</label>
+            <input id="employe-login-email" name="email" type="email" autocomplete="username" required>
+          </div>
+          <div class="champ-formulaire">
+            <label for="employe-login-password">Mot de passe</label>
+            <div class="password-input">
+              <input id="employe-login-password" name="password" type="password" autocomplete="current-password" required>
+              <button class="password-toggle" type="button" aria-label="Afficher le mot de passe" aria-pressed="false"><span aria-hidden="true">&#128065;&#65038;</span></button>
+            </div>
+          </div>
+          <button class="button" type="submit">Accéder à mon espace</button>
+          <p id="employe-login-feedback" class="message-formulaire" role="status"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p>&copy; 2026 Vite et Gourmand</p>
+      <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
+    </div>
+    <nav aria-label="Liens secondaires">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">Conditions générales de vente</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </footer>
+  <script src="js/script.js?v=9547b86e"></script>
+  <script src="js/employe-login.js?v=fe7f376f"></script>
+</body>
+</html>

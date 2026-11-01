@@ -27,9 +27,9 @@ async function actualiserLienConnexion() {
       const element = document.createElement('li');
       const lien = document.createElement('a');
       lien.className = 'lien-espace-client';
-      lien.href = 'compte.html';
-      lien.textContent = 'Mon espace client';
-      if (window.location.pathname.endsWith('compte.html')) lien.setAttribute('aria-current', 'page');
+      lien.href = role === 'employe' ? 'espace-employe.html' : 'compte.html';
+      lien.textContent = role === 'employe' ? 'Mon espace employé' : 'Mon espace client';
+      if (window.location.pathname.endsWith(lien.getAttribute('href'))) lien.setAttribute('aria-current', 'page');
       element.append(lien);
       const dernier = liensConnexion[0]?.closest('li');
       if (dernier) dernier.before(element); else liste.append(element);
