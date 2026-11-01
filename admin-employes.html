@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
-  <title>Employés - Espace de gestion - Vite et Gourmand</title>
+  <title>Planning de l'équipe - Espace de gestion - Vite et Gourmand</title>
   <link rel="stylesheet" href="css/style.css?v=e4d2f6e3">
 </head>
 <body data-admin-only>
@@ -22,7 +22,7 @@
   <main class="catalogue-page admin-page">
     <div class="page-intro">
       <p class="eyebrow">Espace professionnel</p>
-      <h1>Comptes employés</h1>
+      <h1>Planning de l'équipe</h1>
       <p id="admin-identity">Vérification de votre session...</p>
     </div>
 
@@ -32,69 +32,18 @@
         <li><a href="admin-reservations.html">2. Réservations</a></li>
         <li><a href="admin-avis.html">3. Avis</a></li>
         <li data-admin-only><a href="admin-activite.html">4. Activité</a></li>
-        <li data-admin-only><a href="espace-employe.html">5. Employés</a></li>
+        <li data-admin-only><a href="admin-employes.html" aria-current="page">5. Employés</a></li>
       </ol>
     </nav>
 
-    <section class="form-section" aria-labelledby="employee-create-title">
-      <h2 id="employee-create-title">Créer un compte employé</h2>
-      <form id="employee-form" class="grille-formulaire">
-        <div class="champ-formulaire"><label for="employee-first-name">Prénom</label><input id="employee-first-name" name="first_name" required></div>
-        <div class="champ-formulaire"><label for="employee-last-name">Nom</label><input id="employee-last-name" name="last_name" required></div>
-        <div class="champ-formulaire"><label for="employee-phone">Téléphone</label><input id="employee-phone" name="phone" type="tel" required></div>
-        <div class="champ-formulaire"><label for="employee-email">E-mail</label><input id="employee-email" name="email" type="email" required></div>
-        <div class="champ-formulaire"><label for="employee-job">Poste</label><select id="employee-job" name="job_title" required><option value="patron">Patron</option><option value="chef">Chef</option><option value="sous-chef">Sous-chef</option><option value="commis">Commis</option><option value="serveur">Serveur</option><option value="plongeur">Plongeur</option><option value="livreur">Livreur</option></select></div>
-        <div class="champ-formulaire"><label for="employee-password">Mot de passe provisoire</label><input id="employee-password" name="password" type="password" autocomplete="new-password" required><small>8 caractères minimum, une majuscule, une minuscule et un chiffre.</small></div>
-        <button class="button button-small" type="submit">Créer le compte</button>
-      </form>
-      <p id="employee-feedback" class="message-formulaire" role="status"></p>
-    </section>
-
-    <section class="form-section" aria-labelledby="week-title">
-      <h2 id="week-title">Planning de la semaine</h2>
-      <p>Génère automatiquement les horaires de toute l'équipe (cuisiniers en alternance, serveur, plongeur, patron) : 35 h par semaine, 5 jours travaillés et 11 h de repos entre deux services. Les horaires déjà saisis sur cette semaine sont remplacés.</p>
-      <form id="week-form" class="grille-formulaire">
-        <div class="champ-formulaire"><label for="week-date">Semaine du</label><input id="week-date" name="date" type="date" required></div>
-        <button class="button button-small" type="submit">Générer la semaine</button>
-      </form>
-      <p id="week-feedback" class="message-formulaire" role="status"></p>
-      <ul id="week-warnings" class="activite-liste"></ul>
-    </section>
-
-    <section class="form-section" aria-labelledby="employee-list-title">
-      <h2 id="employee-list-title">Employés</h2>
-      <div id="employee-list" class="table-responsive"></div>
-    </section>
-
-    <section id="planning-admin" class="form-section" hidden aria-labelledby="planning-admin-title">
-      <h2 id="planning-admin-title">Planning de <span id="planning-nom"></span></h2>
-      <form id="shift-form" class="grille-formulaire">
-        <h3>Horaire</h3>
-        <div class="champ-formulaire"><label for="shift-date">Date</label><input id="shift-date" name="date" type="date" required></div>
-        <div class="champ-formulaire"><label for="shift-start">Début</label><input id="shift-start" name="start" type="time" required></div>
-        <div class="champ-formulaire"><label for="shift-end">Fin</label><input id="shift-end" name="end" type="time" required></div>
-        <div class="champ-formulaire"><label for="shift-note">Note</label><input id="shift-note" name="note" maxlength="200"></div>
-        <button class="button button-small" type="submit">Ajouter l'horaire</button>
-      </form>
-      <form id="task-form" class="grille-formulaire">
-        <h3>Tâche</h3>
-        <div class="champ-formulaire"><label for="task-date">Date</label><input id="task-date" name="date" type="date" required></div>
-        <div class="champ-formulaire"><label for="task-title">Tâche</label><input id="task-title" name="title" maxlength="200" required></div>
-        <button class="button button-small" type="submit">Ajouter la tâche</button>
-      </form>
-      <form id="payslip-form" class="grille-formulaire">
-        <h3>Fiche de paie</h3>
-        <div class="champ-formulaire"><label for="payslip-period">Mois</label><input id="payslip-period" name="period" type="month" required></div>
-        <div class="champ-formulaire"><label for="payslip-hours">Heures</label><input id="payslip-hours" name="hours" type="number" step="0.25" min="0" required></div>
-        <div class="champ-formulaire"><label for="payslip-gross">Brut (€)</label><input id="payslip-gross" name="gross" type="number" step="0.01" min="0" required></div>
-        <div class="champ-formulaire"><label for="payslip-net">Net (€)</label><input id="payslip-net" name="net" type="number" step="0.01" min="0" required></div>
-        <div class="champ-formulaire"><label for="payslip-note">Note</label><input id="payslip-note" name="note" maxlength="200"></div>
-        <button class="button button-small" type="submit">Ajouter la fiche</button>
-      </form>
-      <p id="planning-feedback" class="message-formulaire" role="status"></p>
-      <div id="planning-contenu"></div>
-    </section>
-  </main>
+    <section class="form-section" aria-labelledby="titre-planning">
+      <h2 id="titre-planning" class="visually-hidden">Planning de l'équipe</h2>
+      <ul class="planning-legende planning-legende-haut">
+        <li><span class="pastille-service">Service</span> 11h-14h30 et 18h-21h30 (7 h)</li>
+        <li><span class="pastille-repos">Repos</span> jour de repos</li>
+      </ul>
+      <div id="planning-simule"></div>
+    </section>  </main>
 
   <footer class="site-footer">
     <div>
@@ -108,6 +57,7 @@
     </nav>
   </footer>
 
+  <script type="module" src="js/planning-equipe.js?v=2ee30adc"></script>
   <script src="js/admin.js?v=8c3ccf02"></script>
 </body>
 </html>
