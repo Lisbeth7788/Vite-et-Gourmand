@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
-requireRole(['admin', 'employe']);
+requireRole(['admin']);
 
 const TYPES_PLATS = ['entree' => 'entrees', 'plat' => 'plats', 'dessert' => 'desserts'];
 

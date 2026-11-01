@@ -5,7 +5,7 @@ require_once __DIR__ . '/../config/database.php';
 $methode = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 if ($methode === 'PATCH') {
-    requireRole(['admin', 'employe']);
+    requireRole(['admin']);
     $data = requestData();
     $jour = (int) ($data['day_of_week'] ?? 0);
     $horaires = trim((string) ($data['opening_hours'] ?? ''));
