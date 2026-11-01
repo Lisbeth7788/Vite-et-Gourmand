@@ -528,24 +528,27 @@ h3 {
 
 .reviews-section {
   background: var(--cream);
-  display: grid;
-  gap: 1rem 1.25rem;
-  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.2fr);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto 4rem;
+  max-width: 760px;
+  padding: 0 1.5rem 2rem;
 }
 .reviews-section > .section-heading {
-  grid-column: 1 / -1;
   margin-bottom: 0;
   width: 100%;
 }
 
 .carte-avis {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
   display: flex;
   flex-direction: column;
-  min-height: 130px;
-  padding: 1rem;
+  min-height: 0;
+  padding: 1.1rem 0;
   text-align: center;
 }
 
@@ -557,7 +560,7 @@ h3 {
 .carte-avis blockquote {
   font-family: var(--font-display);
   font-size: 1rem;
-  margin: 0.75rem 0;
+  margin: 0.4rem 0;
 }
 
 .carte-avis cite {
@@ -565,26 +568,31 @@ h3 {
   font-size: 0.9rem;
   font-style: normal;
   font-weight: 700;
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .formulaire-avis {
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 14px;
   margin: 0;
   max-width: none;
-  padding: 1.25rem;
+  order: 2;
+  padding: 1.5rem;
 }
 
 .liste-avis {
+  gap: 0;
   grid-template-columns: 1fr;
   margin: 0;
   max-width: none;
+  order: 1;
 }
 
 .formulaire-avis h3 {
-  font-size: 1.65rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
 }
 
 .formulaire-avis fieldset {
@@ -1511,24 +1519,24 @@ form {
   border-radius: 14px;
   box-shadow: 0 14px 30px rgba(49, 91, 71, 0.12);
   margin: clamp(2.5rem, 6vw, 4rem) auto clamp(3rem, 7vw, 5rem);
-  max-width: 680px;
-  padding: clamp(1.75rem, 5vw, 3rem);
+  max-width: 520px;
+  padding: 1.25rem 1.5rem;
 }
 
 .contact-form-panel h2 {
   color: var(--terracotta);
-  font-size: clamp(1.6rem, 3vw, 2rem);
-  margin-bottom: 1.75rem;
+  font-size: 1.35rem;
+  margin-bottom: 0.9rem;
   text-align: center;
 }
 
 .contact-form-panel form {
   display: grid;
-  gap: 0.35rem;
+  gap: 0;
 }
 
 .contact-form-panel .champ-formulaire {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.5rem;
 }
 
 .contact-form-panel .champ-formulaire input,
@@ -1536,6 +1544,8 @@ form {
   background: #fff;
   border-color: #e2c8bb;
   border-radius: 10px;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
@@ -1557,8 +1567,8 @@ form {
   background: #c29a7a;
   border-color: #c29a7a;
   box-shadow: 0 8px 18px rgba(116, 68, 40, 0.16);
-  margin-top: 0.75rem;
-  min-width: 220px;
+  margin-top: 0.25rem;
+  padding: 0.6rem 1.1rem;
 }
 
 .contact-form-panel .button:hover,
@@ -1862,65 +1872,12 @@ main > :last-child {
 
 
 /* Section avis simplifiee */
-.reviews-section {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-inline: auto;
-  max-width: 760px;
-  padding: 0 1.5rem;
-}
-
-.reviews-section > .section-heading {
-  margin-bottom: 0;
-}
-
-.liste-avis {
-  gap: 0;
-  grid-template-columns: 1fr;
-  margin: 0;
-  order: 1;
-}
-
-.carte-avis {
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  min-height: 0;
-  padding: 1.1rem 0;
-  text-align: center;
-}
-
 .carte-avis:first-child {
   padding-top: 0;
 }
 
 .carte-avis:last-child {
   border-bottom: 0;
-}
-
-.carte-avis blockquote {
-  font-size: 1rem;
-  margin: 0.4rem 0;
-}
-
-.carte-avis cite {
-  margin-top: 0;
-}
-
-.formulaire-avis {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  order: 2;
-  padding: 1.5rem;
-}
-
-.formulaire-avis h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.75rem;
-  text-align: center;
 }
 
 .formulaire-avis textarea {
@@ -1941,39 +1898,9 @@ main > :last-child {
   font-weight: 300;
 }
 
-/* Formulaire de contact compact */
-.contact-form-panel {
-  max-width: 520px;
-  padding: 1.25rem 1.5rem;
-}
-
 main > .page-intro ~ .contact-form-panel {
   margin-top: 1.5rem;
   margin-bottom: 2rem;
-}
-
-.contact-form-panel h2 {
-  font-size: 1.35rem;
-  margin-bottom: 0.9rem;
-}
-
-.contact-form-panel form {
-  gap: 0;
-}
-
-.contact-form-panel .champ-formulaire {
-  margin-bottom: 0.5rem;
-}
-
-.contact-form-panel .champ-formulaire input,
-.contact-form-panel .champ-formulaire textarea {
-  font-size: 0.95rem;
-  padding: 0.5rem 0.75rem;
-}
-
-.contact-form-panel .button {
-  margin-top: 0.25rem;
-  padding: 0.6rem 1.1rem;
 }
 
 /* Menu de l'espace de gestion */
@@ -2024,12 +1951,6 @@ main > .page-intro ~ .contact-form-panel {
   font-size: 0.9rem;
   font-style: italic;
   margin: 0 0 0.75rem;
-}
-
-/* Espace sous la section avis */
-.reviews-section {
-  margin-bottom: 4rem;
-  padding-bottom: 2rem;
 }
 
 .compteur-personnes { position: relative; }
