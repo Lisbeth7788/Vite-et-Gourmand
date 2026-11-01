@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Activité des clients - Espace de gestion - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=b4dca317">
+  <link rel="stylesheet" href="css/style.css?v=be51fda8">
 </head>
 <body data-admin-only>
   <header class="site-header">
@@ -41,6 +41,20 @@
       <div id="activity-summary" class="chiffres-cles" role="status"></div>
     </section>
 
+    <section class="form-section" aria-labelledby="stats-title">
+      <h2 id="stats-title">Statistiques par menu</h2>
+      <p class="aide-section">Nombre de réservations et chiffre d'affaires de chaque menu (données MongoDB).</p>
+      <form id="stats-form" class="filtres-stats">
+        <label for="stats-menu">Menu</label>
+        <select id="stats-menu" name="menu"><option value="">Tous les menus</option></select>
+        <label for="stats-from">Du</label>
+        <input id="stats-from" name="from" type="date">
+        <label for="stats-to">Au</label>
+        <input id="stats-to" name="to" type="date">
+        <button class="button button-small" type="submit">Afficher</button>
+      </form>
+      <div id="stats-result" aria-live="polite"></div>
+    </section>
     <section class="form-section" aria-labelledby="activity-days-title">
       <h2 id="activity-days-title">Remplissage des prochains services</h2>
       <p class="aide-section">60 personnes maximum par service.</p>
@@ -66,6 +80,6 @@
     </nav>
   </footer>
 
-  <script src="js/admin.js?v=8c3ccf02"></script>
+  <script src="js/admin.js?v=a1550ca0"></script>
 </body>
 </html>

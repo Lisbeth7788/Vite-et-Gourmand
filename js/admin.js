@@ -113,6 +113,41 @@ async function chargerActivite() {
     : 'Aucune activité enregistrée.';
 }
 
+async function chargerStatistiques() {
+  const formulaire = document.querySelector('#stats-form');
+  const resultat = document.querySelector('#stats-result');
+  const choixMenu = document.querySelector('#stats-menu');
+  const menus = await fetch('api/menus.php').then((reponse) => reponse.json()).catch(() => []);
+  const noms = {};
+  (Array.isArray(menus) ? menus : []).forEach((menu) => {
+    noms[menu.id] = menu.name || menu.title || menu.id;
+    choixMenu.insertAdjacentHTML('beforeend', '<option value="' + echapperHtml(menu.id) + '">' + echapperHtml(noms[menu.id]) + '</option>');
+  });
+
+  async function afficher() {
+    const parametres = new URLSearchParams(new FormData(formulaire));
+    for (const [cle, valeur] of [...parametres]) if (!valeur) parametres.delete(cle);
+    try {
+      const stats = await demanderJson('api/admin/stats.php?' + parametres);
+      if (!stats.length) {
+        resultat.textContent = 'Aucune réservation pour ce choix.';
+        return;
+      }
+      const maximum = Math.max(...stats.map((ligne) => ligne.orders));
+      resultat.innerHTML = '<table class="tableau-activite tableau-stats"><caption class="visually-hidden">Réservations et chiffre d’affaires par menu</caption><thead><tr><th>Menu</th><th>Réservations</th><th>Chiffre d’affaires</th></tr></thead><tbody>' +
+        stats.map((ligne) => '<tr><td><strong>' + echapperHtml(noms[ligne.menu] || ligne.menu) + '</strong></td><td><strong>' + ligne.orders + '</strong><div class="jauge"><div class="jauge-remplie jauge-libre" style="width:' + Math.round(ligne.orders * 100 / maximum) + '%"></div></div></td><td>' + Number(ligne.revenue).toFixed(2) + ' €</td></tr>').join('') + '</tbody></table>';
+    } catch (erreur) {
+      resultat.textContent = erreur.message;
+    }
+  }
+
+  formulaire.addEventListener('submit', (evenement) => {
+    evenement.preventDefault();
+    afficher();
+  });
+  await afficher();
+}
+
 function dateLongue(iso) {
   return new Date(iso + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 }
@@ -145,10 +180,13 @@ async function initialiserAdministration() {
     if (messageList) await chargerMessages();
     if (orderList) await chargerCommandes();
     if (reviewList) await chargerAvis();
-    if (activityList) await chargerActivite();
+    if (activityList) {
+      await chargerActivite();
+      await chargerStatistiques();
+    }
     if (employeeList) await chargerEmployes();
   } catch (error) {
-    (messageList || orderList || reviewList || activityList || employeeList).textContent = error.message;
+    (messageList || orderList || reviewList || activityList || employeeList || identiteAdministration).textContent = error.message;
   }
 }
 

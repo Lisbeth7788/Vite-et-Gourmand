@@ -1,57 +1,38 @@
-# Déploiement de Vite et Gourmand avec XAMPP
+# Mettre le site en ligne
 
-## Technologies
+Le site est hébergé chez Hostinger. Il se met à jour à chaque `push` sur la branche `main` de GitHub.
 
-- HTML, CSS et JavaScript pour l'interface.
-- PHP natif pour les traitements serveur.
-- MySQL pour les utilisateurs, menus, commandes et messages.
-- PDO pour les requêtes SQL préparées.
+## Ce qu'il faut sur l'hébergement
 
-## Installation locale
+- PHP 8.2 ou plus récent.
+- Une base MySQL / MariaDB.
+- Apache avec les fichiers `.htaccess` actifs.
+- HTTPS activé.
+- (Pour les statistiques) MongoDB et l'extension PHP `mongodb`.
 
-1. Installer et démarrer Apache et MySQL dans XAMPP.
-2. Copier le dossier `Vite-et-Gourmand` dans `C:\xampp\htdocs`.
-3. Ouvrir phpMyAdmin à l'adresse `http://localhost/phpmyadmin`.
-4. Importer le fichier `sql/schema.sql`.
-5. Ouvrir le site avec `http://localhost/Vite-et-Gourmand/index.html`.
+## Étapes
 
-Le script SQL crée les menus et deux profils de test (client et administrateur). Leurs identifiants figurent dans `sql/schema.sql` et doivent être supprimés ou changés avant la mise en production : le compte administrateur réel se crée avec un `UPDATE users SET role = 'admin'` dans phpMyAdmin.
+1. Créer une base MySQL et un utilisateur dédié (jamais `root`).
+2. Importer `sql/schema.sql` dans phpMyAdmin (encodage `utf8mb4`).
+3. Importer `sql/exemple-employe.sql` pour créer le compte employé.
+4. Renseigner les variables de `.env.example` dans la configuration de l'hébergement : `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL`, `SMTP_*`, `MONGODB_*`.
+5. Envoyer les fichiers dans le dossier public (ou laisser Hostinger les récupérer depuis GitHub).
+6. Vérifier que le site s'ouvre en `https://` et tester chaque parcours (voir `docs/deploiement-et-recette.md`).
 
-Les messages de contact sont maintenant stockés dans MySQL, dans la table `messages`.
+## Après une modification
 
-## Mise en ligne
+Si une page ne montre pas la dernière version, faire **Ctrl + F5** pour vider le cache du navigateur. Les fichiers `css` et `js` portent un numéro `?v=…` qui change quand ils sont modifiés.
 
-L'hébergement doit prendre en charge PHP 8.2 ou une version plus récente, MySQL et Apache avec les fichiers `.htaccess` actifs.
+## Bon à savoir
 
-1. Créer une base MySQL et un utilisateur dédié, sans utiliser `root`.
-2. Importer `sql/schema.sql` dans cette base.
-3. Définir les variables présentes dans `.env.example` dans la configuration de l'hébergement : `DB_HOST`, `DB_NAME`, `DB_USER` et `DB_PASSWORD`.
-5. Configurer le relais SMTP avec `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` et `SMTP_FROM`.
-6. Copier les fichiers du projet dans le dossier public de l'hébergement.
-7. Activer HTTPS et vérifier que les sessions PHP fonctionnent.
-8. Tester l'inscription, la connexion, les menus, une commande, les e-mails, le formulaire de contact et les fonctions administrateur.
+- Le planning de l'équipe est enregistré dans la table `team_planning`, créée automatiquement à la première utilisation.
+- Le fichier `.env` ne doit jamais être publié ni ajouté à GitHub.
+- Les comptes de test doivent être supprimés ou voir leur mot de passe changé avant la vraie ouverture.
 
-Le fichier `.env` ne doit jamais être envoyé sur le serveur public ou ajouté au dépôt. Le fichier `.env.example` sert uniquement de modèle.
+## Les routes PHP
 
-Les comptes présents dans `sql/schema.sql` sont des comptes de test. Ils doivent être supprimés ou leurs mots de passe doivent être changés avant une mise en production.
-
-## Routes PHP
-
-- `api/menus.php` : lecture des menus.
-- `api/auth/register.php` : création d'un compte client.
-- `api/auth/login.php` : connexion d'un utilisateur.
-- `api/auth/reset.php` : demande de réinitialisation.
-- `api/auth/logout.php` : fermeture de session.
-- `api/contact.php` : enregistrement d'un message.
-- `api/orders.php` : validation et enregistrement d'une commande.
-- `api/admin/orders.php` : commandes réservées à l'administrateur connecté.
-- `api/admin/messages.php` : messages réservés à l'administrateur connecté.
-- `api/admin/reviews.php` : modération des avis, réservée à l'équipe connectée.
-- `api/reviews.php` : lecture des avis publiés et dépôt d'un avis par un client.
-
-## Droits utilisateurs
-
-- Le `client` peut consulter les menus, créer un compte, se connecter, commander et envoyer un message.
-- L'`admin` possède une session PHP avec des droits supplémentaires pour consulter les réservations et les messages, et modérer les avis.
-
-Les mots de passe sont protégés avec les fonctions natives PHP `password_hash()` et `password_verify()`. Les requêtes utilisent PDO et des paramètres préparés.
+- Public : `api/menus.php`, `api/contact.php`, `api/reviews.php`.
+- Connexion : `api/auth/` (inscription, connexion, déconnexion, mot de passe oublié, session).
+- Client : `api/orders.php` (réservation), `api/paiement.php`, `api/user/` (profil, réservations, activité).
+- Employé : `api/employee/espace.php`, `api/employee/planning-equipe.php` (lecture).
+- Administrateur : `api/admin/` (messages, réservations, avis, activité, statistiques, comptes employés) et `api/employee/planning-equipe.php` (modification).

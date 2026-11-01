@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Création de compte Vite et Gourmand.">
   <title>Créer un compte - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=b4dca317">
+  <link rel="stylesheet" href="css/style.css?v=be51fda8">
 </head>
 <body>
   <header class="site-header">
@@ -58,10 +58,10 @@
           <div class="champ-formulaire">
             <label for="register-password">Mot de passe</label>
             <div class="password-input">
-              <input id="register-password" name="password" type="password" minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}" aria-describedby="password-help" autocomplete="new-password" required>
+              <input id="register-password" name="password" type="password" minlength="10" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{10,}" aria-describedby="password-help" autocomplete="new-password" required>
               <button class="password-toggle" type="button" aria-label="Afficher le mot de passe" aria-pressed="false"><span aria-hidden="true">&#128065;&#65038;</span></button>
             </div>
-            <small id="password-help">8 caractères minimum, avec une majuscule, une minuscule et un chiffre.</small>
+            <small id="password-help">10 caractères minimum, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
           </div>
           <div class="champ-formulaire">
             <label for="register-password-confirm">Confirmer le mot de passe</label>
@@ -99,6 +99,6 @@
       <a href="confidentialite.html">Politique de confidentialité</a>
     </nav>
   </footer>
-  <script src="js/script.js?v=8b8fd7dc"></script>
+  <script src="js/script.js?v=3e1dd897"></script>
 </body>
 </html>

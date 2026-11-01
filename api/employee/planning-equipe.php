@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../../config/database.php';
 $user = requireRole(['employe', 'admin']);
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+const PLANNING_INVALIDE = 'Planning invalide.';
 
 $pdo->exec('CREATE TABLE IF NOT EXISTS team_planning (
     id TINYINT UNSIGNED NOT NULL PRIMARY KEY,
@@ -25,7 +26,7 @@ if ($user['role'] !== 'admin') {
 $data = requestData();
 $equipe = $data['equipe'] ?? null;
 if (!is_array($equipe) || count($equipe) === 0 || count($equipe) > 40) {
-    jsonResponse(['error' => 'Planning invalide.'], 400);
+    jsonResponse(['error' => PLANNING_INVALIDE], 400);
 }
 
 $propre = [];
@@ -34,12 +35,12 @@ foreach ($equipe as $p) {
     $poste = trim((string) ($p['poste'] ?? ''));
     $semaines = $p['semaines'] ?? null;
     if ($nom === '' || mb_strlen($nom) > 40 || $poste === '' || mb_strlen($poste) > 40 || !is_array($semaines) || count($semaines) !== 2) {
-        jsonResponse(['error' => 'Planning invalide.'], 400);
+        jsonResponse(['error' => PLANNING_INVALIDE], 400);
     }
     $lignes = [];
     foreach ($semaines as $semaine) {
         if (!is_array($semaine) || count($semaine) !== 7) {
-            jsonResponse(['error' => 'Planning invalide.'], 400);
+            jsonResponse(['error' => PLANNING_INVALIDE], 400);
         }
         $lignes[] = array_map(fn ($v) => (bool) $v, array_values($semaine));
     }

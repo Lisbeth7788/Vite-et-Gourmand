@@ -103,6 +103,8 @@ try {
     jsonResponse(['error' => 'La commande n’a pas pu être enregistrée.'], 500);
 }
 
+@mail($data['email'], 'Confirmation de votre réservation', "Bonjour,\n\nNous avons bien reçu votre réservation pour le {$data['date']} (" . (int) $people . " personnes).\nMontant : " . number_format((float) $total, 2, ',', ' ') . " €.\n\nÀ bientôt chez Vite et Gourmand.");
+
 jsonResponse([
     'orderId' => $id,
     'totals' => compact('menuTotal', 'discount', 'delivery', 'total')

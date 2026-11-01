@@ -1,60 +1,79 @@
 # Vite et Gourmand
 
-Application web de presentation et de commande de menus pour l'entreprise Vite et Gourmand.
+Site web d'un restaurant traiteur : présentation des menus, réservation sur place avec paiement en ligne, espace client, espace employé et espace administrateur.
 
-## Technologies
+Projet réalisé dans le cadre de la formation Développeur Web et Web Mobile.
 
-- HTML5, CSS3 et JavaScript natif pour l'interface.
-- PHP 8.2 pour les traitements serveur.
-- MySQL avec PDO et requetes preparees pour les donnees relationnelles.
-- MongoDB pour les statistiques de commandes par menu, avec l'extension PHP `mongodb`.
-- Sessions PHP pour l'authentification et les droits.
+## Outils utilisés
 
-## Installation locale
+| Besoin | Outil |
+| --- | --- |
+| Pages et mise en forme | HTML5, CSS3 |
+| Interactions (filtres, formulaires) | JavaScript sans framework |
+| Serveur | PHP 8.2 |
+| Base de données principale | MySQL (accès avec PDO et requêtes préparées) |
+| Statistiques par menu | MongoDB (base non relationnelle) |
+| Hébergement | Hostinger, déploiement depuis la branche `main` de GitHub |
 
-1. Installer XAMPP avec Apache, PHP et MySQL.
-2. Copier le projet dans `C:\xampp\htdocs\Vite-et-Gourmand`.
-3. Demarrer Apache et MySQL.
-4. Ouvrir phpMyAdmin et importer `sql/schema.sql` en choisissant l'encodage `utf8mb4` (ou utiliser `mysql --default-character-set=utf8mb4 < sql/schema.sql`).
-5. Configurer les variables de `.env.example` dans l'environnement PHP.
-6. Activer l'extension PHP `mongodb` dans `php.ini`.
+## Installer le site sur son ordinateur
+
+1. Installer XAMPP, puis démarrer **Apache** et **MySQL**.
+2. Copier le dossier du projet dans `C:\xampp\htdocs\Vite-et-Gourmand`.
+3. Ouvrir phpMyAdmin (`http://localhost/phpmyadmin`) et importer le fichier `sql/schema.sql` (encodage `utf8mb4`).
+4. Importer ensuite `sql/exemple-employe.sql` pour créer le compte employé.
+5. Copier les variables de `.env.example` dans la configuration PHP (ou dans `config/env.local.php`, modèle : `config/env.local.example.php`).
+6. Pour les statistiques : activer l'extension PHP `mongodb` dans `php.ini` et démarrer MongoDB.
 7. Ouvrir `http://localhost/Vite-et-Gourmand/index.html`.
 
-Le fichier SQL cree les menus, les utilisateurs de test, les commandes, les messages, les avis et l'historique des statuts. Les variables `MONGODB_URI` et `MONGODB_DATABASE` activent la collecte NoSQL des statistiques.
+## Comptes de test
 
-## Parcours de test
+| Espace | Page de connexion | Identifiant | Mot de passe |
+| --- | --- | --- | --- |
+| Client | `connexion.html` | `test@vite-et-gourmand.fr` | voir `sql/schema.sql` |
+| Employé | `employe-connexion.html` | `employe` | `VIETETGOURMAND` (majuscules ou minuscules acceptées) |
+| Administrateur | `admin-connexion.html` | `admin@vite-et-gourmand.fr` | voir `sql/schema.sql` |
 
-- Visiteur : accueil, menus, filtres, detail et contact.
-- Client : inscription, connexion, reservation sur place (creneaux d'ouverture, 6 personnes maximum), avis apres une reservation terminee.
-- Employe : liste des reservations et mise a jour de leur statut.
-- Administrateur : messages de contact, reservations et moderation des avis (connexion via `admin-connexion.html`).
+Ces mots de passe sont des mots de passe de test : il faut les changer avant une vraie mise en ligne.
 
-Les comptes de test sont indiques dans `DEPLOYMENT.md`. Les mots de passe doivent etre modifies avant la mise en production.
+## Que peut faire chaque profil ?
 
-## Securite
+- **Visiteur** : voir l'accueil, les menus (avec filtres), le détail d'un menu, l'histoire du restaurant, et envoyer un message.
+- **Client** : créer un compte, réserver une table (60 personnes maximum par service, 10 personnes maximum par réservation), payer en ligne, suivre ses réservations, les annuler tant qu'elles ne sont pas acceptées, puis donner un avis.
+- **Employé** : consulter le planning de l'équipe (semaines A et B), le même que celui de l'administrateur.
+- **Administrateur** : traiter les messages, les réservations (statuts) et les avis, voir l'activité du restaurant, consulter et modifier le planning de l'équipe. Toute modification du planning apparaît ensuite chez les employés.
 
-- Mots de passe haches avec `password_hash()` et verifies avec `password_verify()`.
-- Requetes SQL preparees avec PDO.
-- Sessions regenerees apres connexion ou inscription.
-- Cookies de session `HttpOnly`, `SameSite=Lax` et `Secure` en production.
-- Controle des roles cote serveur sur les routes protegees.
-- Limitation des tentatives sur les formulaires sensibles.
-- Validation serveur des e-mails, des mots de passe, des commandes et des statuts.
-- Fichiers `.env`, SQL et dossiers sensibles proteges par `.htaccess`.
+## Sécurité mise en place
 
-## Architecture
+- Mots de passe protégés avec `password_hash()` et `password_verify()`.
+- Requêtes SQL préparées (PDO) : pas d'injection SQL.
+- Session régénérée après la connexion, cookies `HttpOnly` et `SameSite`.
+- Droits vérifiés **côté serveur** sur chaque route protégée.
+- Nombre de tentatives limité sur les formulaires sensibles.
+- Données vérifiées côté navigateur **et** côté serveur.
+- Fichiers sensibles (`.env`, `sql/`, `config/`) protégés par `.htaccess`.
 
-- `index.html`, `menus.html`, `menu-detail.html` : parcours public.
-- `connexion.html`, `commande.html` : authentification et commande.
-- `admin-connexion.html` : connexion administrateur.
-- `admin.html`, `admin-reservations.html`, `admin-avis.html` : espace de gestion (messages, reservations, avis).
-- `api/` : routes PHP JSON.
-- `config/database.php` : connexion PDO, sessions et fonctions communes.
-- `sql/schema.sql` : creation et alimentation de la base relationnelle.
-- `DEPLOYMENT.md` : procedure de deploiement.
+## Organisation des fichiers
 
-## Deploiement
+- `index.html`, `menus.html`, `menu-detail.html`, `histoire.html`, `contact.html` : pages publiques.
+- `connexion.html`, `inscription.html`, `compte.html`, `reservation.html`, `commande.html` : espace client.
+- `employe-connexion.html`, `espace-employe.html` : espace employé.
+- `admin-connexion.html`, `admin.html`, `admin-reservations.html`, `admin-avis.html`, `admin-activite.html`, `admin-employes.html` : espace administrateur.
+- `api/` : routes PHP qui répondent en JSON.
+- `config/` : connexion à la base, sessions, fonctions communes.
+- `css/`, `js/`, `images/`, `fonts/` : mise en forme, scripts, images, polices.
+- `sql/` : création de la base et données d'exemple.
+- `docs/` : documentation (voir ci-dessous).
 
-L'hebergement doit fournir PHP 8.2+, Apache, MySQL et l'envoi d'e-mails PHP. Importer le schema SQL, definir les variables de `.env.example`, activer HTTPS et tester chaque parcours avant livraison.
+## Documentation
 
-Pour une livraison ECF complete, ajouter dans le depot le manuel PDF, la charte graphique, les maquettes, les diagrammes, le lien de l'application en ligne et le lien de l'outil de gestion de projet.
+- [Documentation technique](docs/documentation-technique.md)
+- [Déploiement et recette](docs/deploiement-et-recette.md) et [DEPLOYMENT.md](DEPLOYMENT.md)
+- [Gestion de projet](docs/gestion-projet.md)
+- [Liens de livraison](docs/liens-livraison.md)
+- [Contrôle final avant envoi](docs/controle-final.md)
+
+## Méthode de travail avec Git
+
+- `main` : version terminée, publiée en ligne.
+- `develop` : fonctionnalités en cours de validation.
+- Une branche par fonctionnalité, fusionnée dans `develop` après test, puis `develop` est fusionnée dans `main`.

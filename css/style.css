@@ -2249,3 +2249,6 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
 .case-planning:hover .pastille-service, .case-planning:hover .pastille-repos { outline: 2px solid currentColor; }
 .nom-planning { text-decoration: underline dotted; }
 .aide-planning { text-align: center; }
+
+.filtres-stats { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.tableau-stats { width: 75%; margin: 0 auto; table-layout: fixed; }

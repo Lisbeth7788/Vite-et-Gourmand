@@ -1,25 +1,53 @@
 # Documentation technique
 
-## Choix initiaux
+## Choix de départ
 
-HTML, CSS et JavaScript natifs sont utilises pour conserver une interface simple, accessible et facile a maintenir. PHP avec PDO est choisi pour limiter la complexite du serveur et proteger les requetes SQL. MySQL stocke les utilisateurs, menus, commandes et messages. MongoDB stocke les evenements necessaires aux statistiques par menu et par periode.
+- **HTML, CSS, JavaScript sans framework** : simple, accessible, facile à relire.
+- **PHP avec PDO** : le serveur reste simple et les requêtes préparées bloquent les injections SQL.
+- **MySQL** : stocke les comptes, menus, réservations, messages, avis, horaires et planning.
+- **MongoDB** : stocke les statistiques de réservations par menu (base non relationnelle, demandée par le sujet).
 
-## Environnement
+## Environnement de travail
 
-- Apache et PHP 8.2 ou plus recent.
-- MySQL pour la base relationnelle.
-- MongoDB pour les statistiques.
-- Extension PHP `mongodb` pour communiquer avec MongoDB.
-- Navigateur recent et phpMyAdmin pour initialiser la base.
+Windows, XAMPP (Apache, PHP 8.2, MySQL), phpMyAdmin, Visual Studio Code, Git et GitHub. Mise en ligne chez Hostinger.
 
-## Securite
+## Fonctionnement général
 
-Les mots de passe sont haches. Les requetes sont preparees avec PDO. Les sessions sont regenerees apres connexion. Les cookies sont HttpOnly et SameSite. Les routes administratives controlent le role cote serveur. Les formulaires valident les donnees cote client et cote serveur. Les tentatives sensibles sont limitees et les fichiers de configuration sont proteges.
+1. Les pages HTML s'affichent dans le navigateur.
+2. Les scripts `js/` appellent les routes PHP du dossier `api/` avec `fetch`.
+3. Les routes PHP vérifient la session, le rôle et les données, puis lisent ou écrivent dans MySQL.
+4. Elles répondent en JSON et la page se met à jour sans rechargement.
 
-## Donnees
+## Rôles et droits
 
-La base relationnelle gere les comptes, menus, plats, commandes, messages, avis et historique des statuts. MongoDB conserve les statistiques de commandes sans remplacer les donnees metier MySQL.
+| Rôle | Pages | Droits |
+| --- | --- | --- |
+| Visiteur | pages publiques | consulter, contacter, s'inscrire |
+| Client (`client`) | compte, réservation | réserver, payer, annuler, donner un avis |
+| Employé (`employe`) | espace employé | voir le planning |
+| Administrateur (`admin`) | pages `admin-*` | tout, et modifier le planning |
 
-## Deploiement
+Il n'est pas possible de créer un compte administrateur depuis le site.
 
-Importer `sql/schema.sql`, activer l'extension PHP `mongodb`, configurer les variables de `.env.example`, activer HTTPS et tester les parcours visiteur, client, employe et administrateur. Configurer un service SMTP pour les e-mails et une instance MongoDB pour les statistiques.
+## Données
+
+Tables principales : `users`, `menus`, `menu_dishes`, `orders` (les réservations), `order_status_history`, `reviews`, `messages`, `business_hours`, `password_reset_tokens`, `team_planning`.
+
+## Planning de l'équipe
+
+- Le planning (semaines A et B) est stocké en JSON dans `team_planning`.
+- L'administrateur clique sur une case pour passer de « Service » à « Repos » ou sur un prénom pour le modifier ; l'enregistrement est immédiat.
+- La page employé relit le planning toutes les 10 secondes.
+- Le code commun est dans `js/planning-equipe.js`, l'API dans `api/employee/planning-equipe.php`.
+
+## Sécurité
+
+Voir le fichier `README.md` (mots de passe hachés, requêtes préparées, sessions, droits côté serveur, limitation des tentatives).
+
+## Diagrammes
+
+Voir `docs/diagrammes.md`.
+
+## Déploiement
+
+Voir `DEPLOYMENT.md` et `docs/deploiement-et-recette.md`.

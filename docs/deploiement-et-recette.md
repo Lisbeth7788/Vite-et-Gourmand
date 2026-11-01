@@ -1,40 +1,39 @@
-# Deploiement et recette
+# Déploiement et recette
 
-## Variables de production
+## Variables à configurer
 
-Configurer sur l'hebergement : `APP_ENV`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `MONGODB_URI`, `MONGODB_DATABASE` et `CONTACT_EMAIL`.
+`APP_ENV`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, `MONGODB_URI`, `MONGODB_DATABASE`.
 
 Ne jamais publier `.env`, les mots de passe ou le dossier local `mongo-data`.
 
-## Hebergement cible : Hostinger
+## Étapes de déploiement (Hostinger)
 
-Hostinger est l'hebergeur cible du projet. L'application ne sera consideree comme deployee qu'apres l'import de la base, la configuration PHP/MariaDB/MongoDB/SMTP, l'activation HTTPS et la recette sur l'URL publique.
+1. Créer la base MySQL et son utilisateur.
+2. Importer `sql/schema.sql` puis `sql/exemple-employe.sql` (encodage `utf8mb4`).
+3. Configurer MongoDB, l'extension PHP `mongodb` et l'envoi d'e-mails.
+4. Envoyer les fichiers (ou relier le dépôt GitHub, branche `main`).
+5. Activer HTTPS.
+6. Faire la recette ci-dessous sur l'adresse publique.
 
-## Etapes
+## Liste de contrôle (recette)
 
-1. Creer la base MariaDB/MySQL et son utilisateur dedie.
-2. Importer `sql/schema.sql` avec l'encodage `utf8mb4`.
-3. Configurer MongoDB et l'extension PHP `mongodb`.
-4. Copier les fichiers dans le dossier public de l'hebergement.
-5. Configurer HTTPS et le service SMTP.
-6. Tester les parcours ci-dessous sur l'URL publique.
+Cocher chaque ligne après l'avoir testée.
 
-## Tests de recette
+- [ ] Accueil, navigation et pied de page (horaires, mentions légales, CGV).
+- [ ] Menus : filtres par prix, thème, régime et nombre de personnes, sans rechargement.
+- [ ] Détail d'un menu : plats, allergènes, conditions bien visibles.
+- [ ] Inscription (mot de passe de 10 caractères avec majuscule, minuscule, chiffre et caractère spécial).
+- [ ] Connexion, déconnexion, mot de passe oublié (lien reçu par e-mail).
+- [ ] Réservation refusée sans connexion.
+- [ ] Réservation : jour et service, 10 personnes maximum, 60 personnes maximum par service.
+- [ ] Paiement en ligne d'une réservation.
+- [ ] Espace client : liste, annulation avant acceptation, suivi du statut, avis.
+- [ ] Espace administrateur : messages, réservations (changement de statut), avis (publier ou refuser), activité.
+- [ ] Planning : une case modifiée par l'administrateur apparaît chez l'employé en quelques secondes.
+- [ ] Espace employé : connexion avec `employe`, planning en lecture seule.
+- [ ] Formulaire de contact et réception de l'e-mail.
+- [ ] Affichage sur téléphone, au clavier et avec un zoom à 200 %.
 
-- Accueil, navigation et pied de page.
-- Catalogue et filtres par prix, theme, regime et nombre de personnes.
-- Detail dynamique de chaque menu, plats, allergenes et conditions.
-- Inscription, connexion et mot de passe oublie.
-- Acces commande refuse sans session.
-- Commande avec remise et frais de livraison.
-- Compte client, historique et annulation avant acceptation.
-- Creation/desactivation d'un employe par l'administrateur.
-- Mise a jour des statuts par l'employe.
-- Validation d'un avis et affichage sur l'accueil.
-- Statistiques MongoDB avec graphique et filtres de periode.
-- Formulaire de contact et reception du mail SMTP.
-- Verification mobile, clavier et lecteur d'ecran.
+## E-mails
 
-## SMTP
-
-Le test est valide uniquement lorsque le message arrive dans la boite de l'entreprise et que le lien de reinitialisation arrive dans la boite de test. Un message HTTP de succes ne suffit pas.
+Un test n'est réussi que si le message arrive vraiment dans la boîte de réception. Un message de succès affiché par le site ne suffit pas.
