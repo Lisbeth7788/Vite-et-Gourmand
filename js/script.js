@@ -55,14 +55,6 @@ function ajouterSelecteurExperience(liste, role) {
   liste.append(element);
 }
 
-function ajouterBadgeRole(liste, role) {
-  if (role !== 'employe' || liste.querySelector('.badge-role')) return;
-  const badge = document.createElement('li');
-  badge.className = 'badge-role badge-role-employe';
-  badge.textContent = 'Connecté : Employé';
-  liste.append(badge);
-}
-
 function ajouterLienEspace(liste, role, liensConnexion) {
   if (!['client', 'employe'].includes(role) || liste.querySelector('.lien-espace-client')) return;
   const element = document.createElement('li');
@@ -115,7 +107,6 @@ async function actualiserLienConnexion() {
     if (session.data?.canSwitchExperience && !liste.querySelector('.experience-switch')) {
       ajouterSelecteurExperience(liste, role);
     }
-    ajouterBadgeRole(liste, role);
     if (document.body.dataset.modeEmploye !== undefined) return;
     ajouterLienEspace(liste, role, liensConnexion);
     if (liensConnexion.length) ajouterDeconnexion(liensConnexion);
