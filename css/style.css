@@ -2279,9 +2279,9 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
 
   .planning-equipe td::before {
     content: attr(data-label);
-    color: #7a6c5d;
-    font-size: .7rem;
-    font-weight: 600;
+    color: #3b2f27;
+    font-size: .85rem;
+    font-weight: 700;
   }
 
   .planning-equipe td.total-heures {
