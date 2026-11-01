@@ -56,7 +56,7 @@ function tableauSemaine(semaine, prenom) {
     const lignes = equipe.filter((p) => postes.includes(p.poste)).map((p) => ligneEquipe(p, semaine, prenom)).join('');
     return '<tr class="groupe-equipe"><th colspan="9">' + titre + '</th></tr>' + lignes;
   }).join('');
-  return '<h3>Semaine ' + (semaine === 0 ? 'A' : 'B') + '</h3><div class="table-responsive"><table class="planning-equipe"><thead><tr><th>Équipe</th>' + entetes + '<th>Total</th></tr></thead><tbody>' + corps + '</tbody></table></div>';
+  return '<section class="bloc-semaine"><h3>Planning de l’équipe · Semaine ' + (semaine === 0 ? 'A' : 'B') + '</h3><div class="table-responsive"><table class="planning-equipe"><thead><tr><th>Équipe</th>' + entetes + '<th>Total</th></tr></thead><tbody>' + corps + '</tbody></table></div></section>';
 }
 
 const libellesPostes = { patron: 'Patron', chef: 'Chef', 'sous-chef': 'Sous-chef', commis: 'Commis', serveur: 'Serveur', plongeur: 'Plongeur', livreur: 'Livreur' };

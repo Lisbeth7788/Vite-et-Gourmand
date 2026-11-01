@@ -2167,3 +2167,7 @@ ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.
 #planning-simule{max-width:75%;margin:0 auto}
 #planning-simule h3{text-align:center}
 @media (max-width:800px){#planning-simule{max-width:100%}}
+
+.bloc-semaine{margin-bottom:3rem}
+.bloc-semaine + .bloc-semaine{padding-top:2rem;border-top:2px dashed var(--line,#e6dccf)}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
