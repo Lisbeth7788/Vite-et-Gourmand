@@ -165,8 +165,11 @@ async function initialiserAdministration() {
     const role = session.user.role;
     if (!['admin', 'employe'].includes(role)) throw new Error('Accès réservé à l’équipe.');
     if (role !== 'admin') {
-      window.location.href = 'espace-employe.html';
-      return;
+      if (document.body.hasAttribute('data-admin-only')) {
+        window.location.href = 'admin-reservations.html';
+        return;
+      }
+      document.querySelectorAll('[data-admin-only]').forEach((element) => { element.hidden = true; });
     }
     identiteAdministration.textContent = `Connecté : ${session.user.email}`;
   } catch (error) {

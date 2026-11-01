@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
-requireRole(['admin']);
+requireRole(['admin', 'employe']);
 
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
