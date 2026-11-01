@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Activité des clients - Espace de gestion - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css?v=117cdbd2">
+</head>
+<body data-admin-only>
+  <header class="site-header">
+    <a class="logo" href="index.html">Vite et Gourmand</a>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html">Menus</a></li>
+        <li><a href="api/auth/logout.php">Déconnexion</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="catalogue-page admin-page">
+    <div class="page-intro">
+      <p class="eyebrow">Espace professionnel</p>
+      <h1>Activité des clients</h1>
+      <p id="admin-identity">Vérification de votre session...</p>
+    </div>
+
+    <nav class="admin-nav" aria-label="Espace de gestion">
+      <ol>
+        <li data-admin-only><a href="admin.html">1. Messages</a></li>
+        <li><a href="admin-reservations.html">2. Réservations</a></li>
+        <li><a href="admin-avis.html">3. Avis</a></li>
+        <li data-admin-only><a href="admin-activite.html" aria-current="page">4. Activité</a></li>
+      </ol>
+    </nav>
+
+    <section class="form-section" aria-labelledby="activity-summary-title">
+      <h2 id="activity-summary-title">Paiements</h2>
+      <p id="activity-summary" role="status"></p>
+    </section>
+
+    <section class="form-section" aria-labelledby="activity-days-title">
+      <h2 id="activity-days-title">Remplissage des prochains jours (30 personnes maximum par jour)</h2>
+      <div id="activity-days" class="table-responsive"></div>
+    </section>
+
+    <section class="form-section" aria-labelledby="activity-list-title">
+      <h2 id="activity-list-title">Historique des actions</h2>
+      <div id="activity-list" class="table-responsive"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p>&copy; 2026 Vite et Gourmand</p>
+      <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
+    </div>
+    <nav aria-label="Liens secondaires">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">Conditions générales de vente</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </footer>
+
+  <script src="js/admin.js?v=adf50e89"></script>
+</body>
+</html>
