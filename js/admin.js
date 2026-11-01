@@ -248,7 +248,9 @@ if (employeeForm) {
       retour.dataset.state = 'error';
       alertes.innerHTML = '';
     }
-  });, 'shift'], ['#task-form', 'task'], ['#payslip-form', 'payslip']].forEach(([selecteur, type]) => {
+  });
+
+  [['#shift-form', 'shift'], ['#task-form', 'task'], ['#payslip-form', 'payslip']].forEach(([selecteur, type]) => {
     const formulaire = document.querySelector(selecteur);
     formulaire.addEventListener('submit', async (event) => {
       event.preventDefault();
