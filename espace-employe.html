@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Mon espace employé - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css?v=40e431ea">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">Vite et Gourmand</a>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <ul><li><a href="index.html">Accueil</a></li><li><a class="lien-espace-client" href="espace-employe.html" aria-current="page">Mon espace employé</a></li><li><a href="api/auth/logout.php">Déconnexion</a></li></ul>
+    </nav>
+  </header>
+  <main class="catalogue-page">
+    <div class="page-intro"><p class="eyebrow">Espace employé</p><h1 id="employe-titre">Mon espace employé</h1><p id="employe-sous-titre">Chargement...</p></div>
+    <nav class="admin-nav" aria-label="Sections de mon espace">
+      <ol>
+        <li><a href="#aujourdhui" data-section="aujourdhui" aria-current="page">Aujourd'hui</a></li>
+        <li><a href="#planning" data-section="planning">Planning</a></li>
+        <li><a href="#compte-rendu" data-section="compte-rendu">Compte rendu</a></li>
+        <li><a href="#paie" data-section="paie">Fiches de paie</a></li>
+      </ol>
+    </nav>
+    <section id="section-aujourdhui" class="form-section" aria-labelledby="titre-aujourdhui">
+      <h2 id="titre-aujourdhui">Ma journée</h2>
+      <h3>Horaires</h3><ul id="jour-horaires" class="activite-liste"></ul>
+      <h3>Tâches</h3><ul id="jour-taches" class="activite-liste"></ul>
+    </section>
+    <section id="section-planning" class="form-section" hidden aria-labelledby="titre-planning">
+      <h2 id="titre-planning">Planning des 14 prochains jours</h2>
+      <h3>Horaires</h3><ul id="planning-horaires" class="activite-liste"></ul>
+      <h3>Tâches</h3><ul id="planning-taches" class="activite-liste"></ul>
+    </section>
+    <section id="section-compte-rendu" class="form-section" hidden aria-labelledby="titre-cr">
+      <h2 id="titre-cr">Compte rendu de travail</h2>
+      <form id="report-form">
+        <div class="champ-formulaire"><label for="report-content">Résumé de ma journée</label><textarea id="report-content" name="content" rows="5" maxlength="2000" required></textarea></div>
+        <div class="profil-actions"><button class="button button-small" type="submit">Envoyer</button></div>
+        <p id="report-feedback" class="message-formulaire" role="status"></p>
+      </form>
+      <h3>Mes derniers comptes rendus</h3><ul id="report-list" class="activite-liste"></ul>
+    </section>
+    <section id="section-paie" class="form-section" hidden aria-labelledby="titre-paie">
+      <h2 id="titre-paie">Fiches de paie</h2>
+      <div class="table-responsive"><table><thead><tr><th>Période</th><th>Heures</th><th>Brut</th><th>Net</th><th>Note</th></tr></thead><tbody id="payslip-list"></tbody></table></div>
+    </section>
+  </main>
+  <script src="js/script.js?v=9547b86e"></script>
+  <script src="js/employee.js?v=7000bbf2"></script>
+</body>
+</html>
