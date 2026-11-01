@@ -191,6 +191,18 @@ ON DUPLICATE KEY UPDATE
   theme = VALUES(theme), regime = VALUES(regime), description = VALUES(description),
   image_path = VALUES(image_path), conditions_text = VALUES(conditions_text), stock = VALUES(stock);
 
+CREATE TABLE IF NOT EXISTS menu_images (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  menu_id VARCHAR(80) NOT NULL,
+  path VARCHAR(255) NOT NULL,
+  position INT NOT NULL DEFAULT 1,
+  CONSTRAINT fk_menu_images_menu FOREIGN KEY (menu_id) REFERENCES menus(id) ON DELETE CASCADE
+);
+
+INSERT INTO menu_images (menu_id, path, position)
+SELECT m.id, m.image_path, 1 FROM menus m
+WHERE m.image_path <> '' AND NOT EXISTS (SELECT 1 FROM menu_images i WHERE i.menu_id = m.id);
+
 INSERT INTO menu_dishes (menu_id, dish_type, name, allergens, position)
 VALUES
   ('marche-bordeaux', 'entree', 'Entrée du jour selon le marché', 'selon les produits du jour', 1),
