@@ -18,7 +18,7 @@ async function actualiserLienConnexion() {
       const nomsRoles = { client: 'Client', employe: 'Employé', admin: 'Administrateur' };
       const badge = document.createElement('li');
       badge.className = `badge-role badge-role-${role}`;
-      badge.textContent = `Connecté : ${nomsRoles[role] || role}`;
+      badge.textContent = role === 'admin' ? 'Vue client (compte administrateur)' : `Connecté : ${nomsRoles[role] || role}`;
       liste.append(badge);
     }
     if (document.body.dataset.modeEmploye !== undefined) return;
