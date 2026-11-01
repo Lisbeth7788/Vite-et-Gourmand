@@ -21,7 +21,7 @@ async function chargerMenus() {
 }
 
 function remplirFormulaire(menu) {
-  const champs = { id: menu.id, name: menu.name, price: menu.price, minimum_people: menu.minimum_people, stock: menu.stock, theme: menu.theme, regime: menu.regime, image_path: menu.image_path, description: menu.description, conditions_text: menu.conditions_text || '', entrees: menu.plats.entrees, plats: menu.plats.plats, desserts: menu.plats.desserts };
+  const champs = { id: menu.id, name: menu.name, price: menu.price, minimum_people: menu.minimum_people, stock: menu.stock, theme: menu.theme, regime: menu.regime, images: menu.images, description: menu.description, conditions_text: menu.conditions_text || '', entrees: menu.plats.entrees, plats: menu.plats.plats, desserts: menu.plats.desserts };
   Object.entries(champs).forEach(([nom, valeur]) => { formulaireMenu.elements[nom].value = valeur ?? ''; });
   formulaireMenu.scrollIntoView({ behavior: 'smooth' });
 }

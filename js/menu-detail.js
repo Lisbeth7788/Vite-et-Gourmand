@@ -56,9 +56,30 @@ if (pageDetail) {
         document.querySelector('#menu-detail-people').textContent = menu.minimum > 1 ? `${menu.minimum} personnes` : "À partir d’une personne";
         document.querySelector('#menu-detail-stock').textContent = `${menu.stock} commandes`;
         document.querySelector('#menu-detail-regime').textContent = menu.regime;
+        const galerie = (menu.images && menu.images.length ? menu.images : [menu.image_path]).filter(Boolean);
         const image = document.querySelector('#menu-detail-image');
-        image.src = menu.image_path;
-        image.alt = menu.name;
+        const vignettes = document.querySelector('#menu-detail-thumbnails');
+        const afficherImage = (chemin, numero) => {
+          image.src = chemin;
+          image.alt = `${menu.name} - photo ${numero}`;
+          vignettes.querySelectorAll('button').forEach((bouton, i) => bouton.setAttribute('aria-current', String(i === numero - 1)));
+        };
+        vignettes.replaceChildren();
+        if (galerie.length > 1) {
+          galerie.forEach((chemin, i) => {
+            const bouton = document.createElement('button');
+            bouton.type = 'button';
+            bouton.setAttribute('aria-label', `Voir la photo ${i + 1} sur ${galerie.length}`);
+            const miniature = document.createElement('img');
+            miniature.src = chemin;
+            miniature.alt = '';
+            miniature.loading = 'lazy';
+            bouton.append(miniature);
+            bouton.addEventListener('click', () => afficherImage(chemin, i + 1));
+            vignettes.append(bouton);
+          });
+        }
+        afficherImage(galerie[0] || 'images/images/menu-marche.jpg', 1);
         const lienReservation = document.querySelector('#menu-order-link');
         const adresseReservation = `reservation.html?menu=${encodeURIComponent(menu.id)}`;
         lienReservation.href = adresseReservation;

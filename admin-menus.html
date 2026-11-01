@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Menus et horaires - Espace de gestion - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=c9142297">
+  <link rel="stylesheet" href="css/style.css?v=af148e5c">
 </head>
 <body>
   <header class="site-header">
@@ -47,7 +47,7 @@
         <div class="champ-formulaire"><label for="menu-stock">Stock (réservations possibles)</label><input id="menu-stock" name="stock" type="number" min="0" required></div>
         <div class="champ-formulaire"><label for="menu-theme">Thème</label><input id="menu-theme" name="theme" list="themes" required><datalist id="themes"><option value="Noël"><option value="Pâques"><option value="Classique"><option value="Événement"><option value="Midi"><option value="Soir"></datalist></div>
         <div class="champ-formulaire"><label for="menu-regime">Régime</label><select id="menu-regime" name="regime" required><option value="classique">Classique</option><option value="vegetarien">Végétarien</option><option value="vegan">Vegan</option></select></div>
-        <div class="champ-formulaire"><label for="menu-image">Image (chemin dans le site)</label><input id="menu-image" name="image_path" placeholder="images/menu-marche.jpg"></div>
+        <div class="champ-formulaire"><label for="menu-images">Images (une par ligne ; la première est la couverture)</label><textarea id="menu-images" name="images" rows="3" placeholder="images/images/menu-marche.jpg"></textarea></div>
         <div class="champ-formulaire"><label for="menu-description">Description</label><textarea id="menu-description" name="description" rows="3" required></textarea></div>
         <div class="champ-formulaire"><label for="menu-conditions">Conditions (délai de commande, stockage…)</label><textarea id="menu-conditions" name="conditions_text" rows="3"></textarea></div>
         <div class="champ-formulaire"><label for="menu-entrees">Entrées (une par ligne ; allergènes après un point-virgule)</label><textarea id="menu-entrees" name="entrees" rows="3" placeholder="Velouté de potimarron ; lait"></textarea></div>
@@ -93,6 +93,6 @@
 
   <script type="module" src="js/script.js?v=selecteur-admin"></script>
   <script src="js/admin.js?v=2c8a08fa"></script>
-  <script type="module" src="js/admin-menus.js?v=2d113648"></script>
+  <script type="module" src="js/admin-menus.js?v=50fb4779"></script>
 </body>
 </html>
