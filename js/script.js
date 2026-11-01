@@ -9,10 +9,18 @@ function chargerSession() {
 async function actualiserLienConnexion() {
   const liensConnexion = [...document.querySelectorAll('.main-navigation a')]
     .filter((lien) => lien.getAttribute('href')?.includes('connexion'));
+  const panneauConnexion = document.querySelector('#login-panel');
   try {
     const session = await chargerSession();
-    if (!session.ok) return;
+    if (!session.ok) {
+      if (panneauConnexion) panneauConnexion.hidden = false;
+      return;
+    }
     const role = session.data?.user?.role;
+    if (panneauConnexion && role) {
+      window.location.replace('index.html');
+      return;
+    }
     const liste = document.querySelector('.main-navigation ul');
     if (liste && role && role !== 'admin' && !liste.querySelector('.badge-role')) {
       const nomsRoles = { client: 'Client', employe: 'Employé', admin: 'Administrateur' };
@@ -55,9 +63,12 @@ async function actualiserLienConnexion() {
       }, { once: true });
     });
   } catch (error) {
+    if (panneauConnexion) panneauConnexion.hidden = false;
   }
 }
 
+const panneauConnexion = document.querySelector('#login-panel');
+if (panneauConnexion) panneauConnexion.hidden = true;
 actualiserLienConnexion();
 
 const orderForm = document.querySelector('#order-form');
