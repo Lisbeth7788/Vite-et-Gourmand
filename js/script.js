@@ -46,9 +46,9 @@ function ajouterSelecteurExperience(liste, role) {
     link.href = page;
     link.textContent = name;
     if (role === space) link.setAttribute('aria-current', 'page');
-    link.addEventListener('click', (event) => {
+    link.addEventListener('click', async (event) => {
       event.preventDefault();
-      changerExperience(space, page, link);
+      await changerExperience(space, page, link);
     });
     element.append(document.createTextNode(' '), link);
   });
@@ -548,7 +548,7 @@ async function afficherHorairesPiedDePage() {
       const nom = document.createElement('dt');
       const horaires = document.createElement('dd');
       nom.textContent = jour.day_name;
-      String(jour.opening_hours).split('/').forEach((plage) => {
+      (typeof jour.opening_hours === 'string' ? jour.opening_hours : '').split('/').forEach((plage) => {
         const periode = document.createElement('span');
         periode.textContent = plage.trim();
         horaires.append(periode);

@@ -28,7 +28,7 @@ async function initialiserReservation() {
   const menuSelectionne = () => menus.find((menu) => menu.id === choixMenu.value);
 
   try {
-    const session = await chargerSession();
+    const session = await window.chargerSession();
     utilisateur = session.ok ? session.data?.user : null;
   } catch (error_) {
     console.warn('Session indisponible :', error_);
@@ -51,7 +51,7 @@ async function initialiserReservation() {
     const reponse = await fetch('api/menus.php', { credentials: 'same-origin' });
     menus = (await reponse.json()).filter((menu) => Number(menu.stock) > 0);
   } catch (error_) {
-    showToast(friendlyError(error_), true);
+    window.showToast(window.friendlyError(error_), true);
   }
   menus.forEach((menu) => {
     choixMenu.add(new Option(`${menu.name} - ${euros(Number(menu.price))} / personne`, menu.id));
@@ -155,7 +155,7 @@ async function initialiserReservation() {
       document.querySelector('#bouton-payer').textContent = `Payer ${euros(Number(commande.totals.total))}`;
       formulairePaiement.querySelector('input').focus();
     } catch (error_) {
-      showToast(friendlyError(error_), true);
+      window.showToast(window.friendlyError(error_), true);
     } finally {
       bouton.disabled = false;
     }
@@ -195,7 +195,7 @@ async function initialiserReservation() {
     evenement.preventDefault();
     const erreur = erreurCarte();
     if (erreur) {
-      showToast(erreur, true);
+      window.showToast(erreur, true);
       return;
     }
     const bouton = formulairePaiement.querySelector('#bouton-payer');
@@ -214,7 +214,7 @@ async function initialiserReservation() {
       sessionStorage.setItem('toast', 'Paiement reçu : votre réservation est confirmée.');
       window.setTimeout(() => { window.location.href = 'compte.html'; }, 2500);
     } catch (error_) {
-      showToast(friendlyError(error_), true);
+      window.showToast(window.friendlyError(error_), true);
       bouton.disabled = false;
     }
   });
@@ -236,7 +236,7 @@ async function initialiserReservation() {
       introduction.textContent = 'Étape 1 sur 2 : choisissez votre menu et votre créneau.';
       formulaire.querySelector('select').focus();
     } catch (error_) {
-      showToast(friendlyError(error_), true);
+      window.showToast(window.friendlyError(error_), true);
     } finally {
       bouton.disabled = false;
     }
@@ -246,5 +246,5 @@ async function initialiserReservation() {
 try {
   await initialiserReservation();
 } catch (error_) {
-  showToast(friendlyError(error_), true);
+  window.showToast(window.friendlyError(error_), true);
 }

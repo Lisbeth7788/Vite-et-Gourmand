@@ -20,6 +20,6 @@ async function chargerEspaceEmploye() {
   }
 }
 
-const session = await chargerSession();
+const session = await window.chargerSession();
 if (session.data?.user?.role === 'admin') document.querySelector('#employe-choix').hidden = false;
 await chargerEspaceEmploye();
