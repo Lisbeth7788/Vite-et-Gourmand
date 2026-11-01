@@ -2224,6 +2224,79 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
   display: none;
 }
 
+.table-responsive {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .planning-equipe,
+  .planning-equipe tbody {
+    display: block;
+    border: 0;
+    background: none;
+  }
+
+  .planning-equipe thead {
+    display: none;
+  }
+
+  .planning-equipe tr {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--line, #e6dccf);
+    border-radius: 12px;
+    margin-bottom: .6rem;
+    padding: .6rem;
+  }
+
+  .planning-equipe tr.groupe-equipe {
+    display: block;
+    background: #f6ece4;
+    border: 0;
+    padding: 0;
+  }
+
+  .planning-equipe tbody th {
+    flex: 1 1 100%;
+    border: 0;
+    padding: 0 0 .3rem;
+    white-space: normal;
+  }
+
+  .planning-equipe td {
+    flex: 1 1 4.5rem;
+    border: 0;
+    padding: .2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .15rem;
+  }
+
+  .planning-equipe td::before {
+    content: attr(data-label);
+    color: #7a6c5d;
+    font-size: .7rem;
+    font-weight: 600;
+  }
+
+  .planning-equipe td.total-heures {
+    flex-basis: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid #f0e8dd;
+    padding-top: .4rem;
+  }
+
+  .planning-equipe .ligne-moi {
+    background: #fff3c4;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
