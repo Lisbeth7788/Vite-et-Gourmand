@@ -5,10 +5,10 @@ const listeHoraires = document.querySelector('#horaires-liste');
 const retourHoraires = document.querySelector('#horaires-retour');
 let menus = [];
 
-function annoncer(zone, texte, erreur) {
+function annoncer(zone, texte, estErreur) {
   zone.textContent = texte;
-  if (erreur) zone.dataset.state = 'error';
-  else zone.removeAttribute('data-state');
+  if (estErreur) zone.dataset.state = 'error';
+  else delete zone.dataset.state;
 }
 
 async function chargerMenus() {
@@ -34,8 +34,8 @@ formulaireMenu.addEventListener('submit', async (evenement) => {
     formulaireMenu.reset();
     formulaireMenu.elements.id.value = '';
     await chargerMenus();
-  } catch (erreur) {
-    annoncer(retourMenu, erreur.message, true);
+  } catch (error_) {
+    annoncer(retourMenu, error_.message, true);
   }
 });
 
@@ -51,8 +51,8 @@ listeMenus.addEventListener('click', async (evenement) => {
       const resultat = await demanderJson('api/admin/menus.php', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: supprimer.dataset.menuSupprimer }) });
       annoncer(retourMenu, resultat.message, false);
       await chargerMenus();
-    } catch (erreur) {
-      annoncer(retourMenu, erreur.message, true);
+    } catch (error_) {
+      annoncer(retourMenu, error_.message, true);
     }
   }
 });
@@ -70,14 +70,14 @@ listeHoraires.addEventListener('click', async (evenement) => {
   try {
     const resultat = await demanderJson('api/horaires.php', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ day_of_week: bouton.dataset.horaireJour, opening_hours: saisie.value }) });
     annoncer(retourHoraires, resultat.message, false);
-  } catch (erreur) {
-    annoncer(retourHoraires, erreur.message, true);
+  } catch (error_) {
+    annoncer(retourHoraires, error_.message, true);
   }
 });
 
 try {
   await chargerMenus();
   await chargerHoraires();
-} catch (erreur) {
-  annoncer(retourMenu, erreur.message, true);
+} catch (error_) {
+  annoncer(retourMenu, error_.message, true);
 }
