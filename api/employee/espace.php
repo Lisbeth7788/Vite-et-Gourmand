@@ -58,9 +58,21 @@ $reports->execute([$targetId]);
 $payslips = $pdo->prepare('SELECT period, hours, gross, net, note FROM payslips WHERE user_id = ? ORDER BY period DESC LIMIT 24');
 $payslips->execute([$targetId]);
 
+$weekStart = new DateTimeImmutable(preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($_GET['week'] ?? '')) ? $_GET['week'] : 'today');
+$weekStart = $weekStart->modify('monday this week');
+$team = $pdo->prepare(
+    "SELECT u.id AS user_id, u.first_name, u.job_title, s.shift_date, SUBSTRING(s.start_time, 1, 5) AS start_time, SUBSTRING(s.end_time, 1, 5) AS end_time
+     FROM users u LEFT JOIN employee_shifts s ON s.user_id = u.id AND s.shift_date BETWEEN ? AND ?
+     WHERE u.role = 'employe' AND u.is_active = 1 ORDER BY u.job_title, u.first_name, s.shift_date, s.start_time"
+);
+$team->execute([$weekStart->format('Y-m-d'), $weekStart->modify('+6 days')->format('Y-m-d')]);
+
 jsonResponse([
     'profile' => $profile->fetch(),
     'today' => date('Y-m-d'),
+    'me' => $targetId,
+    'weekStart' => $weekStart->format('Y-m-d'),
+    'team' => $team->fetchAll(),
     'shifts' => $shifts->fetchAll(),
     'tasks' => $tasks->fetchAll(),
     'reports' => $reports->fetchAll(),

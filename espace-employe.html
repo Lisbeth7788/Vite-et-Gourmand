@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Mon espace employé - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=55c3b5eb">
+  <link rel="stylesheet" href="css/style.css?v=9499e691">
 </head>
 <body>
   <header class="site-header">
@@ -28,7 +28,15 @@
     </nav>
     <section id="section-planning" class="form-section" aria-labelledby="titre-planning">
       <h2 id="titre-planning">Mon planning</h2>
-      <h3>Horaires</h3><ul id="planning-horaires" class="activite-liste"></ul>
+      <h3>Planning de l'équipe</h3>
+      <div class="semaine-navigation">
+        <button class="button button-small bouton-secondaire" type="button" id="semaine-precedente">← Semaine précédente</button>
+        <strong id="semaine-titre"></strong>
+        <button class="button button-small bouton-secondaire" type="button" id="semaine-suivante">Semaine suivante →</button>
+      </div>
+      <div class="table-responsive"><table class="planning-equipe"><thead id="equipe-entete"></thead><tbody id="equipe-corps"></tbody></table></div>
+      <p class="planning-legende">Règles : 35 h maximum par semaine, 5 jours travaillés, 11 h de repos entre deux services. Les patrons sont présents à chaque service.</p>
+      <h3>Mes horaires</h3><ul id="planning-horaires" class="activite-liste"></ul>
       <h3>Tâches</h3><ul id="planning-taches" class="activite-liste"></ul>
     </section>
     <section id="section-documents" class="form-section" hidden aria-labelledby="titre-documents">
@@ -38,6 +46,6 @@
     </section>
   </main>
   <script src="js/script.js?v=60320912"></script>
-  <script type="module" src="js/employee.js?v=b0e1e7f3"></script>
+  <script type="module" src="js/employee.js?v=112a0a23"></script>
 </body>
 </html>

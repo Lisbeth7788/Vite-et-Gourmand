@@ -38,10 +38,48 @@ function ligneTache(t, aujourdhui) {
 }
 
 let employeConsulte = '';
+let semaineAffichee = '';
+const libellesPostes = { patron: 'Patron', chef: 'Chef', 'sous-chef': 'Sous-chef', commis: 'Commis', serveur: 'Serveur', plongeur: 'Plongeur', livreur: 'Livreur' };
+
+function minutesCreneau(debut, fin) {
+  const [h1, m1] = debut.split(':').map(Number);
+  const [h2, m2] = fin.split(':').map(Number);
+  return (h2 * 60 + m2) - (h1 * 60 + m1);
+}
+
+function decalerJour(iso, jours) {
+  const date = new Date(iso + 'T12:00:00');
+  date.setDate(date.getDate() + jours);
+  return date.toISOString().slice(0, 10);
+}
+
+function afficherEquipe(d) {
+  semaineAffichee = d.weekStart;
+  const jours = [0, 1, 2, 3, 4, 5, 6].map((i) => decalerJour(d.weekStart, i));
+  document.querySelector('#semaine-titre').textContent = 'Semaine du ' + new Date(d.weekStart + 'T12:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+  const entetes = jours.map((j) => '<th>' + texte(new Date(j + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric' })) + '</th>').join('');
+  document.querySelector('#equipe-entete').innerHTML = '<tr><th>Équipe</th>' + entetes + '<th>Total</th></tr>';
+  const personnes = new Map();
+  d.team.forEach((ligne) => {
+    if (!personnes.has(ligne.user_id)) personnes.set(ligne.user_id, { ligne, creneaux: {}, minutes: 0 });
+    if (!ligne.shift_date) return;
+    const entree = personnes.get(ligne.user_id);
+    (entree.creneaux[ligne.shift_date] ??= []).push(ligne.start_time + '-' + ligne.end_time);
+    entree.minutes += minutesCreneau(ligne.start_time, ligne.end_time);
+  });
+  document.querySelector('#equipe-corps').innerHTML = [...personnes.values()].map(({ ligne, creneaux, minutes }) => {
+    const cellules = jours.map((j) => '<td>' + (creneaux[j] ? creneaux[j].map(texte).join('<br>') : '<span class="repos">Repos</span>') + '</td>').join('');
+    const classe = ligne.user_id === d.me ? ' class="ligne-moi"' : '';
+    const total = (minutes / 60).toFixed(1).replace('.0', '') + ' h';
+    return '<tr' + classe + '><th scope="row">' + texte(ligne.first_name) + '<br><small>' + texte(libellesPostes[ligne.job_title] || ligne.job_title || '') + '</small></th>' + cellules + '<td><strong>' + total + '</strong></td></tr>';
+  }).join('');
+}
 
 async function chargerEspaceEmploye() {
-  const parametre = employeConsulte ? '?user_id=' + encodeURIComponent(employeConsulte) : '';
-  const reponse = await fetch(apiEspace + parametre, { credentials: 'same-origin' });
+  const parametres = new URLSearchParams();
+  if (employeConsulte) parametres.set('user_id', employeConsulte);
+  if (semaineAffichee) parametres.set('week', semaineAffichee);
+  const reponse = await fetch(apiEspace + '?' + parametres.toString(), { credentials: 'same-origin' });
   if (reponse.status === 401 || reponse.status === 403) {
     location.href = 'employe-connexion.html';
     return;
@@ -50,6 +88,7 @@ async function chargerEspaceEmploye() {
   const p = d.profile || {};
   document.querySelector('#employe-sous-titre').textContent =
     `${p.first_name || ''} ${p.last_name || ''}${p.job_title ? ` · ${p.job_title}` : ''}`.trim();
+  afficherEquipe(d);
   remplir('#planning-horaires', d.shifts.map((s) => ligneHoraire(s, d.today)), 'Aucun horaire prévu.');
   remplir('#planning-taches', d.tasks.map((t) => ligneTache(t, d.today)), 'Aucune tâche prévue.');
   document.querySelector('#payslip-list').innerHTML = d.payslips.length
@@ -83,6 +122,16 @@ async function initialiserChoixEmploye() {
     await chargerEspaceEmploye();
   });
 }
+
+document.querySelector('#semaine-precedente').addEventListener('click', async () => {
+  semaineAffichee = decalerJour(semaineAffichee, -7);
+  await chargerEspaceEmploye();
+});
+
+document.querySelector('#semaine-suivante').addEventListener('click', async () => {
+  semaineAffichee = decalerJour(semaineAffichee, 7);
+  await chargerEspaceEmploye();
+});
 
 window.addEventListener('hashchange', afficherSectionEmploye);
 afficherSectionEmploye();

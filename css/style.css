@@ -2139,3 +2139,12 @@ main > .page-intro ~ .contact-form-panel {
 #employe-choix .champ-formulaire{margin:0}
 
 .etiquette-jour{background:var(--terracotta);border-radius:999px;color:#fff;font-size:.7rem;font-weight:700;padding:.1rem .55rem;vertical-align:middle}
+
+.semaine-navigation{align-items:center;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin:.5rem 0 1rem}
+.planning-equipe{font-size:.82rem;text-align:center;width:100%}
+.planning-equipe th,.planning-equipe td{padding:.4rem .3rem;vertical-align:middle;white-space:nowrap}
+.planning-equipe tbody th{text-align:left}
+.planning-equipe small{color:#7a6c5d;font-weight:400}
+.planning-equipe .repos{color:#b5a898}
+.planning-equipe .ligne-moi{background:#f6ece4}
+.planning-legende{color:#7a6c5d;font-size:.8rem;text-align:center}
