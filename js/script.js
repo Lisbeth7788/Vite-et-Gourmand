@@ -404,7 +404,7 @@ if (loginForm) {
         }
       }
       const redirect = new URLSearchParams(window.location.search).get('redirect');
-      window.location.href = redirect === 'admin.html' ? 'admin.html' : (redirect || 'compte.html');
+      window.location.href = result.user?.role === 'admin' ? 'admin.html' : (redirect === 'admin.html' ? 'admin.html' : (redirect || 'compte.html'));
     } catch (error) {
       showFormFeedback(loginForm, friendlyError(error), true);
     }
