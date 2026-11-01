@@ -102,7 +102,10 @@ async function actualiserLienConnexion() {
     .filter((lien) => lien.getAttribute('href')?.includes('connexion'));
   try {
     const session = await chargerSession();
-    if (!session.ok) return;
+    if (!session.ok) {
+      if (panneauConnexion) panneauConnexion.hidden = false;
+      return;
+    }
     const role = session.data?.user?.role;
     if (panneauConnexion && role) {
       window.location.replace(pagePourEspace(role));
@@ -160,9 +163,8 @@ if (toastEnAttente) {
 function showFormFeedback(form, message, isError = false) {
   let feedback = form.querySelector('.message-formulaire');
   if (!feedback) {
-    feedback = document.createElement('p');
+    feedback = document.createElement('output');
     feedback.className = 'message-formulaire';
-    feedback.setAttribute('role', 'status');
     form.append(feedback);
   }
 
@@ -208,6 +210,10 @@ function friendlyError(error) {
   return error.message;
 }
 
+window.chargerSession = chargerSession;
+window.showToast = showToast;
+window.friendlyError = friendlyError;
+
 function formatPrice(value) {
   return `${value.toFixed(2).replace('.', ',')} €`;
 }
@@ -234,24 +240,29 @@ function updateOrderSummary() {
 
 if (orderForm) {
   async function verifierSessionCommande() {
+    let session;
     try {
-      const session = await chargerSession();
-      if (!session.ok) throw new Error('Session requise');
-      const user = session.data?.user;
-      if (!user) throw new Error('Utilisateur absent');
-      const firstName = document.querySelector('#order-first-name');
-      const lastName = document.querySelector('#order-last-name');
-      const email = document.querySelector('#order-email');
-      const phone = document.querySelector('#order-phone');
-      if (firstName) firstName.value = user.firstName || '';
-      if (lastName) lastName.value = user.lastName || '';
-      if (email) email.value = user.email || '';
-      phone?.setAttribute('value', user.phone || '');
+      session = await chargerSession();
     } catch (error) {
-      window.location.href = `connexion.html?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+      console.error('Vérification de la session de réservation impossible :', error);
+      showFormFeedback(orderForm, friendlyError(error), true);
+      return;
     }
+    if (!session.ok || !session.data?.user) {
+      window.location.href = `connexion.html?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+      return;
+    }
+    const user = session.data.user;
+    const firstName = document.querySelector('#order-first-name');
+    const lastName = document.querySelector('#order-last-name');
+    const email = document.querySelector('#order-email');
+    const phone = document.querySelector('#order-phone');
+    if (firstName) firstName.value = user.firstName || '';
+    if (lastName) lastName.value = user.lastName || '';
+    if (email) email.value = user.email || '';
+    phone?.setAttribute('value', user.phone || '');
   }
-  verifierSessionCommande();
+  await verifierSessionCommande();
 
   const orderQuery = new URLSearchParams(window.location.search);
   const requestedMenu = orderQuery.get('menu');
@@ -294,7 +305,7 @@ if (orderForm) {
 
   orderForm.addEventListener('input', updateOrderSummary);
   orderForm.addEventListener('change', updateOrderSummary);
-  orderForm.addEventListener('submit', (event) => {
+  orderForm.addEventListener('submit', async (event) => {
     updateOrderSummary();
     if (!orderForm.checkValidity()) {
       event.preventDefault();
@@ -303,7 +314,7 @@ if (orderForm) {
     }
 
     event.preventDefault();
-    submitFormToApi(event, orderForm, 'api/orders.php', 'Votre demande de commande a bien été enregistrée.');
+    await submitFormToApi(event, orderForm, 'api/orders.php', 'Votre demande de commande a bien été enregistrée.');
   });
   updateOrderSummary();
 }
@@ -323,6 +334,7 @@ if (approvedReviews) {
   async function chargerAvisApprouves() {
     try {
       const response = await fetch('api/reviews.php');
+      if (!response.ok) throw new Error('Les avis publiés n’ont pas pu être chargés.');
       const reviews = await response.json();
       if (reviews.length) document.querySelector('#no-reviews')?.remove();
       reviews.forEach((review) => {
@@ -340,9 +352,12 @@ if (approvedReviews) {
         approvedReviews.append(card);
       });
     } catch (error) {
+      console.error('Chargement des avis impossible :', error);
+      const emptyState = document.querySelector('#no-reviews');
+      if (emptyState) emptyState.textContent = 'Les avis publiés sont momentanément indisponibles.';
     }
   }
-  chargerAvisApprouves();
+  await chargerAvisApprouves();
 }
 
 function mettreAJourEtoiles(choixNote, note) {
@@ -401,9 +416,9 @@ passwordToggles.forEach((toggle) => {
 });
 
 if (registerForm) {
-  registerForm.addEventListener('submit', (event) => {
+  registerForm.addEventListener('submit', async (event) => {
     syncRegistrationPasswords();
-    submitFormToApi(event, registerForm, 'api/auth/register.php', 'Votre compte a bien été créé.');
+    await submitFormToApi(event, registerForm, 'api/auth/register.php', 'Votre compte a bien été créé.');
   });
 }
 
@@ -416,8 +431,8 @@ if (registerForm) {
     return;
   }
 
-  form.addEventListener('submit', (event) => {
-    submitFormToApi(event, form, endpoint, message);
+  form.addEventListener('submit', async (event) => {
+    await submitFormToApi(event, form, endpoint, message);
   });
 });
 
@@ -525,7 +540,7 @@ async function afficherHorairesPiedDePage() {
   if (!liste) return;
   try {
     const reponse = await fetch('api/horaires.php');
-    if (!reponse.ok) return;
+    if (!reponse.ok) throw new Error('Les horaires du restaurant n’ont pas pu être chargés.');
     const jours = await reponse.json();
     if (!Array.isArray(jours) || !jours.length) return;
     liste.replaceChildren(...jours.map((jour) => {
@@ -533,13 +548,17 @@ async function afficherHorairesPiedDePage() {
       const nom = document.createElement('dt');
       const horaires = document.createElement('dd');
       nom.textContent = jour.day_name;
-      horaires.textContent = jour.opening_hours;
+      String(jour.opening_hours).split('/').forEach((plage) => {
+        const periode = document.createElement('span');
+        periode.textContent = plage.trim();
+        horaires.append(periode);
+      });
       ligne.append(nom, horaires);
       return ligne;
     }));
-  } catch {
-    // Les horaires écrits dans la page restent affichés.
+  } catch (error) {
+    console.warn('Conservation des horaires de secours du pied de page :', error);
   }
 }
 
-afficherHorairesPiedDePage();
+await afficherHorairesPiedDePage();
