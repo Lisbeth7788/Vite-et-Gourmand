@@ -56,11 +56,10 @@ function ajouterSelecteurExperience(liste, role) {
 }
 
 function ajouterBadgeRole(liste, role) {
-  if (!role || role === 'admin' || liste.querySelector('.badge-role')) return;
-  const nomsRoles = { client: 'Client', employe: 'Employé' };
+  if (role !== 'employe' || liste.querySelector('.badge-role')) return;
   const badge = document.createElement('li');
-  badge.className = `badge-role badge-role-${role}`;
-  badge.textContent = `Connecté : ${nomsRoles[role] || role}`;
+  badge.className = 'badge-role badge-role-employe';
+  badge.textContent = 'Connecté : Employé';
   liste.append(badge);
 }
 
