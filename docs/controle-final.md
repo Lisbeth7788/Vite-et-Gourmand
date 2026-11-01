@@ -26,7 +26,7 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 
 ## À faire avant l'envoi (hors code)
 
-1. **Mettre à jour le dossier projet PDF** : règle du mot de passe (10 caractères), espace employé (planning A/B en lecture seule), espace administrateur (planning modifiable, statistiques par menu), compte employé unique `employe`, e-mails de bienvenue et de confirmation.
+1. **Mettre à jour le dossier projet PDF** : règle du mot de passe (10 caractères), espace employé (réservations, avis, menus et horaires), espace administrateur (comptes employés, statistiques par menu), compte employé unique `employe`, e-mails de bienvenue et de confirmation.
 2. **Mettre à jour le manuel d'utilisation PDF** : identifiants de test ci-dessus et nouveaux parcours.
 3. **Importer les SQL sur Hostinger** : `sql/schema.sql` puis `sql/exemple-employe.sql`.
 4. **Configurer MongoDB et le SMTP sur Hostinger** : sans eux, les statistiques affichent « MongoDB n'est pas configurée » et les e-mails ne partent pas.
@@ -36,8 +36,8 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 
 ## Écarts avec le sujet (à connaître pour l'oral)
 
-- Le site a évolué vers une **réservation sur place** (60 personnes maximum par service, 10 par réservation) au lieu d'une commande avec livraison : la remise de 10 %, les frais de livraison au kilomètre et le prêt de matériel ne sont donc plus mis en avant (les statuts et l'e-mail de matériel existent toujours).
+- Le site suit le **modèle traiteur** du sujet : livraison à l'adresse du client, remise de 10 % (minimum du menu plus 5 personnes), frais de livraison hors Bordeaux (5 € plus 0,59 € par km, distance saisie par le client) et statut de retour de matériel (600 € après 10 jours ouvrés). Il n'y a plus de plafond de personnes ni de créneaux.
 - **Galerie d'images** d'un menu : une seule image par menu.
-- **Horaires** : le pied de page est modifiable ; les créneaux de réservation restent ceux fixés dans le code (11h30-14h00 / 18h00-22h00 en semaine, 10h30-15h00 / 18h00-22h00 le week-end).
-- Le filtre des réservations par statut et par client a été retiré de la page administrateur, à la demande de la cliente. Le sujet le demande : à remettre si le jury l'exige.
+- **Horaires** : le pied de page est modifiable par l'employé ou l'administrateur ; l'heure de livraison est libre.
+- Le filtre des réservations par statut et par client est présent dans la page Réservations.
 - Un seul **compte employé** partagé (`employe`) est fourni pour la démonstration ; l'administrateur peut en créer d'autres depuis « 7. Comptes employés ».

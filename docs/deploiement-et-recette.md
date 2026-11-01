@@ -25,7 +25,7 @@ Cocher chaque ligne après l'avoir testée.
 - [ ] Inscription (mot de passe de 10 caractères avec majuscule, minuscule, chiffre et caractère spécial).
 - [ ] Connexion, déconnexion, mot de passe oublié (lien reçu par e-mail).
 - [ ] Réservation refusée sans connexion.
-- [ ] Réservation : jour et service, 10 personnes maximum, 60 personnes maximum par service.
+- [ ] Commande : adresse, ville, distance hors Bordeaux, détail du prix (menu, remise de 10 %, livraison) avant validation.
 - [ ] Paiement en ligne d'une réservation.
 - [ ] Espace client : liste, annulation avant acceptation, suivi du statut, avis.
 - [ ] Espace administrateur : messages, réservations (changement de statut), avis (publier ou refuser), activité.
@@ -33,8 +33,7 @@ Cocher chaque ligne après l'avoir testée.
 - [ ] Horaires : modifier un jour, vérifier le pied de page.
 - [ ] Comptes employés : créer, désactiver (la connexion doit alors échouer).
 - [ ] Client : modifier une réservation, puis donner un avis sur une réservation terminée.
-- [ ] Planning : une case modifiée par l'administrateur apparaît chez l'employé en quelques secondes.
-- [ ] Espace employé : connexion avec `employe`, planning en lecture seule.
+- [ ] Espace employé : connexion avec `employe`, accès aux réservations, aux avis et aux menus.
 - [ ] Formulaire de contact et réception de l'e-mail.
 - [ ] Affichage sur téléphone, au clavier et avec un zoom à 200 %.
 

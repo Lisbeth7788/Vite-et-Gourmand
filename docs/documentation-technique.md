@@ -24,21 +24,21 @@ Windows, XAMPP (Apache, PHP 8.2, MySQL), phpMyAdmin, Visual Studio Code, Git et 
 | --- | --- | --- |
 | Visiteur | pages publiques | consulter, contacter, s'inscrire |
 | Client (`client`) | compte, réservation | réserver, payer, annuler, donner un avis |
-| Employé (`employe`) | espace employé | voir le planning |
-| Administrateur (`admin`) | pages `admin-*` | tout, et modifier le planning |
+| Employé (`employe`) | espace employé | réservations, avis, menus et horaires |
+| Administrateur (`admin`) | pages `admin-*` | tout, et gérer les comptes employés |
 
 Il n'est pas possible de créer un compte administrateur depuis le site.
 
 ## Données
 
-Tables principales : `users`, `menus`, `menu_dishes`, `orders` (les réservations), `order_status_history`, `reviews`, `messages`, `business_hours`, `password_reset_tokens`, `team_planning`.
+Tables principales : `users`, `menus`, `menu_dishes`, `orders` (les commandes), `order_status_history`, `reviews`, `messages`, `business_hours`, `password_reset_tokens`.
 
-## Planning de l'équipe
+## Prix d'une commande
 
-- Le planning (semaines A et B) est stocké en JSON dans `team_planning`.
-- L'administrateur clique sur une case pour passer de « Service » à « Repos » ou sur un prénom pour le modifier ; l'enregistrement est immédiat.
-- La page employé relit le planning toutes les 10 secondes.
-- Le code commun est dans `js/planning-equipe.js`, l'API dans `api/employee/planning-equipe.php`.
+Le calcul est fait côté serveur dans `config/tarifs.php` :
+
+- remise de 10 % si le nombre de personnes atteint le minimum du menu plus 5 ;
+- livraison gratuite à Bordeaux, sinon 5 € plus 0,59 € par kilomètre.
 
 ## Sécurité
 

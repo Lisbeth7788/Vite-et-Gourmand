@@ -1,6 +1,6 @@
 # Vite et Gourmand
 
-Site web d'un restaurant traiteur : présentation des menus, réservation sur place avec paiement en ligne, espace client, espace employé et espace administrateur.
+Site web d'un traiteur à Bordeaux : présentation des menus, commande avec livraison et paiement en ligne, espace client, espace employé et espace administrateur.
 
 Projet réalisé dans le cadre de la formation Développeur Web et Web Mobile.
 
@@ -38,9 +38,9 @@ Ces mots de passe sont des mots de passe de test : il faut les changer avant une
 ## Que peut faire chaque profil ?
 
 - **Visiteur** : voir l'accueil, les menus (avec filtres), le détail d'un menu, l'histoire du restaurant, et envoyer un message.
-- **Client** : créer un compte, réserver une table, modifier sa réservation avant acceptation (60 personnes maximum par service, 10 personnes maximum par réservation), payer en ligne, suivre ses réservations, les annuler tant qu'elles ne sont pas acceptées, puis donner un avis.
-- **Employé** : consulter le planning de l'équipe (semaines A et B), traiter les réservations (statuts, annulation avec motif), valider ou refuser les avis, gérer les menus (plats, allergènes, stock) et les horaires.
-- **Administrateur** : traiter les messages, les réservations (statuts) et les avis, voir l'activité du restaurant, tout ce que fait un employé, créer ou désactiver des comptes employés, consulter et modifier le planning de l'équipe. Toute modification du planning apparaît ensuite chez les employés.
+- **Client** : créer un compte, commander un menu à livrer (remise de 10 % et frais de livraison calculés), modifier sa commande avant acceptation, payer en ligne, suivre ses commandes, les annuler tant qu'elles ne sont pas acceptées, puis donner un avis.
+- **Employé** : traiter les commandes (statuts, annulation avec motif), valider ou refuser les avis, gérer les menus (plats, allergènes, stock) et les horaires.
+- **Administrateur** : traiter les messages, les commandes (statuts) et les avis, voir l'activité, tout ce que fait un employé, créer ou désactiver des comptes employés.
 
 ## Sécurité mise en place
 
@@ -55,7 +55,7 @@ Ces mots de passe sont des mots de passe de test : il faut les changer avant une
 ## Organisation des fichiers
 
 - `index.html`, `menus.html`, `menu-detail.html`, `histoire.html`, `contact.html` : pages publiques.
-- `connexion.html`, `inscription.html`, `compte.html`, `reservation.html`, `commande.html` : espace client.
+- `connexion.html`, `inscription.html`, `compte.html`, `reservation.html` : espace client (`commande.html` redirige vers `reservation.html`).
 - `employe-connexion.html`, `espace-employe.html` : espace employé.
 - `admin-connexion.html`, `admin.html`, `admin-reservations.html`, `admin-avis.html`, `admin-activite.html`, `admin-employes.html` : espace administrateur.
 - `api/` : routes PHP qui répondent en JSON.
