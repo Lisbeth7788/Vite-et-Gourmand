@@ -2137,3 +2137,5 @@ main > .page-intro ~ .contact-form-panel {
 #employe-choix{align-items:center;flex-wrap:wrap;gap:1rem;margin:0 auto 1rem}
 #employe-choix[hidden]{display:none}
 #employe-choix .champ-formulaire{margin:0}
+
+.etiquette-jour{background:var(--terracotta);border-radius:999px;color:#fff;font-size:.7rem;font-weight:700;padding:.1rem .55rem;vertical-align:middle}

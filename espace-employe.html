@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Mon espace employé - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=a51f17c6">
+  <link rel="stylesheet" href="css/style.css?v=55c3b5eb">
 </head>
 <body>
   <header class="site-header">
@@ -22,19 +22,13 @@
     </div>
     <nav class="admin-nav" aria-label="Sections de mon espace">
       <ol>
-        <li><a href="#aujourdhui" data-section="aujourdhui" aria-current="page">Aujourd'hui</a></li>
-        <li><a href="#planning" data-section="planning">Planning</a></li>
+        <li><a href="#planning" data-section="planning" aria-current="page">Planning</a></li>
         <li><a href="#compte-rendu" data-section="compte-rendu">Compte rendu</a></li>
-        <li><a href="#paie" data-section="paie">Fiches de paie</a></li>
+        <li><a href="#documents" data-section="documents">Documents</a></li>
       </ol>
     </nav>
-    <section id="section-aujourdhui" class="form-section" aria-labelledby="titre-aujourdhui">
-      <h2 id="titre-aujourdhui">Ma journée</h2>
-      <h3>Horaires</h3><ul id="jour-horaires" class="activite-liste"></ul>
-      <h3>Tâches</h3><ul id="jour-taches" class="activite-liste"></ul>
-    </section>
-    <section id="section-planning" class="form-section" hidden aria-labelledby="titre-planning">
-      <h2 id="titre-planning">Planning des 14 prochains jours</h2>
+    <section id="section-planning" class="form-section" aria-labelledby="titre-planning">
+      <h2 id="titre-planning">Mon planning</h2>
       <h3>Horaires</h3><ul id="planning-horaires" class="activite-liste"></ul>
       <h3>Tâches</h3><ul id="planning-taches" class="activite-liste"></ul>
     </section>
@@ -47,12 +41,13 @@
       </form>
       <h3>Mes derniers comptes rendus</h3><ul id="report-list" class="activite-liste"></ul>
     </section>
-    <section id="section-paie" class="form-section" hidden aria-labelledby="titre-paie">
-      <h2 id="titre-paie">Fiches de paie</h2>
+    <section id="section-documents" class="form-section" hidden aria-labelledby="titre-documents">
+      <h2 id="titre-documents">Documents</h2>
+      <h3>Fiches de paie</h3>
       <div class="table-responsive"><table><thead><tr><th>Période</th><th>Heures</th><th>Brut</th><th>Net</th><th>Note</th></tr></thead><tbody id="payslip-list"></tbody></table></div>
     </section>
   </main>
   <script src="js/script.js?v=60320912"></script>
-  <script type="module" src="js/employee.js?v=116c01cb"></script>
+  <script type="module" src="js/employee.js?v=230f7bab"></script>
 </body>
 </html>

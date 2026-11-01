@@ -1,5 +1,5 @@
 const apiEspace = 'api/employee/espace.php';
-const sectionsEmploye = ['aujourdhui', 'planning', 'compte-rendu', 'paie'];
+const sectionsEmploye = ['planning', 'compte-rendu', 'documents'];
 
 function texte(valeur) {
   const span = document.createElement('span');
@@ -12,7 +12,7 @@ function dateFr(iso) {
 }
 
 function afficherSectionEmploye() {
-  const nom = sectionsEmploye.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'aujourdhui';
+  const nom = sectionsEmploye.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'planning';
   sectionsEmploye.forEach((id) => { document.querySelector(`#section-${id}`).hidden = id !== nom; });
   document.querySelectorAll('[data-section]').forEach((lien) => {
     if (lien.dataset.section === nom) lien.setAttribute('aria-current', 'page'); else lien.removeAttribute('aria-current');
@@ -23,12 +23,18 @@ function remplir(selecteur, lignes, vide) {
   document.querySelector(selecteur).innerHTML = lignes.length ? lignes.join('') : `<li>${vide}</li>`;
 }
 
-function ligneHoraire(s) {
-  return `<li><strong>${texte(dateFr(s.shift_date))}</strong> : ${texte(s.start_time)} - ${texte(s.end_time)}${s.note ? ` (${texte(s.note)})` : ''}</li>`;
+function etiquetteJour(dateIso, aujourdhui) {
+  return dateIso === aujourdhui ? ' <span class="etiquette-jour">Aujourd’hui</span>' : '';
 }
 
-function ligneTache(t, avecDate) {
-  return `<li><label><input type="checkbox" data-task="${Number(t.id)}" ${Number(t.is_done) ? 'checked' : ''}> ${avecDate ? `<strong>${texte(dateFr(t.task_date))}</strong> : ` : ''}${texte(t.title)}</label></li>`;
+function ligneHoraire(s, aujourdhui) {
+  const note = s.note ? ' (' + texte(s.note) + ')' : '';
+  return '<li><strong>' + texte(dateFr(s.shift_date)) + '</strong>' + etiquetteJour(s.shift_date, aujourdhui) + ' : ' + texte(s.start_time) + ' - ' + texte(s.end_time) + note + '</li>';
+}
+
+function ligneTache(t, aujourdhui) {
+  const coche = Number(t.is_done) ? 'checked' : '';
+  return '<li><label><input type="checkbox" data-task="' + Number(t.id) + '" ' + coche + '> <strong>' + texte(dateFr(t.task_date)) + '</strong>' + etiquetteJour(t.task_date, aujourdhui) + ' : ' + texte(t.title) + '</label></li>';
 }
 
 let employeConsulte = '';
@@ -44,10 +50,8 @@ async function chargerEspaceEmploye() {
   const p = d.profile || {};
   document.querySelector('#employe-sous-titre').textContent =
     `${p.first_name || ''} ${p.last_name || ''}${p.job_title ? ` · ${p.job_title}` : ''}`.trim();
-  remplir('#jour-horaires', d.shifts.filter((s) => s.shift_date === d.today).map(ligneHoraire), 'Aucun horaire aujourd’hui.');
-  remplir('#jour-taches', d.tasks.filter((t) => t.task_date === d.today).map((t) => ligneTache(t, false)), 'Aucune tâche aujourd’hui.');
-  remplir('#planning-horaires', d.shifts.map(ligneHoraire), 'Aucun horaire prévu.');
-  remplir('#planning-taches', d.tasks.map((t) => ligneTache(t, true)), 'Aucune tâche prévue.');
+  remplir('#planning-horaires', d.shifts.map((s) => ligneHoraire(s, d.today)), 'Aucun horaire prévu.');
+  remplir('#planning-taches', d.tasks.map((t) => ligneTache(t, d.today)), 'Aucune tâche prévue.');
   remplir('#report-list', d.reports.map((r) => `<li><strong>${texte(dateFr(r.report_date))}</strong> : ${texte(r.content)}</li>`), 'Aucun compte rendu.');
   document.querySelector('#payslip-list').innerHTML = d.payslips.length
     ? d.payslips.map((f) => `<tr><td>${texte(f.period)}</td><td>${texte(f.hours)}</td><td>${texte(f.gross)} €</td><td>${texte(f.net)} €</td><td>${texte(f.note)}</td></tr>`).join('')
