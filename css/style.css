@@ -1940,7 +1940,8 @@ main > .page-intro ~ .contact-form-panel {
 
 @media (min-width: 720px) {
   .admin-nav li {
-    flex: 0 1 9.5rem;
+    flex: 1 1 7.5rem;
+    max-width: 10rem;
     min-width: 0;
   }
 }
