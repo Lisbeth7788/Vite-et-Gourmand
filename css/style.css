@@ -2041,22 +2041,26 @@ main > .page-intro ~ .contact-form-panel {
 #confirmation .actions-paiement { column-gap: 1.25rem; row-gap: 1rem; }
 #confirmation .actions-paiement .button { display: inline-block; margin: 0; }
 
-.profil-carte { max-width: 46rem; margin-left: auto; margin-right: auto; text-align: left; }
-.profil-entete { align-items: center; border-bottom: 1px solid var(--line); display: flex; gap: 1.1rem; margin-bottom: 1.5rem; padding-bottom: 1.25rem; }
-.profil-entete h2 { margin: 0; text-align: left; }
-.profil-sous-titre { margin: 0.25rem 0 0; opacity: 0.8; }
-.profil-avatar { align-items: center; background: var(--terracotta); border-radius: 50%; color: #fff; display: flex; flex: 0 0 auto; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; height: 4rem; justify-content: center; width: 4rem; }
-.profil-formulaire { display: grid; gap: 1.5rem; }
-.profil-formulaire fieldset { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; display: grid; gap: 1rem; margin: 0; padding: 1rem 1.25rem 1.25rem; }
-.profil-formulaire legend { color: var(--terracotta-dark); font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; padding: 0 0.5rem; }
-.profil-ligne { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.profil-formulaire .champ-formulaire label { text-align: left; }
+.profil-carte { margin-left: auto; margin-right: auto; max-width: 34rem; padding: 1.25rem 1.5rem; text-align: center; }
+.profil-entete { align-items: center; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.profil-entete h2 { font-size: 1.3rem; margin: 0; text-align: center; }
+.profil-sous-titre { font-size: 0.9rem; margin: 0.15rem 0 0; opacity: 0.8; }
+.profil-avatar { align-items: center; background: var(--terracotta); border-radius: 50%; color: #fff; display: flex; font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; height: 2.9rem; justify-content: center; width: 2.9rem; }
+.profil-formulaire { display: grid; gap: 0.9rem; }
+.profil-formulaire fieldset { border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 0.6rem; margin: 0; padding: 0.4rem 0.9rem 0.8rem; }
+.profil-formulaire legend { color: var(--terracotta-dark); font-size: 0.85rem; font-weight: 700; padding: 0 0.4rem; }
+.profil-ligne { display: grid; gap: 0.6rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.profil-formulaire .champ-formulaire label { font-size: 0.85rem; margin-bottom: 0.2rem; text-align: center; }
 .profil-formulaire .champ-formulaire input,
-.profil-formulaire .champ-formulaire textarea { text-align: left; }
-.profil-formulaire textarea { resize: vertical; }
-.profil-actions { display: flex; justify-content: flex-end; }
-.profil-formulaire .profil-actions .button { display: inline-block; font-size: 0.9rem; margin: 0; padding: 0.5rem 1.1rem; width: auto; }
+.profil-formulaire .champ-formulaire textarea { font-size: 0.95rem; padding: 0.45rem 0.6rem; text-align: center; }
+.profil-formulaire textarea { resize: none; }
+.profil-formulaire .champ-formulaire input.is-valid,
+.profil-formulaire .champ-formulaire textarea.is-valid { background: #fff; border-color: #cfc2b1; box-shadow: none; }
+.profil-actions { display: flex; justify-content: center; }
+.profil-formulaire .profil-actions .button { display: inline-block; font-size: 0.85rem; margin: 0 auto; padding: 0.4rem 1.2rem; width: auto; }
+#profile-feedback:empty { display: none; }
+#profile-feedback { justify-self: center; margin: 0.75rem auto 0; max-width: 100%; }
+#profile-feedback::before { display: none; }
 @media (max-width: 640px) {
   .profil-ligne { grid-template-columns: 1fr; }
-  .profil-actions { justify-content: center; }
 }
