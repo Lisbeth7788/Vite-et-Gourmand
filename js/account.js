@@ -50,6 +50,31 @@ function afficherActivite(activite) {
   });
 }
 
+function ligneSuivi(event) {
+  const statut = echapperTexte(libellesStatuts[event.status] || event.status);
+  const note = event.note ? ' : ' + echapperTexte(event.note) : '';
+  return '<li>' + echapperTexte(event.created_at) + ' - ' + statut + note + '</li>';
+}
+
+function ligneReservation(order) {
+  const heure = String(order.service_time).slice(0, 5);
+  const statut = libellesStatuts[order.status] || order.status;
+  const suivi = order.history.map(ligneSuivi).join('');
+  const pluriel = Number(order.people) > 1 ? 's' : '';
+  const paiement = order.statut_paiement === 'paye' ? 'Payé' : 'En attente de paiement';
+  let action = '';
+  if (order.status === 'pending') {
+    action = '<button class="button button-small" type="button" data-cancel-order="' + echapperTexte(order.id) + '">Annuler la réservation</button>';
+  } else if (order.status === 'completed') {
+    action = '<p>Terminée : vous pouvez donner votre avis.</p>';
+  }
+  const resume = echapperTexte(order.service_date) + ' · ' + echapperTexte(heure) + ' · ' + Number(order.total).toFixed(2) + ' €';
+  return '<details class="reservation-ligne"><summary><span class="reservation-titre">' + echapperTexte(order.menu_name || order.menu_id) +
+    '</span><span class="reservation-resume">' + resume + '</span><span class="reservation-statut">' + echapperTexte(statut) +
+    '</span></summary><div class="reservation-detail"><p>' + echapperTexte(order.people) + ' personne' + pluriel + ' · ' + paiement +
+    '</p><p>Réservée le ' + echapperTexte(order.created_at) + '</p><ul>' + suivi + '</ul>' + action + '</div></details>';
+}
+
 async function chargerCompte() {
   try {
     const session = await demanderCompte('api/auth/session.php');
@@ -71,13 +96,9 @@ async function chargerCompte() {
       commandesCompte.textContent = 'Aucune commande enregistrée.';
       return;
     }
-    commandesCompte.innerHTML = orders.map((order) => {
-      const heure = String(order.service_time).slice(0, 5);
-      const statut = libellesStatuts[order.status] || order.status;
-      const suivi = order.history.map((event) => `<li>${echapperTexte(event.created_at)} - ${echapperTexte(libellesStatuts[event.status] || event.status)}${event.note ? ` : ${echapperTexte(event.note)}` : ''}</li>`).join('');
-      return `<details class="reservation-ligne"><summary><span class="reservation-titre">${echapperTexte(order.menu_name || order.menu_id)}</span><span class="reservation-resume">${echapperTexte(order.service_date)} · ${echapperTexte(heure)} · ${Number(order.total).toFixed(2)} €</span><span class="reservation-statut">${echapperTexte(statut)}</span></summary><div class="reservation-detail"><p>${echapperTexte(order.people)} personne${Number(order.people) > 1 ? 's' : ''} · ${order.statut_paiement === 'paye' ? 'Payé' : 'En attente de paiement'}</p><p>Réservée le ${echapperTexte(order.created_at)}</p><ul>${suivi}</ul>${order.status === 'pending' ? `<button class="button button-small" type="button" data-cancel-order="${echapperTexte(order.id)}">Annuler la réservation</button>` : ''}${order.status === 'completed' ? '<p>Terminée : vous pouvez donner votre avis.</p>' : ''}</div></details>`;
-    }).join('');
-  } catch (error) {
+    commandesCompte.innerHTML = orders.map(ligneReservation).join('');
+  } catch (error_) {
+    // Session absente ou expirée : retour à la connexion.
     window.location.href = 'connexion.html?redirect=compte.html';
   }
 }
@@ -147,4 +168,4 @@ document.querySelectorAll('[data-section]').forEach((lien) => {
 });
 afficherSection(window.location.hash.slice(1));
 
-chargerCompte();
+void chargerCompte();
