@@ -14,8 +14,8 @@ const heuresService = 7;
 const jourA = [0, 1, 2, 5, 6];
 const jourB = [3, 4, 5, 6];
 const equipe = [
-  { nom: 'Sophie', poste: 'Patronne', toujours: true },
-  { nom: 'Marc', poste: 'Patron', toujours: true },
+  { nom: 'Julie', poste: 'Patronne', toujours: true },
+  { nom: 'José', poste: 'Patron', toujours: true },
   { nom: 'Antoine', poste: 'Chef', groupe: 'A' },
   { nom: 'Paul', poste: 'Chef', groupe: 'B' },
   { nom: 'Marie', poste: 'Sous-chef', groupe: 'A' },
