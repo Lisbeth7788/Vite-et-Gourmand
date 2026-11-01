@@ -10,9 +10,9 @@ const libellesStatuts = {
   pending: 'En attente',
   accepted: 'Acceptée',
   preparing: 'En préparation',
-  delivery: 'Prête',
-  delivered: 'Retirée',
-  material_return: 'En attente du retour du matériel',
+  delivery: 'En cours de livraison',
+  delivered: 'Livrée',
+  material_return: 'En attente du retour de matériel',
   completed: 'Terminée',
   cancelled: 'Annulée'
 };
@@ -68,7 +68,10 @@ function ligneReservation(order) {
     action = '<form class="grille-formulaire" data-edit-order="' + id + '">' +
       '<div class="champ-formulaire"><label>Date <input name="date" type="date" value="' + echapperTexte(order.service_date) + '" required></label></div>' +
       '<div class="champ-formulaire"><label>Heure <input name="time" type="time" value="' + echapperTexte(heure) + '" required></label></div>' +
-      '<div class="champ-formulaire"><label>Personnes <input name="people" type="number" min="1" max="10" value="' + Number(order.people) + '" required></label></div>' +
+      '<div class="champ-formulaire"><label>Personnes <input name="people" type="number" min="1" value="' + Number(order.people) + '" required></label></div>' +
+      '<div class="champ-formulaire"><label>Adresse <input name="address" type="text" value="' + echapperTexte(order.address || '') + '" required></label></div>' +
+      '<div class="champ-formulaire"><label>Ville <input name="city" type="text" value="' + echapperTexte(order.city || '') + '" required></label></div>' +
+      '<div class="champ-formulaire"><label>Distance depuis Bordeaux (km) <input name="distance" type="number" min="0" step="0.1" value="' + Number(order.distance || 0) + '"></label></div>
       '<div class="champ-formulaire"><label>Téléphone <input name="phone" type="tel" value="' + echapperTexte(order.phone || '') + '" required></label></div>' +
       '<button class="button button-small" type="submit">Modifier la réservation</button></form>' +
       '<button class="button button-small" type="button" data-cancel-order="' + id + '">Annuler la réservation</button>';
