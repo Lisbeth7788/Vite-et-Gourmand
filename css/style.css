@@ -669,7 +669,7 @@ h3 {
 }
 
 .page-intro .eyebrow {
-  color: #f4c89f;
+  color: #ffd4b1;
 }
 
 .page-intro h1 {
@@ -698,10 +698,6 @@ h1 + p {
 .history-page .page-intro::before,
 .contact-page-body .page-intro::before {
   background: rgba(40, 37, 31, 0.42);
-}
-
-.page-intro .eyebrow {
-  color: #ffd4b1;
 }
 
 .page-intro h1,
@@ -1393,19 +1389,16 @@ form {
 }
 
 .reset-form {
+  align-items: end;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
   margin-inline: auto;
   max-width: 480px;
 }
 
 .reset-panel p {
   color: var(--muted);
-}
-
-.reset-form {
-  align-items: end;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: minmax(0, 1fr);
 }
 
 .reset-form .champ-formulaire {
