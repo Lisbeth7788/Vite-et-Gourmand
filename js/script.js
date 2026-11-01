@@ -104,7 +104,7 @@ async function actualiserLienConnexion() {
     }
     const liste = document.querySelector('.main-navigation ul');
     if (!liste) return;
-    if (session.data?.canSwitchExperience && !liste.querySelector('.experience-switch')) {
+    if (session.data?.canSwitchExperience && role === 'admin' && !liste.querySelector('.experience-switch')) {
       ajouterSelecteurExperience(liste, role);
     }
     if (document.body.dataset.modeEmploye !== undefined) return;
