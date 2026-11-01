@@ -3,7 +3,7 @@
 // Fichier non versionné créé sur le serveur (Hostinger) avec les identifiants de production
 $localConfig = __DIR__ . '/env.local.php';
 if (is_file($localConfig)) {
-    foreach ((require $localConfig) as $key => $value) {
+    foreach ((require_once $localConfig) as $key => $value) {
         putenv("{$key}={$value}");
     }
 }

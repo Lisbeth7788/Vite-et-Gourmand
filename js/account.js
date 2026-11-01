@@ -41,8 +41,9 @@ function afficherActivite(activite) {
     const montant = evenement.amount === null ? '' : ` · ${Number(evenement.amount).toFixed(2)} €`;
     return `<li class="activite-ligne"${index >= 8 ? ' hidden data-extra' : ''}><span class="activite-type">${echapperTexte(libellesActivite[evenement.type] || evenement.type)}</span><span class="activite-detail">${echapperTexte(detail)}${montant}</span><time class="activite-date">${echapperTexte(jour)} ${echapperTexte(heure.slice(0, 5))}</time></li>`;
   }).join('');
-  const plus = activite.length > 8 ? `<button class="button button-small activite-plus" type="button">Voir plus (${activite.length - 8})</button>` : '';
-  activiteCompte.innerHTML = `<ul class="activite-liste">${lignes}</ul>${plus}`;
+  const nombreCache = activite.length - 8;
+  const plus = nombreCache > 0 ? '<button class="button button-small activite-plus" type="button">Voir plus (' + nombreCache + ')</button>' : '';
+  activiteCompte.innerHTML = '<ul class="activite-liste">' + lignes + '</ul>' + plus;
   activiteCompte.querySelector('.activite-plus')?.addEventListener('click', (event) => {
     activiteCompte.querySelectorAll('[data-extra]').forEach((ligne) => { ligne.hidden = false; });
     event.currentTarget.remove();

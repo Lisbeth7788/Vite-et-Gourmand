@@ -1,4 +1,4 @@
-const formulaireAdmin = document.querySelector('#admin-login-form');
+﻿const formulaireAdmin = document.querySelector('#admin-login-form');
 const retourAdmin = document.querySelector('#admin-login-feedback');
 
 function afficherRetourAdmin(message, erreur = false) {
@@ -22,7 +22,8 @@ formulaireAdmin.addEventListener('submit', async (event) => {
     const resultat = await reponse.json();
     if (!reponse.ok) throw new Error(resultat.error || 'La connexion a échoué.');
     window.location.href = 'admin.html';
-  } catch (erreur) {
-    afficherRetourAdmin(erreur.message, true);
+  } catch (error_) {
+    afficherRetourAdmin(error_.message, true);
   }
 });
+

@@ -1,4 +1,4 @@
-(async () => {
+﻿(async () => {
   const formulaire = document.querySelector('#formulaire-reservation');
   if (!formulaire) return;
   const formulairePaiement = document.querySelector('#formulaire-paiement');
@@ -18,7 +18,8 @@
   try {
     const session = await chargerSession();
     utilisateur = session.ok ? session.data?.user : null;
-  } catch (erreur) {
+  } catch (error_) {
+    // Session indisponible : la réservation reste possible, la connexion sera demandée ensuite.
     utilisateur = null;
   }
   const adresseConnexion = `connexion.html?redirect=${encodeURIComponent(window.location.pathname.split('/').pop() + window.location.search)}`;
@@ -38,7 +39,7 @@
     const reponse = await fetch('api/menus.php', { credentials: 'same-origin' });
     menus = (await reponse.json()).filter((menu) => Number(menu.stock) > 0);
   } catch (erreur) {
-    showToast(friendlyError(erreur), true);
+    showToast(friendlyError(error_), true);
   }
   menus.forEach((menu) => {
     choixMenu.add(new Option(`${menu.name} - ${euros(Number(menu.price))} / personne`, menu.id));
@@ -148,8 +149,8 @@
       introduction.textContent = 'Étape 2 sur 2 : réglez votre réservation en ligne.';
       document.querySelector('#bouton-payer').textContent = `Payer ${euros(Number(commande.totals.total))}`;
       formulairePaiement.querySelector('input').focus();
-    } catch (erreur) {
-      showToast(friendlyError(erreur), true);
+    } catch (error_) {
+      showToast(friendlyError(error_), true);
     } finally {
       bouton.disabled = false;
     }
@@ -207,8 +208,8 @@
       titre.focus();
       sessionStorage.setItem('toast', 'Paiement reçu : votre réservation est confirmée.');
       window.setTimeout(() => { window.location.href = 'compte.html'; }, 2500);
-    } catch (erreurPaiement) {
-      showToast(friendlyError(erreurPaiement), true);
+    } catch (error_) {
+      showToast(friendlyError(error_), true);
       bouton.disabled = false;
     }
   });
@@ -229,8 +230,8 @@
       formulaire.hidden = false;
       introduction.textContent = 'Étape 1 sur 2 : choisissez votre menu et votre créneau.';
       formulaire.querySelector('select').focus();
-    } catch (erreur) {
-      showToast(friendlyError(erreur), true);
+    } catch (error_) {
+      showToast(friendlyError(error_), true);
     } finally {
       bouton.disabled = false;
     }
