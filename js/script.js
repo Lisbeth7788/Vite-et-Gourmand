@@ -446,3 +446,28 @@ if (formulaireAvis) {
     }
   });
 }
+
+// Les horaires du pied de page viennent de la base : l'équipe peut les modifier.
+async function afficherHorairesPiedDePage() {
+  const liste = document.querySelector('.opening-hours dl');
+  if (!liste) return;
+  try {
+    const reponse = await fetch('api/horaires.php');
+    if (!reponse.ok) return;
+    const jours = await reponse.json();
+    if (!Array.isArray(jours) || !jours.length) return;
+    liste.replaceChildren(...jours.map((jour) => {
+      const ligne = document.createElement('div');
+      const nom = document.createElement('dt');
+      const horaires = document.createElement('dd');
+      nom.textContent = jour.day_name;
+      horaires.textContent = jour.opening_hours;
+      ligne.append(nom, horaires);
+      return ligne;
+    }));
+  } catch {
+    // Les horaires écrits dans la page restent affichés.
+  }
+}
+
+afficherHorairesPiedDePage();

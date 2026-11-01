@@ -36,6 +36,17 @@ if ($method === 'PATCH') {
         jsonResponse(['error' => 'La mise à jour de la commande a échoué.'], 500);
     }
 
+    $client = $pdo->prepare('SELECT email, first_name FROM orders WHERE id = ?');
+    $client->execute([trim($data['id'])]);
+    $destinataire = $client->fetch();
+    $messagesStatut = [
+        'material_return' => "Du matériel vous a été prêté. S'il n'est pas rendu sous 10 jours ouvrés, 600 € de frais vous seront facturés (voir nos conditions générales de vente). Pour organiser le retour, contactez-nous.",
+        'completed' => 'Votre réservation est terminée. Connectez-vous à votre compte pour donner votre avis (note de 1 à 5 et commentaire).'
+    ];
+    if ($destinataire && isset($messagesStatut[$data['status']])) {
+        @mail($destinataire['email'], 'Votre réservation Vite et Gourmand', 'Bonjour ' . $destinataire['first_name'] . ",\n\n" . $messagesStatut[$data['status']] . "\n\nVite et Gourmand");
+    }
+
     jsonResponse(['message' => 'Commande mise à jour.']);
 }
 

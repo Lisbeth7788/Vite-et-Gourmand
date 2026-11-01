@@ -29,6 +29,10 @@ Cocher chaque ligne après l'avoir testée.
 - [ ] Paiement en ligne d'une réservation.
 - [ ] Espace client : liste, annulation avant acceptation, suivi du statut, avis.
 - [ ] Espace administrateur : messages, réservations (changement de statut), avis (publier ou refuser), activité.
+- [ ] Menus : ajouter un menu avec plats et allergènes, le retrouver sur le site, le supprimer.
+- [ ] Horaires : modifier un jour, vérifier le pied de page.
+- [ ] Comptes employés : créer, désactiver (la connexion doit alors échouer).
+- [ ] Client : modifier une réservation, puis donner un avis sur une réservation terminée.
 - [ ] Planning : une case modifiée par l'administrateur apparaît chez l'employé en quelques secondes.
 - [ ] Espace employé : connexion avec `employe`, planning en lecture seule.
 - [ ] Formulaire de contact et réception de l'e-mail.

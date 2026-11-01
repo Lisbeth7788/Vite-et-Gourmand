@@ -38,9 +38,9 @@ Ces mots de passe sont des mots de passe de test : il faut les changer avant une
 ## Que peut faire chaque profil ?
 
 - **Visiteur** : voir l'accueil, les menus (avec filtres), le détail d'un menu, l'histoire du restaurant, et envoyer un message.
-- **Client** : créer un compte, réserver une table (60 personnes maximum par service, 10 personnes maximum par réservation), payer en ligne, suivre ses réservations, les annuler tant qu'elles ne sont pas acceptées, puis donner un avis.
-- **Employé** : consulter le planning de l'équipe (semaines A et B), le même que celui de l'administrateur.
-- **Administrateur** : traiter les messages, les réservations (statuts) et les avis, voir l'activité du restaurant, consulter et modifier le planning de l'équipe. Toute modification du planning apparaît ensuite chez les employés.
+- **Client** : créer un compte, réserver une table, modifier sa réservation avant acceptation (60 personnes maximum par service, 10 personnes maximum par réservation), payer en ligne, suivre ses réservations, les annuler tant qu'elles ne sont pas acceptées, puis donner un avis.
+- **Employé** : consulter le planning de l'équipe (semaines A et B), traiter les réservations (statuts, annulation avec motif), valider ou refuser les avis, gérer les menus (plats, allergènes, stock) et les horaires.
+- **Administrateur** : traiter les messages, les réservations (statuts) et les avis, voir l'activité du restaurant, tout ce que fait un employé, créer ou désactiver des comptes employés, consulter et modifier le planning de l'équipe. Toute modification du planning apparaît ensuite chez les employés.
 
 ## Sécurité mise en place
 

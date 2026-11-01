@@ -155,7 +155,7 @@ function dateLongue(iso) {
 async function chargerEmployes() {
   const employes = await demanderJson('api/admin/employees.php');
   employeeList.innerHTML = employes.length
-    ? `<table><caption>Comptes employés</caption><thead><tr><th>Nom</th><th>Poste</th><th>Contact</th><th>État</th><th>Actions</th></tr></thead><tbody>${employes.map((employe) => `<tr><td>${echapperHtml(employe.first_name)} ${echapperHtml(employe.last_name)}</td><td>${echapperHtml(employe.job_title || '')}</td><td>${echapperHtml(employe.email)}<br>${echapperHtml(employe.phone)}</td><td>${Number(employe.is_active) ? 'Actif' : 'Désactivé'}</td><td><button class="button button-small bouton-secondaire" type="button" data-employee-planning="${echapperHtml(employe.id)}" data-nom="${echapperHtml(employe.first_name)} ${echapperHtml(employe.last_name)}">Planning</button> <button class="button button-small" type="button" data-employee-toggle="${echapperHtml(employe.id)}" data-active="${Number(employe.is_active) ? 0 : 1}">${Number(employe.is_active) ? 'Désactiver' : 'Réactiver'}</button> <button class="button button-small bouton-secondaire" type="button" data-employee-delete="${echapperHtml(employe.id)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`
+    ? `<table><caption>Comptes employés</caption><thead><tr><th>Nom</th><th>Poste</th><th>Contact</th><th>État</th><th>Actions</th></tr></thead><tbody>${employes.map((employe) => `<tr><td>${echapperHtml(employe.first_name)} ${echapperHtml(employe.last_name)}</td><td>${echapperHtml(employe.job_title || '')}</td><td>${echapperHtml(employe.email)}<br>${echapperHtml(employe.phone)}</td><td>${Number(employe.is_active) ? 'Actif' : 'Désactivé'}</td><td><button class="button button-small" type="button" data-employee-toggle="${echapperHtml(employe.id)}" data-active="${Number(employe.is_active) ? 0 : 1}">${Number(employe.is_active) ? 'Désactiver' : 'Réactiver'}</button> <button class="button button-small bouton-secondaire" type="button" data-employee-delete="${echapperHtml(employe.id)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`
     : 'Aucun compte employé.';
 }
 
@@ -250,15 +250,6 @@ if (employeeForm) {
     }
   });
   employeeList.addEventListener('click', async (event) => {
-    const planning = event.target.closest('[data-employee-planning]');
-    if (planning) {
-      employePlanningId = planning.dataset.employeePlanning;
-      document.querySelector('#planning-nom').textContent = planning.dataset.nom;
-      document.querySelector('#planning-admin').hidden = false;
-      document.querySelector('#planning-admin').scrollIntoView({ behavior: 'smooth' });
-      await chargerPlanningAdmin();
-      return;
-    }
     const bascule = event.target.closest('[data-employee-toggle]');
     const suppression = event.target.closest('[data-employee-delete]');
     try {
@@ -270,72 +261,6 @@ if (employeeForm) {
         return;
       }
       await chargerEmployes();
-    } catch (error) {
-      window.alert(error.message);
-    }
-  });
-}
-
-let employePlanningId = null;
-
-function ligneAdmin(type, id, texte) {
-  return `<li>${texte} <button class="button button-small bouton-secondaire" type="button" data-planning-delete="${type}" data-id="${Number(id)}">Supprimer</button></li>`;
-}
-
-async function chargerPlanningAdmin() {
-  const d = await demanderJson(`api/admin/planning.php?user_id=${encodeURIComponent(employePlanningId)}`);
-  const liste = (titre, lignes) => `<h3>${titre}</h3><ul class="activite-liste">${lignes.length ? lignes.join('') : '<li>Aucun élément.</li>'}</ul>`;
-  document.querySelector('#planning-contenu').innerHTML =
-    liste('Horaires à venir', d.shifts.map((s) => ligneAdmin('shift', s.id, `${echapperHtml(s.shift_date)} : ${echapperHtml(s.start_time)}-${echapperHtml(s.end_time)} ${echapperHtml(s.note || '')}`))) +
-    liste('Tâches à venir', d.tasks.map((t) => ligneAdmin('task', t.id, `${echapperHtml(t.task_date)} : ${echapperHtml(t.title)} ${Number(t.is_done) ? '(faite)' : ''}`))) +
-    liste('Fiches de paie', d.payslips.map((f) => ligneAdmin('payslip', f.id, `${echapperHtml(f.period)} : ${echapperHtml(f.hours)} h, brut ${echapperHtml(f.gross)} €, net ${echapperHtml(f.net)} €`))) +
-    liste('Comptes rendus', d.reports.map((r) => `<li>${echapperHtml(r.report_date)} : ${echapperHtml(r.content)}</li>`));
-}
-
-if (employeeForm) {
-  const formulaireSemaine = document.querySelector('#week-form');
-  formulaireSemaine.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const retour = document.querySelector('#week-feedback');
-    const alertes = document.querySelector('#week-warnings');
-    try {
-      const donnees = { date: formulaireSemaine.elements.date.value, type: 'week' };
-      const result = await demanderJson('api/admin/planning.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(donnees) });
-      retour.textContent = result.message;
-      retour.removeAttribute('data-state');
-      alertes.innerHTML = result.warnings.map((alerte) => '<li>' + echapperHtml(alerte) + '</li>').join('');
-      if (result.warnings.length) retour.textContent += ' Postes non couverts (effectif ou règles de travail insuffisants) :';
-    } catch (error) {
-      retour.textContent = error.message;
-      retour.dataset.state = 'error';
-      alertes.innerHTML = '';
-    }
-  });
-
-  [['#shift-form', 'shift'], ['#task-form', 'task'], ['#payslip-form', 'payslip']].forEach(([selecteur, type]) => {
-    const formulaire = document.querySelector(selecteur);
-    formulaire.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const retour = document.querySelector('#planning-feedback');
-      try {
-        const donnees = { ...Object.fromEntries(new FormData(formulaire)), type, user_id: employePlanningId };
-        const result = await demanderJson('api/admin/planning.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(donnees) });
-        retour.textContent = result.message;
-        retour.removeAttribute('data-state');
-        formulaire.reset();
-        await chargerPlanningAdmin();
-      } catch (error) {
-        retour.textContent = error.message;
-        retour.dataset.state = 'error';
-      }
-    });
-  });
-  document.querySelector('#planning-contenu').addEventListener('click', async (event) => {
-    const bouton = event.target.closest('[data-planning-delete]');
-    if (!bouton || !window.confirm('Supprimer cet élément ?')) return;
-    try {
-      await demanderJson('api/admin/planning.php', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: bouton.dataset.planningDelete, id: bouton.dataset.id }) });
-      await chargerPlanningAdmin();
     } catch (error) {
       window.alert(error.message);
     }

@@ -17,6 +17,11 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 - Statistiques par menu (réservations et chiffre d'affaires, filtres menu et période) ajoutées sur la page Activité de l'administrateur. Elles utilisent MongoDB.
 - `sitemap.xml` : les adresses `localhost` ont été remplacées par l'adresse publique.
 - Pages privées (administration, espace employé) : `noindex` ajouté pour qu'elles n'apparaissent pas dans Google.
+- **Menus et horaires** (nouvelle page dmin-menus.html, accessible aux employés et à l'administrateur) : ajouter, modifier, supprimer un menu avec ses entrées, plats, desserts, allergènes, conditions et stock ; modifier les horaires affichés dans le pied de page.
+- **Comptes employés** (nouvelle page dmin-comptes.html, administrateur) : créer un compte (e-mail envoyé sans le mot de passe), désactiver, réactiver ou supprimer.
+- **Espace client** : modification d'une réservation (tout sauf le menu) tant qu'elle n'est pas acceptée, et formulaire d'avis (note de 1 à 5 et commentaire) sur une réservation terminée.
+- **E-mails de statut** : statut « en attente du retour de matériel » (600 € après 10 jours ouvrés) et statut « terminée » (invitation à donner un avis).
+- Espace employé : accès direct aux réservations, aux avis et aux menus.
 - README, DEPLOYMENT et documents `docs/` réécrits en français simple et mis à jour (nombre de personnes, comptes, planning, MongoDB).
 
 ## À faire avant l'envoi (hors code)
@@ -31,8 +36,8 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 
 ## Écarts avec le sujet (à connaître pour l'oral)
 
-- Le site a évolué vers une **réservation sur place** (60 personnes maximum par service, 10 par réservation) au lieu d'une commande avec livraison ; la remise de 10 %, les frais de livraison et le prêt de matériel du sujet ne sont donc plus mis en avant.
-- Pas d'écran pour créer, modifier ou supprimer les **menus, plats et horaires** (les menus sont dans `sql/schema.sql`).
-- Plus d'écran pour **créer ou désactiver des comptes employés** : un compte employé unique est fourni.
-- Le filtre des réservations par statut et par client a été retiré de la page administrateur, à ta demande.
-- Les anciennes routes `api/admin/employees.php` et `api/admin/planning.php` existent toujours mais ne sont plus reliées à une page.
+- Le site a évolué vers une **réservation sur place** (60 personnes maximum par service, 10 par réservation) au lieu d'une commande avec livraison : la remise de 10 %, les frais de livraison au kilomètre et le prêt de matériel ne sont donc plus mis en avant (les statuts et l'e-mail de matériel existent toujours).
+- **Galerie d'images** d'un menu : une seule image par menu.
+- **Horaires** : le pied de page est modifiable ; les créneaux de réservation restent ceux fixés dans le code (11h30-14h00 / 18h00-22h00 en semaine, 10h30-15h00 / 18h00-22h00 le week-end).
+- Le filtre des réservations par statut et par client a été retiré de la page administrateur, à la demande de la cliente. Le sujet le demande : à remettre si le jury l'exige.
+- Un seul **compte employé** partagé (`employe`) est fourni pour la démonstration ; l'administrateur peut en créer d'autres depuis « 7. Comptes employés ».

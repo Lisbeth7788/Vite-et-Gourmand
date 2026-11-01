@@ -35,7 +35,8 @@ if ($method === 'POST') {
         bin2hex(random_bytes(16)), trim($data['first_name']), trim($data['last_name']),
         trim($data['phone']), $email, password_hash((string) $data['password'], PASSWORD_DEFAULT), $job
     ]);
-    jsonResponse(['message' => 'Compte employé créé.'], 201);
+    @mail($email, 'Votre compte employé Vite et Gourmand', 'Bonjour ' . trim($data['first_name']) . ",\n\nUn compte employé a été créé pour vous (identifiant : $email). Par sécurité, le mot de passe n'est pas indiqué dans ce message : demandez-le à l'administrateur.\n\nVite et Gourmand");
+    jsonResponse(['message' => 'Compte employé créé. Un e-mail lui est envoyé, sans le mot de passe.'], 201);
 }
 
 if ($method === 'PATCH') {
