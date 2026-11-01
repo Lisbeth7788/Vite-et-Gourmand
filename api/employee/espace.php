@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../config/planning.php';
 $user = requireRole(['employe', 'admin']);
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
@@ -12,17 +13,6 @@ if ($method === 'PATCH') {
     $update = $pdo->prepare('UPDATE employee_tasks SET is_done = ? WHERE id = ? AND user_id = ?');
     $update->execute([filter_var($data['done'], FILTER_VALIDATE_BOOLEAN) ? 1 : 0, (int) $data['task_id'], $user['id']]);
     jsonResponse(['message' => 'Tâche mise à jour.']);
-}
-
-if ($method === 'POST') {
-    $data = requestData();
-    $content = trim((string) ($data['content'] ?? ''));
-    if ($content === '' || mb_strlen($content) > 2000) {
-        jsonResponse(['error' => 'Le compte rendu est obligatoire (2000 caractères maximum).'], 400);
-    }
-    $insert = $pdo->prepare('INSERT INTO employee_reports (user_id, report_date, content) VALUES (?, CURDATE(), ?)');
-    $insert->execute([$user['id'], $content]);
-    jsonResponse(['message' => 'Compte rendu enregistré.'], 201);
 }
 
 if ($method !== 'GET') {
@@ -52,14 +42,16 @@ $tasks = $pdo->prepare(
 );
 $tasks->execute([$targetId]);
 
-$reports = $pdo->prepare('SELECT report_date, content FROM employee_reports WHERE user_id = ? ORDER BY created_at DESC LIMIT 20');
-$reports->execute([$targetId]);
-
-$payslips = $pdo->prepare('SELECT period, hours, gross, net, note FROM payslips WHERE user_id = ? ORDER BY period DESC LIMIT 24');
-$payslips->execute([$targetId]);
-
 $weekStart = new DateTimeImmutable(preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($_GET['week'] ?? '')) ? $_GET['week'] : 'today');
 $weekStart = $weekStart->modify('monday this week');
+
+// Le planning de la semaine est créé automatiquement s'il n'existe pas encore.
+$count = $pdo->prepare("SELECT COUNT(*) FROM employee_shifts s JOIN users u ON u.id = s.user_id WHERE u.role = 'employe' AND u.is_active = 1 AND s.shift_date BETWEEN ? AND ?");
+$count->execute([$weekStart->format('Y-m-d'), $weekStart->modify('+6 days')->format('Y-m-d')]);
+if ((int) $count->fetchColumn() === 0) {
+    generateWeek($pdo, $weekStart->format('Y-m-d'));
+}
+
 $team = $pdo->prepare(
     "SELECT u.id AS user_id, u.first_name, u.job_title, s.shift_date, SUBSTRING(s.start_time, 1, 5) AS start_time, SUBSTRING(s.end_time, 1, 5) AS end_time
      FROM users u LEFT JOIN employee_shifts s ON s.user_id = u.id AND s.shift_date BETWEEN ? AND ?
@@ -74,7 +66,5 @@ jsonResponse([
     'weekStart' => $weekStart->format('Y-m-d'),
     'team' => $team->fetchAll(),
     'shifts' => $shifts->fetchAll(),
-    'tasks' => $tasks->fetchAll(),
-    'reports' => $reports->fetchAll(),
-    'payslips' => $payslips->fetchAll()
+    'tasks' => $tasks->fetchAll()
 ]);

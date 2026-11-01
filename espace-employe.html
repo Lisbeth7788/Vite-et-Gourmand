@@ -20,15 +20,8 @@
       <a class="button button-small bouton-secondaire" href="admin.html">← Retour à l'espace administrateur</a>
       <div class="champ-formulaire"><label for="employe-select">Voir l'espace de</label><select id="employe-select"></select></div>
     </div>
-    <nav class="admin-nav" aria-label="Sections de mon espace">
-      <ol>
-        <li><a href="#planning" data-section="planning" aria-current="page">Planning</a></li>
-        <li><a href="#documents" data-section="documents">Documents</a></li>
-      </ol>
-    </nav>
     <section id="section-planning" class="form-section" aria-labelledby="titre-planning">
-      <h2 id="titre-planning">Mon planning</h2>
-      <h3>Planning de l'équipe</h3>
+      <h2 id="titre-planning">Planning de l'équipe</h2>
       <div class="semaine-navigation">
         <button class="button button-small bouton-secondaire" type="button" id="semaine-precedente">← Semaine précédente</button>
         <strong id="semaine-titre"></strong>
@@ -39,13 +32,8 @@
       <h3>Mes horaires</h3><ul id="planning-horaires" class="activite-liste"></ul>
       <h3>Tâches</h3><ul id="planning-taches" class="activite-liste"></ul>
     </section>
-    <section id="section-documents" class="form-section" hidden aria-labelledby="titre-documents">
-      <h2 id="titre-documents">Documents</h2>
-      <h3>Fiches de paie</h3>
-      <div class="table-responsive"><table><thead><tr><th>Période</th><th>Heures</th><th>Brut</th><th>Net</th><th>Note</th></tr></thead><tbody id="payslip-list"></tbody></table></div>
-    </section>
   </main>
   <script src="js/script.js?v=60320912"></script>
-  <script type="module" src="js/employee.js?v=112a0a23"></script>
+  <script type="module" src="js/employee.js?v=82bcc14b"></script>
 </body>
 </html>

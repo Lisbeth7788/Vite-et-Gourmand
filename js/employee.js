@@ -1,5 +1,4 @@
 const apiEspace = 'api/employee/espace.php';
-const sectionsEmploye = ['planning', 'documents'];
 
 function texte(valeur) {
   const span = document.createElement('span');
@@ -9,14 +8,6 @@ function texte(valeur) {
 
 function dateFr(iso) {
   return new Date(`${iso}T12:00:00`).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
-}
-
-function afficherSectionEmploye() {
-  const nom = sectionsEmploye.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'planning';
-  sectionsEmploye.forEach((id) => { document.querySelector(`#section-${id}`).hidden = id !== nom; });
-  document.querySelectorAll('[data-section]').forEach((lien) => {
-    if (lien.dataset.section === nom) lien.setAttribute('aria-current', 'page'); else lien.removeAttribute('aria-current');
-  });
 }
 
 function remplir(selecteur, lignes, vide) {
@@ -91,9 +82,6 @@ async function chargerEspaceEmploye() {
   afficherEquipe(d);
   remplir('#planning-horaires', d.shifts.map((s) => ligneHoraire(s, d.today)), 'Aucun horaire prévu.');
   remplir('#planning-taches', d.tasks.map((t) => ligneTache(t, d.today)), 'Aucune tâche prévue.');
-  document.querySelector('#payslip-list').innerHTML = d.payslips.length
-    ? d.payslips.map((f) => `<tr><td>${texte(f.period)}</td><td>${texte(f.hours)}</td><td>${texte(f.gross)} €</td><td>${texte(f.net)} €</td><td>${texte(f.note)}</td></tr>`).join('')
-    : '<tr><td colspan="5">Aucune fiche de paie.</td></tr>';
 }
 
 document.addEventListener('change', async (event) => {
@@ -133,7 +121,5 @@ document.querySelector('#semaine-suivante').addEventListener('click', async () =
   await chargerEspaceEmploye();
 });
 
-window.addEventListener('hashchange', afficherSectionEmploye);
-afficherSectionEmploye();
 await initialiserChoixEmploye();
 await chargerEspaceEmploye();
