@@ -1670,10 +1670,10 @@ main > :last-child {
 }
 
 .opening-hours dl div {
-  display: flex;
-  flex-wrap: wrap;
+  align-items: start;
+  display: grid;
   gap: 0.25rem 0.75rem;
-  justify-content: center;
+  grid-template-columns: minmax(5rem, auto) minmax(0, 1fr);
 }
 
 .opening-hours dt {
@@ -1688,7 +1688,15 @@ main > :last-child {
 }
 
 .opening-hours dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.75rem;
+  min-width: 0;
   margin: 0;
+}
+
+ .opening-hours dd span {
+  white-space: nowrap;
 }
 
 .site-footer nav {
@@ -1704,7 +1712,7 @@ main > :last-child {
   padding: 0.25rem 0;
 }
 
-@media (min-width: 761px) {
+@media (min-width: 1000px) {
   .site-footer {
     align-items: center;
     flex-direction: row;
@@ -1715,8 +1723,10 @@ main > :last-child {
   }
 
   .site-footer .opening-hours {
+    flex: 1 1 28rem;
     margin-inline: 0;
     max-width: none;
+    min-width: 0;
     text-align: left;
     width: auto;
   }
