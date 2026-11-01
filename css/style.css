@@ -2116,3 +2116,20 @@ main > .page-intro ~ .contact-form-panel {
 .message-formulaire:empty{display:none}
 .message-formulaire:not([data-state='error']){background:none;border:0;padding:0;margin:.75rem 0 0;justify-content:center;text-align:center;color:var(--ink)}
 .message-formulaire:not([data-state='error'])::before{display:none}
+
+/* Page réservation : style moderne */
+.order-page .page-intro { text-align: center; }
+.order-page .order-layout { gap: 1.5rem; max-width: 1000px; padding-top: 1rem; }
+.order-page .form-section, .order-page .order-summary { background: #fff; border: 0; border-radius: 18px; box-shadow: 0 8px 30px rgba(60, 40, 20, 0.08); padding: clamp(1.25rem, 3vw, 2rem); }
+.order-page .form-section h2, .order-page .order-summary h2 { font-size: 1.35rem; margin: 0 0 1rem; }
+.order-page .form-section { display: grid; gap: 1rem; }
+.order-page .champ-formulaire label { color: var(--ink); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; }
+.order-page .champ-formulaire input, .order-page .champ-formulaire select { background: #faf7f2; border: 1px solid transparent; border-radius: 12px; font-size: 1rem; padding: 0.7rem 0.9rem; transition: border-color 0.2s, box-shadow 0.2s, background 0.2s; width: 100%; }
+.order-page .champ-formulaire input:focus, .order-page .champ-formulaire select:focus { background: #fff; border-color: var(--terracotta); box-shadow: 0 0 0 3px rgba(154, 91, 56, 0.15); outline: none; }
+.order-page .champ-formulaire small { color: #7a6c5d; display: block; font-size: 0.78rem; margin-top: 0.3rem; }
+.order-page form > .button, .order-page .actions-paiement .button { border-radius: 999px; font-size: 1rem; padding: 0.8rem 1.5rem; width: 100%; }
+.order-page .actions-paiement { display: grid; gap: 0.6rem; }
+.order-page .order-summary dl { margin: 0; }
+.order-page .order-summary dl div { border-bottom: 1px dashed var(--line); }
+.order-page .order-summary .summary-total { border-bottom: 0; font-size: 1.2rem; padding-top: 1rem; }
+.order-page #lien-retour { border-radius: 999px; font-size: 0.85rem; padding: 0.35rem 1rem; }
