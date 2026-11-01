@@ -3,6 +3,7 @@ const messageList = document.querySelector('#message-list');
 const formulaireFiltreCommandes = document.querySelector('#order-filter-form');
 const orderList = document.querySelector('#order-list');
 const reviewList = document.querySelector('#review-list');
+const activityList = document.querySelector('#activity-list');
 
 const statusLabels = {
   pending: 'En attente',
@@ -69,6 +70,20 @@ async function chargerAvis() {
   reviewList.innerHTML = `<table><caption>Avis reçus</caption><thead><tr><th>Date</th><th>Note</th><th>Avis</th><th>Statut</th><th>Action</th></tr></thead><tbody>${avis.map((review) => `<tr><td>${echapperHtml(review.created_at)}</td><td>${'★'.repeat(Number(review.rating))}</td><td>${echapperHtml(review.comment)}</td><td>${statuts[review.status] || echapperHtml(review.status)}</td><td><button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="approved">Publier</button> <button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="rejected">Refuser</button></td></tr>`).join('')}</tbody></table>`;
 }
 
+async function chargerActivite() {
+  const data = await demanderJson('api/admin/activity.php');
+  const types = { inscription: 'Inscription', reservation: 'Réservation', paiement: 'Paiement', statut: 'Suivi', avis: 'Avis' };
+  document.querySelector('#activity-summary').textContent =
+    `${data.summary.payments} paiement(s) reçu(s) pour ${Number(data.summary.total_paid).toFixed(2)} € · ${data.summary.reservations} réservation(s) actives.`;
+  const days = document.querySelector('#activity-days');
+  days.innerHTML = data.days.length
+    ? `<table><caption>Personnes réservées par jour</caption><thead><tr><th>Jour</th><th>Personnes</th><th>Places restantes</th></tr></thead><tbody>${data.days.map((day) => `<tr><td>${echapperHtml(day.service_date)}</td><td>${echapperHtml(day.people)} / ${data.capacity}</td><td>${Math.max(0, data.capacity - Number(day.people))}</td></tr>`).join('')}</tbody></table>`
+    : 'Aucune réservation à venir.';
+  activityList.innerHTML = data.events.length
+    ? `<table><caption>Actions des clients, de la plus récente à la plus ancienne</caption><thead><tr><th>Date</th><th>Action</th><th>Client</th><th>Détail</th><th>Montant</th></tr></thead><tbody>${data.events.map((event) => `<tr><td>${echapperHtml(event.event_at)}</td><td>${echapperHtml(types[event.type] || event.type)}</td><td>${echapperHtml(event.client)}<br>${echapperHtml(event.email)}</td><td>${echapperHtml(event.detail)}</td><td>${event.amount === null ? '' : `${Number(event.amount).toFixed(2)} €`}</td></tr>`).join('')}</tbody></table>`
+    : 'Aucune activité enregistrée.';
+}
+
 async function initialiserAdministration() {
   try {
     const session = await demanderJson('api/auth/session.php');
@@ -90,8 +105,9 @@ async function initialiserAdministration() {
     if (messageList) await chargerMessages();
     if (orderList) await chargerCommandes();
     if (reviewList) await chargerAvis();
+    if (activityList) await chargerActivite();
   } catch (error) {
-    (messageList || orderList || reviewList).textContent = error.message;
+    (messageList || orderList || reviewList || activityList).textContent = error.message;
   }
 }
 
