@@ -35,7 +35,8 @@ $profile = [
     'phone' => $user['phone'],
     'email' => $user['email'],
     'address' => $user['address'],
-    'role' => $space
+    'role' => $space,
+    'accountRole' => $user['role']
 ];
 $_SESSION['user'] = $profile;
 

@@ -22,6 +22,43 @@ async function actualiserLienConnexion() {
       return;
     }
     const liste = document.querySelector('.main-navigation ul');
+    if (liste && session.data?.canSwitchExperience && !liste.querySelector('.experience-switch')) {
+      const element = document.createElement('li');
+      element.className = 'experience-switch';
+      const label = document.createElement('span');
+      label.textContent = 'Expérience : ';
+      element.append(label);
+      [
+        ['client', 'Client', 'index.html'],
+        ['employe', 'Employé', 'espace-employe.html'],
+        ['admin', 'Administrateur', 'admin.html']
+      ].forEach(([space, name, page]) => {
+        const link = document.createElement('a');
+        link.href = page;
+        link.textContent = name;
+        if (role === space) link.setAttribute('aria-current', 'page');
+        link.addEventListener('click', async (event) => {
+          event.preventDefault();
+          link.setAttribute('aria-busy', 'true');
+          try {
+            const response = await fetch('api/auth/switch-space.php', {
+              method: 'POST',
+              credentials: 'same-origin',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ space })
+            });
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || 'Le changement d’espace a échoué.');
+            window.location.href = page;
+          } catch (error) {
+            window.alert(error.message || 'Le changement d’espace a échoué.');
+            link.removeAttribute('aria-busy');
+          }
+        });
+        element.append(link);
+      });
+      liste.append(element);
+    }
     if (liste && role && role !== 'admin' && !liste.querySelector('.badge-role')) {
       const nomsRoles = { client: 'Client', employe: 'Employé', admin: 'Administrateur' };
       const badge = document.createElement('li');
