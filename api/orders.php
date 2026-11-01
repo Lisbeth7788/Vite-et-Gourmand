@@ -41,6 +41,17 @@ if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people
     jsonResponse(['error' => 'Le menu ou le nombre de personnes est invalide (10 personnes maximum par réservation).'], 400);
 }
 
+$capacityQuery = $pdo->prepare("SELECT COALESCE(SUM(people), 0) FROM orders WHERE service_date = ? AND status <> 'cancelled' FOR UPDATE");
+$capacityQuery->execute([$data['date']]);
+$alreadyBooked = (int) $capacityQuery->fetchColumn();
+if ($alreadyBooked + $people > 30) {
+    $pdo->rollBack();
+    $remaining = max(0, 30 - $alreadyBooked);
+    jsonResponse(['error' => $remaining > 0
+        ? "Capacité quotidienne atteinte : il ne reste que $remaining place(s) ce jour-là (30 personnes maximum par jour)."
+        : 'Ce jour est complet (30 personnes maximum par jour). Merci de choisir une autre date.'], 409);
+}
+
 $menuTotal = (float) $menu['price'] * $people;
 $discount = 0;
 $delivery = 0;
