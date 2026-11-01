@@ -33,7 +33,6 @@ function travaille(personne, semaine, jour) {
 }
 
 const groupes = [
-  ['Direction', ['Patronne', 'Patron']],
   ['Cuisine', ['Chef', 'Sous-chef']],
   ['Salle', ['Serveuse', 'Serveur']],
   ['Plonge', ['Plongeur', 'Plongeuse']]
