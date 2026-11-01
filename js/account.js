@@ -28,6 +28,27 @@ function echapperTexte(value) {
   return String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
 }
 
+function afficherActivite(activite) {
+  if (!activite.length) {
+    activiteCompte.textContent = 'Aucune activité enregistrée.';
+    return;
+  }
+  const lignes = activite.map((evenement, index) => {
+    const detail = evenement.type === 'suivi'
+      ? evenement.detail.replace(/ : (\w+)$/, (_, statut) => ` : ${libellesStatuts[statut] || statut}`)
+      : evenement.detail;
+    const [jour, heure = ''] = String(evenement.event_at).split(' ');
+    const montant = evenement.amount === null ? '' : ` · ${Number(evenement.amount).toFixed(2)} €`;
+    return `<li class="activite-ligne"${index >= 8 ? ' hidden data-extra' : ''}><span class="activite-type">${echapperTexte(libellesActivite[evenement.type] || evenement.type)}</span><span class="activite-detail">${echapperTexte(detail)}${montant}</span><time class="activite-date">${echapperTexte(jour)} ${echapperTexte(heure.slice(0, 5))}</time></li>`;
+  }).join('');
+  const plus = activite.length > 8 ? `<button class="button button-small activite-plus" type="button">Voir plus (${activite.length - 8})</button>` : '';
+  activiteCompte.innerHTML = `<ul class="activite-liste">${lignes}</ul>${plus}`;
+  activiteCompte.querySelector('.activite-plus')?.addEventListener('click', (event) => {
+    activiteCompte.querySelectorAll('[data-extra]').forEach((ligne) => { ligne.hidden = false; });
+    event.currentTarget.remove();
+  });
+}
+
 async function chargerCompte() {
   try {
     const session = await demanderCompte('api/auth/session.php');
@@ -43,9 +64,7 @@ async function chargerCompte() {
     document.querySelector('#profile-avatar').textContent =
       `${(profile.first_name || '?')[0]}${(profile.last_name || '')[0] || ''}`.toUpperCase();
     const activite = await demanderCompte('api/user/activity.php');
-    activiteCompte.innerHTML = activite.length
-      ? `<table><caption>Mes actions, de la plus récente à la plus ancienne</caption><thead><tr><th>Date</th><th>Action</th><th>Détail</th><th>Montant</th></tr></thead><tbody>${activite.map((evenement) => `<tr><td>${echapperTexte(evenement.event_at)}</td><td>${echapperTexte(libellesActivite[evenement.type] || evenement.type)}</td><td>${echapperTexte(evenement.type === 'suivi' ? evenement.detail.replace(/ : (\w+)$/, (_, statut) => ` : ${libellesStatuts[statut] || statut}`) : evenement.detail)}</td><td>${evenement.amount === null ? '' : `${Number(evenement.amount).toFixed(2)} €`}</td></tr>`).join('')}</tbody></table>`
-      : 'Aucune activité enregistrée.';
+    afficherActivite(activite);
     const orders = await demanderCompte('api/user/orders.php');
     if (!orders.length) {
       commandesCompte.textContent = 'Aucune commande enregistrée.';
