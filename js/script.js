@@ -13,6 +13,7 @@ async function actualiserLienConnexion() {
     const session = await chargerSession();
     if (!session.ok) return;
     const role = session.data?.user?.role;
+    if (document.body.dataset.modeEmploye !== undefined) return;
     const liste = document.querySelector('.main-navigation ul');
     if (liste && role === 'admin' && !liste.querySelector('.lien-gestion')) {
       const element = document.createElement('li');
