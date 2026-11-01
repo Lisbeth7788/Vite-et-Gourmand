@@ -1,5 +1,4 @@
 let sessionPromise;
-const initialisations = [];
 
 function chargerSession() {
   sessionPromise ??= fetch('api/auth/session.php', { credentials: 'same-origin' })
@@ -128,7 +127,6 @@ async function actualiserLienConnexion() {
 }
 
 if (panneauConnexion) panneauConnexion.hidden = true;
-initialisations.push(actualiserLienConnexion());
 
 const orderForm = document.querySelector('#order-form');
 const menuChoice = document.querySelector('#order-menu');
@@ -263,8 +261,6 @@ if (orderForm) {
     if (email) email.value = user.email || '';
     phone?.setAttribute('value', user.phone || '');
   }
-  initialisations.push(verifierSessionCommande());
-
   const orderQuery = new URLSearchParams(window.location.search);
   const requestedMenu = orderQuery.get('menu');
   if (requestedMenu && [...menuChoice.options].some((option) => option.value === requestedMenu)) {
@@ -318,6 +314,7 @@ if (orderForm) {
     await submitFormToApi(event, orderForm, 'api/orders.php', 'Votre demande de commande a bien été enregistrée.');
   });
   updateOrderSummary();
+  await verifierSessionCommande();
 }
 
 const registerForm = document.querySelector('#register-form');
@@ -358,7 +355,7 @@ if (approvedReviews) {
       if (emptyState) emptyState.textContent = 'Les avis publiés sont momentanément indisponibles.';
     }
   }
-  initialisations.push(chargerAvisApprouves());
+  await chargerAvisApprouves();
 }
 
 function mettreAJourEtoiles(choixNote, note) {
@@ -562,5 +559,5 @@ async function afficherHorairesPiedDePage() {
   }
 }
 
-initialisations.push(afficherHorairesPiedDePage());
-await Promise.all(initialisations);
+await actualiserLienConnexion();
+await afficherHorairesPiedDePage();
