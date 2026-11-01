@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Planning de l'équipe - Espace de gestion - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=e4d2f6e3">
+  <link rel="stylesheet" href="css/style.css?v=b4dca317">
 </head>
 <body data-admin-only>
   <header class="site-header">
@@ -42,7 +42,9 @@
         <li><span class="pastille-service">Service</span> 11h-14h30 et 18h-21h30 (7 h)</li>
         <li><span class="pastille-repos">Repos</span> jour de repos</li>
       </ul>
-      <div id="planning-simule"></div>
+      <p class="aide-planning">Cliquez sur une case pour passer de « Service » à « Repos », ou sur un prénom pour le modifier. Les employés voient le changement aussitôt.</p>
+      <p id="planning-retour" class="message-formulaire" role="status"></p>
+      <div id="planning-simule" data-edition></div>
     </section>  </main>
 
   <footer class="site-footer">
@@ -57,7 +59,7 @@
     </nav>
   </footer>
 
-  <script type="module" src="js/planning-equipe.js?v=2ee30adc"></script>
+  <script type="module" src="js/planning-equipe.js?v=2bde6937"></script>
   <script src="js/admin.js?v=8c3ccf02"></script>
 </body>
 </html>

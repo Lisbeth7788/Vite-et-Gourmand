@@ -2244,3 +2244,8 @@ ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.
 .etat-complet{background:#f8d7d3;color:#a02a1d}
 
 ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 1.5rem;margin:0 auto 1.5rem}
+
+.case-planning, .nom-planning { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; }
+.case-planning:hover .pastille-service, .case-planning:hover .pastille-repos { outline: 2px solid currentColor; }
+.nom-planning { text-decoration: underline dotted; }
+.aide-planning { text-align: center; }
