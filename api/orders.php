@@ -48,13 +48,10 @@ $capacityQuery = $pdo->prepare(
 );
 $capacityQuery->execute([$data['date'], $isLunch ? 1 : 0]);
 $alreadyBooked = (int) $capacityQuery->fetchColumn();
-$serviceName = $isLunch ? 'le service du midi' : 'le service du soir';
+$serviceName = $isLunch ? 'midi' : 'soir';
 if ($alreadyBooked + $people > 60) {
     $pdo->rollBack();
-    $remaining = max(0, 60 - $alreadyBooked);
-    jsonResponse(['error' => $remaining > 0
-        ? "Capacité atteinte pour $serviceName : il ne reste que $remaining place(s) (60 personnes maximum par service)."
-        : "Le service est complet pour $serviceName (60 personnes maximum par service). Merci de choisir un autre créneau ou une autre date."], 409);
+    jsonResponse(['error' => "Ce créneau du $serviceName n’est plus disponible pour cette date. Merci de choisir un autre créneau ou une autre date."], 409);
 }
 
 $menuTotal = (float) $menu['price'] * $people;
