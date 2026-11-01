@@ -2148,3 +2148,18 @@ main > .page-intro ~ .contact-form-panel {
 .planning-equipe .repos{color:#b5a898}
 .planning-equipe .ligne-moi{background:#f6ece4}
 .planning-legende{color:#7a6c5d;font-size:.8rem;text-align:center}
+
+.planning-equipe{width:100%;border-collapse:separate;border-spacing:0;font-size:.9rem;text-align:center;background:#fff;border:1px solid var(--line,#e6dccf);border-radius:12px;overflow:hidden}
+.planning-equipe thead th{background:#3b2f27;color:#fff;padding:.6rem .4rem;font-weight:600}
+.planning-equipe thead th:first-child{text-align:left;padding-left:1rem}
+.planning-equipe td,.planning-equipe tbody th{padding:.55rem .4rem;border-top:1px solid #f0e8dd;vertical-align:middle}
+.planning-equipe tbody th{text-align:left;padding-left:1rem;white-space:nowrap}
+.planning-equipe tbody th strong{display:block}
+.planning-equipe tbody th small{color:#7a6c5d;font-weight:400}
+.planning-equipe .groupe-equipe th{background:#f6ece4;color:var(--terracotta,#b5532f);text-transform:uppercase;letter-spacing:.06em;font-size:.75rem;padding:.4rem 1rem;text-align:left}
+.planning-equipe .ligne-moi th,.planning-equipe .ligne-moi td{background:#fff3c4}
+.planning-equipe .total-heures{font-weight:700;white-space:nowrap}
+.pastille-service,.pastille-repos{display:inline-block;padding:.2rem .6rem;border-radius:999px;font-size:.78rem;font-weight:600}
+.pastille-service{background:#dff1e1;color:#1f6b35}
+.pastille-repos{background:#eee9e3;color:#8a7d70}
+ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.4rem;text-align:left;font-size:.9rem}

@@ -8,7 +8,6 @@ function texte(valeur) {
 }
 
 const jours = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
-const serviceComplet = '11h-14h30<br>18h-21h30';
 const heuresService = 7;
 
 // Chaque poste a deux personnes qui alternent d'une semaine à l'autre (35 h maximum, 5 jours maximum).
@@ -33,20 +32,32 @@ function travaille(personne, semaine, jour) {
   return groupe.includes(jour);
 }
 
+const groupes = [
+  ['Direction', ['Patronne', 'Patron']],
+  ['Cuisine', ['Chef', 'Sous-chef']],
+  ['Salle', ['Serveuse', 'Serveur']],
+  ['Plonge', ['Plongeur', 'Plongeuse']]
+];
+
+function ligneEquipe(personne, semaine, prenom) {
+  let total = 0;
+  const cellules = jours.map((_, jour) => {
+    if (!travaille(personne, semaine, jour)) return '<td><span class="pastille-repos">Repos</span></td>';
+    total += heuresService;
+    return '<td><span class="pastille-service">Service</span></td>';
+  }).join('');
+  const heures = personne.toujours ? 'Tous les services' : total + ' h';
+  const classe = personne.nom === prenom ? ' class="ligne-moi"' : '';
+  return '<tr' + classe + '><th scope="row"><strong>' + texte(personne.nom) + '</strong><small>' + texte(personne.poste) + '</small></th>' + cellules + '<td class="total-heures">' + heures + '</td></tr>';
+}
+
 function tableauSemaine(semaine, prenom) {
   const entetes = jours.map((j) => '<th>' + j + '</th>').join('');
-  const lignes = equipe.map((personne) => {
-    let total = 0;
-    const cellules = jours.map((_, jour) => {
-      if (!travaille(personne, semaine, jour)) return '<td><span class="repos">Repos</span></td>';
-      total += heuresService;
-      return '<td>' + serviceComplet + '</td>';
-    }).join('');
-    const heures = personne.toujours ? 'Présent à chaque service' : total + ' h';
-    const classe = personne.nom === prenom ? ' class="ligne-moi"' : '';
-    return '<tr' + classe + '><th scope="row">' + texte(personne.nom) + '<br><small>' + texte(personne.poste) + '</small></th>' + cellules + '<td><strong>' + heures + '</strong></td></tr>';
+  const corps = groupes.map(([titre, postes]) => {
+    const lignes = equipe.filter((p) => postes.includes(p.poste)).map((p) => ligneEquipe(p, semaine, prenom)).join('');
+    return '<tr class="groupe-equipe"><th colspan="9">' + titre + '</th></tr>' + lignes;
   }).join('');
-  return '<h3>Semaine ' + (semaine === 0 ? 'A' : 'B') + '</h3><div class="table-responsive"><table class="planning-equipe"><thead><tr><th>Équipe</th>' + entetes + '<th>Total</th></tr></thead><tbody>' + lignes + '</tbody></table></div>';
+  return '<h3>Semaine ' + (semaine === 0 ? 'A' : 'B') + '</h3><div class="table-responsive"><table class="planning-equipe"><thead><tr><th>Équipe</th>' + entetes + '<th>Total</th></tr></thead><tbody>' + corps + '</tbody></table></div>';
 }
 
 const libellesPostes = { patron: 'Patron', chef: 'Chef', 'sous-chef': 'Sous-chef', commis: 'Commis', serveur: 'Serveur', plongeur: 'Plongeur', livreur: 'Livreur' };
