@@ -40,8 +40,8 @@ function texte(valeur) {
 function cellule(p, semaine, jour) {
   const actif = p.semaines[semaine][jour];
   const pastille = actif ? '<span class="pastille-service">Service</span>' : '<span class="pastille-repos">Repos</span>';
-  if (!modeEdition || p.toujours) return '<td>' + pastille + '</td>';
-  return '<td><button type="button" class="case-planning" data-nom="' + texte(p.nom) + '" data-semaine="' + semaine + '" data-jour="' + jour + '" title="Cliquer pour changer">' + pastille + '</button></td>';
+  if (!modeEdition || p.toujours) return '<td data-label="' + jours[jour] + '">' + pastille + '</td>';
+  return '<td data-label="' + jours[jour] + '"><button type="button" class="case-planning" data-nom="' + texte(p.nom) + '" data-semaine="' + semaine + '" data-jour="' + jour + '" title="Cliquer pour changer">' + pastille + '</button></td>';
 }
 
 function ligne(p, semaine) {
@@ -49,7 +49,7 @@ function ligne(p, semaine) {
   const heures = p.toujours ? 'Tous les services' : total + ' h';
   const nom = modeEdition ? '<button type="button" class="nom-planning" data-nom="' + texte(p.nom) + '" title="Cliquer pour renommer">' + texte(p.nom) + '</button>' : texte(p.nom);
   const cellules = jours.map((_, j) => cellule(p, semaine, j)).join('');
-  return '<tr><th scope="row"><strong>' + nom + '</strong><small>' + texte(p.poste) + '</small></th>' + cellules + '<td class="total-heures">' + heures + '</td></tr>';
+  return '<tr><th scope="row"><strong>' + nom + '</strong><small>' + texte(p.poste) + '</small></th>' + cellules + '<td class="total-heures" data-label="Total">' + heures + '</td></tr>';
 }
 
 function tableauSemaine(semaine) {
