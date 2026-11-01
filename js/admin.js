@@ -4,6 +4,8 @@ const formulaireFiltreCommandes = document.querySelector('#order-filter-form');
 const orderList = document.querySelector('#order-list');
 const reviewList = document.querySelector('#review-list');
 const activityList = document.querySelector('#activity-list');
+const employeeList = document.querySelector('#employee-list');
+const employeeForm = document.querySelector('#employee-form');
 
 const statusLabels = {
   pending: 'En attente',
@@ -84,6 +86,13 @@ async function chargerActivite() {
     : 'Aucune activité enregistrée.';
 }
 
+async function chargerEmployes() {
+  const employes = await demanderJson('api/admin/employees.php');
+  employeeList.innerHTML = employes.length
+    ? `<table><caption>Comptes employés</caption><thead><tr><th>Nom</th><th>Contact</th><th>État</th><th>Actions</th></tr></thead><tbody>${employes.map((employe) => `<tr><td>${echapperHtml(employe.first_name)} ${echapperHtml(employe.last_name)}</td><td>${echapperHtml(employe.email)}<br>${echapperHtml(employe.phone)}</td><td>${Number(employe.is_active) ? 'Actif' : 'Désactivé'}</td><td><button class="button button-small" type="button" data-employee-toggle="${echapperHtml(employe.id)}" data-active="${Number(employe.is_active) ? 0 : 1}">${Number(employe.is_active) ? 'Désactiver' : 'Réactiver'}</button> <button class="button button-small bouton-secondaire" type="button" data-employee-delete="${echapperHtml(employe.id)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`
+    : 'Aucun compte employé.';
+}
+
 async function initialiserAdministration() {
   try {
     const session = await demanderJson('api/auth/session.php');
@@ -106,8 +115,9 @@ async function initialiserAdministration() {
     if (orderList) await chargerCommandes();
     if (reviewList) await chargerAvis();
     if (activityList) await chargerActivite();
+    if (employeeList) await chargerEmployes();
   } catch (error) {
-    (messageList || orderList || reviewList || activityList).textContent = error.message;
+    (messageList || orderList || reviewList || activityList || employeeList).textContent = error.message;
   }
 }
 
@@ -156,6 +166,39 @@ if (messageList) {
     try {
       await demanderJson('api/admin/messages.php', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: button.dataset.deleteMessage }) });
       await chargerMessages();
+    } catch (error) {
+      window.alert(error.message);
+    }
+  });
+}
+
+if (employeeForm) {
+  const retourEmploye = document.querySelector('#employee-feedback');
+  employeeForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    try {
+      const result = await demanderJson('api/admin/employees.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(employeeForm))) });
+      retourEmploye.textContent = result.message;
+      retourEmploye.removeAttribute('data-state');
+      employeeForm.reset();
+      await chargerEmployes();
+    } catch (error) {
+      retourEmploye.textContent = error.message;
+      retourEmploye.dataset.state = 'error';
+    }
+  });
+  employeeList.addEventListener('click', async (event) => {
+    const bascule = event.target.closest('[data-employee-toggle]');
+    const suppression = event.target.closest('[data-employee-delete]');
+    try {
+      if (bascule) {
+        await demanderJson('api/admin/employees.php', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: bascule.dataset.employeeToggle, active: bascule.dataset.active }) });
+      } else if (suppression && window.confirm('Supprimer définitivement ce compte employé ?')) {
+        await demanderJson('api/admin/employees.php', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: suppression.dataset.employeeDelete }) });
+      } else {
+        return;
+      }
+      await chargerEmployes();
     } catch (error) {
       window.alert(error.message);
     }
