@@ -1,4 +1,4 @@
-﻿(async () => {
+﻿async function initialiserReservation() {
   const formulaire = document.querySelector('#formulaire-reservation');
   if (!formulaire) return;
   const formulairePaiement = document.querySelector('#formulaire-paiement');
@@ -88,8 +88,12 @@
           const personnes = Math.min(Math.max(Number(champPersonnes.value) || minimum, minimum), 10);
     document.querySelector('#reservation-aide-personnes').textContent = `Minimum : ${minimum}, maximum : 10 personnes par réservation.`;
     document.querySelector('#recapitulatif-menu').textContent = `${menu.name} × ${personnes}`;
-    document.querySelector('#recapitulatif-date').textContent = champDate.value
-      ? `${champDate.value}${choixHeure.value ? ` à ${choixHeure.value.replace(':', 'h')}` : ''}` : '-';
+    let texteDate = '-';
+    if (champDate.value) {
+      const heureChoisie = choixHeure.value ? ' à ' + choixHeure.value.replace(':', 'h') : '';
+      texteDate = champDate.value + heureChoisie;
+    }
+    document.querySelector('#recapitulatif-date').textContent = texteDate;
     document.querySelector('#recapitulatif-total').textContent = euros(Number(menu.price) * personnes);
   }
 
@@ -236,4 +240,6 @@
       bouton.disabled = false;
     }
   });
-})();
+}
+
+initialiserReservation().catch((error_) => showToast(friendlyError(error_), true));
