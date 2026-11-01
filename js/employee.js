@@ -21,9 +21,9 @@ const equipe = [
   { nom: 'Marie', poste: 'Sous-chef', groupe: 'A' },
   { nom: 'Julien', poste: 'Sous-chef', groupe: 'B' },
   { nom: 'Léa', poste: 'Serveuse', groupe: 'A' },
-  { nom: 'Hugo', poste: 'Serveur', groupe: 'B' },
+  { nom: 'Nadia', poste: 'Serveuse', groupe: 'B' },
   { nom: 'Karim', poste: 'Plongeur', groupe: 'A' },
-  { nom: 'Nadia', poste: 'Plongeuse', groupe: 'B' }
+  { nom: 'Hugo', poste: 'Plongeur', groupe: 'B' }
 ];
 
 function travaille(personne, semaine, jour) {
