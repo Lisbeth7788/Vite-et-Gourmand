@@ -22,13 +22,18 @@ if ($method === 'POST') {
     if ($check->fetch()) {
         jsonResponse(['error' => 'Cette adresse e-mail est déjà utilisée.'], 409);
     }
+    $jobs = ['cuisinier', 'serveur', 'livreur', 'plongeur', 'responsable'];
+    $job = strtolower(trim((string) ($data['job_title'] ?? '')));
+    if (!in_array($job, $jobs, true)) {
+        jsonResponse(['error' => 'Poste invalide.'], 400);
+    }
     $insert = $pdo->prepare(
-        "INSERT INTO users (id, first_name, last_name, phone, email, address, password_hash, role)
-         VALUES (?, ?, ?, ?, ?, 'Vite et Gourmand', ?, 'employe')"
+        "INSERT INTO users (id, first_name, last_name, phone, email, address, password_hash, role, job_title)
+         VALUES (?, ?, ?, ?, ?, 'Vite et Gourmand', ?, 'employe', ?)"
     );
     $insert->execute([
         bin2hex(random_bytes(16)), trim($data['first_name']), trim($data['last_name']),
-        trim($data['phone']), $email, password_hash((string) $data['password'], PASSWORD_DEFAULT)
+        trim($data['phone']), $email, password_hash((string) $data['password'], PASSWORD_DEFAULT), $job
     ]);
     jsonResponse(['message' => 'Compte employé créé.'], 201);
 }
@@ -58,5 +63,5 @@ if ($method !== 'GET') {
 }
 
 jsonResponse($pdo->query(
-    "SELECT id, first_name, last_name, email, phone, is_active, created_at FROM users WHERE role = 'employe' ORDER BY created_at DESC"
+    "SELECT id, first_name, last_name, email, phone, job_title, is_active, created_at FROM users WHERE role = 'employe' ORDER BY created_at DESC"
 )->fetchAll());
