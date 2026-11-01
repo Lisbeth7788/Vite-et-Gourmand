@@ -19,6 +19,12 @@
     <div id="employe-choix" class="profil-actions" hidden>
       <a class="button button-small bouton-secondaire" href="admin.html">← Retour à l'espace administrateur</a>
     </div>
+    <section class="form-section bloc-jour" aria-labelledby="titre-jour">
+      <h2 id="titre-jour">Aujourd'hui</h2>
+      <p id="jour-date" class="bandeau-jour"></p>
+      <h3>Commandes du jour</h3>
+      <ul id="commandes-jour" class="activite-liste"><li>Aucune commande aujourd'hui.</li></ul>
+    </section>
     <section id="section-planning" class="form-section" aria-labelledby="titre-planning">
       <h2 id="titre-planning" class="visually-hidden">Planning de l'équipe</h2>
       <div id="planning-simule"></div>
@@ -26,9 +32,18 @@
         <li><span class="pastille-service">Service</span> 11h-14h30 et 18h-21h30 (7 h)</li>
         <li><span class="pastille-repos">Repos</span> jour de repos</li>
       </ul>
+      <button class="button button-small bouton-secondaire bouton-imprimer" type="button" onclick="window.print()">Imprimer le planning</button>
+    </section>
+    <section class="form-section" aria-labelledby="titre-contacts">
+      <h2 id="titre-contacts">Contacts utiles</h2>
+      <ul class="activite-liste">
+        <li><strong>Julie et José</strong> (patrons) : présents à chaque service.</li>
+        <li><strong>Besoin d'un échange de service ou d'un congé ?</strong> Préviens les patrons au moins une semaine à l'avance.</li>
+        <li><strong>Allergies :</strong> signale toujours les allergènes à la salle avant le service.</li>
+      </ul>
     </section>
   </main>
   <script src="js/script.js?v=8b8fd7dc"></script>
-  <script type="module" src="js/employee.js?v=5ff665e1"></script>
+  <script type="module" src="js/employee.js?v=9c013a60"></script>
 </body>
 </html>

@@ -60,6 +60,16 @@ function tableauSemaine(semaine, prenom) {
 
 const libellesPostes = { patron: 'Patron', chef: 'Chef', 'sous-chef': 'Sous-chef', commis: 'Commis', serveur: 'Serveur', plongeur: 'Plongeur', livreur: 'Livreur' };
 
+function afficherJour(commandes) {
+  const date = new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+  const jour = (new Date().getDay() + 6) % 7;
+  document.querySelector('#jour-date').textContent = date.charAt(0).toUpperCase() + date.slice(1) + ' · Service du midi : 11h-14h30 · Service du soir : 18h-21h30';
+  document.querySelector('#commandes-jour').innerHTML = commandes.length
+    ? commandes.map((c) => '<li><strong>' + texte(c.service_time) + '</strong> · ' + texte(c.menu) + ' · ' + Number(c.people) + ' personnes · ' + texte(c.city) + '</li>').join('')
+    : '<li>Aucune commande aujourd’hui.</li>';
+  return jour;
+}
+
 async function chargerEspaceEmploye() {
   try {
     const reponse = await fetch(apiEspace, { credentials: 'same-origin' });
@@ -68,6 +78,7 @@ async function chargerEspaceEmploye() {
       return;
     }
     const d = await reponse.json();
+    afficherJour(d.orders || []);
     const p = d.profile || {};
     const poste = libellesPostes[p.job_title] || '';
     document.querySelector('#employe-sous-titre').textContent =
