@@ -89,4 +89,23 @@ commandesCompte.addEventListener('submit', async (event) => {
   }
 });
 
+function afficherSection(nom) {
+  const sections = ['profil', 'commandes', 'activite', 'session'];
+  const choix = sections.includes(nom) ? nom : 'profil';
+  sections.forEach((section) => { document.querySelector(`#section-${section}`).hidden = section !== choix; });
+  document.querySelectorAll('[data-section]').forEach((lien) => {
+    if (lien.dataset.section === choix) lien.setAttribute('aria-current', 'page');
+    else lien.removeAttribute('aria-current');
+  });
+}
+
+document.querySelectorAll('[data-section]').forEach((lien) => {
+  lien.addEventListener('click', (event) => {
+    event.preventDefault();
+    history.replaceState(null, '', `#${lien.dataset.section}`);
+    afficherSection(lien.dataset.section);
+  });
+});
+afficherSection(window.location.hash.slice(1));
+
 chargerCompte();

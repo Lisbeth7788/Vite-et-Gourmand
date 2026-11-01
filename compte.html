@@ -16,7 +16,15 @@
   </header>
   <main class="catalogue-page">
     <div class="page-intro"><p class="eyebrow">Espace personnel</p><h1>Mon espace client</h1><p id="account-identity">Vérification de votre session...</p></div>
-    <section class="form-section" aria-labelledby="profile-title">
+    <nav class="admin-nav" aria-label="Sections de mon espace">
+      <ol>
+        <li><a href="#profil" data-section="profil" aria-current="page">Mon profil</a></li>
+        <li><a href="#commandes" data-section="commandes">Mes réservations</a></li>
+        <li><a href="#activite" data-section="activite">Mon activité</a></li>
+        <li><a href="#session" data-section="session">Ma session</a></li>
+      </ol>
+    </nav>
+    <section id="section-profil" class="form-section" aria-labelledby="profile-title">
       <h2 id="profile-title">Mes informations</h2>
       <form id="profile-form" class="grille-formulaire">
         <div class="champ-formulaire"><label for="profile-first-name">Prénom</label><input id="profile-first-name" name="first_name" required></div>
@@ -28,9 +36,9 @@
       </form>
       <p id="profile-feedback" class="message-formulaire" role="status"></p>
     </section>
-    <section class="form-section" aria-labelledby="account-orders-title"><h2 id="account-orders-title">Historique de mes commandes et réservations</h2><div id="account-orders"></div></section>
-    <section class="form-section" aria-labelledby="account-activity-title"><h2 id="account-activity-title">Historique de mon activité</h2><div id="account-activity" class="table-responsive"></div></section>
-    <section class="form-section" aria-labelledby="account-session-title">
+    <section id="section-commandes" class="form-section" aria-labelledby="account-orders-title" hidden><h2 id="account-orders-title">Historique de mes commandes et réservations</h2><div id="account-orders"></div></section>
+    <section id="section-activite" class="form-section" aria-labelledby="account-activity-title" hidden><h2 id="account-activity-title">Historique de mon activité</h2><div id="account-activity" class="table-responsive"></div></section>
+    <section id="section-session" class="form-section" aria-labelledby="account-session-title" hidden>
       <h2 id="account-session-title">Ma session</h2>
       <p>Vous êtes connecté. Vous pouvez vous déconnecter à tout moment.</p>
       <div class="actions-paiement">
@@ -60,6 +68,6 @@
   </footer>
 
   <script src="js/script.js?v=dc0e7f8d"></script>
-  <script src="js/account.js?v=834a77ec"></script>
+  <script src="js/account.js?v=318442d2"></script>
 </body>
 </html>
