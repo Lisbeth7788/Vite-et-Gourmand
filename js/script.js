@@ -23,6 +23,16 @@ async function actualiserLienConnexion() {
       element.append(lien);
       liste.append(element);
     }
+    if (liste && role === 'admin' && !liste.querySelector('.lien-espace-employe')) {
+      const element = document.createElement('li');
+      const lien = document.createElement('a');
+      lien.className = 'lien-espace-employe';
+      lien.href = 'espace-employe.html';
+      lien.textContent = 'Espace employé';
+      if (window.location.pathname.endsWith('espace-employe.html')) lien.setAttribute('aria-current', 'page');
+      element.append(lien);
+      liste.append(element);
+    }
     if (liste && !liste.querySelector('.lien-espace-client')) {
       const element = document.createElement('li');
       const lien = document.createElement('a');
