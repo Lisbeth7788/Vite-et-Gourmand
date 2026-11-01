@@ -16,13 +16,13 @@ const jourB = [3, 4, 5, 6];
 const equipe = [
   { nom: 'Julie', poste: 'Patronne', toujours: true },
   { nom: 'José', poste: 'Patron', toujours: true },
-  { nom: 'Antoine', poste: 'Chef', groupe: 'A' },
+  { nom: 'Karim', poste: 'Chef', groupe: 'A' },
   { nom: 'Paul', poste: 'Chef', groupe: 'B' },
   { nom: 'Marie', poste: 'Sous-chef', groupe: 'A' },
   { nom: 'Julien', poste: 'Sous-chef', groupe: 'B' },
   { nom: 'Léa', poste: 'Serveuse', groupe: 'A' },
   { nom: 'Nadia', poste: 'Serveuse', groupe: 'B' },
-  { nom: 'Karim', poste: 'Plongeur', groupe: 'A' },
+  { nom: 'Antoine', poste: 'Plongeur', groupe: 'A' },
   { nom: 'Hugo', poste: 'Plongeur', groupe: 'B' }
 ];
 
