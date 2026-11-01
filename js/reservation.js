@@ -79,13 +79,13 @@
     if (!menu) return;
     const minimum = Number(menu.minimum) || 1;
     champPersonnes.min = minimum;
-    champPersonnes.max = 6;
+    champPersonnes.max = 10;
     // On ne corrige la valeur qu'à la fin de la saisie, sinon la frappe sur mobile est écrasée.
     if (forcer) {
-      champPersonnes.value = Math.min(Math.max(Math.round(Number(champPersonnes.value)) || minimum, minimum), 6);
+      champPersonnes.value = Math.min(Math.max(Math.round(Number(champPersonnes.value))       || minimum, minimum), 10);
     }
-    const personnes = Math.min(Math.max(Number(champPersonnes.value) || minimum, minimum), 6);
-    document.querySelector('#reservation-aide-personnes').textContent = `Minimum : ${minimum}, maximum : 6 personnes par réservation.`;
+          const personnes = Math.min(Math.max(Number(champPersonnes.value) || minimum, minimum), 10);
+    document.querySelector('#reservation-aide-personnes').textContent = `Minimum : ${minimum}, maximum : 10 personnes par réservation.`;
     document.querySelector('#recapitulatif-menu').textContent = `${menu.name} × ${personnes}`;
     document.querySelector('#recapitulatif-date').textContent = champDate.value
       ? `${champDate.value}${choixHeure.value ? ` à ${choixHeure.value.replace(':', 'h')}` : ''}` : '-';
