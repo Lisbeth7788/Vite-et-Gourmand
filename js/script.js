@@ -30,16 +30,7 @@ async function actualiserLienConnexion() {
       liste.append(badge);
     }
     if (document.body.dataset.modeEmploye !== undefined) return;
-    if (liste && role === 'admin' && !liste.querySelector('.lien-gestion')) {
-      const element = document.createElement('li');
-      const lien = document.createElement('a');
-      lien.className = 'lien-gestion';
-      lien.href = 'admin.html';
-      lien.textContent = 'Retour à mon espace administrateur';
-      element.append(lien);
-      liste.append(element);
-    }
-    if (liste && !liste.querySelector('.lien-espace-client')) {
+    if (liste && ['client', 'employe'].includes(role) && !liste.querySelector('.lien-espace-client')) {
       const element = document.createElement('li');
       const lien = document.createElement('a');
       lien.className = 'lien-espace-client';
