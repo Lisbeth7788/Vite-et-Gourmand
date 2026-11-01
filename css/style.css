@@ -1938,9 +1938,10 @@ main > .page-intro ~ .contact-form-panel {
   flex: 0 1 calc((100% - 0.5rem) / 2);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 720px) {
   .admin-nav li {
     flex: 0 1 9.5rem;
+    min-width: 0;
   }
 }
 
