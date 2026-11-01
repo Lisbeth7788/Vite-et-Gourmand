@@ -1992,11 +1992,10 @@ main > .page-intro ~ .contact-form-panel {
 }
 #account-orders { display: grid; gap: 0.5rem; margin: 0 auto; max-width: 40rem; }
 .reservation-ligne { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; }
-.reservation-ligne summary { align-items: center; cursor: pointer; display: grid; font-size: 0.9rem; gap: 0.5rem; grid-template-columns: 1.3fr 1.4fr auto; list-style: none; padding: 0.55rem 0.8rem; }
+.reservation-ligne summary { align-items: center; cursor: pointer; display: grid; font-size: 0.9rem; gap: 0.5rem; grid-template-columns: 1.3fr 1.4fr auto 1rem; list-style: none; padding: 0.55rem 0.8rem; }
 .reservation-ligne summary::-webkit-details-marker { display: none; }
 .reservation-ligne summary::after { content: '▾'; grid-column: 4; grid-row: 1; }
 .reservation-ligne[open] summary::after { content: '▴'; }
-.reservation-ligne summary { grid-template-columns: 1.3fr 1.4fr auto 1rem; }
 .reservation-titre { font-weight: 700; }
 .reservation-statut { font-size: 0.8rem; opacity: 0.85; }
 .reservation-detail { border-top: 1px solid var(--line); font-size: 0.85rem; padding: 0.5rem 0.8rem 0.8rem; text-align: center; }
@@ -2067,19 +2066,17 @@ main > .page-intro ~ .contact-form-panel {
 .etiquette-jour{background:var(--terracotta);border-radius:999px;color:#fff;font-size:.7rem;font-weight:700;padding:.1rem .55rem;vertical-align:middle}
 
 .semaine-navigation{align-items:center;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin:.5rem 0 1rem}
-.planning-equipe{font-size:.82rem;text-align:center;width:100%}
+.planning-equipe{width:100%;border-collapse:separate;border-spacing:0;font-size:.9rem;text-align:center;background:#fff;border:1px solid var(--line,#e6dccf);border-radius:12px;overflow:hidden}
 .planning-equipe th,.planning-equipe td{padding:.4rem .3rem;vertical-align:middle;white-space:nowrap}
-.planning-equipe tbody th{text-align:left}
+.planning-equipe tbody th{text-align:left;padding-left:1rem;white-space:nowrap}
 .planning-equipe small{color:#7a6c5d;font-weight:400}
 .planning-equipe .repos{color:#b5a898}
 .planning-equipe .ligne-moi{background:#f6ece4}
 .planning-legende{color:#7a6c5d;font-size:.8rem;text-align:center}
 
-.planning-equipe{width:100%;border-collapse:separate;border-spacing:0;font-size:.9rem;text-align:center;background:#fff;border:1px solid var(--line,#e6dccf);border-radius:12px;overflow:hidden}
 .planning-equipe thead th{background:#3b2f27;color:#fff;padding:.6rem .4rem;font-weight:600}
 .planning-equipe thead th:first-child{text-align:left;padding-left:1rem}
 .planning-equipe td,.planning-equipe tbody th{padding:.55rem .4rem;border-top:1px solid #f0e8dd;vertical-align:middle}
-.planning-equipe tbody th{text-align:left;padding-left:1rem;white-space:nowrap}
 .planning-equipe tbody th strong{display:block}
 .planning-equipe tbody th small{color:#7a6c5d;font-weight:400}
 .planning-equipe .groupe-equipe th{background:#f6ece4;color:var(--terracotta,#b5532f);text-transform:uppercase;letter-spacing:.06em;font-size:.75rem;padding:.4rem 1rem;text-align:left}
@@ -2087,7 +2084,7 @@ main > .page-intro ~ .contact-form-panel {
 .planning-equipe .total-heures{font-weight:700;white-space:nowrap}
 .pastille-service,.pastille-repos{display:inline-block;padding:.2rem .6rem;border-radius:999px;font-size:.78rem;font-weight:600}
 .pastille-service{background:#dff1e1;color:#1f6b35}
-.pastille-repos{background:#eee9e3;color:#8a7d70}
+.pastille-repos{background:#eee9e3;color:#5a4d40}
 ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.4rem;text-align:left;font-size:.9rem}
 
 #planning-simule{max-width:75%;margin:0 auto}
@@ -2125,8 +2122,8 @@ ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.
 
 .chiffres-cles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem}
 .chiffre-cle{background:#f6ece4;border-radius:14px;padding:1rem;text-align:center;display:grid;gap:.2rem}
-.chiffre-cle strong{font-size:1.7rem;color:var(--terracotta,#b5532f)}
-.chiffre-cle span{color:#7a6c5d;font-size:.85rem}
+.chiffre-cle strong{font-size:2.2rem;color:var(--terracotta,#b5532f)}
+.chiffre-cle span{color:#7a6c5d;font-size:1rem;font-weight:600}
 .aide-section{color:#7a6c5d;font-size:.9rem;margin-top:0}
 .grille-services{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
 .carte-service{background:#fff;border:1px solid var(--line,#e6dccf);border-radius:14px;padding:.9rem 1rem;display:grid;gap:.6rem}
@@ -2150,21 +2147,16 @@ ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.
 
 #activity-summary,#activity-days,#activity-list{max-width:75%;margin:0 auto}
 [aria-labelledby^='activity-'] h2,[aria-labelledby^='activity-'] .aide-section{text-align:center}
-.chiffre-cle strong{font-size:2.2rem}
-.chiffre-cle span{font-size:1rem;font-weight:600}
-.tableau-activite{width:100%;border-collapse:separate;border-spacing:0;text-align:center;font-size:1rem;background:#fff;border:2px solid #3b2f27;border-radius:12px;overflow:hidden}
+.tableau-activite{table-layout:fixed;width:85%;min-width:640px;margin:0 auto;border-collapse:separate;border-spacing:0;text-align:center;font-size:1rem;background:#fff;border:2px solid #3b2f27;border-radius:12px;overflow:hidden}
 .tableau-activite thead th{background:#3b2f27;color:#fff;padding:.8rem .6rem;font-size:.95rem;text-align:center}
-.tableau-activite td{padding:.8rem .6rem;border-top:1px solid #e6dccf;vertical-align:middle;text-align:center}
+.tableau-activite td{padding:.8rem .6rem;border-top:1px solid #e6dccf;vertical-align:middle;text-align:center;overflow-wrap:anywhere;line-height:1.35}
 .tableau-activite tbody tr:nth-child(even){background:#faf5ef}
 .tableau-activite small{color:#7a6c5d}
-.tableau-activite .jauge{min-width:120px;height:14px}
+.tableau-activite .jauge{width:80%;min-width:0;height:14px;margin:.4rem auto 0}
 .pastille-service-nom{display:inline-block;background:#3b2f27;color:#fff;border-radius:999px;padding:.2rem .8rem;font-weight:600}
 @media (max-width:800px){#activity-summary,#activity-days,#activity-list{max-width:100%}}
 
 #activity-days,#activity-list{max-width:100%;overflow-x:auto}
-.tableau-activite{table-layout:fixed;width:85%;min-width:640px;margin:0 auto}
-.tableau-activite td{word-break:break-word;line-height:1.35}
-.tableau-activite .jauge{width:80%;min-width:0;margin:.4rem auto 0}
 .etat-service{display:inline-block;padding:.25rem .8rem;border-radius:999px;font-weight:700;font-size:.85rem}
 .etat-ouvert{background:#dff1e1;color:#1f6b35}
 .etat-complet{background:#f8d7d3;color:#a02a1d}
@@ -2209,5 +2201,16 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
 }
 
 [hidden] {
-  display: none !important;
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .button,
+  .compteur-fleches button {
+    transition: none;
+  }
 }
