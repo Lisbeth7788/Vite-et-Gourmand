@@ -1,6 +1,5 @@
 const identiteAdministration = document.querySelector('#admin-identity');
 const messageList = document.querySelector('#message-list');
-const formulaireFiltreCommandes = document.querySelector('#order-filter-form');
 const orderList = document.querySelector('#order-list');
 const reviewList = document.querySelector('#review-list');
 const activityList = document.querySelector('#activity-list');
@@ -63,8 +62,7 @@ function carteReservation(order, options) {
 }
 
 async function chargerCommandes() {
-  const parameters = new URLSearchParams(new FormData(formulaireFiltreCommandes));
-  const orders = await demanderJson(`api/admin/orders.php?${parameters}`);
+  const orders = await demanderJson('api/admin/orders.php');
   if (!orders.length) {
     orderList.textContent = 'Aucune réservation trouvée.';
     return;
@@ -134,13 +132,6 @@ async function initialiserAdministration() {
   } catch (error) {
     (messageList || orderList || reviewList || activityList || employeeList).textContent = error.message;
   }
-}
-
-if (formulaireFiltreCommandes) {
-  formulaireFiltreCommandes.addEventListener('submit', (event) => {
-    event.preventDefault();
-    chargerCommandes().catch((error) => { orderList.textContent = error.message; });
-  });
 }
 
 if (orderList) {
