@@ -6,100 +6,125 @@ function chargerSession() {
   return sessionPromise;
 }
 
+const panneauConnexion = document.querySelector('#login-panel, #employe-login-form, #admin-login-form');
+
+function pagePourEspace(role) {
+  return { admin: 'admin.html', employe: 'espace-employe.html', client: 'index.html' }[role] || 'index.html';
+}
+
+async function changerExperience(space, page, link) {
+  link.setAttribute('aria-busy', 'true');
+  try {
+    const response = await fetch('api/auth/switch-space.php', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ space })
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'Le changement d’espace a échoué.');
+    window.location.href = page;
+  } catch (error) {
+    console.error('Changement d’espace impossible :', error);
+    window.alert(error.message || 'Le changement d’espace a échoué.');
+    link.removeAttribute('aria-busy');
+  }
+}
+
+function ajouterSelecteurExperience(liste, role) {
+  const element = document.createElement('li');
+  element.className = 'experience-switch';
+  const label = document.createElement('span');
+  label.textContent = 'Expérience : ';
+  element.append(label);
+  [
+    ['client', 'Client', 'index.html'],
+    ['employe', 'Employé', 'espace-employe.html'],
+    ['admin', 'Administrateur', 'admin.html']
+  ].forEach(([space, name, page]) => {
+    const link = document.createElement('a');
+    link.href = page;
+    link.textContent = name;
+    if (role === space) link.setAttribute('aria-current', 'page');
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      changerExperience(space, page, link);
+    });
+    element.append(document.createTextNode(' '), link);
+  });
+  liste.append(element);
+}
+
+function ajouterBadgeRole(liste, role) {
+  if (!role || role === 'admin' || liste.querySelector('.badge-role')) return;
+  const nomsRoles = { client: 'Client', employe: 'Employé' };
+  const badge = document.createElement('li');
+  badge.className = `badge-role badge-role-${role}`;
+  badge.textContent = `Connecté : ${nomsRoles[role] || role}`;
+  liste.append(badge);
+}
+
+function ajouterLienEspace(liste, role, liensConnexion) {
+  if (!['client', 'employe'].includes(role) || liste.querySelector('.lien-espace-client')) return;
+  const element = document.createElement('li');
+  const lien = document.createElement('a');
+  lien.className = 'lien-espace-client';
+  lien.href = role === 'employe' ? 'espace-employe.html' : 'compte.html';
+  lien.textContent = role === 'employe' ? 'Mon espace employé' : 'Mon espace client';
+  if (window.location.pathname.endsWith(lien.getAttribute('href'))) lien.setAttribute('aria-current', 'page');
+  element.append(lien);
+  const dernier = liensConnexion[0]?.closest('li');
+  if (dernier) dernier.before(element);
+  else liste.append(element);
+}
+
+function ajouterDeconnexion(liensConnexion) {
+  liensConnexion.forEach((lien) => {
+    lien.textContent = 'Déconnexion';
+    lien.href = '#deconnexion';
+    lien.addEventListener('click', async (event) => {
+      event.preventDefault();
+      try {
+        const response = await fetch('api/auth/logout.php', { credentials: 'same-origin' });
+        if (!response.ok) throw new Error('La déconnexion n’a pas pu être effectuée.');
+        sessionStorage.setItem('toast', 'Vous êtes déconnecté.');
+        window.location.href = 'index.html';
+      } catch (error) {
+        console.error('Déconnexion impossible :', error);
+        showToast(error.message || 'La déconnexion n’a pas pu être effectuée.', true);
+      }
+    }, { once: true });
+  });
+}
+
 async function actualiserLienConnexion() {
   const liensConnexion = [...document.querySelectorAll('.main-navigation a')]
     .filter((lien) => lien.getAttribute('href')?.includes('connexion'));
-  const panneauConnexion = document.querySelector('#login-panel, #employe-login-form, #admin-login-form');
   try {
     const session = await chargerSession();
-    if (!session.ok) {
-      if (panneauConnexion) panneauConnexion.hidden = false;
-      return;
-    }
+    if (!session.ok) return;
     const role = session.data?.user?.role;
     if (panneauConnexion && role) {
-      const pageEspaceActif = role === 'admin' ? 'admin.html' : role === 'employe' ? 'espace-employe.html' : 'index.html';
-      window.location.replace(pageEspaceActif);
+      window.location.replace(pagePourEspace(role));
       return;
     }
     const liste = document.querySelector('.main-navigation ul');
-    if (liste && session.data?.canSwitchExperience && !liste.querySelector('.experience-switch')) {
-      const element = document.createElement('li');
-      element.className = 'experience-switch';
-      const label = document.createElement('span');
-      label.textContent = 'Expérience : ';
-      element.append(label);
-      [
-        ['client', 'Client', 'index.html'],
-        ['employe', 'Employé', 'espace-employe.html'],
-        ['admin', 'Administrateur', 'admin.html']
-      ].forEach(([space, name, page]) => {
-        const link = document.createElement('a');
-        link.href = page;
-        link.textContent = name;
-        if (role === space) link.setAttribute('aria-current', 'page');
-        link.addEventListener('click', async (event) => {
-          event.preventDefault();
-          link.setAttribute('aria-busy', 'true');
-          try {
-            const response = await fetch('api/auth/switch-space.php', {
-              method: 'POST',
-              credentials: 'same-origin',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ space })
-            });
-            const result = await response.json();
-            if (!response.ok) throw new Error(result.error || 'Le changement d’espace a échoué.');
-            window.location.href = page;
-          } catch (error) {
-            window.alert(error.message || 'Le changement d’espace a échoué.');
-            link.removeAttribute('aria-busy');
-          }
-        });
-        element.append(document.createTextNode(' '));
-        element.append(link);
-      });
-      liste.append(element);
+    if (!liste) return;
+    if (session.data?.canSwitchExperience && !liste.querySelector('.experience-switch')) {
+      ajouterSelecteurExperience(liste, role);
     }
-    if (liste && role && role !== 'admin' && !liste.querySelector('.badge-role')) {
-      const nomsRoles = { client: 'Client', employe: 'Employé', admin: 'Administrateur' };
-      const badge = document.createElement('li');
-      badge.className = `badge-role badge-role-${role}`;
-      badge.textContent = `Connecté : ${nomsRoles[role] || role}`;
-      liste.append(badge);
-    }
+    ajouterBadgeRole(liste, role);
     if (document.body.dataset.modeEmploye !== undefined) return;
-    if (liste && ['client', 'employe'].includes(role) && !liste.querySelector('.lien-espace-client')) {
-      const element = document.createElement('li');
-      const lien = document.createElement('a');
-      lien.className = 'lien-espace-client';
-      lien.href = role === 'employe' ? 'espace-employe.html' : 'compte.html';
-      lien.textContent = role === 'employe' ? 'Mon espace employé' : 'Mon espace client';
-      if (window.location.pathname.endsWith(lien.getAttribute('href'))) lien.setAttribute('aria-current', 'page');
-      element.append(lien);
-      const dernier = liensConnexion[0]?.closest('li');
-      if (dernier) dernier.before(element); else liste.append(element);
-    }
-    if (!liensConnexion.length) return;
-    document.querySelectorAll('.login-section').forEach((section) => { section.hidden = true; });
-    liensConnexion.forEach((lien) => {
-      lien.textContent = 'Déconnexion';
-      lien.href = '#deconnexion';
-      lien.addEventListener('click', async (event) => {
-        event.preventDefault();
-        await fetch('api/auth/logout.php', { credentials: 'same-origin' });
-        sessionStorage.setItem('toast', 'Vous êtes déconnecté.');
-        window.location.href = 'index.html';
-      }, { once: true });
-    });
+    ajouterLienEspace(liste, role, liensConnexion);
+    if (liensConnexion.length) ajouterDeconnexion(liensConnexion);
   } catch (error) {
+    console.error('Vérification de la session impossible :', error);
     if (panneauConnexion) panneauConnexion.hidden = false;
   }
 }
 
-const panneauConnexion = document.querySelector('#login-panel, #employe-login-form, #admin-login-form');
 if (panneauConnexion) panneauConnexion.hidden = true;
-actualiserLienConnexion();
+await actualiserLienConnexion();
 
 const orderForm = document.querySelector('#order-form');
 const menuChoice = document.querySelector('#order-menu');
