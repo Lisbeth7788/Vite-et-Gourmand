@@ -411,11 +411,7 @@ if (loginForm) {
           // L'enregistrement est facultatif.
         }
       }
-      const redirect = new URLSearchParams(window.location.search).get('redirect');
-      // Le formulaire client mène toujours à l'espace client, même avec un compte administrateur.
-      const pageEspaceGestion = /^\/?(admin|espace-employe|employe)/;
-      const pageDemandee = redirect && !pageEspaceGestion.test(redirect) ? redirect : 'compte.html';
-      window.location.href = pageDemandee;
+      window.location.href = 'index.html';
     } catch (error) {
       showFormFeedback(loginForm, friendlyError(error), true);
     }
