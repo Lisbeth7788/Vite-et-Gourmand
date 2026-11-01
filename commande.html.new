@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=reservation.html">
+  <meta name="robots" content="noindex">
+  <title>Redirection - Vite et Gourmand</title>
+</head>
+<body>
+  <p>Cette page a déménagé : <a href="reservation.html">réserver un menu</a>.</p>
+</body>
+</html>

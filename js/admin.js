@@ -99,17 +99,10 @@ async function chargerActivite() {
     '<div class="chiffre-cle"><strong>' + Number(data.summary.reservations) + '</strong><span>réservations actives</span></div>';
   const days = document.querySelector('#activity-days');
   days.innerHTML = data.days.length
-    ? '<table class="tableau-activite tableau-services"><colgroup><col style="width:28%"><col style="width:14%"><col style="width:26%"><col style="width:16%"><col style="width:16%"></colgroup><thead><tr><th>Jour</th><th>Service</th><th>Personnes</th><th>Places restantes</th><th>État</th></tr></thead><tbody>' + data.days.map((day) => {
-      const personnes = Number(day.people);
-      const pourcent = Math.min(100, Math.round(personnes * 100 / data.capacity));
-      const niveau = pourcent >= 90 ? 'plein' : (pourcent >= 60 ? 'moyen' : 'libre');
-      const complet = personnes >= data.capacity;
-      return '<tr><td><strong>' + echapperHtml(dateLongue(day.service_date)) + '</strong></td><td><span class="pastille-service-nom">' + (day.service === 'midi' ? 'Midi' : 'Soir') + '</span></td>' +
-        '<td><strong>' + personnes + ' / ' + data.capacity + '</strong><div class="jauge"><div class="jauge-remplie jauge-' + niveau + '" style="width:' + pourcent + '%"></div></div></td>' +
-        '<td>' + Math.max(0, data.capacity - personnes) + '</td>' +
-        '<td><span class="etat-service ' + (complet ? 'etat-complet' : 'etat-ouvert') + '">' + (complet ? 'Complet' : 'Ouvert') + '</span></td></tr>';
-    }).join('') + '</tbody></table>'
-    : 'Aucune réservation à venir.';
+    ? '<table class="tableau-activite tableau-services"><thead><tr><th>Jour de livraison</th><th>Commandes</th><th>Personnes</th><th>Montant</th></tr></thead><tbody>' + data.days.map((day) =>
+      '<tr><td><strong>' + echapperHtml(dateLongue(day.service_date)) + '</strong></td><td>' + Number(day.orders) + '</td><td>' + Number(day.people) + '</td><td>' + Number(day.total).toFixed(2) + ' €</td></tr>'
+    ).join('') + '</tbody></table>'
+    : 'Aucune livraison à venir.';
   activityList.innerHTML = data.events.length
     ? '<table class="tableau-activite tableau-historique"><colgroup><col style="width:17%"><col style="width:15%"><col style="width:24%"><col style="width:32%"><col style="width:12%"></colgroup><thead><tr><th>Date</th><th>Action</th><th>Client</th><th>Détail</th><th>Montant</th></tr></thead><tbody>' + data.events.map((event) =>
       '<tr><td>' + echapperHtml(event.event_at) + '</td><td><span class="fil-type fil-' + echapperHtml(event.type) + '">' + echapperHtml(types[event.type] || event.type) + '</span></td>' +
