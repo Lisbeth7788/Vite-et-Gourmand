@@ -168,4 +168,4 @@ document.querySelectorAll('[data-section]').forEach((lien) => {
 });
 afficherSection(window.location.hash.slice(1));
 
-void chargerCompte();
+await chargerCompte();

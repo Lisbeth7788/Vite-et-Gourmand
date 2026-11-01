@@ -16,11 +16,13 @@ if ($isProduction) {
 }
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_set_cookie_params([
-        'httponly' => true,
-        'samesite' => 'Lax',
-        'secure' => $isProduction || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-    ]);
+    $cookieParams = ['httponly' => true, 'samesite' => 'Lax', 'secure' => true];
+    $isHttps = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+    if (!$isProduction && !$isHttps) {
+        // Développement local en HTTP : un cookie "secure" ne serait pas renvoyé par le navigateur.
+        $cookieParams['secure'] = false;
+    }
+    session_set_cookie_params($cookieParams);
     session_start();
 }
 

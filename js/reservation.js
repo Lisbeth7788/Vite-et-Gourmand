@@ -243,4 +243,8 @@ async function initialiserReservation() {
   });
 }
 
-initialiserReservation().catch((error_) => showToast(friendlyError(error_), true));
+try {
+  await initialiserReservation();
+} catch (error_) {
+  showToast(friendlyError(error_), true);
+}
