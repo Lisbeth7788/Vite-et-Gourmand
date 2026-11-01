@@ -9,11 +9,15 @@ if ($missing) {
     jsonResponse(['error' => 'Adresse e-mail et mot de passe obligatoires.'], 400);
 }
 
+$identifiant = strtr(mb_strtolower(trim($data['email'])), ['é' => 'e', 'è' => 'e', 'ê' => 'e']);
 $query = $pdo->prepare('SELECT id, first_name, last_name, phone, email, address, password_hash, role, is_active FROM users WHERE email = ?');
-$query->execute([strtolower(trim($data['email']))]);
+$query->execute([$identifiant]);
 $user = $query->fetch();
 
-if (!$user || !$user['is_active'] || !password_verify($data['password'], $user['password_hash'])) {
+// Le compte employé partagé accepte le mot de passe en majuscules ou en minuscules.
+$motDePasse = $user && $user['email'] === 'employe' ? mb_strtoupper($data['password']) : $data['password'];
+
+if (!$user || !$user['is_active'] || !password_verify($motDePasse, $user['password_hash'])) {
     jsonResponse(['error' => 'Adresse e-mail ou mot de passe incorrect.'], 401);
 }
 
