@@ -29,28 +29,34 @@ if ($method !== 'GET') {
     jsonResponse(['error' => 'Méthode non autorisée.'], 405);
 }
 
+// L'administrateur peut consulter l'espace d'un employé précis.
+$targetId = $user['id'];
+if ($user['role'] === 'admin' && !empty($_GET['user_id'])) {
+    $targetId = (string) $_GET['user_id'];
+}
+
 $profile = $pdo->prepare('SELECT first_name, last_name, job_title FROM users WHERE id = ?');
-$profile->execute([$user['id']]);
+$profile->execute([$targetId]);
 
 $shifts = $pdo->prepare(
     'SELECT shift_date, SUBSTRING(start_time, 1, 5) AS start_time, SUBSTRING(end_time, 1, 5) AS end_time, note
      FROM employee_shifts WHERE user_id = ? AND shift_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 14 DAY)
      ORDER BY shift_date, start_time'
 );
-$shifts->execute([$user['id']]);
+$shifts->execute([$targetId]);
 
 $tasks = $pdo->prepare(
     'SELECT id, task_date, title, is_done FROM employee_tasks
      WHERE user_id = ? AND task_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 14 DAY)
      ORDER BY task_date, id'
 );
-$tasks->execute([$user['id']]);
+$tasks->execute([$targetId]);
 
 $reports = $pdo->prepare('SELECT report_date, content FROM employee_reports WHERE user_id = ? ORDER BY created_at DESC LIMIT 20');
-$reports->execute([$user['id']]);
+$reports->execute([$targetId]);
 
 $payslips = $pdo->prepare('SELECT period, hours, gross, net, note FROM payslips WHERE user_id = ? ORDER BY period DESC LIMIT 24');
-$payslips->execute([$user['id']]);
+$payslips->execute([$targetId]);
 
 jsonResponse([
     'profile' => $profile->fetch(),

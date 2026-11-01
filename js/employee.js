@@ -31,8 +31,11 @@ function ligneTache(t, avecDate) {
   return `<li><label><input type="checkbox" data-task="${Number(t.id)}" ${Number(t.is_done) ? 'checked' : ''}> ${avecDate ? `<strong>${texte(dateFr(t.task_date))}</strong> : ` : ''}${texte(t.title)}</label></li>`;
 }
 
+let employeConsulte = '';
+
 async function chargerEspaceEmploye() {
-  const reponse = await fetch(apiEspace, { credentials: 'same-origin' });
+  const parametre = employeConsulte ? '?user_id=' + encodeURIComponent(employeConsulte) : '';
+  const reponse = await fetch(apiEspace + parametre, { credentials: 'same-origin' });
   if (reponse.status === 401 || reponse.status === 403) {
     location.href = 'employe-connexion.html';
     return;
@@ -80,6 +83,23 @@ document.querySelector('#report-form').addEventListener('submit', async (event) 
   }
 });
 
+async function initialiserChoixEmploye() {
+  const session = await chargerSession();
+  if (session.data?.user?.role !== 'admin') return;
+  const reponse = await fetch('api/admin/employees.php', { credentials: 'same-origin' });
+  if (!reponse.ok) return;
+  const employes = await reponse.json();
+  const choix = document.querySelector('#employe-select');
+  choix.innerHTML = '<option value="">Mon propre espace</option>' +
+    employes.map((e) => '<option value="' + texte(e.id) + '">' + texte(e.first_name) + ' ' + texte(e.last_name) + (e.job_title ? ' (' + texte(e.job_title) + ')' : '') + '</option>').join('');
+  document.querySelector('#employe-choix').hidden = false;
+  choix.addEventListener('change', async () => {
+    employeConsulte = choix.value;
+    await chargerEspaceEmploye();
+  });
+}
+
 window.addEventListener('hashchange', afficherSectionEmploye);
 afficherSectionEmploye();
-chargerEspaceEmploye();
+await initialiserChoixEmploye();
+await chargerEspaceEmploye();
