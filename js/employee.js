@@ -1,5 +1,5 @@
 const apiEspace = 'api/employee/espace.php';
-const sectionsEmploye = ['planning', 'compte-rendu', 'documents'];
+const sectionsEmploye = ['planning', 'documents'];
 
 function texte(valeur) {
   const span = document.createElement('span');
@@ -52,7 +52,6 @@ async function chargerEspaceEmploye() {
     `${p.first_name || ''} ${p.last_name || ''}${p.job_title ? ` · ${p.job_title}` : ''}`.trim();
   remplir('#planning-horaires', d.shifts.map((s) => ligneHoraire(s, d.today)), 'Aucun horaire prévu.');
   remplir('#planning-taches', d.tasks.map((t) => ligneTache(t, d.today)), 'Aucune tâche prévue.');
-  remplir('#report-list', d.reports.map((r) => `<li><strong>${texte(dateFr(r.report_date))}</strong> : ${texte(r.content)}</li>`), 'Aucun compte rendu.');
   document.querySelector('#payslip-list').innerHTML = d.payslips.length
     ? d.payslips.map((f) => `<tr><td>${texte(f.period)}</td><td>${texte(f.hours)}</td><td>${texte(f.gross)} €</td><td>${texte(f.net)} €</td><td>${texte(f.note)}</td></tr>`).join('')
     : '<tr><td colspan="5">Aucune fiche de paie.</td></tr>';
@@ -67,24 +66,6 @@ document.addEventListener('change', async (event) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ task_id: Number(tache), done: event.target.checked })
   });
-});
-
-document.querySelector('#report-form').addEventListener('submit', async (event) => {
-  event.preventDefault();
-  const retour = document.querySelector('#report-feedback');
-  const reponse = await fetch(apiEspace, {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ content: document.querySelector('#report-content').value })
-  });
-  const resultat = await reponse.json();
-  retour.textContent = resultat.message || resultat.error;
-  retour.dataset.state = reponse.ok ? 'success' : 'error';
-  if (reponse.ok) {
-    event.target.reset();
-    chargerEspaceEmploye();
-  }
 });
 
 async function initialiserChoixEmploye() {

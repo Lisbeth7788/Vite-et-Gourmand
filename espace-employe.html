@@ -23,7 +23,6 @@
     <nav class="admin-nav" aria-label="Sections de mon espace">
       <ol>
         <li><a href="#planning" data-section="planning" aria-current="page">Planning</a></li>
-        <li><a href="#compte-rendu" data-section="compte-rendu">Compte rendu</a></li>
         <li><a href="#documents" data-section="documents">Documents</a></li>
       </ol>
     </nav>
@@ -32,15 +31,6 @@
       <h3>Horaires</h3><ul id="planning-horaires" class="activite-liste"></ul>
       <h3>Tâches</h3><ul id="planning-taches" class="activite-liste"></ul>
     </section>
-    <section id="section-compte-rendu" class="form-section" hidden aria-labelledby="titre-cr">
-      <h2 id="titre-cr">Compte rendu de travail</h2>
-      <form id="report-form">
-        <div class="champ-formulaire"><label for="report-content">Résumé de ma journée</label><textarea id="report-content" name="content" rows="5" maxlength="2000" required></textarea></div>
-        <div class="profil-actions"><button class="button button-small" type="submit">Envoyer</button></div>
-        <p id="report-feedback" class="message-formulaire" role="status"></p>
-      </form>
-      <h3>Mes derniers comptes rendus</h3><ul id="report-list" class="activite-liste"></ul>
-    </section>
     <section id="section-documents" class="form-section" hidden aria-labelledby="titre-documents">
       <h2 id="titre-documents">Documents</h2>
       <h3>Fiches de paie</h3>
@@ -48,6 +38,6 @@
     </section>
   </main>
   <script src="js/script.js?v=60320912"></script>
-  <script type="module" src="js/employee.js?v=230f7bab"></script>
+  <script type="module" src="js/employee.js?v=b0e1e7f3"></script>
 </body>
 </html>
