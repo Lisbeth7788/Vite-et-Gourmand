@@ -10,8 +10,8 @@ const statusLabels = {
   pending: 'En attente',
   accepted: 'Acceptée',
   preparing: 'En préparation',
-  delivery: 'Prête',
-  delivered: 'Retirée',
+  delivery: 'En cours de livraison',
+  delivered: 'Livrée',
   material_return: 'Retour du matériel',
   completed: 'Terminée',
   cancelled: 'Annulée'

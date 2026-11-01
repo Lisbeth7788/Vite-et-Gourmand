@@ -71,7 +71,7 @@ function ligneReservation(order) {
       '<div class="champ-formulaire"><label>Personnes <input name="people" type="number" min="1" value="' + Number(order.people) + '" required></label></div>' +
       '<div class="champ-formulaire"><label>Adresse <input name="address" type="text" value="' + echapperTexte(order.address || '') + '" required></label></div>' +
       '<div class="champ-formulaire"><label>Ville <input name="city" type="text" value="' + echapperTexte(order.city || '') + '" required></label></div>' +
-      '<div class="champ-formulaire"><label>Distance depuis Bordeaux (km) <input name="distance" type="number" min="0" step="0.1" value="' + Number(order.distance || 0) + '"></label></div>
+      '<div class="champ-formulaire"><label>Distance depuis Bordeaux (km) <input name="distance" type="number" min="0" step="0.1" value="' + Number(order.distance || 0) + '"></label></div>' +
       '<div class="champ-formulaire"><label>Téléphone <input name="phone" type="tel" value="' + echapperTexte(order.phone || '') + '" required></label></div>' +
       '<button class="button button-small" type="submit">Modifier la réservation</button></form>' +
       '<button class="button button-small" type="button" data-cancel-order="' + id + '">Annuler la réservation</button>';
