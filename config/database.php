@@ -78,9 +78,9 @@ function validEmail(mixed $email): bool
     return is_string($email) && filter_var(trim($email), FILTER_VALIDATE_EMAIL) !== false;
 }
 
-function enforceRateLimit(string $scope, int $limit, int $window): void
+function enforceRateLimit(string $scope, int $limit, int $window, ?string $key = null): void
 {
-    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $ip = $key ?? $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     $file = sys_get_temp_dir() . '/vite-et-gourmand-' . hash('sha256', $scope . '|' . $ip) . '.json';
     $now = time();
     $attempts = [];

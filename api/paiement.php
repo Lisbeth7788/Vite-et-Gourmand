@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../config/database.php';
 requireRole(['client', 'employe', 'admin']);
-enforceRateLimit('paiement', 20, 600);
+enforceRateLimit('paiement', 20, 600, 'user-' . $_SESSION['user']['id']);
 
 $donnees = requestData();
 if (requiredFields($donnees, ['commande_id'])) {

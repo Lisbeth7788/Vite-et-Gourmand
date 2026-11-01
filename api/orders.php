@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/mongodb.php';
 requireRole(['client', 'employe', 'admin']);
-enforceRateLimit('orders', 10, 600);
+enforceRateLimit('orders', 10, 600, 'user-' . $_SESSION['user']['id']);
 
 $data = requestData();
 $fields = ['first_name', 'last_name', 'email', 'phone', 'date', 'time', 'menu', 'people'];
