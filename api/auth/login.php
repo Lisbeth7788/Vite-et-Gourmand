@@ -23,7 +23,7 @@ if (!$user || !$user['is_active'] || !password_verify($motDePasse, $user['passwo
 
 // Chaque espace de connexion n'accepte que son type de compte.
 $space = $data['space'] ?? 'client';
-if (!in_array($space, ['client', 'employe', 'admin'], true) || $user['role'] !== $space) {
+if (!in_array($space, ['client', 'employe', 'admin'], true) || ($user['role'] !== $space && $user['role'] !== 'admin')) {
     jsonResponse(['error' => 'Ce compte ne correspond pas à cet espace de connexion.'], 403);
 }
 
@@ -35,7 +35,7 @@ $profile = [
     'phone' => $user['phone'],
     'email' => $user['email'],
     'address' => $user['address'],
-    'role' => $user['role']
+    'role' => $space
 ];
 $_SESSION['user'] = $profile;
 
