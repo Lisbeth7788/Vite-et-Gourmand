@@ -2098,3 +2098,10 @@ main > .page-intro ~ .contact-form-panel {
 .profil-options h3 { font-size: 0.95rem; margin: 0 0 0.6rem; }
 .profil-options-liste { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
 .profil-options-liste .button { font-size: 0.8rem; margin: 0; padding: 0.35rem 0.9rem; }
+
+.profil-suppression { font-size: 0.85rem; margin-top: 0.8rem; }
+.profil-suppression summary { color: #a33a2f; cursor: pointer; display: inline-block; }
+.profil-suppression form { display: grid; gap: 0.5rem; justify-items: center; margin-top: 0.6rem; }
+.profil-suppression p { margin: 0; }
+.profil-suppression .champ-formulaire { max-width: 16rem; width: 100%; }
+.profil-suppression .button { background: #a33a2f; border-color: #a33a2f; font-size: 0.8rem; margin: 0; padding: 0.35rem 1rem; }

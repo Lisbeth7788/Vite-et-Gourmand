@@ -33,6 +33,46 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'PATCH') {
     jsonResponse(['message' => 'Profil mis à jour.', 'user' => $_SESSION['user']]);
 }
 
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'DELETE') {
+    if ($user['role'] !== 'client') {
+        jsonResponse(['error' => 'Seuls les comptes clients peuvent être supprimés ici.'], 403);
+    }
+    $data = requestData();
+    $hashQuery = $pdo->prepare('SELECT password_hash FROM users WHERE id = ?');
+    $hashQuery->execute([$user['id']]);
+    $hash = $hashQuery->fetchColumn();
+    if (empty($data['password']) || !is_string($hash) || !password_verify((string) $data['password'], $hash)) {
+        jsonResponse(['error' => 'Mot de passe incorrect.'], 403);
+    }
+
+    $pdo->beginTransaction();
+    try {
+        // Les réservations en attente sont annulées et leur stock est restitué.
+        $pending = $pdo->prepare("SELECT id, menu_id FROM orders WHERE user_id = ? AND status = 'pending'");
+        $pending->execute([$user['id']]);
+        $restore = $pdo->prepare('UPDATE menus SET stock = stock + 1 WHERE id = ?');
+        $history = $pdo->prepare("INSERT INTO order_status_history (order_id, status, note) VALUES (?, 'cancelled', 'Compte supprimé par le client')");
+        foreach ($pending->fetchAll() as $order) {
+            $restore->execute([$order['menu_id']]);
+            $history->execute([$order['id']]);
+        }
+        $pdo->prepare("UPDATE orders SET status = 'cancelled', cancellation_reason = 'Compte supprimé par le client', cancellation_contact_method = 'espace client' WHERE user_id = ? AND status = 'pending'")
+            ->execute([$user['id']]);
+        // Les montants sont conservés pour la comptabilité, les données personnelles sont effacées.
+        $pdo->prepare("UPDATE orders SET first_name = 'Compte', last_name = 'supprimé', email = 'supprime@invalid', phone = '', address = '', city = '' WHERE user_id = ?")
+            ->execute([$user['id']]);
+        $pdo->prepare('DELETE FROM users WHERE id = ?')->execute([$user['id']]);
+        $pdo->commit();
+    } catch (Throwable $error) {
+        $pdo->rollBack();
+        jsonResponse(['error' => 'Le compte n’a pas pu être supprimé.'], 500);
+    }
+
+    $_SESSION = [];
+    session_destroy();
+    jsonResponse(['message' => 'Votre compte a été supprimé.']);
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'GET') {
     jsonResponse(['error' => 'Méthode non autorisée.'], 405);
 }

@@ -92,6 +92,18 @@ formulaireProfil.addEventListener('submit', async (event) => {
   }
 });
 
+document.querySelector('#delete-account-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (!window.confirm('Supprimer définitivement votre compte ?')) return;
+  try {
+    await demanderCompte('api/user/profile.php', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: event.currentTarget.elements.password.value }) });
+    sessionStorage.setItem('toast', 'Votre compte a été supprimé.');
+    window.location.href = 'index.html';
+  } catch (error) {
+    window.alert(error.message);
+  }
+});
+
 commandesCompte.addEventListener('click', async (event) => {
   const button = event.target.closest('[data-cancel-order]');
   if (!button) return;
