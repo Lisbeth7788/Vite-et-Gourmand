@@ -2045,8 +2045,8 @@ main > .page-intro ~ .contact-form-panel {
 .profil-suppression .champ-formulaire { max-width: 16rem; width: 100%; }
 .profil-suppression .button { background: #a33a2f; border-color: #a33a2f; font-size: 0.8rem; margin: 0; padding: 0.35rem 1rem; }
 
-.choix-espace{display:flex;justify-content:center;gap:.5rem;margin:0 auto 1.5rem;flex-wrap:wrap}
-.choix-espace a{padding:.45rem 1.1rem;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--ink);font-size:.95rem}
+.choix-espace{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:center;gap:.5rem;margin:0 auto 1.5rem;max-width:34rem;width:100%}
+.choix-espace a{align-items:center;display:flex;justify-content:center;min-height:3.25rem;padding:.5rem .35rem;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--ink);font-size:.95rem;font-weight:600;line-height:1.2;text-align:center;overflow-wrap:anywhere}
 .choix-espace a[aria-current='page']{background:var(--terracotta);border-color:var(--terracotta);color:#fff}
 
 #employee-feedback::before,#planning-feedback::before,#report-feedback::before,#employe-login-feedback::before,#admin-login-feedback::before{display:none}
