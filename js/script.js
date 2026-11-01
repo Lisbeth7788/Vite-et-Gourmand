@@ -393,7 +393,7 @@ if (loginForm) {
         }
       }
       const redirect = new URLSearchParams(window.location.search).get('redirect');
-      window.location.href = redirect === 'admin.html' ? 'admin.html' : (redirect || 'index.html');
+      window.location.href = redirect === 'admin.html' ? 'admin.html' : (redirect || 'compte.html');
     } catch (error) {
       showFormFeedback(loginForm, friendlyError(error), true);
     }

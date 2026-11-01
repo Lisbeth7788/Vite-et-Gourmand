@@ -30,8 +30,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'GET') {
 }
 
 $query = $pdo->prepare(
-    'SELECT id, menu_id, people, total, status, service_date, service_time, created_at
-     FROM orders WHERE user_id = ? ORDER BY created_at DESC'
+    'SELECT o.id, o.menu_id, m.name AS menu_name, o.people, o.total, o.status, o.statut_paiement, o.service_date, o.service_time, o.created_at
+     FROM orders o LEFT JOIN menus m ON m.id = o.menu_id WHERE o.user_id = ? ORDER BY o.created_at DESC'
 );
 $query->execute([$_SESSION['user']['id']]);
 $orders = $query->fetchAll();
