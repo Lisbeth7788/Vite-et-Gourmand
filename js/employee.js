@@ -1,5 +1,4 @@
 const apiEspace = 'api/employee/espace.php';
-let employeConsulte = '';
 
 function texte(valeur) {
   const span = document.createElement('span');
@@ -62,10 +61,8 @@ function tableauSemaine(semaine, prenom) {
 const libellesPostes = { patron: 'Patron', chef: 'Chef', 'sous-chef': 'Sous-chef', commis: 'Commis', serveur: 'Serveur', plongeur: 'Plongeur', livreur: 'Livreur' };
 
 async function chargerEspaceEmploye() {
-  const parametres = new URLSearchParams();
-  if (employeConsulte) parametres.set('user_id', employeConsulte);
   try {
-    const reponse = await fetch(apiEspace + '?' + parametres.toString(), { credentials: 'same-origin' });
+    const reponse = await fetch(apiEspace, { credentials: 'same-origin' });
     if (reponse.status === 401 || reponse.status === 403) {
       location.href = 'employe-connexion.html';
       return;
@@ -86,16 +83,6 @@ async function initialiserChoixEmploye() {
   const session = await chargerSession();
   if (session.data?.user?.role !== 'admin') return;
   document.querySelector('#employe-choix').hidden = false;
-  const reponse = await fetch('api/admin/employees.php', { credentials: 'same-origin' });
-  if (!reponse.ok) return;
-  const employes = await reponse.json();
-  const choix = document.querySelector('#employe-select');
-  choix.innerHTML = '<option value="">Mon propre espace</option>' +
-    employes.map((e) => '<option value="' + texte(e.id) + '">' + texte(e.first_name) + ' ' + texte(e.last_name) + '</option>').join('');
-  choix.addEventListener('change', async () => {
-    employeConsulte = choix.value;
-    await chargerEspaceEmploye();
-  });
 }
 
 await initialiserChoixEmploye();
