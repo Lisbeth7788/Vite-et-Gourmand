@@ -74,21 +74,17 @@
     choixHeure.disabled = false;
   }
 
-  function actualiserRecapitulatif() {
+  function actualiserRecapitulatif(forcer = false) {
     const menu = menuSelectionne();
     if (!menu) return;
     const minimum = Number(menu.minimum) || 1;
-    // Les options ne sont reconstruites que si le minimum change, sinon le sélecteur mobile se réinitialise.
-    if (champPersonnes.dataset.minimum !== String(minimum)) {
-      const precedent = Number(champPersonnes.value) || minimum;
-      champPersonnes.replaceChildren();
-      for (let n = Math.min(minimum, 6); n <= 6; n += 1) {
-        champPersonnes.add(new Option(`${n} personne${n > 1 ? 's' : ''}`, n));
-      }
-      champPersonnes.dataset.minimum = minimum;
-      champPersonnes.value = Math.min(Math.max(precedent, minimum), 6);
+    champPersonnes.min = minimum;
+    champPersonnes.max = 6;
+    // On ne corrige la valeur qu'à la fin de la saisie, sinon la frappe sur mobile est écrasée.
+    if (forcer) {
+      champPersonnes.value = Math.min(Math.max(Math.round(Number(champPersonnes.value)) || minimum, minimum), 6);
     }
-    const personnes = Number(champPersonnes.value) || minimum;
+    const personnes = Math.min(Math.max(Number(champPersonnes.value) || minimum, minimum), 6);
     document.querySelector('#reservation-aide-personnes').textContent = `Minimum : ${minimum}, maximum : 6 personnes par réservation.`;
     document.querySelector('#recapitulatif-menu').textContent = `${menu.name} × ${personnes}`;
     document.querySelector('#recapitulatif-date').textContent = champDate.value
@@ -98,9 +94,17 @@
 
   champDate.min = new Date().toISOString().split('T')[0];
   champDate.addEventListener('change', actualiserCreneaux);
-  formulaire.addEventListener('input', actualiserRecapitulatif);
-  formulaire.addEventListener('change', actualiserRecapitulatif);
-  actualiserRecapitulatif();
+  formulaire.addEventListener('input', () => actualiserRecapitulatif(false));
+  formulaire.addEventListener('change', () => actualiserRecapitulatif(true));
+  document.querySelector('.compteur-haut').addEventListener('click', () => {
+    champPersonnes.value = (Number(champPersonnes.value) || 0) + 1;
+    actualiserRecapitulatif(true);
+  });
+  document.querySelector('.compteur-bas').addEventListener('click', () => {
+    champPersonnes.value = (Number(champPersonnes.value) || 2) - 1;
+    actualiserRecapitulatif(true);
+  });
+  actualiserRecapitulatif(true);
 
   async function appelerApi(url, corps) {
     const reponse = await fetch(url, {
@@ -116,7 +120,7 @@
 
   formulaire.addEventListener('submit', async (evenement) => {
     evenement.preventDefault();
-    actualiserRecapitulatif();
+    actualiserRecapitulatif(true);
     if (!formulaire.checkValidity()) {
       formulaire.reportValidity();
       return;

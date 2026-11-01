@@ -2027,3 +2027,12 @@ main > .page-intro ~ .contact-form-panel {
   padding-bottom: 2rem;
 }
 
+
+.compteur-personnes { position: relative; }
+.compteur-personnes input { -moz-appearance: textfield; appearance: textfield; padding-right: 2.6rem; }
+.compteur-personnes input::-webkit-inner-spin-button,
+.compteur-personnes input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.compteur-fleches { bottom: 1px; display: flex; flex-direction: column; position: absolute; right: 1px; top: 1px; width: 2.4rem; }
+.compteur-fleches button { background: #f3ece2; border: 0; color: var(--ink); cursor: pointer; flex: 1; font-size: 0.7rem; line-height: 1; padding: 0; }
+.compteur-fleches .compteur-haut { border-radius: 0 9px 0 0; }
+.compteur-fleches .compteur-bas { border-radius: 0 0 9px 0; border-top: 1px solid #cfc2b1; }
