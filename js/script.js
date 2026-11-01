@@ -388,11 +388,7 @@ if (loginForm) {
       const response = await fetch('api/auth/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(new FormData(loginForm)))
-      });
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.error || 'La connexion a échoué.');
+        body: JSON.stringify({ ...Object.fromEntries(new FormData(loginForm)), space: 'client' })
       }
       showFormFeedback(loginForm, 'Connexion réussie.');
       sessionStorage.setItem('toast', 'Connexion réussie. Bienvenue !');

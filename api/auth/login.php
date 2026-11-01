@@ -17,6 +17,12 @@ if (!$user || !$user['is_active'] || !password_verify($data['password'], $user['
     jsonResponse(['error' => 'Adresse e-mail ou mot de passe incorrect.'], 401);
 }
 
+// Chaque espace de connexion n'accepte que son type de compte.
+$space = $data['space'] ?? 'client';
+if (!in_array($space, ['client', 'employe', 'admin'], true) || $user['role'] !== $space) {
+    jsonResponse(['error' => 'Ce compte ne correspond pas à cet espace de connexion.'], 403);
+}
+
 session_regenerate_id(true);
 $profile = [
     'id' => $user['id'],
