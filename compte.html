@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Espace personnel Vite et Gourmand.">
   <title>Mon compte - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=117cdbd2">
+  <link rel="stylesheet" href="css/style.css?v=2357a062">
 </head>
 <body>
   <header class="site-header">
@@ -24,15 +24,33 @@
         <li><a href="#session" data-section="session">Ma session</a></li>
       </ol>
     </nav>
-    <section id="section-profil" class="form-section" aria-labelledby="profile-title">
-      <h2 id="profile-title">Mes informations</h2>
-      <form id="profile-form" class="grille-formulaire">
-        <div class="champ-formulaire"><label for="profile-first-name">Prénom</label><input id="profile-first-name" name="first_name" required></div>
-        <div class="champ-formulaire"><label for="profile-last-name">Nom</label><input id="profile-last-name" name="last_name" required></div>
-        <div class="champ-formulaire"><label for="profile-phone">Téléphone</label><input id="profile-phone" name="phone" required></div>
-        <div class="champ-formulaire"><label for="profile-email">E-mail</label><input id="profile-email" name="email" type="email" required></div>
-        <div class="champ-formulaire"><label for="profile-address">Adresse</label><textarea id="profile-address" name="address" required></textarea></div>
-        <button class="button" type="submit">Enregistrer mes informations</button>
+    <section id="section-profil" class="form-section profil-carte" aria-labelledby="profile-title">
+      <div class="profil-entete">
+        <span class="profil-avatar" id="profile-avatar" aria-hidden="true">?</span>
+        <div>
+          <h2 id="profile-title">Mon profil</h2>
+          <p class="profil-sous-titre">Vos coordonnées servent à confirmer et suivre vos réservations.</p>
+        </div>
+      </div>
+      <form id="profile-form" class="profil-formulaire">
+        <fieldset>
+          <legend>Identité</legend>
+          <div class="profil-ligne">
+            <div class="champ-formulaire"><label for="profile-first-name">Prénom</label><input id="profile-first-name" name="first_name" autocomplete="given-name" required></div>
+            <div class="champ-formulaire"><label for="profile-last-name">Nom</label><input id="profile-last-name" name="last_name" autocomplete="family-name" required></div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Contact</legend>
+          <div class="profil-ligne">
+            <div class="champ-formulaire"><label for="profile-phone">Téléphone</label><input id="profile-phone" name="phone" type="tel" autocomplete="tel" required></div>
+            <div class="champ-formulaire"><label for="profile-email">E-mail</label><input id="profile-email" name="email" type="email" autocomplete="email" required></div>
+          </div>
+          <div class="champ-formulaire"><label for="profile-address">Adresse</label><textarea id="profile-address" name="address" rows="3" autocomplete="street-address" required></textarea></div>
+        </fieldset>
+        <div class="profil-actions">
+          <button class="button" type="submit">Enregistrer les modifications</button>
+        </div>
       </form>
       <p id="profile-feedback" class="message-formulaire" role="status"></p>
     </section>
@@ -68,6 +86,6 @@
   </footer>
 
   <script src="js/script.js?v=dc0e7f8d"></script>
-  <script src="js/account.js?v=318442d2"></script>
+  <script src="js/account.js?v=8b2df992"></script>
 </body>
 </html>

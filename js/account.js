@@ -40,6 +40,8 @@ async function chargerCompte() {
       email: profile.email,
       address: profile.address
     }).forEach(([field, value]) => { formulaireProfil.elements[field].value = value || ''; });
+    document.querySelector('#profile-avatar').textContent =
+      `${(profile.first_name || '?')[0]}${(profile.last_name || '')[0] || ''}`.toUpperCase();
     const activite = await demanderCompte('api/user/activity.php');
     activiteCompte.innerHTML = activite.length
       ? `<table><caption>Mes actions, de la plus récente à la plus ancienne</caption><thead><tr><th>Date</th><th>Action</th><th>Détail</th><th>Montant</th></tr></thead><tbody>${activite.map((evenement) => `<tr><td>${echapperTexte(evenement.event_at)}</td><td>${echapperTexte(libellesActivite[evenement.type] || evenement.type)}</td><td>${echapperTexte(evenement.type === 'suivi' ? evenement.detail.replace(/ : (\w+)$/, (_, statut) => ` : ${libellesStatuts[statut] || statut}`) : evenement.detail)}</td><td>${evenement.amount === null ? '' : `${Number(evenement.amount).toFixed(2)} €`}</td></tr>`).join('')}</tbody></table>`
