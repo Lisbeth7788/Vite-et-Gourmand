@@ -231,7 +231,24 @@ async function chargerPlanningAdmin() {
 }
 
 if (employeeForm) {
-  [['#shift-form', 'shift'], ['#task-form', 'task'], ['#payslip-form', 'payslip']].forEach(([selecteur, type]) => {
+  const formulaireSemaine = document.querySelector('#week-form');
+  formulaireSemaine.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const retour = document.querySelector('#week-feedback');
+    const alertes = document.querySelector('#week-warnings');
+    try {
+      const donnees = { date: formulaireSemaine.elements.date.value, type: 'week' };
+      const result = await demanderJson('api/admin/planning.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(donnees) });
+      retour.textContent = result.message;
+      retour.removeAttribute('data-state');
+      alertes.innerHTML = result.warnings.map((alerte) => '<li>' + echapperHtml(alerte) + '</li>').join('');
+      if (result.warnings.length) retour.textContent += ' Postes non couverts (effectif ou règles de travail insuffisants) :';
+    } catch (error) {
+      retour.textContent = error.message;
+      retour.dataset.state = 'error';
+      alertes.innerHTML = '';
+    }
+  });, 'shift'], ['#task-form', 'task'], ['#payslip-form', 'payslip']].forEach(([selecteur, type]) => {
     const formulaire = document.querySelector(selecteur);
     formulaire.addEventListener('submit', async (event) => {
       event.preventDefault();

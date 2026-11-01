@@ -43,11 +43,22 @@
         <div class="champ-formulaire"><label for="employee-last-name">Nom</label><input id="employee-last-name" name="last_name" required></div>
         <div class="champ-formulaire"><label for="employee-phone">Téléphone</label><input id="employee-phone" name="phone" type="tel" required></div>
         <div class="champ-formulaire"><label for="employee-email">E-mail</label><input id="employee-email" name="email" type="email" required></div>
-        <div class="champ-formulaire"><label for="employee-job">Poste</label><select id="employee-job" name="job_title" required><option value="cuisinier">Cuisinier</option><option value="serveur">Serveur</option><option value="livreur">Livreur</option><option value="plongeur">Plongeur</option><option value="responsable">Responsable</option></select></div>
+        <div class="champ-formulaire"><label for="employee-job">Poste</label><select id="employee-job" name="job_title" required><option value="patron">Patron</option><option value="cuisinier">Cuisinier</option><option value="serveur">Serveur</option><option value="plongeur">Plongeur</option><option value="livreur">Livreur</option></select></div>
         <div class="champ-formulaire"><label for="employee-password">Mot de passe provisoire</label><input id="employee-password" name="password" type="password" autocomplete="new-password" required><small>8 caractères minimum, une majuscule, une minuscule et un chiffre.</small></div>
         <button class="button button-small" type="submit">Créer le compte</button>
       </form>
       <p id="employee-feedback" class="message-formulaire" role="status"></p>
+    </section>
+
+    <section class="form-section" aria-labelledby="week-title">
+      <h2 id="week-title">Planning de la semaine</h2>
+      <p>Génère automatiquement les horaires de toute l'équipe (cuisiniers en alternance, serveur, plongeur, patron) : 35 h par semaine, 5 jours travaillés et 11 h de repos entre deux services. Les horaires déjà saisis sur cette semaine sont remplacés.</p>
+      <form id="week-form" class="grille-formulaire">
+        <div class="champ-formulaire"><label for="week-date">Semaine du</label><input id="week-date" name="date" type="date" required></div>
+        <button class="button button-small" type="submit">Générer la semaine</button>
+      </form>
+      <p id="week-feedback" class="message-formulaire" role="status"></p>
+      <ul id="week-warnings" class="activite-liste"></ul>
     </section>
 
     <section class="form-section" aria-labelledby="employee-list-title">
@@ -97,6 +108,6 @@
     </nav>
   </footer>
 
-  <script src="js/admin.js?v=5e6d51f4"></script>
+  <script src="js/admin.js?v=b5052e70"></script>
 </body>
 </html>
