@@ -2237,7 +2237,7 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
 }
 
 [hidden] {
-  display: none;
+  display: none !important;
 }
 
 .table-responsive {
