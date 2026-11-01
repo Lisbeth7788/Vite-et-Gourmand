@@ -40,7 +40,6 @@ if ($method === 'GET') {
 }
 
 const WEEKLY_LIMIT_MINUTES = 35 * 60;
-const PATRON_LIMIT_MINUTES = 48 * 60;
 const MAX_DAYS_PER_WEEK = 5;
 const MIN_REST_SECONDS = 11 * 3600;
 
@@ -56,11 +55,13 @@ function generateWeek(PDO $pdo, string $date): array
     $weekNumber = (int) $monday->format('W');
     $dayNames = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
     $slots = [
-        ['role' => 'cuisinier', 'label' => 'Midi', 'parts' => [['09:00', '16:00']]],
-        ['role' => 'cuisinier', 'label' => 'Soir', 'parts' => [['15:00', '22:00']]],
+        ['role' => 'cuisine', 'label' => 'Midi', 'parts' => [['09:00', '16:00']]],
+        ['role' => 'cuisine', 'label' => 'Soir', 'parts' => [['15:00', '22:00']]],
         ['role' => 'serveur', 'label' => 'Service complet', 'parts' => [['11:00', '14:30'], ['18:00', '21:30']]],
         ['role' => 'plongeur', 'label' => 'Service complet', 'parts' => [['11:00', '14:30'], ['18:00', '21:30']]]
     ];
+    $kitchenJobs = ['chef', 'sous-chef', 'commis'];
+    $ownerParts = [['11:00', '14:30'], ['18:00', '21:30']];
 
     $people = $pdo->query("SELECT id, first_name, job_title FROM users WHERE role = 'employe' AND is_active = 1 ORDER BY created_at, id")->fetchAll();
     $state = [];
@@ -85,15 +86,13 @@ function generateWeek(PDO $pdo, string $date): array
                 $minutes += minutesBetween($from, $to);
             }
             $firstStart = strtotime("$dayDate {$slot['parts'][0][0]}");
-            $pool = array_values(array_filter($people, fn ($p) => $p['job_title'] === $slot['role']));
-            $patrons = array_values(array_filter($people, fn ($p) => $p['job_title'] === 'patron'));
+            $pool = array_values(array_filter($people, fn ($p) => $slot['role'] === 'cuisine' ? in_array($p['job_title'], $kitchenJobs, true) : $p['job_title'] === $slot['role']));
             $chosen = null;
-            foreach ([$pool, $patrons] as $group) {
+            foreach ([$pool] as $group) {
                 $eligible = [];
                 foreach ($group as $index => $person) {
                     $s = $state[$person['id']];
-                    $limit = $person['job_title'] === 'patron' ? PATRON_LIMIT_MINUTES : WEEKLY_LIMIT_MINUTES;
-                    if ($s['today'] === $day || $s['days'] >= MAX_DAYS_PER_WEEK || $s['minutes'] + $minutes > $limit || $firstStart - $s['lastEnd'] < MIN_REST_SECONDS) {
+                    if ($s['today'] === $day || $s['days'] >= MAX_DAYS_PER_WEEK || $s['minutes'] + $minutes > WEEKLY_LIMIT_MINUTES || $firstStart - $s['lastEnd'] < MIN_REST_SECONDS) {
                         continue;
                     }
                     $eligible[] = ['person' => $person, 'minutes' => $s['minutes'], 'rotation' => ($index + $weekNumber + $day) % max(1, count($group))];
@@ -105,7 +104,7 @@ function generateWeek(PDO $pdo, string $date): array
                 }
             }
             if ($chosen === null) {
-                $warnings[] = $dayNames[$day] . ' ' . $monday->modify("+$day days")->format('d/m') . ' – ' . $slot['role'] . ' (' . $slot['label'] . ') à pourvoir';
+                $warnings[] = $dayNames[$day] . ' ' . $monday->modify("+$day days")->format('d/m') . ' – ' . ($slot['role'] === 'cuisine' ? 'cuisine' : $slot['role']) . ' (' . $slot['label'] . ') à pourvoir';
                 continue;
             }
             foreach ($slot['parts'] as [$from, $to]) {
@@ -115,6 +114,14 @@ function generateWeek(PDO $pdo, string $date): array
             $state[$chosen['id']]['days']++;
             $state[$chosen['id']]['today'] = $day;
             $state[$chosen['id']]['lastEnd'] = strtotime("$dayDate " . end($slot['parts'])[1]);
+        }
+        // Les propriétaires sont présents à chaque service, tous les jours.
+        foreach ($people as $person) {
+            if ($person['job_title'] === 'patron') {
+                foreach ($ownerParts as [$from, $to]) {
+                    $insert->execute([$person['id'], $dayDate, $from, $to, 'Présent au service']);
+                }
+            }
         }
     }
     $pdo->commit();

@@ -22,7 +22,7 @@ if ($method === 'POST') {
     if ($check->fetch()) {
         jsonResponse(['error' => 'Cette adresse e-mail est déjà utilisée.'], 409);
     }
-    $jobs = ['patron', 'cuisinier', 'serveur', 'plongeur', 'livreur'];
+    $jobs = ['patron', 'chef', 'sous-chef', 'commis', 'serveur', 'plongeur', 'livreur'];
     $job = strtolower(trim((string) ($data['job_title'] ?? '')));
     if (!in_array($job, $jobs, true)) {
         jsonResponse(['error' => 'Poste invalide.'], 400);
