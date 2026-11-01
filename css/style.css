@@ -2252,3 +2252,14 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
 
 .filtres-stats { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: center; margin-bottom: 1rem; }
 .tableau-stats { width: 75%; margin: 0 auto; table-layout: fixed; }
+
+.badge-role {
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+  background: #1f6f5c;
+}
+.badge-role-employe { background: #b36b00; }
+.badge-role-admin { background: #8c2f39; }

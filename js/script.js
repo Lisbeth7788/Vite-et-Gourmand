@@ -13,8 +13,15 @@ async function actualiserLienConnexion() {
     const session = await chargerSession();
     if (!session.ok) return;
     const role = session.data?.user?.role;
-    if (document.body.dataset.modeEmploye !== undefined) return;
     const liste = document.querySelector('.main-navigation ul');
+    if (liste && role && !liste.querySelector('.badge-role')) {
+      const nomsRoles = { client: 'Client', employe: 'Employé', admin: 'Administrateur' };
+      const badge = document.createElement('li');
+      badge.className = `badge-role badge-role-${role}`;
+      badge.textContent = `Connecté : ${nomsRoles[role] || role}`;
+      liste.append(badge);
+    }
+    if (document.body.dataset.modeEmploye !== undefined) return;
     if (liste && role === 'admin' && !liste.querySelector('.lien-gestion')) {
       const element = document.createElement('li');
       const lien = document.createElement('a');
