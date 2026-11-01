@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Réservations - Espace de gestion - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=masquage-etapes">
+  <link rel="stylesheet" href="css/style.css?v=c9142297">
 </head>
 <body>
   <header class="site-header">
@@ -40,6 +40,16 @@
 
     <section class="form-section" aria-labelledby="orders-management-title">
       <h2 id="orders-management-title">Réservations des clients</h2>
+      <form id="filtres-reservations" class="filtres-reservations" aria-label="Filtrer les réservations">
+        <label>Statut
+          <select id="filtre-statut"><option value="">Tous les statuts</option></select>
+        </label>
+        <label>Client (adresse e-mail)
+          <input id="filtre-client" type="search" placeholder="client@exemple.fr" autocomplete="off">
+        </label>
+        <button class="button button-small" type="submit">Rechercher</button>
+        <button class="button button-small bouton-secondaire" type="reset">Effacer</button>
+      </form>
       <div id="order-list" class="table-responsive"></div>
     </section>
   </main>
@@ -64,6 +74,6 @@
   </footer>
 
   <script type="module" src="js/script.js?v=selecteur-admin"></script>
-  <script src="js/admin.js?v=equipe-sans-gestion"></script>
+  <script src="js/admin.js?v=0956680a"></script>
 </body>
 </html>

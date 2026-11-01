@@ -62,7 +62,12 @@ function carteReservation(order, options) {
 }
 
 async function chargerCommandes() {
-  const orders = await demanderJson('api/admin/orders.php');
+  const parametres = new URLSearchParams();
+  const statut = document.querySelector('#filtre-statut')?.value;
+  const client = document.querySelector('#filtre-client')?.value.trim();
+  if (statut) parametres.set('status', statut);
+  if (client) parametres.set('email', client);
+  const orders = await demanderJson('api/admin/orders.php' + (parametres.size ? '?' + parametres : ''));
   if (!orders.length) {
     orderList.textContent = 'Aucune réservation trouvée.';
     return;
@@ -191,6 +196,24 @@ async function initialiserAdministration() {
 }
 
 if (orderList) {
+  const formulaireFiltres = document.querySelector('#filtres-reservations');
+  const filtreStatut = document.querySelector('#filtre-statut');
+  if (filtreStatut) {
+    filtreStatut.insertAdjacentHTML('beforeend', Object.entries(statusLabels).map(([valeur, libelle]) => `<option value="${valeur}">${libelle}</option>`).join(''));
+  }
+  const actualiserFiltres = async () => {
+    try {
+      await chargerCommandes();
+    } catch (error) {
+      orderList.textContent = error.message;
+    }
+  };
+  formulaireFiltres?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    actualiserFiltres();
+  });
+  filtreStatut?.addEventListener('change', actualiserFiltres);
+  formulaireFiltres?.addEventListener('reset', () => setTimeout(actualiserFiltres));
   orderList.addEventListener('change', async (event) => {
     const select = event.target.closest('[data-order-status]');
     if (!select) return;
