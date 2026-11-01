@@ -14,11 +14,11 @@ async function actualiserLienConnexion() {
     if (!session.ok) return;
     const role = session.data?.user?.role;
     const liste = document.querySelector('.main-navigation ul');
-    if (liste && role && !liste.querySelector('.badge-role')) {
+    if (liste && role && role !== 'admin' && !liste.querySelector('.badge-role')) {
       const nomsRoles = { client: 'Client', employe: 'Employé', admin: 'Administrateur' };
       const badge = document.createElement('li');
       badge.className = `badge-role badge-role-${role}`;
-      badge.textContent = role === 'admin' ? 'Vue client (compte administrateur)' : `Connecté : ${nomsRoles[role] || role}`;
+      badge.textContent = `Connecté : ${nomsRoles[role] || role}`;
       liste.append(badge);
     }
     if (document.body.dataset.modeEmploye !== undefined) return;
