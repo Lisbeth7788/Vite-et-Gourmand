@@ -2112,3 +2112,7 @@ main > .page-intro ~ .contact-form-panel {
 
 #employee-feedback::before,#planning-feedback::before,#report-feedback::before,#employe-login-feedback::before,#admin-login-feedback::before{display:none}
 #employee-feedback:empty,#planning-feedback:empty,#report-feedback:empty{display:none}
+
+.message-formulaire:empty{display:none}
+.message-formulaire:not([data-state='error']){background:none;border:0;padding:0;margin:.75rem 0 0;justify-content:center;text-align:center;color:var(--ink)}
+.message-formulaire:not([data-state='error'])::before{display:none}
