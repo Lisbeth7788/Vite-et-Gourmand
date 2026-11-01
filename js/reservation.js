@@ -19,6 +19,8 @@ async function initialiserReservation() {
   const champPersonnes = document.querySelector('#reservation-personnes');
   const champDate = document.querySelector('#reservation-date');
   const choixHeure = document.querySelector('#reservation-heure');
+  const champVille = document.querySelector('#reservation-ville');
+  const champDistance = document.querySelector('#champ-distance');
   const introduction = document.querySelector('#reservation-intro');
   let utilisateur;
   let menus = [];
@@ -62,29 +64,8 @@ async function initialiserReservation() {
     document.querySelector('#lien-retour').href = `menu-detail.html?menu=${encodeURIComponent(menuDemande)}`;
   }
 
-  const horaires = {
-    semaine: [['11:30', '14:00'], ['18:00', '22:00']],
-    weekend: [['10:30', '15:00'], ['18:00', '22:00']]
-  };
-  const enMinutes = (heure) => Number(heure.slice(0, 2)) * 60 + Number(heure.slice(3, 5));
-  const enHeure = (minutes) => `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`;
-
-  function actualiserCreneaux() {
-    choixHeure.replaceChildren();
-    if (!champDate.value) {
-      choixHeure.add(new Option('Choisissez d’abord une date', ''));
-      choixHeure.disabled = true;
-      return;
-    }
-    const jour = new Date(`${champDate.value}T12:00:00`).getDay();
-    const plages = jour === 0 || jour === 6 ? horaires.weekend : horaires.semaine;
-    choixHeure.add(new Option('Choisissez un créneau', ''));
-    plages.forEach(([debut, fin]) => {
-      for (let minutes = enMinutes(debut); minutes < enMinutes(fin); minutes += 30) {
-        choixHeure.add(new Option(enHeure(minutes).replace(':', 'h'), enHeure(minutes)));
-      }
-    });
-    choixHeure.disabled = false;
+  function estBordeaux() {
+    return champVille.value.trim().toLowerCase() === 'bordeaux';
   }
 
   function actualiserRecapitulatif(forcer = false) {
@@ -92,25 +73,32 @@ async function initialiserReservation() {
     if (!menu) return;
     const minimum = Number(menu.minimum) || 1;
     champPersonnes.min = minimum;
-    champPersonnes.max = 10;
+    champPersonnes.removeAttribute('max');
     // On ne corrige la valeur qu'à la fin de la saisie, sinon la frappe sur mobile est écrasée.
     if (forcer) {
-      champPersonnes.value = Math.min(Math.max(Math.round(Number(champPersonnes.value))       || minimum, minimum), 10);
+      champPersonnes.value = Math.max(Math.round(Number(champPersonnes.value)) || minimum, minimum);
     }
-          const personnes = Math.min(Math.max(Number(champPersonnes.value) || minimum, minimum), 10);
-    document.querySelector('#reservation-aide-personnes').textContent = `Minimum : ${minimum}, maximum : 10 personnes par réservation.`;
-    document.querySelector('#recapitulatif-menu').textContent = `${menu.name} × ${personnes}`;
+    const personnes = Math.max(Number(champPersonnes.value) || minimum, minimum);
+    champDistance.hidden = estBordeaux();
+    champDistance.querySelector('input').required = !estBordeaux();
+    const distance = estBordeaux() ? 0 : Math.max(Number(champDistance.querySelector('input').value) || 0, 0);
+    const prixMenu = Number(menu.price) * personnes;
+    const remise = personnes >= minimum + 5 ? prixMenu * 0.1 : 0;
+    const livraison = estBordeaux() ? 0 : 5 + 0.59 * distance;
+    document.querySelector('#reservation-aide-personnes').textContent = `Minimum : ${minimum} personnes. Remise de 10 % dès ${minimum + 5} personnes.`;
+    document.querySelector('#recapitulatif-menu').textContent = `${menu.name} × ${personnes} (${euros(prixMenu)})`;
     let texteDate = '-';
     if (champDate.value) {
       const heureChoisie = choixHeure.value ? ' à ' + choixHeure.value.replace(':', 'h') : '';
       texteDate = champDate.value + heureChoisie;
     }
     document.querySelector('#recapitulatif-date').textContent = texteDate;
-    document.querySelector('#recapitulatif-total').textContent = euros(Number(menu.price) * personnes);
+    document.querySelector('#recapitulatif-remise').textContent = remise ? `-${euros(remise)}` : 'Aucune';
+    document.querySelector('#recapitulatif-livraison').textContent = estBordeaux() ? 'Gratuite (Bordeaux)' : euros(livraison);
+    document.querySelector('#recapitulatif-total').textContent = euros(prixMenu - remise + livraison);
   }
 
   champDate.min = new Date().toISOString().split('T')[0];
-  champDate.addEventListener('change', actualiserCreneaux);
   formulaire.addEventListener('input', () => actualiserRecapitulatif(false));
   formulaire.addEventListener('change', () => actualiserRecapitulatif(true));
   document.querySelector('.compteur-haut').addEventListener('click', () => {
@@ -146,6 +134,10 @@ async function initialiserReservation() {
         phone: formulaire.elements.telephone.value,
         date: champDate.value,
         time: choixHeure.value,
+        address: formulaire.elements.adresse.value,
+        city: champVille.value,
+        distance: formulaire.elements.distance.value,
+        delivery_place: formulaire.elements.lieu.value,
         menu: choixMenu.value,
         people: champPersonnes.value
       });
