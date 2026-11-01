@@ -2093,3 +2093,8 @@ main > .page-intro ~ .contact-form-panel {
   .activite-ligne { grid-template-columns: 1fr auto; }
   .activite-detail { grid-column: 1 / -1; grid-row: 2; }
 }
+
+.profil-options { border-top: 1px solid var(--line); margin-top: 1.1rem; padding-top: 0.9rem; }
+.profil-options h3 { font-size: 0.95rem; margin: 0 0 0.6rem; }
+.profil-options-liste { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.profil-options-liste .button { font-size: 0.8rem; margin: 0; padding: 0.35rem 0.9rem; }

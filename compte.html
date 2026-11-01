@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Espace personnel Vite et Gourmand.">
   <title>Mon compte - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=ba54ad80">
+  <link rel="stylesheet" href="css/style.css?v=48b0bf74">
 </head>
 <body>
   <header class="site-header">
@@ -21,7 +21,6 @@
         <li><a href="#profil" data-section="profil" aria-current="page">Mon profil</a></li>
         <li><a href="#commandes" data-section="commandes">Mes réservations</a></li>
         <li><a href="#activite" data-section="activite">Mon activité</a></li>
-        <li><a href="#session" data-section="session">Ma session</a></li>
       </ol>
     </nav>
     <section id="section-profil" class="form-section profil-carte" aria-labelledby="profile-title">
@@ -53,17 +52,17 @@
         </div>
       </form>
       <p id="profile-feedback" class="message-formulaire" role="status"></p>
+      <div class="profil-options">
+        <h3>Options du compte</h3>
+        <div class="profil-options-liste">
+          <a class="button button-small" href="reservation.html">Nouvelle réservation</a>
+          <a class="button button-small bouton-secondaire" href="connexion.html?reset=1#password-reset">Changer mon mot de passe</a>
+          <a class="button button-small bouton-secondaire" href="api/auth/logout.php">Se déconnecter</a>
+        </div>
+      </div>
     </section>
     <section id="section-commandes" class="form-section" aria-labelledby="account-orders-title" hidden><h2 id="account-orders-title">Historique de mes commandes et réservations</h2><div id="account-orders"></div></section>
     <section id="section-activite" class="form-section" aria-labelledby="account-activity-title" hidden><h2 id="account-activity-title">Historique de mon activité</h2><div id="account-activity" class="table-responsive"></div></section>
-    <section id="section-session" class="form-section" aria-labelledby="account-session-title" hidden>
-      <h2 id="account-session-title">Ma session</h2>
-      <p>Vous êtes connecté. Vous pouvez vous déconnecter à tout moment.</p>
-      <div class="actions-paiement">
-        <a class="button" href="reservation.html">Nouvelle réservation</a>
-        <a class="button bouton-secondaire" href="api/auth/logout.php">Se déconnecter</a>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -86,6 +85,6 @@
   </footer>
 
   <script src="js/script.js?v=dc0e7f8d"></script>
-  <script src="js/account.js?v=a822c43e"></script>
+  <script src="js/account.js?v=ac7875a0"></script>
 </body>
 </html>

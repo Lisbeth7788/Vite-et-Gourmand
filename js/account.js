@@ -116,7 +116,7 @@ commandesCompte.addEventListener('submit', async (event) => {
 });
 
 function afficherSection(nom) {
-  const sections = ['profil', 'commandes', 'activite', 'session'];
+  const sections = ['profil', 'commandes', 'activite'];
   const choix = sections.includes(nom) ? nom : 'profil';
   sections.forEach((section) => { document.querySelector(`#section-${section}`).hidden = section !== choix; });
   document.querySelectorAll('[data-section]').forEach((lien) => {
