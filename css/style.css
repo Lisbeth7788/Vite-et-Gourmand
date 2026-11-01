@@ -2133,3 +2133,7 @@ main > .page-intro ~ .contact-form-panel {
 .order-page .order-summary dl div { border-bottom: 1px dashed var(--line); }
 .order-page .order-summary .summary-total { border-bottom: 0; font-size: 1.2rem; padding-top: 1rem; }
 .order-page #lien-retour { border-radius: 999px; font-size: 0.85rem; padding: 0.35rem 1rem; }
+
+#employe-choix{align-items:center;flex-wrap:wrap;gap:1rem;margin:0 auto 1rem}
+#employe-choix[hidden]{display:none}
+#employe-choix .champ-formulaire{margin:0}
