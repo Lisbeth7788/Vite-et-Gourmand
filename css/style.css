@@ -1704,6 +1704,20 @@ main > :last-child {
   white-space: nowrap;
 }
 
+.opening-hours-details {
+  font-size: 0.8rem;
+}
+
+.opening-hours-details summary {
+  cursor: pointer;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.opening-hours-details[open] summary {
+  margin-bottom: 0.35rem;
+}
+
 .site-footer nav {
   display: flex;
   flex-wrap: wrap;

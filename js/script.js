@@ -554,6 +554,13 @@ async function afficherHorairesPiedDePage() {
       ligne.append(nom, horaires);
       return ligne;
     }));
+    const openingHours = liste.parentElement;
+    const details = document.createElement('details');
+    details.className = 'opening-hours-details';
+    const summary = document.createElement('summary');
+    summary.textContent = 'Afficher les horaires par jour';
+    details.append(summary, liste);
+    openingHours.append(details);
   } catch (error) {
     console.warn('Conservation des horaires de secours du pied de page :', error);
   }
