@@ -88,15 +88,33 @@ async function chargerAvis() {
 async function chargerActivite() {
   const data = await demanderJson('api/admin/activity.php');
   const types = { inscription: 'Inscription', reservation: 'Réservation', paiement: 'Paiement', statut: 'Suivi', avis: 'Avis' };
-  document.querySelector('#activity-summary').textContent =
-    `${data.summary.payments} paiement(s) reçu(s) pour ${Number(data.summary.total_paid).toFixed(2)} € · ${data.summary.reservations} réservation(s) actives.`;
+  document.querySelector('#activity-summary').innerHTML =
+    '<div class="chiffre-cle"><strong>' + Number(data.summary.payments) + '</strong><span>paiements reçus</span></div>' +
+    '<div class="chiffre-cle"><strong>' + Number(data.summary.total_paid).toFixed(2) + ' €</strong><span>encaissés</span></div>' +
+    '<div class="chiffre-cle"><strong>' + Number(data.summary.reservations) + '</strong><span>réservations actives</span></div>';
   const days = document.querySelector('#activity-days');
   days.innerHTML = data.days.length
-    ? `<table><caption>Personnes réservées par service</caption><thead><tr><th>Jour</th><th>Service</th><th>Personnes</th><th>Places restantes</th></tr></thead><tbody>${data.days.map((day) => `<tr><td>${echapperHtml(day.service_date)}</td><td>${day.service === 'midi' ? 'Midi' : 'Soir'}</td><td>${echapperHtml(day.people)} / ${data.capacity}</td><td>${Math.max(0, data.capacity - Number(day.people))}</td></tr>`).join('')}</tbody></table>`
+    ? '<table class="tableau-activite tableau-services"><colgroup><col style="width:28%"><col style="width:14%"><col style="width:26%"><col style="width:16%"><col style="width:16%"></colgroup><thead><tr><th>Jour</th><th>Service</th><th>Personnes</th><th>Places restantes</th><th>État</th></tr></thead><tbody>' + data.days.map((day) => {
+      const personnes = Number(day.people);
+      const pourcent = Math.min(100, Math.round(personnes * 100 / data.capacity));
+      const niveau = pourcent >= 90 ? 'plein' : (pourcent >= 60 ? 'moyen' : 'libre');
+      const complet = personnes >= data.capacity;
+      return '<tr><td><strong>' + echapperHtml(dateLongue(day.service_date)) + '</strong></td><td><span class="pastille-service-nom">' + (day.service === 'midi' ? 'Midi' : 'Soir') + '</span></td>' +
+        '<td><strong>' + personnes + ' / ' + data.capacity + '</strong><div class="jauge"><div class="jauge-remplie jauge-' + niveau + '" style="width:' + pourcent + '%"></div></div></td>' +
+        '<td>' + Math.max(0, data.capacity - personnes) + '</td>' +
+        '<td><span class="etat-service ' + (complet ? 'etat-complet' : 'etat-ouvert') + '">' + (complet ? 'Complet' : 'Ouvert') + '</span></td></tr>';
+    }).join('') + '</tbody></table>'
     : 'Aucune réservation à venir.';
   activityList.innerHTML = data.events.length
-    ? `<table><caption>Actions des clients, de la plus récente à la plus ancienne</caption><thead><tr><th>Date</th><th>Action</th><th>Client</th><th>Détail</th><th>Montant</th></tr></thead><tbody>${data.events.map((event) => `<tr><td>${echapperHtml(event.event_at)}</td><td>${echapperHtml(types[event.type] || event.type)}</td><td>${echapperHtml(event.client)}<br>${echapperHtml(event.email)}</td><td>${echapperHtml(event.detail)}</td><td>${event.amount === null ? '' : `${Number(event.amount).toFixed(2)} €`}</td></tr>`).join('')}</tbody></table>`
+    ? '<table class="tableau-activite tableau-historique"><colgroup><col style="width:17%"><col style="width:15%"><col style="width:24%"><col style="width:32%"><col style="width:12%"></colgroup><thead><tr><th>Date</th><th>Action</th><th>Client</th><th>Détail</th><th>Montant</th></tr></thead><tbody>' + data.events.map((event) =>
+      '<tr><td>' + echapperHtml(event.event_at) + '</td><td><span class="fil-type fil-' + echapperHtml(event.type) + '">' + echapperHtml(types[event.type] || event.type) + '</span></td>' +
+      '<td><strong>' + echapperHtml(event.client) + '</strong><br><small>' + echapperHtml(event.email) + '</small></td><td>' + echapperHtml(event.detail) + '</td>' +
+      '<td><strong>' + (event.amount === null ? '' : Number(event.amount).toFixed(2) + ' €') + '</strong></td></tr>').join('') + '</tbody></table>'
     : 'Aucune activité enregistrée.';
+}
+
+function dateLongue(iso) {
+  return new Date(iso + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 }
 
 async function chargerEmployes() {

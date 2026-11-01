@@ -2196,3 +2196,49 @@ ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.
 
 #order-list{max-width:75%;margin:0 auto}
 @media (max-width:800px){#order-list{max-width:100%}}
+
+.chiffres-cles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem}
+.chiffre-cle{background:#f6ece4;border-radius:14px;padding:1rem;text-align:center;display:grid;gap:.2rem}
+.chiffre-cle strong{font-size:1.7rem;color:var(--terracotta,#b5532f)}
+.chiffre-cle span{color:#7a6c5d;font-size:.85rem}
+.aide-section{color:#7a6c5d;font-size:.9rem;margin-top:0}
+.grille-services{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.carte-service{background:#fff;border:1px solid var(--line,#e6dccf);border-radius:14px;padding:.9rem 1rem;display:grid;gap:.6rem}
+.carte-service-tete{display:flex;justify-content:space-between;gap:.5rem;align-items:center}
+.carte-service-tete strong{text-transform:capitalize}
+.carte-service-tete span{background:#3b2f27;color:#fff;border-radius:999px;padding:.1rem .6rem;font-size:.75rem}
+.carte-service p{margin:0;font-size:.85rem;color:#7a6c5d}
+.jauge{height:10px;background:#eee9e3;border-radius:999px;overflow:hidden}
+.jauge-remplie{height:100%;border-radius:999px}
+.jauge-libre{background:#2f8f4e}
+.jauge-moyen{background:#e0a030}
+.jauge-plein{background:#c0392b}
+.fil-activite{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.fil-activite li{display:flex;gap:.8rem;align-items:flex-start;background:#fff;border:1px solid var(--line,#e6dccf);border-radius:12px;padding:.7rem .9rem}
+.fil-activite small{display:block;color:#7a6c5d;margin-top:.2rem}
+.fil-type{flex:0 0 auto;min-width:6.5rem;text-align:center;padding:.2rem .6rem;border-radius:999px;font-size:.75rem;font-weight:700;background:#eee9e3;color:#5a4d40}
+.fil-paiement{background:#dff1e1;color:#1f6b35}
+.fil-reservation{background:#dbe8f7;color:#1f4f85}
+.fil-inscription{background:#f6ece4;color:#8a4a2a}
+.fil-avis{background:#fdeccf;color:#8a5a00}
+
+#activity-summary,#activity-days,#activity-list{max-width:75%;margin:0 auto}
+[aria-labelledby^='activity-'] h2,[aria-labelledby^='activity-'] .aide-section{text-align:center}
+.chiffre-cle strong{font-size:2.2rem}
+.chiffre-cle span{font-size:1rem;font-weight:600}
+.tableau-activite{width:100%;border-collapse:separate;border-spacing:0;text-align:center;font-size:1rem;background:#fff;border:2px solid #3b2f27;border-radius:12px;overflow:hidden}
+.tableau-activite thead th{background:#3b2f27;color:#fff;padding:.8rem .6rem;font-size:.95rem;text-align:center}
+.tableau-activite td{padding:.8rem .6rem;border-top:1px solid #e6dccf;vertical-align:middle;text-align:center}
+.tableau-activite tbody tr:nth-child(even){background:#faf5ef}
+.tableau-activite small{color:#7a6c5d}
+.tableau-activite .jauge{min-width:120px;height:14px}
+.pastille-service-nom{display:inline-block;background:#3b2f27;color:#fff;border-radius:999px;padding:.2rem .8rem;font-weight:600}
+@media (max-width:800px){#activity-summary,#activity-days,#activity-list{max-width:100%}}
+
+#activity-days,#activity-list{max-width:100%;overflow-x:auto}
+.tableau-activite{table-layout:fixed;width:85%;min-width:640px;margin:0 auto}
+.tableau-activite td{word-break:break-word;line-height:1.35}
+.tableau-activite .jauge{width:80%;min-width:0;margin:.4rem auto 0}
+.etat-service{display:inline-block;padding:.25rem .8rem;border-radius:999px;font-weight:700;font-size:.85rem}
+.etat-ouvert{background:#dff1e1;color:#1f6b35}
+.etat-complet{background:#f8d7d3;color:#a02a1d}
