@@ -9,7 +9,7 @@ function chargerSession() {
 async function actualiserLienConnexion() {
   const liensConnexion = [...document.querySelectorAll('.main-navigation a')]
     .filter((lien) => lien.getAttribute('href')?.includes('connexion'));
-  const panneauConnexion = document.querySelector('#login-panel');
+  const panneauConnexion = document.querySelector('#login-panel, #employe-login-form, #admin-login-form');
   try {
     const session = await chargerSession();
     if (!session.ok) {
@@ -18,7 +18,8 @@ async function actualiserLienConnexion() {
     }
     const role = session.data?.user?.role;
     if (panneauConnexion && role) {
-      window.location.replace('index.html');
+      const pageEspaceActif = role === 'admin' ? 'admin.html' : role === 'employe' ? 'espace-employe.html' : 'index.html';
+      window.location.replace(pageEspaceActif);
       return;
     }
     const liste = document.querySelector('.main-navigation ul');
@@ -55,6 +56,7 @@ async function actualiserLienConnexion() {
             link.removeAttribute('aria-busy');
           }
         });
+        element.append(document.createTextNode(' '));
         element.append(link);
       });
       liste.append(element);
@@ -95,7 +97,7 @@ async function actualiserLienConnexion() {
   }
 }
 
-const panneauConnexion = document.querySelector('#login-panel');
+const panneauConnexion = document.querySelector('#login-panel, #employe-login-form, #admin-login-form');
 if (panneauConnexion) panneauConnexion.hidden = true;
 actualiserLienConnexion();
 
