@@ -41,15 +41,20 @@ if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people
     jsonResponse(['error' => 'Le menu ou le nombre de personnes est invalide (10 personnes maximum par réservation).'], 400);
 }
 
-$capacityQuery = $pdo->prepare("SELECT COALESCE(SUM(people), 0) FROM orders WHERE service_date = ? AND status <> 'cancelled' FOR UPDATE");
-$capacityQuery->execute([$data['date']]);
+$isLunch = $data['time'] < '16:00';
+$capacityQuery = $pdo->prepare(
+    "SELECT COALESCE(SUM(people), 0) FROM orders
+     WHERE service_date = ? AND status <> 'cancelled' AND (service_time < '16:00:00') = ? FOR UPDATE"
+);
+$capacityQuery->execute([$data['date'], $isLunch ? 1 : 0]);
 $alreadyBooked = (int) $capacityQuery->fetchColumn();
-if ($alreadyBooked + $people > 30) {
+$serviceName = $isLunch ? 'le service du midi' : 'le service du soir';
+if ($alreadyBooked + $people > 60) {
     $pdo->rollBack();
-    $remaining = max(0, 30 - $alreadyBooked);
+    $remaining = max(0, 60 - $alreadyBooked);
     jsonResponse(['error' => $remaining > 0
-        ? "Capacité quotidienne atteinte : il ne reste que $remaining place(s) ce jour-là (30 personnes maximum par jour)."
-        : 'Ce jour est complet (30 personnes maximum par jour). Merci de choisir une autre date.'], 409);
+        ? "Capacité atteinte pour $serviceName : il ne reste que $remaining place(s) (60 personnes maximum par service)."
+        : "Le service est complet pour $serviceName (60 personnes maximum par service). Merci de choisir un autre créneau ou une autre date."], 409);
 }
 
 $menuTotal = (float) $menu['price'] * $people;

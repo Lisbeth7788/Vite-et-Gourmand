@@ -38,9 +38,9 @@ $summary = $pdo->query(
 )->fetch();
 
 $days = $pdo->query(
-    "SELECT service_date, SUM(people) AS people FROM orders
+    "SELECT service_date, IF(service_time < '16:00:00', 'midi', 'soir') AS service, SUM(people) AS people FROM orders
      WHERE status <> 'cancelled' AND service_date >= CURDATE()
-     GROUP BY service_date ORDER BY service_date LIMIT 60"
+     GROUP BY service_date, service ORDER BY service_date, service LIMIT 120"
 )->fetchAll();
 
-jsonResponse(['summary' => $summary, 'events' => $events, 'days' => $days, 'capacity' => 30]);
+jsonResponse(['summary' => $summary, 'events' => $events, 'days' => $days, 'capacity' => 60]);

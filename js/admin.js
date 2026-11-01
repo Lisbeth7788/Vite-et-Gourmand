@@ -77,7 +77,7 @@ async function chargerActivite() {
     `${data.summary.payments} paiement(s) reçu(s) pour ${Number(data.summary.total_paid).toFixed(2)} € · ${data.summary.reservations} réservation(s) actives.`;
   const days = document.querySelector('#activity-days');
   days.innerHTML = data.days.length
-    ? `<table><caption>Personnes réservées par jour</caption><thead><tr><th>Jour</th><th>Personnes</th><th>Places restantes</th></tr></thead><tbody>${data.days.map((day) => `<tr><td>${echapperHtml(day.service_date)}</td><td>${echapperHtml(day.people)} / ${data.capacity}</td><td>${Math.max(0, data.capacity - Number(day.people))}</td></tr>`).join('')}</tbody></table>`
+    ? `<table><caption>Personnes réservées par service</caption><thead><tr><th>Jour</th><th>Service</th><th>Personnes</th><th>Places restantes</th></tr></thead><tbody>${data.days.map((day) => `<tr><td>${echapperHtml(day.service_date)}</td><td>${day.service === 'midi' ? 'Midi' : 'Soir'}</td><td>${echapperHtml(day.people)} / ${data.capacity}</td><td>${Math.max(0, data.capacity - Number(day.people))}</td></tr>`).join('')}</tbody></table>`
     : 'Aucune réservation à venir.';
   activityList.innerHTML = data.events.length
     ? `<table><caption>Actions des clients, de la plus récente à la plus ancienne</caption><thead><tr><th>Date</th><th>Action</th><th>Client</th><th>Détail</th><th>Montant</th></tr></thead><tbody>${data.events.map((event) => `<tr><td>${echapperHtml(event.event_at)}</td><td>${echapperHtml(types[event.type] || event.type)}</td><td>${echapperHtml(event.client)}<br>${echapperHtml(event.email)}</td><td>${echapperHtml(event.detail)}</td><td>${event.amount === null ? '' : `${Number(event.amount).toFixed(2)} €`}</td></tr>`).join('')}</tbody></table>`
