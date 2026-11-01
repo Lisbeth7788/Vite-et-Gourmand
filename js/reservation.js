@@ -1,4 +1,16 @@
-﻿async function initialiserReservation() {
+﻿async function appelerApi(url, corps) {
+  const reponse = await fetch(url, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(corps)
+  });
+  const resultat = await reponse.json().catch(() => ({}));
+  if (!reponse.ok) throw new Error(resultat.error || 'La demande n’a pas pu être traitée.');
+  return resultat;
+}
+
+async function initialiserReservation() {
   const formulaire = document.querySelector('#formulaire-reservation');
   if (!formulaire) return;
   const formulairePaiement = document.querySelector('#formulaire-paiement');
@@ -19,7 +31,7 @@
     const session = await chargerSession();
     utilisateur = session.ok ? session.data?.user : null;
   } catch (error_) {
-    // Session indisponible : la réservation reste possible, la connexion sera demandée ensuite.
+    console.warn('Session indisponible :', error_);
     utilisateur = null;
   }
   const adresseConnexion = `connexion.html?redirect=${encodeURIComponent(window.location.pathname.split('/').pop() + window.location.search)}`;
@@ -38,7 +50,7 @@
   try {
     const reponse = await fetch('api/menus.php', { credentials: 'same-origin' });
     menus = (await reponse.json()).filter((menu) => Number(menu.stock) > 0);
-  } catch (erreur) {
+  } catch (error_) {
     showToast(friendlyError(error_), true);
   }
   menus.forEach((menu) => {
@@ -111,17 +123,6 @@
   });
   actualiserRecapitulatif(true);
 
-  async function appelerApi(url, corps) {
-    const reponse = await fetch(url, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(corps)
-    });
-    const resultat = await reponse.json().catch(() => ({}));
-    if (!reponse.ok) throw new Error(resultat.error || 'La demande n’a pas pu être traitée.');
-    return resultat;
-  }
 
   formulaire.addEventListener('submit', async (evenement) => {
     evenement.preventDefault();

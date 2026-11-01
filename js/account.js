@@ -98,7 +98,7 @@ async function chargerCompte() {
     }
     commandesCompte.innerHTML = orders.map(ligneReservation).join('');
   } catch (error_) {
-    // Session absente ou expirée : retour à la connexion.
+    console.warn('Session invalide :', error_);
     window.location.href = 'connexion.html?redirect=compte.html';
   }
 }
