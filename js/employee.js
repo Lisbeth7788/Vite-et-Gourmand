@@ -1,5 +1,3 @@
-import './planning-equipe.js?v=jours-visibles';
-
 const apiEspace = 'api/employee/espace.php';
 const libellesPostes = { patron: 'Patron', chef: 'Chef', 'sous-chef': 'Sous-chef', commis: 'Commis', serveur: 'Serveur', plongeur: 'Plongeur', livreur: 'Livreur' };
 

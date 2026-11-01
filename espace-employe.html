@@ -19,15 +19,6 @@
     <div id="employe-choix" class="profil-actions" hidden>
       <a class="button button-small bouton-secondaire" href="admin.html">← Retour à l'espace administrateur</a>
     </div>
-    <section id="section-planning" class="form-section" aria-labelledby="titre-planning">
-      <h2 id="titre-planning" class="visually-hidden">Planning de l'équipe</h2>
-      <ul class="planning-legende planning-legende-haut">
-        <li><span class="pastille-service">Service</span> 11h-14h30 et 18h-21h30 (7 h)</li>
-        <li><span class="pastille-repos">Repos</span> jour de repos</li>
-      </ul>
-      <div id="planning-simule"></div>
-      <button class="button button-small bouton-secondaire bouton-imprimer" type="button" onclick="window.print()">Imprimer le planning</button>
-    </section>
     <section class="form-section" aria-labelledby="titre-gestion">
       <h2 id="titre-gestion">Gérer le site</h2>
       <div class="profil-actions">
@@ -36,15 +27,8 @@
         <a class="button button-small" href="admin-menus.html">Menus et horaires</a>
       </div>
     </section>
-    <section class="form-section" aria-labelledby="titre-contacts">
-      <h2 id="titre-contacts">Contacts utiles</h2>
-      <ul class="activite-liste">
-        <li><strong>Julie et José</strong> (patrons) : présents à chaque service.</li>
-        <li><strong>Besoin d'un échange de service ou d'un congé ?</strong> Préviens les patrons au moins une semaine à l'avance.</li>
-      </ul>
-    </section>
   </main>
   <script type="module" src="js/script.js?v=selecteur-admin"></script>
-  <script type="module" src="js/employee.js?v=jours-visibles"></script>
+  <script type="module" src="js/employee.js?v=sans-planning"></script>
 </body>
 </html>
