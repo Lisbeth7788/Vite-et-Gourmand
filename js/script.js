@@ -23,6 +23,17 @@ async function actualiserLienConnexion() {
       element.append(lien);
       liste.append(element);
     }
+    if (liste && !liste.querySelector('.lien-espace-client')) {
+      const element = document.createElement('li');
+      const lien = document.createElement('a');
+      lien.className = 'lien-espace-client';
+      lien.href = 'compte.html';
+      lien.textContent = 'Mon espace client';
+      if (window.location.pathname.endsWith('compte.html')) lien.setAttribute('aria-current', 'page');
+      element.append(lien);
+      const dernier = liensConnexion[0]?.closest('li');
+      if (dernier) dernier.before(element); else liste.append(element);
+    }
     if (!liensConnexion.length) return;
     document.querySelectorAll('.login-section').forEach((section) => { section.hidden = true; });
     liensConnexion.forEach((lien) => {
