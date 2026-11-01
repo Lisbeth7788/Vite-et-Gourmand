@@ -2,13 +2,20 @@
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/mongodb.php';
+require_once __DIR__ . '/../config/tarifs.php';
 requireRole(['client', 'employe', 'admin']);
 enforceRateLimit('orders', 10, 600, 'user-' . $_SESSION['user']['id']);
 
 $data = requestData();
-$fields = ['first_name', 'last_name', 'email', 'phone', 'date', 'time', 'menu', 'people'];
+$fields = ['first_name', 'last_name', 'email', 'phone', 'address', 'city', 'date', 'time', 'menu', 'people'];
 if (requiredFields($data, $fields)) {
     jsonResponse(['error' => 'Tous les champs de commande sont obligatoires.'], 400);
+}
+
+$ville = trim((string) $data['city']);
+$distance = estBordeaux($ville) ? 0.0 : (float) ($data['distance'] ?? 0);
+if (!estBordeaux($ville) && ($distance <= 0 || $distance > 500)) {
+    jsonResponse(['error' => 'Indiquez la distance en kilomètres entre Bordeaux et le lieu de livraison.'], 400);
 }
 
 if (!validEmail($data['email'])) {
