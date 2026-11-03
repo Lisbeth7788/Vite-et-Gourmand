@@ -37,7 +37,7 @@ Cocher chaque ligne après l'avoir testée.
 - [ ] Comptes employés : créer, désactiver (la connexion doit alors échouer).
 - [ ] Client : donner un avis sur une réservation terminée.
 - [ ] Espace employé : connexion avec `employe`, accès aux réservations, aux avis et aux menus.
-- [x] Site déployé chez Hostinger et envoi d'e-mails testé avec une vraie adresse (test fait par Lisbeth).
+- [x] Site déployé chez Hostinger, envoi d'e-mails et parcours client testés en ligne avec une vraie adresse (tests faits par Lisbeth).
 - [ ] Formulaire de contact et réception de l'e-mail.
 - [ ] Affichage sur téléphone, au clavier et avec un zoom à 200 %.
 
