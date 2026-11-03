@@ -9,7 +9,7 @@ function chargerSession() {
 const panneauConnexion = document.querySelector('#login-panel, #employe-login-form, #admin-login-form');
 
 function pagePourEspace(role) {
-  return { admin: 'admin.html', employe: 'espace-employe.html', client: 'index.html' }[role] || 'index.html';
+  return { admin: 'admin.html', employe: 'admin-reservations.html', client: 'index.html' }[role] || 'index.html';
 }
 
 async function changerExperience(space, page, link) {
@@ -39,7 +39,7 @@ function ajouterSelecteurExperience(liste, role) {
   element.append(label);
   [
     ['client', 'Client', 'index.html'],
-    ['employe', 'Employé', 'espace-employe.html'],
+    ['employe', 'Employé', 'admin-reservations.html'],
     ['admin', 'Administrateur', 'admin.html']
   ].forEach(([space, name, page]) => {
     const link = document.createElement('a');
@@ -60,7 +60,7 @@ function ajouterLienEspace(liste, role, liensConnexion) {
   const element = document.createElement('li');
   const lien = document.createElement('a');
   lien.className = 'lien-espace-client';
-  lien.href = role === 'employe' ? 'espace-employe.html' : 'compte.html';
+  lien.href = role === 'employe' ? 'admin-reservations.html' : 'compte.html';
   lien.textContent = role === 'employe' ? 'Mon espace employé' : 'Mon espace client';
   if (window.location.pathname.endsWith(lien.getAttribute('href'))) lien.setAttribute('aria-current', 'page');
   element.append(lien);
