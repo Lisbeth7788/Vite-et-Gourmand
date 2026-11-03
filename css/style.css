@@ -2171,8 +2171,8 @@ main > .page-intro ~ .contact-form-panel {
   }
 }
 
-#employee-feedback::before,#planning-feedback::before,#report-feedback::before,#employe-login-feedback::before,#admin-login-feedback::before{display:none}
-#employee-feedback:empty,#planning-feedback:empty,#report-feedback:empty{display:none}
+#employee-feedback::before,#report-feedback::before,#employe-login-feedback::before,#admin-login-feedback::before{display:none}
+#employee-feedback:empty,#report-feedback:empty{display:none}
 
 .message-formulaire:empty{display:none}
 .message-formulaire:not([data-state='error']){background:none;border:0;padding:0;margin:.75rem 0 0;justify-content:center;text-align:center;color:var(--ink)}
@@ -2202,29 +2202,11 @@ main > .page-intro ~ .contact-form-panel {
 .etiquette-jour{background:var(--terracotta);border-radius:999px;color:#fff;font-size:.7rem;font-weight:700;padding:.1rem .55rem;vertical-align:middle}
 
 .semaine-navigation{align-items:center;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin:.5rem 0 1rem}
-.planning-equipe{width:100%;border-collapse:separate;border-spacing:0;font-size:.9rem;text-align:center;background:#fff;border:1px solid var(--line,#e6dccf);border-radius:12px;overflow:hidden}
-.planning-equipe th,.planning-equipe td{padding:.4rem .3rem;vertical-align:middle;white-space:nowrap}
-.planning-equipe tbody th{text-align:left;padding-left:1rem;white-space:nowrap}
-.planning-equipe small{color:#7a6c5d;font-weight:400}
-.planning-equipe .repos{color:#b5a898}
-.planning-equipe .ligne-moi{background:#f6ece4}
-.planning-legende{color:#7a6c5d;font-size:.8rem;text-align:center}
 
-.planning-equipe thead th{background:#3b2f27;color:#fff;padding:.6rem .4rem;font-weight:600}
-.planning-equipe thead th:first-child{text-align:left;padding-left:1rem}
-.planning-equipe td,.planning-equipe tbody th{padding:.55rem .4rem;border-top:1px solid #f0e8dd;vertical-align:middle}
-.planning-equipe tbody th strong{display:block}
-.planning-equipe tbody th small{color:#7a6c5d;font-weight:400}
-.planning-equipe .groupe-equipe th{background:#f6ece4;color:var(--terracotta,#b5532f);text-transform:uppercase;letter-spacing:.06em;font-size:.75rem;padding:.4rem 1rem;text-align:left}
-.planning-equipe .ligne-moi th,.planning-equipe .ligne-moi td{background:#fff3c4}
-.planning-equipe .total-heures{font-weight:700;white-space:nowrap}
 .pastille-service,.pastille-repos{display:inline-block;padding:.2rem .6rem;border-radius:999px;font-size:.78rem;font-weight:600}
 .pastille-service{background:#dff1e1;color:#1f6b35}
 .pastille-repos{background:#eee9e3;color:#5a4d40}
-ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.4rem;text-align:left;font-size:.9rem}
 
-#planning-simule{max-width:75%;margin:0 auto}
-#planning-simule h3{text-align:center}
 @media (max-width:800px){#planning-simule{max-width:100%}}
 
 .bloc-semaine{margin-bottom:3rem}
@@ -2297,12 +2279,7 @@ ul.planning-legende{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.
 .etat-ouvert{background:#dff1e1;color:#1f6b35}
 .etat-complet{background:#f8d7d3;color:#a02a1d}
 
-ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 1.5rem;margin:0 auto 1.5rem}
 
-.case-planning, .nom-planning { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; }
-.case-planning:hover .pastille-service, .case-planning:hover .pastille-repos { outline: 2px solid currentColor; }
-.nom-planning { text-decoration: underline dotted; }
-.aide-planning { text-align: center; }
 
 .filtres-stats { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: center; margin-bottom: 1rem; }
 .tableau-stats { width: 75%; margin: 0 auto; table-layout: fixed; }
@@ -2361,71 +2338,14 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
 }
 
 @media (max-width: 900px) {
-  .planning-equipe,
-  .planning-equipe tbody {
-    display: block;
-    border: 0;
-    background: none;
-  }
 
-  .planning-equipe thead {
-    display: none;
-  }
 
-  .planning-equipe tr {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .4rem;
-    align-items: center;
-    background: #fff;
-    border: 1px solid var(--line, #e6dccf);
-    border-radius: 12px;
-    margin-bottom: .6rem;
-    padding: .6rem;
-  }
 
-  .planning-equipe tr.groupe-equipe {
-    display: block;
-    background: #f6ece4;
-    border: 0;
-    padding: 0;
-  }
 
-  .planning-equipe tbody th {
-    flex: 1 1 100%;
-    border: 0;
-    padding: 0 0 .3rem;
-    white-space: normal;
-  }
 
-  .planning-equipe td {
-    flex: 1 1 4.5rem;
-    border: 0;
-    padding: .2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .15rem;
-  }
 
-  .planning-equipe td::before {
-    content: attr(data-label);
-    color: #3b2f27;
-    font-size: .85rem;
-    font-weight: 700;
-  }
 
-  .planning-equipe td.total-heures {
-    flex-basis: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    border-top: 1px solid #f0e8dd;
-    padding-top: .4rem;
-  }
 
-  .planning-equipe .ligne-moi {
-    background: #fff3c4;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2558,10 +2478,6 @@ a.button,
 
 .tableau-activite,
 .tableau-stats,
-.planning-equipe {
-  border: var(--bordure);
-  border-radius: var(--rayon-carte);
-}
 
 .champ-formulaire input,
 .champ-formulaire select,
