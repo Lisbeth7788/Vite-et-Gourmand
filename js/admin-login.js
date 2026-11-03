@@ -1,4 +1,4 @@
-﻿const formulaireAdmin = document.querySelector('#admin-login-form');
+const formulaireAdmin = document.querySelector('#admin-login-form');
 const retourAdmin = document.querySelector('#admin-login-feedback');
 
 function afficherRetourAdmin(message, erreur = false) {

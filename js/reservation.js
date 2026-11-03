@@ -1,4 +1,4 @@
-﻿async function appelerApi(url, corps) {
+async function appelerApi(url, corps) {
   const reponse = await fetch(url, {
     method: 'POST',
     credentials: 'same-origin',

@@ -1,6 +1,8 @@
 -- Mise à jour des menus et des plats (à importer dans phpMyAdmin, base déjà sélectionnée).
 -- Ne touche ni aux comptes, ni aux commandes.
 
+SET NAMES utf8mb4;
+
 INSERT INTO menus (id, name, price, minimum_people, theme, regime, description, image_path, conditions_text, stock)
 VALUES
   ('banquet-mariage', 'Le banquet de mariage', 95, 40, 'Événement', 'classique', 'Le grand repas de réception en cinq temps, pensé pour le plus beau jour : produits d''exception, dressage à l''assiette et pièce montée signature.', 'images/images/menu-reveillon.jpg', 'Commande au minimum 30 jours avant la prestation. Dégustation offerte sur rendez-vous. Service et dressage assurés par notre équipe. Conservation au réfrigérateur et consommation sous 24 heures.', 3),
