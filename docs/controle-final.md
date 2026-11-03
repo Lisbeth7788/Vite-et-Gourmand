@@ -26,7 +26,7 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 
 ## À faire avant l'envoi (hors code)
 
-1. **Joindre le dossier projet corrigé** : la dernière page du PDF actualise les passages rédigés avant les dernières évolutions.
+1. **Joindre le dossier projet corrigé** : les deux dernières pages du PDF actualisent les passages rédigés avant les dernières évolutions.
 2. **Joindre le manuel d'utilisation PDF** : [docs/manuel-utilisation.pdf](manuel-utilisation.pdf) présente les parcours actuels et les identifiants de démonstration.
 3. **Compléter la copie officielle ECF** téléchargée depuis Studi, puis la nommer selon l'énoncé. Ce modèle n'est pas dans le dépôt.
 4. **Importer les SQL sur Hostinger** : `sql/schema.sql` puis `sql/comptes-ecf.sql`.
