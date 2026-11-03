@@ -5,14 +5,6 @@ const REMISE_TAUX = 0.10;
 const LIVRAISON_FORFAIT = 5.0;
 const LIVRAISON_PAR_KM = 0.59;
 
-const DELAI_COMMANDE_JOURS = 2;
-
-// Un traiteur a besoin de temps pour préparer : la date de l'événement doit respecter ce délai.
-function dateMinimaleCommande(): string
-{
-    return date('Y-m-d', strtotime('+' . DELAI_COMMANDE_JOURS . ' days'));
-}
-
 function estBordeaux(string $ville): bool
 {
     return mb_strtolower(trim($ville)) === 'bordeaux';

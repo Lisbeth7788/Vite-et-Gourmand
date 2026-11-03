@@ -64,10 +64,8 @@ async function initialiserReservation() {
     document.querySelector('#lien-retour').href = `menu-detail.html?menu=${encodeURIComponent(menuDemande)}`;
   }
 
-  const modeRetrait = () => formulaire.elements.mode.value === 'retrait';
-
   function estBordeaux() {
-    return modeRetrait() || champVille.value.trim().toLowerCase() === 'bordeaux';
+    return champVille.value.trim().toLowerCase() === 'bordeaux';
   }
 
   function actualiserRecapitulatif(forcer = false) {
@@ -83,10 +81,6 @@ async function initialiserReservation() {
     const personnes = Math.max(Number(champPersonnes.value) || minimum, minimum);
     champDistance.hidden = estBordeaux();
     champDistance.querySelector('input').required = !estBordeaux();
-    document.querySelector('#bloc-livraison').hidden = modeRetrait();
-    formulaire.elements.adresse.required = !modeRetrait();
-    formulaire.elements.ville.required = !modeRetrait();
-    document.querySelector('#libelle-heure').textContent = modeRetrait() ? 'Heure de retrait' : 'Heure de livraison';
     const distance = estBordeaux() ? 0 : Math.max(Number(champDistance.querySelector('input').value) || 0, 0);
     const prixMenu = Number(menu.price) * personnes;
     const remise = personnes >= minimum + 5 ? prixMenu * 0.1 : 0;
@@ -100,13 +94,11 @@ async function initialiserReservation() {
     }
     document.querySelector('#recapitulatif-date').textContent = texteDate;
     document.querySelector('#recapitulatif-remise').textContent = remise ? `-${euros(remise)}` : 'Aucune';
-    document.querySelector('#recapitulatif-livraison').textContent = estBordeaux() ? (modeRetrait() ? 'Retrait sur place (gratuit)' : 'Gratuite (Bordeaux)') : euros(livraison);
+    document.querySelector('#recapitulatif-livraison').textContent = estBordeaux() ? 'Gratuite (Bordeaux)' : euros(livraison);
     document.querySelector('#recapitulatif-total').textContent = euros(prixMenu - remise + livraison);
   }
 
-  const dateMin = new Date();
-  dateMin.setDate(dateMin.getDate() + 2);
-  champDate.min = `${dateMin.getFullYear()}-${String(dateMin.getMonth() + 1).padStart(2, '0')}-${String(dateMin.getDate()).padStart(2, '0')}`;
+  champDate.min = new Date().toISOString().split('T')[0];
   formulaire.addEventListener('input', () => actualiserRecapitulatif(false));
   formulaire.addEventListener('change', () => actualiserRecapitulatif(true));
   document.querySelector('.compteur-haut').addEventListener('click', () => {
@@ -145,7 +137,6 @@ async function initialiserReservation() {
         address: formulaire.elements.adresse.value,
         city: champVille.value,
         distance: formulaire.elements.distance.value,
-        mode: formulaire.elements.mode.value,
         delivery_place: formulaire.elements.lieu.value,
         menu: choixMenu.value,
         people: champPersonnes.value
