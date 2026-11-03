@@ -203,7 +203,7 @@ if (pageDetail) {
             item.textContent = plat.name;
             const detail = document.createElement('span');
             detail.className = 'allergen';
-            detail.textContent = `Allerg?nes : ${plat.allergens}`;
+            detail.textContent = `Allergènes : ${plat.allergens}`;
             item.appendChild(detail);
             liste.appendChild(item);
           });
