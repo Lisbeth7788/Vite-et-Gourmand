@@ -33,8 +33,18 @@
         <h2 id="catalogue-title">Nos menus</h2>
         <p>Mariage, anniversaire, naissance, baptême, communion, Noël ou Pâques : choisissez le menu qui correspond à votre cérémonie. Nous le préparons et nous vous le livrons.</p>
       </div>
+      <form id="filtres-menus" class="filtres-menus" aria-label="Filtrer les menus">
+        <div class="champ-formulaire"><label for="filtre-prix-max">Prix maximum (€)</label><input id="filtre-prix-max" type="number" min="0" step="1" inputmode="numeric"></div>
+        <div class="champ-formulaire"><label for="filtre-prix-min">Prix à partir de (€)</label><input id="filtre-prix-min" type="number" min="0" step="1" inputmode="numeric"></div>
+        <div class="champ-formulaire"><label for="filtre-prix-borne">Prix jusqu'à (€)</label><input id="filtre-prix-borne" type="number" min="0" step="1" inputmode="numeric"></div>
+        <div class="champ-formulaire"><label for="filtre-theme">Thème</label><select id="filtre-theme"><option value="">Tous</option><option value="noel">Noël</option><option value="paques">Pâques</option><option value="classique">Classique</option><option value="evenement">Événement</option></select></div>
+        <div class="champ-formulaire"><label for="filtre-regime">Régime</label><select id="filtre-regime"><option value="">Tous</option><option value="classique">Classique</option><option value="vegetarien">Végétarien</option><option value="vegan">Vegan</option></select></div>
+        <div class="champ-formulaire"><label for="filtre-personnes">Personnes minimum</label><input id="filtre-personnes" type="number" min="1" step="1" inputmode="numeric"></div>
+        <button class="button button-small bouton-secondaire" type="reset">Effacer</button>
+      </form>
+      <p id="filtre-resultat" class="aide-section" role="status" aria-live="polite"></p>
 <div id="menu-list" class="catalogue-grid">
-            <article class="catalogue-card" data-people="40" data-price="95">
+            <article class="catalogue-card" data-people="40" data-price="95" data-theme="evenement" data-regime="classique">
               <img class="menu-placeholder-image" src="images/images/menu-reveillon.jpg" alt="Plat du menu Le banquet de mariage">
               <div class="catalogue-card-content">
                 <p class="card-tag">Mariage</p>
@@ -45,7 +55,7 @@
               </div>
             </article>
 
-            <article class="catalogue-card" data-people="10" data-price="62">
+            <article class="catalogue-card" data-people="10" data-price="62" data-theme="evenement" data-regime="classique">
               <img class="menu-placeholder-image" src="images/images/menu-printemps.jpg" alt="Plat du menu Le dîner d'anniversaire">
               <div class="catalogue-card-content">
                 <p class="card-tag">Anniversaire</p>
@@ -56,7 +66,7 @@
               </div>
             </article>
 
-            <article class="catalogue-card" data-people="8" data-price="58">
+            <article class="catalogue-card" data-people="8" data-price="58" data-theme="evenement" data-regime="classique">
               <img class="menu-placeholder-image" src="images/images/menu-marche.jpg" alt="Plat du menu Le brunch de naissance">
               <div class="catalogue-card-content">
                 <p class="card-tag">Naissance</p>
@@ -67,7 +77,7 @@
               </div>
             </article>
 
-            <article class="catalogue-card" data-people="12" data-price="72">
+            <article class="catalogue-card" data-people="12" data-price="72" data-theme="evenement" data-regime="classique">
               <img class="menu-placeholder-image" src="images/images/menu-reveillon.jpg" alt="Plat du menu Le repas de baptême et de communion">
               <div class="catalogue-card-content">
                 <p class="card-tag">Baptême et communion</p>
@@ -78,7 +88,7 @@
               </div>
             </article>
 
-            <article class="catalogue-card" data-people="20" data-price="68">
+            <article class="catalogue-card" data-people="20" data-price="68" data-theme="evenement" data-regime="classique">
               <img class="menu-placeholder-image" src="images/images/menu-marche.jpg" alt="Plat du menu Le cocktail de cérémonie">
               <div class="catalogue-card-content">
                 <p class="card-tag">Cocktail</p>
@@ -89,7 +99,7 @@
               </div>
             </article>
 
-            <article class="catalogue-card" data-people="8" data-price="89">
+            <article class="catalogue-card" data-people="8" data-price="89" data-theme="noel" data-regime="classique">
               <img class="menu-placeholder-image" src="images/images/menu-reveillon.jpg" alt="Plat du menu Le réveillon d'exception">
               <div class="catalogue-card-content">
                 <p class="card-tag">Noël</p>
@@ -100,7 +110,7 @@
               </div>
             </article>
 
-            <article class="catalogue-card" data-people="6" data-price="74">
+            <article class="catalogue-card" data-people="6" data-price="74" data-theme="paques" data-regime="classique">
               <img class="menu-placeholder-image" src="images/images/menu-printemps.jpg" alt="Plat du menu Le déjeuner de Pâques">
               <div class="catalogue-card-content">
                 <p class="card-tag">Pâques</p>
@@ -111,7 +121,7 @@
               </div>
             </article>
 
-            <article class="catalogue-card" data-people="6" data-price="79">
+            <article class="catalogue-card" data-people="6" data-price="79" data-theme="classique" data-regime="classique">
               <img class="menu-placeholder-image" src="images/images/menu-marche.jpg" alt="Plat du menu Le dîner gastronomique de Bordeaux">
               <div class="catalogue-card-content">
                 <p class="card-tag">Dîner gastronomique</p>
@@ -122,7 +132,7 @@
               </div>
             </article>
 
-            <article class="catalogue-card" data-people="10" data-price="64">
+            <article class="catalogue-card" data-people="10" data-price="64" data-theme="evenement" data-regime="vegan">
               <img class="menu-placeholder-image" src="images/images/menu-vegetal.jpg" alt="Plat du menu La table végétale d'exception">
               <div class="catalogue-card-content">
                 <p class="card-tag">Vegan</p>
