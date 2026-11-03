@@ -1979,6 +1979,13 @@ main > .page-intro ~ .contact-form-panel {
   color: #fff;
 }
 
+/* Raccourcis de l'espace employé */
+.employe-raccourcis { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); list-style: none; margin: 1.25rem auto 0; max-width: 44rem; padding: 0; }
+.employe-raccourcis a { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; color: var(--terracotta); display: flex; flex-direction: column; gap: 0.35rem; height: 100%; padding: 1rem 1.1rem; text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
+.employe-raccourcis a:hover, .employe-raccourcis a:focus-visible { border-color: var(--terracotta); transform: translateY(-2px); }
+.employe-raccourcis strong { font-size: 1rem; }
+.employe-raccourcis span { color: var(--ink); font-size: 0.82rem; opacity: 0.85; }
+
 /* Avis clients */
 .aucun-avis {
   color: var(--muted);
