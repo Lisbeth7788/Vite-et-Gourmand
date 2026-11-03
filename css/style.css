@@ -2015,10 +2015,17 @@ main > .page-intro ~ .contact-form-panel {
 }
 
 /* Horaires d'ouverture (deux groupes) */
-.actions-ligne { align-items: center; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; padding: 0 0.4rem; }
-.actions-ligne .button { flex: 1 1 4.5rem; font-size: 0.72rem; max-width: 5.5rem; padding: 0.2rem 0.5rem; text-align: center; }
-#menu-liste .tableau-activite { width: 100%; }
-#menu-liste .tableau-activite th:last-child, #menu-liste .tableau-activite td:last-child { width: 28%; }
+.actions-ligne { align-items: center; display: flex; flex: 0 0 auto; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+.actions-ligne .button { flex: 1 1 4.5rem; font-size: 0.72rem; max-width: 5.5rem; min-width: 5rem; padding: 0.25rem 0.5rem; text-align: center; }
+.menus-admin { display: flex; flex-direction: column; gap: 0.5rem; list-style: none; margin: 0 auto; max-width: 56rem; padding: 0; }
+.menu-admin-ligne { align-items: center; background: #f6f1ee; border-radius: 18px; display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; justify-content: space-between; padding: 0.6rem 1rem; }
+.menu-admin-titre { display: flex; flex: 1 1 14rem; flex-direction: column; min-width: 0; }
+.menu-admin-titre span { color: var(--muted); font-size: 0.78rem; }
+.menu-admin-infos { display: flex; flex: 0 1 auto; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin: 0; }
+.menu-admin-infos div { text-align: center; }
+.menu-admin-infos dt { color: var(--muted); font-size: 0.68rem; text-transform: uppercase; }
+.menu-admin-infos dd { font-size: 0.85rem; font-weight: 700; margin: 0; }
+@media (max-width: 560px) { .menu-admin-ligne { flex-direction: column; text-align: center; } .menu-admin-titre { flex-basis: auto; } }
 #horaires-liste { margin: 0 auto; max-width: 34rem; }
 .horaires-groupes { display: grid; gap: 0.35rem; list-style: none; margin: 0; padding: 0; }
 .horaires-groupe { align-items: center; background: #f6f1ee; border-radius: 999px; display: grid; gap: 0.6rem; grid-template-columns: 9.5rem 1fr auto; padding: 0.25rem 0.3rem 0.25rem 1rem; }
