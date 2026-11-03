@@ -28,7 +28,7 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 
 1. **Mettre à jour le dossier projet PDF** : règle du mot de passe (10 caractères), espace employé (réservations, avis, menus et horaires), espace administrateur (comptes employés, statistiques par menu), compte employé unique `employe`, e-mails de bienvenue et de confirmation.
 2. **Mettre à jour le manuel d'utilisation PDF** : identifiants de test ci-dessus et nouveaux parcours.
-3. **Importer les SQL sur Hostinger** : `sql/schema.sql` puis `sql/exemple-employe.sql`.
+3. **Importer les SQL sur Hostinger** : `sql/schema.sql` puis `sql/comptes-ecf.sql`.
 4. **Configurer MongoDB et le SMTP sur Hostinger** : sans eux, les statistiques affichent « MongoDB n'est pas configurée » et les e-mails ne partent pas.
 5. **Vérifier la branche `develop`** : la fusionner dans `main` après tests (bonnes pratiques Git demandées).
 6. **Partager le Trello** en lecture avec le correcteur.

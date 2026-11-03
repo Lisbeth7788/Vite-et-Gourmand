@@ -20,7 +20,7 @@ Projet réalisé dans le cadre de la formation Développeur Web et Web Mobile.
 1. Installer XAMPP, puis démarrer **Apache** et **MySQL**.
 2. Copier le dossier du projet dans `C:\xampp\htdocs\Vite-et-Gourmand`.
 3. Ouvrir phpMyAdmin (`http://localhost/phpmyadmin`) et importer le fichier `sql/schema.sql` (encodage `utf8mb4`).
-4. Importer ensuite `sql/exemple-employe.sql` pour créer le compte employé.
+4. Importer ensuite `sql/comptes-ecf.sql` pour créer les comptes de démonstration.
 5. Copier les variables de `.env.example` dans la configuration PHP (ou dans `config/env.local.php`, modèle : `config/env.local.example.php`).
 6. Pour les statistiques : activer l'extension PHP `mongodb` dans `php.ini` et démarrer MongoDB.
 7. Ouvrir `http://localhost/Vite-et-Gourmand/index.html`.

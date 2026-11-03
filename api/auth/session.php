@@ -17,6 +17,5 @@ if (!isset($_SESSION['user']['accountRole'])) {
 
 jsonResponse([
     'authenticated' => true,
-    'user' => $_SESSION['user'],
-    'canSwitchExperience' => ($_SESSION['user']['accountRole'] ?? $_SESSION['user']['role']) === 'admin'
+    'user' => $_SESSION['user']
 ]);

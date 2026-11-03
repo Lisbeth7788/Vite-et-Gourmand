@@ -14,10 +14,7 @@ $query = $pdo->prepare('SELECT id, first_name, last_name, phone, email, address,
 $query->execute([$identifiant]);
 $user = $query->fetch();
 
-// Le compte employé partagé accepte le mot de passe en majuscules ou en minuscules.
-$motDePasse = $user && $user['email'] === 'employe' ? mb_strtoupper($data['password']) : $data['password'];
-
-if (!$user || !$user['is_active'] || !password_verify($motDePasse, $user['password_hash'])) {
+if (!$user || !$user['is_active'] || !password_verify($data['password'], $user['password_hash'])) {
     jsonResponse(['error' => 'Adresse e-mail ou mot de passe incorrect.'], 401);
 }
 

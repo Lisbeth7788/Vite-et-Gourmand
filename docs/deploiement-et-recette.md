@@ -9,7 +9,7 @@ Ne jamais publier `.env`, les mots de passe ou le dossier local `mongo-data`.
 ## Étapes de déploiement (Hostinger)
 
 1. Créer la base MySQL et son utilisateur.
-2. Importer `sql/schema.sql` puis `sql/exemple-employe.sql` (encodage `utf8mb4`).
+2. Importer `sql/schema.sql` puis `sql/comptes-ecf.sql` (encodage `utf8mb4`).
 3. Configurer MongoDB, l'extension PHP `mongodb` et l'envoi d'e-mails.
 4. Envoyer les fichiers (ou relier le dépôt GitHub, branche `main`).
 5. Activer HTTPS.
