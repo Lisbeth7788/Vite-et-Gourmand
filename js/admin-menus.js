@@ -16,7 +16,7 @@ async function chargerMenus() {
   listeMenus.innerHTML = menus.length
     ? '<ul class="menus-admin">' + menus.map((menu) =>
       '<li class="menu-admin-ligne"><div class="menu-admin-titre"><strong>' + echapperHtml(menu.name) + '</strong><span>' + echapperHtml(menu.theme) + ' · ' + echapperHtml(menu.regime) + '</span></div>' +
-      '<dl class="menu-admin-infos"><div><dt>Prix</dt><dd>' + Number(menu.price).toFixed(2) + ' €</dd></div><div><dt>Minimum</dt><dd>' + Number(menu.minimum_people) + ' pers.</dd></div><div><dt>Stock</dt><dd>' + Number(menu.stock) + '</dd></div></dl>' +
+      '<dl class="menu-admin-infos"><div><dt>Prix</dt><dd>' + Number(menu.price).toFixed(2) + ' €</dd></div><div><dt>Minimum</dt><dd>' + Number(menu.minimum_people) + ' pers.</dd></div><div><dt>Stock</dt><dd>' + Number(menu.stock) + ' en stock</dd></div></dl>' +
       '<div class="actions-ligne"><button class="button button-small" type="button" data-menu-modifier="' + echapperHtml(menu.id) + '">Modifier</button><button class="button button-small bouton-secondaire" type="button" data-menu-supprimer="' + echapperHtml(menu.id) + '">Supprimer</button></div></li>').join('') + '</ul>'
     : 'Aucun menu.';
 }

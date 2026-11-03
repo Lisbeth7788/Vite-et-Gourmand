@@ -104,9 +104,6 @@ async function actualiserLienConnexion() {
     }
     const liste = document.querySelector('.main-navigation ul');
     if (!liste) return;
-    if (session.data?.canSwitchExperience && role === 'admin' && !liste.querySelector('.experience-switch')) {
-      ajouterSelecteurExperience(liste, role);
-    }
     if (document.body.dataset.modeEmploye !== undefined) return;
     ajouterLienEspace(liste, role, liensConnexion);
     if (liensConnexion.length) ajouterDeconnexion(liensConnexion);
