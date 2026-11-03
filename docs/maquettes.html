@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wireframes et maquettes — Vite et Gourmand</title>
+  <style>
+    @page { size: A4; margin: 12mm; }
+    :root {
+      color-scheme: light;
+      --ink: #302b28;
+      --muted: #6b625d;
+      --terracotta: #bd5b3b;
+      --terracotta-dark: #8f3f2b;
+      --wine: #5c2730;
+      --paper: #fff;
+      --sand: #eee8df;
+      --soft: #f9f4f1;
+      --line: #ded5cc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--soft);
+      font: 14px/1.45 "Segoe UI", Arial, sans-serif;
+    }
+    .screen-page {
+      position: relative;
+      display: flex;
+      height: 270mm;
+      flex-direction: column;
+      align-items: center;
+      padding: 5mm 1mm 10mm;
+      break-after: page;
+      page-break-after: always;
+    }
+    .screen-page:last-child { break-after: auto; page-break-after: auto; }
+    .page-heading { width: 100%; margin: 0 0 7mm; text-align: center; }
+    .eyebrow {
+      margin: 0 0 2mm;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 0; color: var(--terracotta-dark); font-size: 24px; }
+    h2 { margin: 0; color: var(--terracotta-dark); font-size: 20px; }
+    .subtitle { margin: 2mm 0 0; color: var(--muted); font-size: 12px; }
+    .device {
+      flex: 0 0 auto;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 8px 24px #302b2820;
+    }
+    .desktop {
+      width: 100%;
+      max-width: 190mm;
+      aspect-ratio: 16 / 10;
+      padding: 3mm;
+      border: 2mm solid #302b28;
+      border-radius: 4mm;
+    }
+    .phone {
+      width: 86mm;
+      height: 188mm;
+      padding: 2mm;
+      border: 2mm solid #302b28;
+      border-radius: 9mm;
+    }
+    .viewport {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--paper);
+      border-radius: 1.5mm;
+    }
+    .phone .viewport { border-radius: 6mm; }
+    .topbar {
+      display: flex;
+      min-height: 12mm;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5mm;
+      padding: 0 6mm;
+      color: var(--paper);
+      background: var(--wine);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .brand { white-space: nowrap; letter-spacing: .02em; }
+    .nav { display: flex; gap: 5mm; color: #fff8f4; font-weight: 500; }
+    .page-content { padding: 7mm; }
+    .desktop .page-content { padding: 7mm 10mm; }
+    .hero {
+      display: grid;
+      min-height: 49mm;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 8mm;
+    }
+    .hero h3, .page-content h3 { margin: 0 0 3mm; color: var(--wine); font-size: 20px; }
+    .hero p, .intro { margin: 0; color: var(--muted); }
+    .photo {
+      display: flex;
+      min-height: 37mm;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2mm;
+      background: linear-gradient(135deg, #e8d8c6, #c9a887 55%, #785a48);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .button {
+      display: inline-flex;
+      min-height: 10mm;
+      align-items: center;
+      justify-content: center;
+      margin-top: 4mm;
+      padding: 0 5mm;
+      border-radius: 1.5mm;
+      background: var(--terracotta);
+      color: #fff;
+      font-weight: 700;
+    }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 5mm 0 3mm;
+    }
+    .section-heading h4 { margin: 0; color: var(--wine); font-size: 14px; }
+    .section-heading span { color: var(--muted); font-size: 10px; }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4mm; }
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 2mm;
+      background: #fff;
+    }
+    .card .photo { min-height: 27mm; border-radius: 0; }
+    .card-body { padding: 3mm; }
+    .card-title { margin: 0 0 1mm; color: var(--ink); font-size: 12px; font-weight: 700; }
+    .card-meta { margin: 0; color: var(--muted); font-size: 10px; }
+    .price { margin-top: 2mm; color: var(--terracotta-dark); font-weight: 700; }
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3mm;
+      margin: 5mm 0;
+      padding: 4mm;
+      border: 1px solid var(--line);
+      border-radius: 2mm;
+      background: var(--soft);
+    }
+    .field-label { display: block; margin-bottom: 1mm; color: var(--muted); font-size: 9px; }
+    .field-value {
+      min-height: 9mm;
+      padding: 2mm 3mm;
+      border: 1px solid var(--line);
+      border-radius: 1mm;
+      background: #fff;
+      color: var(--ink);
+      font-size: 10px;
+    }
+    .desktop .catalog-cards { grid-template-columns: repeat(3, 1fr); }
+    .catalog-cards .photo { min-height: 31mm; }
+    .order-layout { display: grid; grid-template-columns: 1.3fr .7fr; gap: 8mm; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3mm; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field .field-value { min-height: 10mm; }
+    .summary {
+      padding: 5mm;
+      border: 1px solid var(--line);
+      border-radius: 2mm;
+      background: var(--soft);
+    }
+    .summary h4 { margin: 0 0 4mm; color: var(--wine); font-size: 13px; }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 4mm;
+      margin: 3mm 0;
+      color: var(--muted);
+      font-size: 10px;
+    }
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5mm;
+      padding-top: 3mm;
+      border-top: 1px solid var(--line);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .phone .topbar { min-height: 12mm; padding: 0 4mm; font-size: 10px; }
+    .phone .page-content { padding: 5mm 4mm; }
+    .phone .hero { display: flex; min-height: 0; flex-direction: column; align-items: stretch; gap: 3mm; }
+    .phone .hero h3, .phone .page-content h3 { font-size: 17px; }
+    .phone .hero .photo { min-height: 42mm; }
+    .phone .button { width: 100%; min-height: 11mm; margin-top: 3mm; }
+    .phone .section-heading { margin: 5mm 0 3mm; }
+    .phone .section-heading h4 { font-size: 12px; }
+    .phone .cards { grid-template-columns: 1fr; gap: 3mm; }
+    .phone .card { display: grid; grid-template-columns: 30mm 1fr; }
+    .phone .card .photo { min-height: 24mm; }
+    .phone .card-body { padding: 2mm; }
+    .phone .card-title { font-size: 10px; }
+    .phone .card-meta, .phone .price { font-size: 9px; }
+    .phone .filters { grid-template-columns: repeat(2, 1fr); gap: 2mm; margin: 3mm 0; padding: 2mm; }
+    .phone .field-value { min-height: 8mm; padding: 1.5mm; font-size: 9px; }
+    .phone .filter-label { font-size: 8px; }
+    .dish-list { display: grid; gap: 2mm; margin: 4mm 0; }
+    .dish {
+      display: flex;
+      justify-content: space-between;
+      gap: 3mm;
+      padding: 2.5mm 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 10px;
+    }
+    .dish span:last-child { color: var(--muted); text-align: right; }
+    .notice {
+      margin-top: 3mm;
+      padding: 3mm;
+      border-left: 1mm solid var(--terracotta);
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 9px;
+    }
+    .order-status {
+      margin: 4mm 0;
+      padding: 3mm;
+      border-radius: 2mm;
+      background: #f1e7d9;
+      color: var(--terracotta-dark);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .account-row {
+      margin: 3mm 0;
+      padding: 3mm;
+      border: 1px solid var(--line);
+      border-radius: 2mm;
+      background: #fff;
+    }
+    .account-row strong { display: block; color: var(--ink); font-size: 10px; }
+    .account-row span { display: block; margin-top: 1mm; color: var(--muted); font-size: 9px; }
+    .page-number {
+      position: absolute;
+      right: 2mm;
+      bottom: 1mm;
+      left: 2mm;
+      padding-top: 2mm;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 9px;
+      text-align: center;
+    }
+    @media screen {
+      body { padding: 12mm; }
+      .screen-page { max-width: 210mm; margin: 0 auto 12mm; background: #fff; box-shadow: 0 4px 24px #302b2818; }
+    }
+    @media print {
+      body { background: #fff; }
+      .device { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="screen-page desktop-page">
+      <header class="page-heading">
+        <p class="eyebrow">Wireframe bureautique · 01</p>
+        <h1>Accueil</h1>
+        <p class="subtitle">Découvrir le traiteur et accéder aux menus</p>
+      </header>
+      <div class="device desktop">
+        <div class="viewport">
+          <div class="topbar">
+            <span class="brand">Vite et Gourmand</span>
+            <nav class="nav"><span>Accueil</span><span>Nos menus</span><span>Notre histoire</span><span>Contact</span><span>Connexion</span></nav>
+          </div>
+          <div class="page-content">
+            <div class="hero">
+              <div><h3>Des menus faits maison</h3><p>Un traiteur bordelais pour vos repas et vos événements.</p><span class="button">Découvrir les menus</span></div>
+              <div class="photo">Visuel du menu du moment</div>
+            </div>
+            <div class="section-heading"><h4>Une cuisine généreuse, à partager</h4><span>Préparée avec soin à Bordeaux</span></div>
+            <div class="cards">
+              <article class="card"><div class="photo">Menu de saison</div><div class="card-body"><p class="card-title">Le menu du moment</p><p class="card-meta">Des produits choisis avec attention</p></div></article>
+              <article class="card"><div class="photo">Avis clients</div><div class="card-body"><p class="card-title">Ils nous font confiance</p><p class="card-meta">Consultez les avis publiés</p></div></article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="page-number">Vite et Gourmand · Maquettes de conception</p>
+    </section>
+
+    <section class="screen-page desktop-page">
+      <header class="page-heading">
+        <p class="eyebrow">Wireframe bureautique · 02</p>
+        <h1>Catalogue des menus</h1>
+        <p class="subtitle">Filtrer les offres et consulter les informations essentielles</p>
+      </header>
+      <div class="device desktop">
+        <div class="viewport">
+          <div class="topbar">
+            <span class="brand">Vite et Gourmand</span>
+            <nav class="nav"><span>Accueil</span><span>Nos menus</span><span>Notre histoire</span><span>Contact</span><span>Connexion</span></nav>
+          </div>
+          <div class="page-content">
+            <h3>Tous nos menus</h3>
+            <p class="intro">Choisissez une offre adaptée à votre événement.</p>
+            <div class="filters">
+              <div><span class="field-label">Prix maximum</span><div class="field-value">Tous les prix</div></div>
+              <div><span class="field-label">Thème</span><div class="field-value">Tous les thèmes</div></div>
+              <div><span class="field-label">Régime</span><div class="field-value">Toutes les options</div></div>
+              <div><span class="field-label">Personnes</span><div class="field-value">Nombre minimum</div></div>
+            </div>
+            <div class="cards catalog-cards">
+              <article class="card"><div class="photo">Photo du menu</div><div class="card-body"><p class="card-title">Menu classique</p><p class="card-meta">Entrée · plat · dessert</p><p class="price">À partir de 24 € / personne</p></div></article>
+              <article class="card"><div class="photo">Photo du menu</div><div class="card-body"><p class="card-title">Menu de saison</p><p class="card-meta">Cuisine fraîche et locale</p><p class="price">À partir de 32 € / personne</p></div></article>
+              <article class="card"><div class="photo">Photo du menu</div><div class="card-body"><p class="card-title">Menu de fête</p><p class="card-meta">Une proposition généreuse</p><p class="price">À partir de 38 € / personne</p></div></article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="page-number">Vite et Gourmand · Maquettes de conception</p>
+    </section>
+
+    <section class="screen-page desktop-page">
+      <header class="page-heading">
+        <p class="eyebrow">Wireframe bureautique · 03</p>
+        <h1>Formulaire de commande</h1>
+        <p class="subtitle">Renseigner la prestation et vérifier le récapitulatif</p>
+      </header>
+      <div class="device desktop">
+        <div class="viewport">
+          <div class="topbar">
+            <span class="brand">Vite et Gourmand</span>
+            <nav class="nav"><span>Mon compte</span><span>Mes commandes</span><span>Déconnexion</span></nav>
+          </div>
+          <div class="page-content">
+            <h3>Votre prestation</h3>
+            <p class="intro">Complétez les informations de livraison et vérifiez le prix avant confirmation.</p>
+            <div class="order-layout">
+              <div>
+                <div class="section-heading"><h4>Informations de livraison</h4><span>Étape 1 sur 2</span></div>
+                <div class="form-grid">
+                  <div class="form-field"><span class="field-label">Date souhaitée</span><div class="field-value">JJ / MM / AAAA</div></div>
+                  <div class="form-field"><span class="field-label">Heure de livraison</span><div class="field-value">-- : --</div></div>
+                  <div class="form-field full"><span class="field-label">Adresse</span><div class="field-value">Numéro et rue</div></div>
+                  <div class="form-field"><span class="field-label">Ville</span><div class="field-value">Votre ville</div></div>
+                  <div class="form-field"><span class="field-label">Distance si hors Bordeaux</span><div class="field-value">Distance en kilomètres</div></div>
+                  <div class="form-field"><span class="field-label">Nombre de personnes</span><div class="field-value">Minimum du menu requis</div></div>
+                  <div class="form-field"><span class="field-label">Menu sélectionné</span><div class="field-value">Menu choisi</div></div>
+                </div>
+                <span class="button">Continuer vers le paiement simulé</span>
+              </div>
+              <aside class="summary">
+                <h4>Récapitulatif</h4>
+                <div class="summary-row"><span>Menu</span><span>—</span></div>
+                <div class="summary-row"><span>Nombre de personnes</span><span>—</span></div>
+                <div class="summary-row"><span>Remise éventuelle</span><span>—</span></div>
+                <div class="summary-row"><span>Livraison</span><span>—</span></div>
+                <div class="summary-total"><span>Total estimé</span><span>— €</span></div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="page-number">Vite et Gourmand · Maquettes de conception</p>
+    </section>
+
+    <section class="screen-page mobile-page">
+      <header class="page-heading">
+        <p class="eyebrow">Wireframe mobile · 01</p>
+        <h1>Accueil</h1>
+        <p class="subtitle">Découvrir l'offre depuis un téléphone</p>
+      </header>
+      <div class="device phone">
+        <div class="viewport">
+          <div class="topbar"><span class="brand">Vite et Gourmand</span><span>☰</span></div>
+          <div class="page-content">
+            <div class="hero">
+              <h3>Bienvenue chez votre traiteur</h3>
+              <p>Des menus faits maison pour vos repas et événements.</p>
+              <div class="photo">Menu du moment</div>
+              <span class="button">Voir les menus</span>
+            </div>
+            <div class="section-heading"><h4>Nos suggestions</h4></div>
+            <div class="cards">
+              <article class="card"><div class="photo">Menu de saison</div><div class="card-body"><p class="card-title">Une cuisine généreuse</p><p class="card-meta">Découvrir la composition</p></div></article>
+            </div>
+            <div class="notice">Avis clients et informations sur le traiteur</div>
+          </div>
+        </div>
+      </div>
+      <p class="page-number">Vite et Gourmand · Maquettes de conception</p>
+    </section>
+
+    <section class="screen-page mobile-page">
+      <header class="page-heading">
+        <p class="eyebrow">Wireframe mobile · 02</p>
+        <h1>Détail d’un menu</h1>
+        <p class="subtitle">Lire la composition, les allergènes et les conditions</p>
+      </header>
+      <div class="device phone">
+        <div class="viewport">
+          <div class="topbar"><span>‹ Menus</span><span class="brand">Vite et Gourmand</span></div>
+          <div class="page-content">
+            <h3>Le menu de saison</h3>
+            <p class="intro">Une formule préparée avec des produits choisis.</p>
+            <div class="photo" style="min-height:42mm;margin-top:3mm">Photo du menu</div>
+            <div class="dish-list">
+              <div class="dish"><span>Entrée</span><span>Composition du plat</span></div>
+              <div class="dish"><span>Plat</span><span>Composition du plat</span></div>
+              <div class="dish"><span>Dessert</span><span>Composition du dessert</span></div>
+            </div>
+            <p class="card-meta">Allergènes et conditions de commande</p>
+            <div class="notice">Minimum de personnes et informations sur la livraison.</div>
+            <span class="button">Commander ce menu</span>
+          </div>
+        </div>
+      </div>
+      <p class="page-number">Vite et Gourmand · Maquettes de conception</p>
+    </section>
+
+    <section class="screen-page mobile-page">
+      <header class="page-heading">
+        <p class="eyebrow">Wireframe mobile · 03</p>
+        <h1>Espace client</h1>
+        <p class="subtitle">Consulter les commandes et leur avancement</p>
+      </header>
+      <div class="device phone">
+        <div class="viewport">
+          <div class="topbar"><span class="brand">Mon compte</span><span>☰</span></div>
+          <div class="page-content">
+            <h3>Mes commandes</h3>
+            <p class="intro">Retrouvez vos réservations et leur statut.</p>
+            <div class="order-status">Commande en préparation</div>
+            <div class="account-row"><strong>Menu de saison</strong><span>Livraison · date et heure</span><span>Commande n° —</span></div>
+            <div class="section-heading"><h4>Suivi de la commande</h4></div>
+            <div class="account-row"><strong>Commande acceptée</strong><span>Votre réservation est confirmée</span></div>
+            <div class="account-row"><strong>Préparation en cours</strong><span>Dernière mise à jour</span></div>
+            <div class="account-row"><strong>Historique</strong><span>Consulter les anciennes commandes</span></div>
+            <span class="button">Voir le détail</span>
+          </div>
+        </div>
+      </div>
+      <p class="page-number">Vite et Gourmand · Maquettes de conception</p>
+    </section>
+  </main>
+</body>
+</html>
