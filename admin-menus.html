@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Menus et horaires - Espace de gestion - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=54d58743">
+  <link rel="stylesheet" href="css/style.css?v=614ecf83">
 </head>
 <body>
   <header class="site-header">
@@ -37,24 +37,43 @@
       </ol>
     </nav>
 
-    <section class="form-section" aria-labelledby="menu-form-title">
+    <section class="form-section section-menu-edition" aria-labelledby="menu-form-title">
       <h2 id="menu-form-title">Ajouter ou modifier un menu</h2>
-      <form id="menu-form" class="grille-formulaire">
+      <form id="menu-form" class="formulaire-menu">
         <input type="hidden" name="id">
-        <div class="champ-formulaire"><label for="menu-nom">Titre</label><input id="menu-nom" name="name" required></div>
-        <div class="champ-formulaire"><label for="menu-prix">Prix pour le nombre minimum (€)</label><input id="menu-prix" name="price" type="number" min="1" step="0.01" required></div>
-        <div class="champ-formulaire"><label for="menu-min">Nombre minimum de personnes</label><input id="menu-min" name="minimum_people" type="number" min="1" required></div>
-        <div class="champ-formulaire"><label for="menu-stock">Stock (réservations possibles)</label><input id="menu-stock" name="stock" type="number" min="0" required></div>
-        <div class="champ-formulaire"><label for="menu-theme">Thème</label><input id="menu-theme" name="theme" list="themes" required><datalist id="themes"><option value="Noël"><option value="Pâques"><option value="Classique"><option value="Événement"><option value="Midi"><option value="Soir"></datalist></div>
-        <div class="champ-formulaire"><label for="menu-regime">Régime</label><select id="menu-regime" name="regime" required><option value="classique">Classique</option><option value="vegetarien">Végétarien</option><option value="vegan">Vegan</option></select></div>
-        <div class="champ-formulaire"><label for="menu-images">Images (une par ligne ; la première est la couverture)</label><textarea id="menu-images" name="images" rows="3" placeholder="images/images/menu-marche.jpg"></textarea></div>
-        <div class="champ-formulaire"><label for="menu-description">Description</label><textarea id="menu-description" name="description" rows="3" required></textarea></div>
-        <div class="champ-formulaire"><label for="menu-conditions">Conditions (délai de commande, stockage…)</label><textarea id="menu-conditions" name="conditions_text" rows="3"></textarea></div>
-        <div class="champ-formulaire"><label for="menu-entrees">Entrées (une par ligne ; allergènes après un point-virgule)</label><textarea id="menu-entrees" name="entrees" rows="3" placeholder="Velouté de potimarron ; lait"></textarea></div>
-        <div class="champ-formulaire"><label for="menu-plats">Plats</label><textarea id="menu-plats" name="plats" rows="3"></textarea></div>
-        <div class="champ-formulaire"><label for="menu-desserts">Desserts</label><textarea id="menu-desserts" name="desserts" rows="3"></textarea></div>
-        <button class="button button-small" type="submit">Enregistrer le menu</button>
-        <button class="button button-small bouton-secondaire" type="reset" id="menu-nouveau">Nouveau menu</button>
+        <fieldset>
+          <legend>Informations générales</legend>
+          <div class="ligne-menu ligne-menu-3">
+            <div class="champ-formulaire champ-large"><label for="menu-nom">Titre</label><input id="menu-nom" name="name" required></div>
+            <div class="champ-formulaire"><label for="menu-theme">Thème</label><input id="menu-theme" name="theme" list="themes" required><datalist id="themes"><option value="Noël"><option value="Pâques"><option value="Classique"><option value="Événement"><option value="Mariage"><option value="Anniversaire"></datalist></div>
+          </div>
+          <div class="ligne-menu ligne-menu-4">
+            <div class="champ-formulaire"><label for="menu-prix">Prix minimum (€)</label><input id="menu-prix" name="price" type="number" min="1" step="0.01" required></div>
+            <div class="champ-formulaire"><label for="menu-min">Personnes minimum</label><input id="menu-min" name="minimum_people" type="number" min="1" required></div>
+            <div class="champ-formulaire"><label for="menu-stock">Stock disponible</label><input id="menu-stock" name="stock" type="number" min="0" required></div>
+            <div class="champ-formulaire"><label for="menu-regime">Régime</label><select id="menu-regime" name="regime" required><option value="classique">Classique</option><option value="vegetarien">Végétarien</option><option value="vegan">Vegan</option></select></div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Présentation</legend>
+          <div class="ligne-menu ligne-menu-2">
+            <div class="champ-formulaire"><label for="menu-description">Description</label><textarea id="menu-description" name="description" rows="3" required></textarea></div>
+            <div class="champ-formulaire"><label for="menu-conditions">Conditions (délai de commande, stockage…)</label><textarea id="menu-conditions" name="conditions_text" rows="3"></textarea></div>
+          </div>
+          <div class="champ-formulaire"><label for="menu-images">Images (une par ligne ; la première est la couverture)</label><textarea id="menu-images" name="images" rows="2" placeholder="images/images/menu-marche.jpg"></textarea></div>
+        </fieldset>
+        <fieldset>
+          <legend>Composition du menu <small>une ligne par plat ; allergènes après un point-virgule</small></legend>
+          <div class="ligne-menu ligne-menu-3">
+            <div class="champ-formulaire"><label for="menu-entrees">Entrées</label><textarea id="menu-entrees" name="entrees" rows="4" placeholder="Velouté de potimarron ; lait"></textarea></div>
+            <div class="champ-formulaire"><label for="menu-plats">Plats</label><textarea id="menu-plats" name="plats" rows="4"></textarea></div>
+            <div class="champ-formulaire"><label for="menu-desserts">Desserts</label><textarea id="menu-desserts" name="desserts" rows="4"></textarea></div>
+          </div>
+        </fieldset>
+        <div class="actions-menu">
+          <button class="button button-small" type="submit">Enregistrer le menu</button>
+          <button class="button button-small bouton-secondaire" type="reset" id="menu-nouveau">Nouveau menu</button>
+        </div>
       </form>
       <output id="menu-retour" class="message-formulaire"></output>
     </section>

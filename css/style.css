@@ -1979,6 +1979,32 @@ main > .page-intro ~ .contact-form-panel {
   color: #fff;
 }
 
+/* Formulaire d'édition d'un menu */
+.section-menu-edition { margin-left: auto; margin-right: auto; max-width: 75%; }
+.formulaire-menu { display: grid; gap: 1.1rem; }
+.formulaire-menu fieldset { border: 1px solid var(--line); border-radius: 18px; display: grid; gap: 0.8rem; margin: 0; padding: 0.9rem 1.2rem 1.1rem; }
+.formulaire-menu legend { color: var(--terracotta); font-weight: 700; padding: 0 0.6rem; }
+.formulaire-menu legend small { color: var(--muted); font-weight: 400; margin-left: 0.5rem; }
+.ligne-menu { display: grid; gap: 0.8rem 1rem; }
+.ligne-menu-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ligne-menu-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ligne-menu-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ligne-menu .champ-large { grid-column: span 2; }
+.formulaire-menu .champ-formulaire { margin: 0; }
+.formulaire-menu .champ-formulaire label { font-size: 0.82rem; margin-bottom: 0.25rem; padding-left: 0.9rem; text-align: left; }
+.formulaire-menu .champ-formulaire input,
+.formulaire-menu .champ-formulaire select { border-radius: 999px; font-size: 0.92rem; padding: 0.5rem 1rem; text-align: left; width: 100%; }
+.formulaire-menu .champ-formulaire textarea { border-radius: 22px; font-size: 0.92rem; padding: 0.65rem 1rem; text-align: left; width: 100%; }
+.actions-menu { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+@media (max-width: 900px) {
+  .section-menu-edition { max-width: 100%; }
+  .ligne-menu-3, .ligne-menu-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .ligne-menu-2, .ligne-menu-3, .ligne-menu-4 { grid-template-columns: 1fr; }
+  .ligne-menu .champ-large { grid-column: auto; }
+}
+
 /* Raccourcis de l'espace employé */
 .employe-raccourcis { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); list-style: none; margin: 1.25rem auto 0; max-width: 44rem; padding: 0; }
 .employe-raccourcis a { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; color: var(--terracotta); display: flex; flex-direction: column; gap: 0.35rem; height: 100%; padding: 1rem 1.1rem; text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
