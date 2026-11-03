@@ -2438,3 +2438,65 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
     transition: none;
   }
 }
+
+  /* Contenants uniformes : trois quarts de l'écran, centrés, mêmes marges des deux côtés */
+  main > .form-section,
+  main > .catalogue-section,
+  main > .admin-nav,
+  main > .auth-layout,
+  main > .order-layout,
+  main > .legal-content,
+  main > .contact-form-panel,
+  main > .page-intro ~ .history-story,
+  main > .reset-panel,
+  main > .profil-actions {
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: none;
+    width: 75%;
+  }
+
+  main .form-section > *,
+  .section-menu-edition,
+  #planning-simule,
+  #order-list,
+  #activity-summary,
+  #activity-days,
+  #activity-list,
+  #account-orders,
+  #account-activity,
+  #horaires-liste,
+  .menus-admin,
+  .evenements-entete,
+  .evenement-prochain,
+  .employe-raccourcis {
+    max-width: 100%;
+  }
+
+  .tableau-stats,
+  .tableau-activite {
+    width: 100%;
+  }
+
+  .section-menu-edition,
+  .profil-carte {
+    width: 75%;
+  }
+
+  @media (max-width: 800px) {
+    main > .form-section,
+    main > .catalogue-section,
+    main > .admin-nav,
+    main > .auth-layout,
+    main > .order-layout,
+    main > .legal-content,
+    main > .contact-form-panel,
+    main > .page-intro ~ .history-story,
+    main > .reset-panel,
+    main > .profil-actions,
+    .section-menu-edition,
+    .profil-carte {
+      width: 92%;
+    }
+  }
