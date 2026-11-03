@@ -227,7 +227,7 @@ select:-webkit-autofill {
 .page-intro p:last-child {
   background: rgba(96, 77, 62, 0.55);
   border-radius: 12px;
-  color: #ffe9d9;
+  color: #ffd0ad;
   padding: 0.5rem 1rem;
   margin-left: auto;
   margin-right: auto;
@@ -718,7 +718,7 @@ h1 + p {
 .contact-page-body .page-intro p:not(.eyebrow) {
   background: rgba(96, 77, 62, 0.55);
   border-radius: 12px;
-  color: #ffe9d9;
+  color: #ffd0ad;
   font-size: 0.95rem;
   font-style: italic;
   font-weight: 400;
@@ -1920,7 +1920,7 @@ main > :last-child {
 .hero p:not(.eyebrow),
 .page-intro p:not(.eyebrow),
 .contact-page-body .page-intro p:not(.eyebrow) {
-  color: #e8d9c2;
+  color: #ffd0ad;
   font-weight: 300;
 }
 
