@@ -2016,13 +2016,14 @@ main > .page-intro ~ .contact-form-panel {
 
 /* Horaires d'ouverture (deux groupes) */
 #horaires-liste { margin: 0 auto; max-width: 34rem; }
-.horaires-groupes { display: grid; gap: 0.6rem; }
-.horaires-groupe { align-items: end; display: grid; gap: 0.6rem; grid-template-columns: 1fr auto; }
-.horaires-groupe label { color: var(--muted); font-size: 0.75rem; font-weight: 600; text-align: center; }
-.horaires-groupe .champ-horaire { background: #f6f1ee; border: 1px solid transparent; border-radius: 999px; box-shadow: none; display: block; font-size: 0.85rem; margin-top: 0.2rem; padding: 0.4rem 0.9rem; text-align: center; width: 100%; }
-.horaires-groupe .champ-horaire:focus { background: #fff; border-color: var(--terracotta); outline: none; }
-.horaires-groupe .button { font-size: 0.8rem; padding: 0.4rem 1rem; }
-@media (max-width: 560px) { .horaires-groupe { grid-template-columns: 1fr; } }
+.horaires-groupes { display: grid; gap: 0.35rem; list-style: none; margin: 0; padding: 0; }
+.horaires-groupe { align-items: center; background: #f6f1ee; border-radius: 999px; display: grid; gap: 0.6rem; grid-template-columns: 9.5rem 1fr auto; padding: 0.25rem 0.3rem 0.25rem 1rem; }
+.horaires-titre { color: var(--muted); font-size: 0.78rem; font-weight: 600; }
+.horaires-valeur { font-size: 0.85rem; }
+.horaires-groupe .champ-horaire { background: #fff; border: 1px solid var(--terracotta); border-radius: 999px; box-shadow: none; font-size: 0.85rem; padding: 0.25rem 0.8rem; width: 100%; }
+.horaires-groupe .champ-horaire:focus { outline: none; }
+.horaires-groupe .button { font-size: 0.75rem; padding: 0.25rem 0.9rem; }
+@media (max-width: 560px) { .horaires-groupe { border-radius: 18px; grid-template-columns: 1fr auto; } .horaires-titre { grid-column: 1 / -1; } }
 
 /* Raccourcis de l'espace employé */
 .employe-raccourcis { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); list-style: none; margin: 1.25rem auto 0; max-width: 44rem; padding: 0; }

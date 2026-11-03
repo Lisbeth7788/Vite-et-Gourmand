@@ -81,21 +81,37 @@ const groupesHoraires = [
 
 async function chargerHoraires() {
   const jours = await fetch('api/horaires.php').then((reponse) => reponse.json());
-  listeHoraires.innerHTML = '<div class="horaires-groupes">' + groupesHoraires.map((groupe) => {
+  listeHoraires.innerHTML = '<ul class="horaires-groupes">' + groupesHoraires.map((groupe) => {
     const premier = jours.find((jour) => Number(jour.day_of_week) === groupe.jours[0]);
-    return '<div class="horaires-groupe"><label>' + groupe.titre +
-      '<input class="champ-horaire" value="' + echapperHtml(premier ? premier.opening_hours : '') + '" maxlength="120"></label>' +
-      '<button class="button button-small" type="button" data-horaire-jours="' + groupe.jours.join(',') + '">Enregistrer</button></div>';
-  }).join('') + '</div>';
+    return '<li class="horaires-groupe" data-jours="' + groupe.jours.join(',') + '"><span class="horaires-titre">' + groupe.titre +
+      '</span><span class="horaires-valeur">' + echapperHtml(premier ? premier.opening_hours : '') + '</span>' +
+      '<button class="button button-small bouton-secondaire" type="button" data-horaire-action="modifier">Modifier</button></li>';
+  }).join('') + '</ul>';
 }
 
 listeHoraires.addEventListener('click', async (evenement) => {
-  const bouton = evenement.target.closest('[data-horaire-jours]');
+  const bouton = evenement.target.closest('[data-horaire-action]');
   if (!bouton) return;
-  const saisie = bouton.closest('.horaires-groupe').querySelector('.champ-horaire');
+  const ligne = bouton.closest('.horaires-groupe');
+  const valeur = ligne.querySelector('.horaires-valeur');
+  if (bouton.dataset.horaireAction === 'modifier') {
+    const saisie = document.createElement('input');
+    saisie.className = 'champ-horaire';
+    saisie.maxLength = 120;
+    saisie.value = valeur.textContent;
+    saisie.setAttribute('aria-label', 'Horaires : ' + ligne.querySelector('.horaires-titre').textContent);
+    valeur.replaceWith(saisie);
+    saisie.focus();
+    bouton.dataset.horaireAction = 'valider';
+    bouton.textContent = 'Valider';
+    bouton.classList.remove('bouton-secondaire');
+    return;
+  }
+  const saisie = ligne.querySelector('.champ-horaire');
   try {
-    const resultat = await demanderJson('api/horaires.php', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ days: bouton.dataset.horaireJours.split(',').map(Number), opening_hours: saisie.value }) });
+    const resultat = await demanderJson('api/horaires.php', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ days: ligne.dataset.jours.split(',').map(Number), opening_hours: saisie.value }) });
     annoncer(retourHoraires, resultat.message, false);
+    await chargerHoraires();
   } catch (error_) {
     annoncer(retourHoraires, error_.message, true);
   }
