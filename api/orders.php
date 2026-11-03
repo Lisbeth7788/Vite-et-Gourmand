@@ -7,6 +7,11 @@ requireRole(['client', 'employe', 'admin']);
 enforceRateLimit('orders', 10, 600, 'user-' . $_SESSION['user']['id']);
 
 $data = requestData();
+$retrait = ($data['mode'] ?? 'livraison') === 'retrait';
+if ($retrait) {
+    $data['address'] = 'Retrait sur place';
+    $data['city'] = 'Bordeaux';
+}
 $fields = ['first_name', 'last_name', 'email', 'phone', 'address', 'city', 'date', 'time', 'menu', 'people'];
 if (requiredFields($data, $fields)) {
     jsonResponse(['error' => 'Tous les champs de commande sont obligatoires.'], 400);
@@ -30,7 +35,12 @@ $people = (int) $data['people'];
 
 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) $data['date']) || !preg_match('/^\d{2}:\d{2}$/', (string) $data['time']) || $data['date'] < date('Y-m-d')) {
     $pdo->rollBack();
-    jsonResponse(['error' => 'Date ou heure de livraison invalide.'], 400);
+    jsonResponse(['error' => 'Date ou heure invalide.'], 400);
+}
+
+if ($data['date'] < dateMinimaleCommande()) {
+    $pdo->rollBack();
+    jsonResponse(['error' => 'Merci de commander au moins ' . DELAI_COMMANDE_JOURS . ' jours avant la date de votre événement.'], 400);
 }
 
 if (!$menu || (int) $menu['stock'] <= 0 || $people < (int) $menu['minimum_people']) {
@@ -43,7 +53,7 @@ $menuTotal = $tarifs['menuTotal'];
 $discount = $tarifs['discount'];
 $delivery = $tarifs['delivery'];
 $total = $tarifs['total'];
-$lieu = trim((string) ($data['delivery_place'] ?? '')) ?: 'Adresse de livraison';
+$lieu = $retrait ? 'Retrait sur place' : (trim((string) ($data['delivery_place'] ?? '')) ?: 'Adresse de livraison');
 
 $insert = $pdo->prepare(
     'INSERT INTO orders (

@@ -19,6 +19,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'PATCH') {
         if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date) || !preg_match('/^\d{2}:\d{2}$/', $time) || $telephone === '' || $date < date('Y-m-d')) {
             jsonResponse(['error' => 'Date, heure ou téléphone invalide.'], 400);
         }
+                if ($date < dateMinimaleCommande()) {
+                    jsonResponse(['error' => 'Merci de choisir une date au moins ' . DELAI_COMMANDE_JOURS . ' jours à l’avance.'], 400);
+                }
         $jourSemaine = null;
         $ville = trim((string) ($data['city'] ?? ''));
         $adresse = trim((string) ($data['address'] ?? ''));
