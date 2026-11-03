@@ -194,20 +194,16 @@ if (pageDetail) {
             conditionsList.appendChild(item);
           });
 
-        const choix = {
-          starter: [['Tartare de saumon, avocat et citron vert', 'poisson'], ['Samossas de légumes et chutney de mangue', 'gluten'], ['Bâtonnets de légumes et sauce yaourt-citron', 'lait']],
-          main: [['Magret de canard laqué au miel et gingembre, patates douces rôties', 'aucun allergène majeur déclaré'], ['Poulet tikka masala et riz basmati', 'lait'], ['Wrap de poulet croustillant et frites de patate douce', 'gluten, oeufs']],
-          dessert: [['Cœur coulant au chocolat et mangue fraîche', 'gluten, lait, oeufs'], ['Riz au lait de coco et fruits de la passion', 'fruits à coque'], ['Brochette de fruits exotiques et chocolat fondu', 'lait']]
-        };
-        Object.entries(choix).forEach(([type, plats]) => {
-          const liste = document.querySelector(`#menu-detail-${type}-list`);
+        const typesPlats = { entree: 'starter', plat: 'main', dessert: 'dessert' };
+        Object.entries(typesPlats).forEach(([typeBase, typePage]) => {
+          const liste = document.querySelector(`#menu-detail-${typePage}-list`);
           liste.replaceChildren();
-          [...plats].sort(() => Math.random() - 0.5).forEach(([nom, allergenes]) => {
+          (menu.dishes || []).filter((plat) => plat.dish_type === typeBase).forEach((plat) => {
             const item = document.createElement('li');
-            item.textContent = nom;
+            item.textContent = plat.name;
             const detail = document.createElement('span');
             detail.className = 'allergen';
-            detail.textContent = `Allergènes : ${allergenes}`;
+            detail.textContent = `Allerg?nes : ${plat.allergens}`;
             item.appendChild(detail);
             liste.appendChild(item);
           });
