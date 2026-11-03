@@ -15,20 +15,20 @@
     </nav>
   </header>
   <main class="catalogue-page">
-    <div class="page-intro"><p class="eyebrow">Espace personnel</p><h1>Mon espace client</h1><p id="account-identity">Vérification de votre session...</p></div>
+    <div class="page-intro"><p class="eyebrow">Espace client</p><h1>Mes événements</h1><p id="account-identity">Vérification de votre session...</p></div>
     <nav class="admin-nav" aria-label="Sections de mon espace">
       <ol>
-        <li><a href="#profil" data-section="profil" aria-current="page">Mon profil</a></li>
-        <li><a href="#commandes" data-section="commandes">Mes réservations</a></li>
+        <li><a href="#commandes" data-section="commandes" aria-current="page">Mes événements</a></li>
+        <li><a href="#profil" data-section="profil">Mes coordonnées</a></li>
         <li><a href="#activite" data-section="activite">Mon activité</a></li>
       </ol>
     </nav>
-    <section id="section-profil" class="form-section profil-carte" aria-labelledby="profile-title">
+    <section id="section-profil" class="form-section profil-carte" aria-labelledby="profile-title" hidden>
       <div class="profil-entete">
         <span class="profil-avatar" id="profile-avatar" aria-hidden="true">?</span>
         <div>
-          <h2 id="profile-title">Mon profil</h2>
-          <p class="profil-sous-titre">Vos coordonnées servent à confirmer et suivre vos réservations.</p>
+          <h2 id="profile-title">Mes coordonnées</h2>
+          <p class="profil-sous-titre">Elles nous servent à confirmer votre événement et à organiser la livraison.</p>
         </div>
       </div>
       <form id="profile-form" class="profil-formulaire">
@@ -55,21 +55,28 @@
       <div class="profil-options">
         <h3>Options du compte</h3>
         <div class="profil-options-liste">
-          <a class="button button-small" href="reservation.html">Nouvelle réservation</a>
+          <a class="button button-small" href="reservation.html">Organiser un événement</a>
           <a class="button button-small bouton-secondaire" href="connexion.html?reset=1#password-reset">Changer mon mot de passe</a>
           <a class="button button-small bouton-secondaire" href="api/auth/logout.php">Se déconnecter</a>
         </div>
         <details class="profil-suppression">
           <summary>Supprimer mon compte</summary>
           <form id="delete-account-form">
-            <p>Cette action est définitive. Vos réservations en attente seront annulées et vos informations personnelles effacées.</p>
+            <p>Cette action est définitive. Vos événements en attente seront annulés et vos informations personnelles effacées.</p>
             <div class="champ-formulaire"><label for="delete-password">Confirmez avec votre mot de passe</label><input id="delete-password" name="password" type="password" autocomplete="current-password" required></div>
             <button class="button button-small" type="submit">Supprimer définitivement</button>
           </form>
         </details>
       </div>
     </section>
-    <section id="section-commandes" class="form-section" aria-labelledby="account-orders-title" hidden><h2 id="account-orders-title">Historique de mes commandes et réservations</h2><div id="account-orders"></div></section>
+    <section id="section-commandes" class="form-section" aria-labelledby="account-orders-title">
+      <div id="account-next" class="evenement-prochain" hidden></div>
+      <div class="evenements-entete">
+        <h2 id="account-orders-title">Mes réceptions et cérémonies</h2>
+        <a class="button button-small" href="menus.html">Organiser un nouvel événement</a>
+      </div>
+      <div id="account-orders" class="evenements-liste"></div>
+    </section>
     <section id="section-activite" class="form-section" aria-labelledby="account-activity-title" hidden><h2 id="account-activity-title">Historique de mon activité</h2><div id="account-activity" class="table-responsive"></div></section>
   </main>
 
