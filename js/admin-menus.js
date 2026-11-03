@@ -42,6 +42,11 @@ formulaireMenu.addEventListener('submit', async (evenement) => {
 });
 
 formulaireMenu.addEventListener('reset', () => { formulaireMenu.elements.id.value = ''; });
+document.getElementById('menu-ajouter').addEventListener('click', () => {
+  formulaireMenu.reset();
+  document.getElementById('menu-details').open = true;
+  formulaireMenu.scrollIntoView({ behavior: 'smooth' });
+});
 
 document.querySelector('#menus-maj')?.addEventListener('click', async (evenement) => {
   const message = 'Cette action remplace les menus par les nouveaux menus de traiteur ET supprime toutes les commandes, avis et messages existants. Continuer ?';

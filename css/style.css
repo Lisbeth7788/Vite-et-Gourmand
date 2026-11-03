@@ -2646,3 +2646,19 @@ main.contact-page > .page-intro ~ .contact-form-panel {
 #activity-list {
   gap: var(--espace-petit);
 }
+
+/* Page « Menus et horaires » : liste en haut, formulaire replié juste en dessous */
+.admin-page > section[aria-labelledby="menu-liste-title"] { order: 1; }
+.admin-page > .section-menu-edition { order: 2; }
+.admin-page > section[aria-labelledby="horaires-title"] { order: 3; }
+.admin-page > .page-intro { order: -2; }
+.admin-page > .admin-nav { order: -1; }
+.section-menu-edition { padding: 0.8rem 1.2rem; }
+.menu-repliable > summary { cursor: pointer; list-style: none; }
+.menu-repliable > summary::-webkit-details-marker { display: none; }
+.menu-repliable > summary h2 { font-size: 1rem; margin: 0; }
+.menu-repliable[open] > summary { margin-bottom: 1rem; }
+.menu-repliable > summary h2::after { content: " +"; color: var(--terracotta); }
+.menu-repliable[open] > summary h2::after { content: " −"; }
+.menu-repliable .formulaire-menu { font-size: 0.85rem; }
+
