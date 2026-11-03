@@ -12,49 +12,6 @@ function pagePourEspace(role) {
   return { admin: 'admin.html', employe: 'admin-reservations.html', client: 'index.html' }[role] || 'index.html';
 }
 
-async function changerExperience(space, page, link) {
-  link.setAttribute('aria-busy', 'true');
-  try {
-    const response = await fetch('api/auth/switch-space.php', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ space })
-    });
-    const result = await response.json();
-    if (!response.ok) throw new Error(result.error || 'Le changement d’espace a échoué.');
-    window.location.href = page;
-  } catch (error) {
-    console.error('Changement d’espace impossible :', error);
-    window.alert(error.message || 'Le changement d’espace a échoué.');
-    link.removeAttribute('aria-busy');
-  }
-}
-
-function ajouterSelecteurExperience(liste, role) {
-  const element = document.createElement('li');
-  element.className = 'experience-switch';
-  const label = document.createElement('span');
-  label.textContent = 'Expérience : ';
-  element.append(label);
-  [
-    ['client', 'Client', 'index.html'],
-    ['employe', 'Employé', 'admin-reservations.html'],
-    ['admin', 'Administrateur', 'admin.html']
-  ].forEach(([space, name, page]) => {
-    const link = document.createElement('a');
-    link.href = page;
-    link.textContent = name;
-    if (role === space) link.setAttribute('aria-current', 'page');
-    link.addEventListener('click', async (event) => {
-      event.preventDefault();
-      await changerExperience(space, page, link);
-    });
-    element.append(document.createTextNode(' '), link);
-  });
-  liste.append(element);
-}
-
 function ajouterLienEspace(liste, role, liensConnexion) {
   if (!['client', 'employe'].includes(role) || liste.querySelector('.lien-espace-client')) return;
   const element = document.createElement('li');
