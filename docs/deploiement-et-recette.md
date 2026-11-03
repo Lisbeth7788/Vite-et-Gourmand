@@ -39,7 +39,7 @@ Cocher chaque ligne après l'avoir testée.
 - [ ] Espace employé : connexion avec `employe`, accès aux réservations, aux avis et aux menus.
 - [x] Site déployé chez Hostinger, envoi d'e-mails et parcours client testés en ligne avec une vraie adresse (tests faits par Lisbeth).
 - [x] Parcours client testé sur le site en ligne le 3 novembre 2026 : inscription, connexion, commande à Bordeaux et hors Bordeaux, remise de 10 %, paiement, annulation, droits d'accès, contact, suppression du compte de test. Stocks des menus inchangés après les tests.
-- [x] Accessibilité en ligne le 3 novembre 2026 : aucun défaut axe-core sur 13 pages, lecture à 320 px sans défilement horizontal, focus clavier visible, langue, titres et textes alternatifs présents. Il manque un lien d'évitement et le contrôle au lecteur d'écran.
+- [x] Accessibilité en ligne le 3 novembre 2026 : aucun défaut axe-core sur 13 pages, lecture à 320 px sans défilement horizontal, focus clavier visible, langue, titres et textes alternatifs présents. Un lien d'évitement « Aller au contenu principal » a ensuite été ajouté sur les 20 pages et testé en local (visible au clavier, saut vers le contenu) ; il sera en ligne après le prochain déploiement. Il manque le contrôle au lecteur d'écran.
 - [ ] Formulaire de contact et réception de l'e-mail.
 - [ ] Affichage sur téléphone, au clavier et avec un zoom à 200 %.
 
