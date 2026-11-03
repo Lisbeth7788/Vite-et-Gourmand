@@ -18,15 +18,15 @@ const statusLabels = {
 };
 
 const nomsMenus = {
-  'marche-bordeaux': 'Le marché de Bordeaux',
-  'reveillon': 'Le réveillon généreux',
-  'dejeuner-paques': 'Le déjeuner de Pâques',
-  'cocktail-dinatoire': 'Le cocktail de cérémonie',
-  'repas-anniversaire': 'Le repas d\'anniversaire',
+  'banquet-mariage': 'Le banquet de mariage',
+  'repas-anniversaire': 'Le dîner d\'anniversaire',
   'brunch-naissance': 'Le brunch de naissance',
   'bapteme-communion': 'Le repas de baptême et de communion',
-  'banquet-mariage': 'Le banquet de mariage',
-  'fete-vegetale': 'La fête végétale'
+  'cocktail-dinatoire': 'Le cocktail de cérémonie',
+  'reveillon': 'Le réveillon d\'exception',
+  'dejeuner-paques': 'Le déjeuner de Pâques',
+  'marche-bordeaux': 'Le dîner gastronomique de Bordeaux',
+  'fete-vegetale': 'La table végétale d\'exception'
 };
 
 async function demanderJson(url, options = {}) {
