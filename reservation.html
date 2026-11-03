@@ -48,16 +48,23 @@
                         </div>
             <small id="reservation-aide-personnes">Remise de 10 % dès 5 personnes de plus que le minimum du menu.</small>
           </div>
+          <fieldset class="champ-formulaire">
+            <legend>Mode de réception</legend>
+            <label><input type="radio" name="mode" value="livraison" checked> Livraison</label>
+            <label><input type="radio" name="mode" value="retrait"> Retrait sur place (gratuit)</label>
+          </fieldset>
           <div class="grille-formulaire">
             <div class="champ-formulaire">
-              <label for="reservation-date">Date</label>
+              <label for="reservation-date">Date de l'événement</label>
               <input id="reservation-date" name="date" type="date" required>
+              <small>Commande à passer au moins 2 jours à l'avance.</small>
             </div>
             <div class="champ-formulaire">
-              <label for="reservation-heure">Heure de livraison</label>
+              <label for="reservation-heure" id="libelle-heure">Heure de livraison</label>
               <input id="reservation-heure" name="heure" type="time" required>
             </div>
           </div>
+          <div id="bloc-livraison">
           <div class="champ-formulaire">
             <label for="reservation-adresse">Adresse de livraison</label>
             <input id="reservation-adresse" name="adresse" type="text" autocomplete="street-address" required>
@@ -76,6 +83,7 @@
             <label for="reservation-lieu">Lieu de livraison (facultatif)</label>
             <input id="reservation-lieu" name="lieu" type="text" placeholder="Salle des fêtes, domicile, bureau…">
           </div>
+                      </div>
           <div class="champ-formulaire">
             <label for="reservation-telephone">Numéro de téléphone</label>
             <input id="reservation-telephone" name="telephone" type="tel" autocomplete="tel" pattern="(?:\+33|0)[1-9](?:[ .-]?\d{2}){4}" title="Saisissez un numéro français, par exemple 06 12 34 56 78." required>
@@ -153,6 +161,6 @@
   </footer>
 
   <script type="module" src="js/script.js?v=selecteur-admin"></script>
-  <script type="module" src="js/reservation.js?v=bdfb66ad"></script>
+  <script type="module" src="js/reservation.js?v=8b57ecb8"></script>
 </body>
 </html>
