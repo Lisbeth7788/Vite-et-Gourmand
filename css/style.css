@@ -2726,3 +2726,12 @@ main:not([class]) .section-heading .button {
   .history-values .values-list { grid-template-columns: 1fr; }
   .history-story { grid-template-columns: 1fr; }
 }
+
+/* Texte des bandeaux : même couleur que le titre, sur toutes les pages */
+.hero p:not(.eyebrow),
+.page-intro p:not(.eyebrow),
+.page-intro p:last-child,
+.home-page .hero p:not(.eyebrow),
+.contact-page-body .page-intro p {
+  color: #ffd0ad;
+}
