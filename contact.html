@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Contacter Vite et Gourmand.">
   <title>Contact - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=texte-titre">
+  <link rel="stylesheet" href="css/style.css?v=contact-moderne">
 </head>
 <body class="contact-page-body">
   <header class="site-header">
@@ -27,25 +27,44 @@
       <p>Envoyez votre demande à Vite et Gourmand.</p>
     </div>
 
-    <section class="contact-form-panel" aria-labelledby="contact-form-title">
-      <h2 id="contact-form-title">Votre demande</h2>
-      <form id="contact-form" action="#" method="post">
-        <div class="champ-formulaire">
-          <label for="contact-title">Titre</label>
-          <input id="contact-title" name="title" type="text" required>
-        </div>
-        <div class="champ-formulaire">
-          <label for="contact-description">Description</label>
-          <textarea id="contact-description" name="description" rows="3" required></textarea>
-        </div>
-        <div class="champ-formulaire">
-          <label for="contact-email">Adresse e-mail</label>
-          <input id="contact-email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <button class="button" type="submit">Envoyer la demande</button>
-      </form>
-    </section>
-  </main>
+    <div class="contact-layout">
+      <aside class="contact-infos" aria-label="Informations pratiques">
+        <article class="contact-carte">
+          <span class="contact-icone" aria-hidden="true">✉</span>
+          <h2>Réponse rapide</h2>
+          <p>Julie et José vous répondent sous 48 heures.</p>
+        </article>
+        <article class="contact-carte">
+          <span class="contact-icone" aria-hidden="true">📍</span>
+          <h2>Où sommes-nous ?</h2>
+          <p>Traiteur à Bordeaux, livraison dans toute la région.</p>
+        </article>
+        <article class="contact-carte">
+          <span class="contact-icone" aria-hidden="true">🍽</span>
+          <h2>Un événement ?</h2>
+          <p>Mariage, baptême, Noël ou Pâques : <a href="menus.html">découvrez nos menus</a>.</p>
+        </article>
+      </aside>
+
+      <section class="contact-form-panel" aria-labelledby="contact-form-title">
+        <h2 id="contact-form-title">Votre demande</h2>
+        <form id="contact-form" action="#" method="post">
+          <div class="champ-formulaire">
+            <label for="contact-title">Titre</label>
+            <input id="contact-title" name="title" type="text" placeholder="Ex. : Devis pour un mariage" required>
+          </div>
+          <div class="champ-formulaire">
+            <label for="contact-email">Adresse e-mail</label>
+            <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.fr" required>
+          </div>
+          <div class="champ-formulaire">
+            <label for="contact-description">Description</label>
+            <textarea id="contact-description" name="description" rows="5" placeholder="Date, nombre de personnes, envies…" required></textarea>
+          </div>
+          <button class="button" type="submit">Envoyer la demande</button>
+        </form>
+      </section>
+    </div>  </main>
 
   <footer class="site-footer">
     <div>
