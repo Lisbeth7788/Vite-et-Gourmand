@@ -150,13 +150,13 @@ CREATE TABLE IF NOT EXISTS business_hours (
 
 INSERT INTO business_hours (day_of_week, day_name, opening_hours)
 VALUES
-  (1, 'Lundi', '11h30 - 14h00'),
-  (2, 'Mardi', '11h30 - 14h00 / 18h00 - 21h00'),
-  (3, 'Mercredi', '11h30 - 14h00 / 18h00 - 21h00'),
-  (4, 'Jeudi', '11h30 - 14h00 / 18h00 - 21h30'),
-  (5, 'Vendredi', '11h30 - 14h00 / 18h00 - 22h00'),
-  (6, 'Samedi', '10h30 - 15h00 / 18h00 - 22h00'),
-  (7, 'Dimanche', '10h30 - 14h30')
+  (1, 'Lundi', '9h00 - 19h00'),
+  (2, 'Mardi', '9h00 - 19h00'),
+  (3, 'Mercredi', '9h00 - 19h00'),
+  (4, 'Jeudi', '9h00 - 19h00'),
+  (5, 'Vendredi', '9h00 - 19h00'),
+  (6, 'Samedi', '9h00 - 18h00'),
+  (7, 'Dimanche', 'Ferm? (livraisons sur demande)')
 ON DUPLICATE KEY UPDATE day_name = VALUES(day_name), opening_hours = VALUES(opening_hours);
 
 CREATE TABLE IF NOT EXISTS order_status_history (
