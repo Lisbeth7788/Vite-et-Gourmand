@@ -2801,3 +2801,12 @@ main.contact-page > .contact-layout > .contact-form-panel {
     width: 92%;
   }
 }
+
+.contact-carte-map {
+  border: 0;
+  border-radius: 12px;
+  display: block;
+  height: 14rem;
+  margin-top: 0.75rem;
+  width: 100%;
+}
