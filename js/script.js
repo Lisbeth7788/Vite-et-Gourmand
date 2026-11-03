@@ -485,11 +485,15 @@ async function afficherHorairesPiedDePage() {
     if (!reponse.ok) throw new Error('Les horaires du traiteur n’ont pas pu être chargés.');
     const jours = await reponse.json();
     if (!Array.isArray(jours) || !jours.length) return;
-    liste.replaceChildren(...jours.map((jour) => {
+    const groupes = [
+      ['Semaine (lun. - ven.)', jours.find((jour) => Number(jour.day_of_week) === 1) || jours[0]],
+      ['Week-end (sam. - dim.)', jours.find((jour) => Number(jour.day_of_week) === 6) || jours[jours.length - 1]]
+    ];
+    liste.replaceChildren(...groupes.map(([titre, jour]) => {
       const ligne = document.createElement('div');
       const nom = document.createElement('dt');
       const horaires = document.createElement('dd');
-      nom.textContent = jour.day_name;
+      nom.textContent = titre;
       (typeof jour.opening_hours === 'string' ? jour.opening_hours : '').split('/').forEach((plage) => {
         const periode = document.createElement('span');
         periode.textContent = plage.trim();
@@ -502,7 +506,7 @@ async function afficherHorairesPiedDePage() {
     const details = document.createElement('details');
     details.className = 'opening-hours-details';
     const summary = document.createElement('summary');
-    summary.textContent = 'Afficher les horaires par jour';
+    summary.textContent = 'Afficher les horaires';
     details.append(summary, liste);
     openingHours.append(details);
   } catch (error) {
