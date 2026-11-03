@@ -11,6 +11,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
         assurerMenusTraiteur($pdo);
     } catch (Throwable $erreur) {
         error_log('Mise à jour automatique des menus impossible : ' . $erreur->getMessage());
+        jsonResponse(['error' => 'Mise à jour des menus impossible : ' . $erreur->getMessage()], 500);
     }
 }
 
