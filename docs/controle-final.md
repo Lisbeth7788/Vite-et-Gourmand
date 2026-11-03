@@ -26,18 +26,20 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 
 ## À faire avant l'envoi (hors code)
 
-1. **Mettre à jour le dossier projet PDF** : règle du mot de passe (10 caractères), espace employé (réservations, avis, menus et horaires), espace administrateur (comptes employés, statistiques par menu), compte employé unique `employe`, e-mails de bienvenue et de confirmation.
-2. **Joindre le manuel d'utilisation PDF** : il doit présenter les parcours actuels et les identifiants de test.
-3. **Importer les SQL sur Hostinger** : `sql/schema.sql` puis `sql/comptes-ecf.sql`.
-4. **Configurer MongoDB et le SMTP sur Hostinger** : sans eux, les statistiques affichent « MongoDB n'est pas configurée » et les e-mails ne partent pas.
-5. **Vérifier la branche `develop`** : la fusionner dans `main` après tests (bonnes pratiques Git demandées).
-6. **Partager le Trello** en lecture avec le correcteur.
-7. **Lancer la recette** : `docs/deploiement-et-recette.md`.
+1. **Joindre le dossier projet corrigé** : la dernière page du PDF actualise les passages rédigés avant les dernières évolutions.
+2. **Joindre le manuel d'utilisation PDF** : [docs/manuel-utilisation.pdf](manuel-utilisation.pdf) présente les parcours actuels et les identifiants de démonstration.
+3. **Compléter la copie officielle ECF** téléchargée depuis Studi, puis la nommer selon l'énoncé. Ce modèle n'est pas dans le dépôt.
+4. **Importer les SQL sur Hostinger** : `sql/schema.sql` puis `sql/comptes-ecf.sql`.
+5. **Configurer MongoDB et le SMTP sur Hostinger** : sans eux, les statistiques et les e-mails ne fonctionneront pas.
+6. **Vérifier la branche `develop`** : la fusionner dans `main` après tests (bonnes pratiques Git demandées).
+7. **Partager le Trello** en lecture avec le correcteur.
+8. **Lancer la recette** : `docs/deploiement-et-recette.md`.
 
 ## Écarts avec le sujet (à connaître pour l'oral)
 
 - Le site suit le **modèle traiteur** du sujet : livraison à l'adresse du client, remise de 10 % (minimum du menu plus 5 personnes), frais de livraison hors Bordeaux (5 € plus 0,59 € par km, distance saisie par le client) et statut de retour de matériel (600 € après 10 jours ouvrés). Il n'y a plus de plafond de personnes ni de créneaux.
 - **Galerie d'images** : plusieurs images peuvent être enregistrées par menu ; la première sert d'image de couverture.
 - **Horaires** : les horaires du pied de page sont modifiables par l'employé ou l'administrateur ; le client saisit librement l'heure de livraison.
+- **Paiement** : le parcours de carte est simulé ; aucun prestataire bancaire ne débite réellement la carte.
 - Le filtre des réservations par statut et par client est présent dans la page Réservations.
 - Un seul **compte employé** partagé (`employe`) est fourni pour la démonstration ; l'administrateur peut en créer d'autres depuis « 7. Comptes employés ».

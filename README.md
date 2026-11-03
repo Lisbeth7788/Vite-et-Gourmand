@@ -69,7 +69,7 @@ Ces comptes sont créés par `sql/comptes-ecf.sql` (à exécuter après `sql/sch
 - [Documentation technique](docs/documentation-technique.md)
 - [Déploiement et recette](docs/deploiement-et-recette.md) et [DEPLOYMENT.md](DEPLOYMENT.md)
 - [Gestion de projet](docs/gestion-projet.md)
-- [Manuel d'utilisation](docs/manuel-utilisation.html) (version PDF à remettre séparément)
+- [Manuel d'utilisation (PDF)](docs/manuel-utilisation.pdf) et [source HTML](docs/manuel-utilisation.html)
 - [Charte graphique](docs/charte-graphique.pdf) et [maquettes](docs/maquettes.pdf)
 - [Liens de livraison](docs/liens-livraison.md)
 - [Contrôle final avant envoi](docs/controle-final.md)
