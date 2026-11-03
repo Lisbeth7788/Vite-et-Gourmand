@@ -2662,3 +2662,10 @@ main.contact-page > .page-intro ~ .contact-form-panel {
 .menu-repliable[open] > summary h2::after { content: " −"; }
 .menu-repliable .formulaire-menu { font-size: 0.85rem; }
 
+
+/* Filtres dynamiques de la page « Nos menus » */
+.filtres-menus { align-items: flex-end; display: flex; flex-wrap: wrap; gap: var(--espace-petit, 0.75rem); justify-content: center; margin: 0 auto var(--espace-petit, 0.75rem); }
+.filtres-menus .champ-formulaire { flex: 1 1 8rem; max-width: 11rem; }
+.filtres-menus label { font-size: 0.75rem; }
+.filtres-menus input, .filtres-menus select { background: #f6f1ee; border: 1px solid transparent; border-radius: 999px; font-size: 0.85rem; padding: 0.4rem 0.8rem; text-align: center; width: 100%; box-sizing: border-box; }
+#filtre-resultat { text-align: center; margin: 0 0 var(--espace, 1.5rem); }
