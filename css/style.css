@@ -2501,4 +2501,75 @@ ul.planning-legende-haut{display:flex;flex-wrap:wrap;justify-content:center;gap:
     }
   }
 
-/* HARMONIE_PLACEHOLDER */
+/* Harmonie générale : mêmes bordures, mêmes arrondis, mêmes boutons */
+:root {
+  --rayon-carte: 18px;
+  --rayon-bouton: 999px;
+  --bordure: 1px solid var(--line);
+}
+
+.button,
+button.button,
+a.button,
+.filter-button {
+  align-items: center;
+  border: 2px solid var(--terracotta);
+  border-radius: var(--rayon-bouton);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.2;
+  min-height: 2.6rem;
+  padding: 0.55rem 1.4rem;
+  text-align: center;
+}
+
+.button-small,
+.actions-ligne .button {
+  font-size: 0.78rem;
+  min-height: 2.1rem;
+  padding: 0.35rem 1rem;
+}
+
+.bouton-secondaire,
+.bouton-secondaire.button {
+  background: transparent;
+  border: 2px solid var(--terracotta);
+  color: var(--terracotta);
+}
+
+.form-section,
+.section-menu-edition,
+.profil-carte,
+.evenement-prochain,
+.menu-admin-ligne,
+.horaires-groupe,
+.catalogue-card,
+.reset-panel,
+.legal-content,
+.contact-form-panel,
+.auth-layout > * {
+  border-radius: var(--rayon-carte);
+}
+
+.tableau-activite,
+.tableau-stats,
+.planning-equipe {
+  border: var(--bordure);
+  border-radius: var(--rayon-carte);
+}
+
+.champ-formulaire input,
+.champ-formulaire select,
+.champ-formulaire textarea {
+  border-radius: 16px;
+}
+
+.champ-formulaire input,
+.champ-formulaire select {
+  border-radius: 999px;
+}
