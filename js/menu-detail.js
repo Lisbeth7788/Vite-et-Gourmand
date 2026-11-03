@@ -11,7 +11,7 @@ const MENUS_PAR_DEFAUT = {
     minimum: 40,
     stock: 3,
     conditions_text: "Commande au minimum 30 jours avant la prestation. Dégustation offerte sur rendez-vous. Service et dressage assurés par notre équipe. Conservation au réfrigérateur et consommation sous 24 heures.",
-    dishes: [{"dish_type": "entree", "name": "Foie gras de canard mi-cuit, chutney de figues et brioche toastée", "allergens": "gluten, oeufs, lait"}, {"dish_type": "entree", "name": "Noix de Saint-Jacques snackées, crème de topinambour et noisettes torréfiées", "allergens": "mollusques, lait, fruits à coque"}, {"dish_type": "plat", "name": "Filet de bœuf Rossini, jus truffé, gratin dauphinois et légumes glacés", "allergens": "lait, gluten, céleri"}, {"dish_type": "plat", "name": "Pavé de turbot, beurre blanc au champagne et risotto crémeux aux asperges", "allergens": "poisson, lait"}, {"dish_type": "dessert", "name": "Pièce montée de choux, crème vanille de Madagascar et caramel", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Macarons assortis et mignardises du chef", "allergens": "fruits à coque, oeufs, lait"}]
+    dishes: [{"dish_type": "entree", "name": "Foie gras de canard mi-cuit, chutney de figues et brioche toastée", "allergens": "gluten, oeufs, lait"}, {"dish_type": "entree", "name": "Langoustines rôties, émulsion de corail et fenouil confit", "allergens": "crustacés, lait"}, {"dish_type": "plat", "name": "Filet de bœuf Rossini, jus truffé, gratin dauphinois et légumes glacés", "allergens": "lait, gluten, céleri"}, {"dish_type": "plat", "name": "Pavé de turbot, beurre blanc au champagne et risotto crémeux aux asperges", "allergens": "poisson, lait"}, {"dish_type": "dessert", "name": "Pièce montée de choux, crème vanille de Madagascar et caramel", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Macarons assortis et mignardises du chef", "allergens": "fruits à coque, oeufs, lait"}]
   },
   "repas-anniversaire": {
     id: "repas-anniversaire",
@@ -24,7 +24,7 @@ const MENUS_PAR_DEFAUT = {
     minimum: 10,
     stock: 6,
     conditions_text: "Commande au minimum 10 jours avant la prestation. Message et parfum de l'entremets à préciser à la commande. Conservation au réfrigérateur et consommation sous 24 heures.",
-    dishes: [{"dish_type": "entree", "name": "Carpaccio de bœuf, copeaux de parmesan, roquette et huile de truffe", "allergens": "lait"}, {"dish_type": "entree", "name": "Velouté de petits pois à la menthe et crème fouettée au citron", "allergens": "lait"}, {"dish_type": "plat", "name": "Suprême de volaille fermière, sauce au vin jaune et morilles, pommes fondantes", "allergens": "lait, sulfites"}, {"dish_type": "plat", "name": "Dos de cabillaud rôti, beurre citronné et légumes de printemps", "allergens": "poisson, lait"}, {"dish_type": "dessert", "name": "Entremets personnalisé chocolat noir, framboise et feuilleté praliné", "allergens": "gluten, lait, oeufs, fruits à coque"}]
+    dishes: [{"dish_type": "entree", "name": "Burrata crémeuse, tomates anciennes et pesto de basilic", "allergens": "lait, fruits à coque"}, {"dish_type": "entree", "name": "Carpaccio de bœuf, copeaux de parmesan, roquette et huile d'olive vierge", "allergens": "lait"}, {"dish_type": "plat", "name": "Côte de veau rôtie au thym, jus corsé et purée à la vanille", "allergens": "lait"}, {"dish_type": "plat", "name": "Risotto crémeux aux gambas et safran, copeaux de parmesan", "allergens": "crustacés, lait"}, {"dish_type": "dessert", "name": "Entremets personnalisé chocolat noir, framboise et croustillant praliné", "allergens": "gluten, lait, oeufs, fruits à coque"}]
   },
   "brunch-naissance": {
     id: "brunch-naissance",
@@ -37,7 +37,7 @@ const MENUS_PAR_DEFAUT = {
     minimum: 8,
     stock: 5,
     conditions_text: "Commande au minimum 10 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
-    dishes: [{"dish_type": "entree", "name": "Blinis, saumon gravlax maison, crème à l'aneth et œufs de truite", "allergens": "gluten, poisson, lait, oeufs"}, {"dish_type": "entree", "name": "Mini-croissants au jambon de Bayonne et fromage frais aux herbes", "allergens": "gluten, lait"}, {"dish_type": "plat", "name": "Œufs cocotte à la crème et ciboulette, mouillettes de pain de campagne", "allergens": "oeufs, lait, gluten"}, {"dish_type": "plat", "name": "Quiche fine aux asperges, chèvre frais et salade de jeunes pousses", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Pancakes moelleux, fruits rouges et sirop d'érable", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Verrines de panna cotta vanille et coulis de fruits de la passion", "allergens": "lait"}]
+    dishes: [{"dish_type": "entree", "name": "Blinis, saumon gravlax maison et crème à l'aneth", "allergens": "gluten, poisson, lait, oeufs"}, {"dish_type": "entree", "name": "Mini-croissants au jambon de Bayonne et fromage frais aux herbes", "allergens": "gluten, lait"}, {"dish_type": "plat", "name": "Œufs cocotte à la crème et ciboulette, mouillettes de pain de campagne", "allergens": "oeufs, lait, gluten"}, {"dish_type": "plat", "name": "Tarte fine courgette, chèvre frais et menthe, salade de jeunes pousses", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Pancakes moelleux, fruits rouges et sirop d'érable", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Verrines de panna cotta vanille et coulis de fruits de la passion", "allergens": "lait"}]
   },
   "bapteme-communion": {
     id: "bapteme-communion",
@@ -45,12 +45,12 @@ const MENUS_PAR_DEFAUT = {
     price: 72,
     theme: "Événement",
     regime: "classique",
-    description: "Un repas de fête en quatre temps pour un baptême, une communion ou une confirmation, avec une pièce montée à partager.",
+    description: "Un repas de fête délicat pour un baptême, une communion ou une confirmation, avec un gâteau blanc personnalisable.",
     image_path: "images/images/menu-reveillon.jpg",
     minimum: 12,
     stock: 4,
-    conditions_text: "Commande au minimum 21 jours avant la prestation. Personnalisation de la pièce montée possible (couleurs, dragées). Conservation au réfrigérateur et consommation sous 24 heures.",
-    dishes: [{"dish_type": "entree", "name": "Terrine de lotte au safran, mayonnaise citronnée et salade croquante", "allergens": "poisson, oeufs"}, {"dish_type": "entree", "name": "Tartelette fine aux champignons des bois et jambon cru", "allergens": "gluten, lait, oeufs"}, {"dish_type": "plat", "name": "Rôti de veau basse température, sauce aux morilles, gratin de pommes de terre", "allergens": "lait, sulfites"}, {"dish_type": "plat", "name": "Pavé de saumon, sauce au beurre blanc et fondue de poireaux", "allergens": "poisson, lait"}, {"dish_type": "dessert", "name": "Pièce montée de choux, dragées et nougatine", "allergens": "gluten, lait, oeufs, fruits à coque"}, {"dish_type": "dessert", "name": "Fraisier à la crème mousseline", "allergens": "gluten, lait, oeufs"}]
+    conditions_text: "Commande au minimum 21 jours avant la prestation. Personnalisation du gâteau possible (couleurs, dragées). Conservation au réfrigérateur et consommation sous 24 heures.",
+    dishes: [{"dish_type": "entree", "name": "Salade de gambas et mangue, vinaigrette à la passion et coriandre", "allergens": "crustacés"}, {"dish_type": "entree", "name": "Feuilleté de ris de veau aux champignons des bois et crème de porto", "allergens": "gluten, lait, oeufs, sulfites"}, {"dish_type": "plat", "name": "Filet mignon de porc ibérique, sauce miel-romarin et écrasé de pommes de terre au beurre noisette", "allergens": "lait"}, {"dish_type": "plat", "name": "Cailles farcies aux raisins et jus au porto, polenta crémeuse", "allergens": "lait, sulfites"}, {"dish_type": "dessert", "name": "Gâteau de baptême blanc, mousse vanille et framboises fraîches", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Charlotte aux poires et chocolat blanc", "allergens": "gluten, lait, oeufs"}]
   },
   "cocktail-dinatoire": {
     id: "cocktail-dinatoire",
@@ -63,7 +63,7 @@ const MENUS_PAR_DEFAUT = {
     minimum: 20,
     stock: 6,
     conditions_text: "Commande au minimum 14 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures. Prévoir des tables hautes ou un buffet pour la mise en place.",
-    dishes: [{"dish_type": "entree", "name": "Cuillères de tartare de saumon, avocat et citron vert", "allergens": "poisson"}, {"dish_type": "entree", "name": "Gougères au comté et mini-blinis au caviar d'aubergine", "allergens": "gluten, lait, oeufs"}, {"dish_type": "plat", "name": "Brochettes de magret de canard, sauce teriyaki et sésame", "allergens": "sésame, soja"}, {"dish_type": "plat", "name": "Mini-burgers de bœuf wagyu et pain brioché", "allergens": "gluten, lait, oeufs, sésame"}, {"dish_type": "dessert", "name": "Mignardises, tartelettes citron meringuée et éclairs chocolat", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Verrines de mousse chocolat et passion", "allergens": "lait, oeufs"}]
+    dishes: [{"dish_type": "entree", "name": "Cuillères de tartare de thon rouge, avocat et yuzu", "allergens": "poisson"}, {"dish_type": "entree", "name": "Gougères au comté et mini-blinis au caviar d'aubergine", "allergens": "gluten, lait, oeufs"}, {"dish_type": "plat", "name": "Brochettes de gambas marinées citron-gingembre", "allergens": "crustacés"}, {"dish_type": "plat", "name": "Mini-burgers de bœuf wagyu et pain brioché", "allergens": "gluten, lait, oeufs, sésame"}, {"dish_type": "dessert", "name": "Mignardises, tartelettes citron meringuée et éclairs chocolat", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Verrines de mousse chocolat et passion", "allergens": "lait, oeufs"}]
   },
   "reveillon": {
     id: "reveillon",
@@ -76,7 +76,7 @@ const MENUS_PAR_DEFAUT = {
     minimum: 8,
     stock: 4,
     conditions_text: "Commande au minimum 21 jours avant la prestation. Réservation conseillée dès novembre. Conservation au réfrigérateur et consommation sous 24 heures.",
-    dishes: [{"dish_type": "entree", "name": "Foie gras de canard mi-cuit, chutney de figues et pain d'épices", "allergens": "gluten, oeufs, lait"}, {"dish_type": "entree", "name": "Huîtres de Marennes-Oléron, mignonnette au vinaigre de champagne", "allergens": "mollusques, sulfites"}, {"dish_type": "plat", "name": "Chapon rôti aux marrons et truffe noire, jus corsé et purée de céleri", "allergens": "lait, céleri"}, {"dish_type": "plat", "name": "Homard bleu, bisque légère et gnocchis dorés", "allergens": "crustacés, gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Bûche chocolat grand cru, cœur praliné et feuilleté croustillant", "allergens": "gluten, lait, oeufs, fruits à coque"}, {"dish_type": "dessert", "name": "Truffes au chocolat et papillotes du chef", "allergens": "lait, fruits à coque"}]
+    dishes: [{"dish_type": "entree", "name": "Noix de Saint-Jacques snackées, crème de topinambour et noisettes torréfiées", "allergens": "mollusques, lait, fruits à coque"}, {"dish_type": "entree", "name": "Huîtres de Marennes-Oléron, mignonnette au vinaigre de champagne", "allergens": "mollusques, sulfites"}, {"dish_type": "plat", "name": "Chapon rôti aux marrons et truffe noire, jus corsé et purée de céleri", "allergens": "lait, céleri"}, {"dish_type": "plat", "name": "Homard bleu, bisque légère et gnocchis dorés", "allergens": "crustacés, gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Bûche chocolat grand cru, cœur praliné et feuilleté croustillant", "allergens": "gluten, lait, oeufs, fruits à coque"}, {"dish_type": "dessert", "name": "Truffes au chocolat et papillotes du chef", "allergens": "lait, fruits à coque"}]
   },
   "dejeuner-paques": {
     id: "dejeuner-paques",
@@ -102,7 +102,7 @@ const MENUS_PAR_DEFAUT = {
     minimum: 6,
     stock: 5,
     conditions_text: "Commande au minimum 10 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
-    dishes: [{"dish_type": "entree", "name": "Terrine de foie gras des Landes, confit d'oignons au vin rouge et pain de campagne", "allergens": "gluten, sulfites"}, {"dish_type": "entree", "name": "Marbré de légumes du marché, vinaigrette à la noisette et fromage de chèvre", "allergens": "lait, fruits à coque"}, {"dish_type": "plat", "name": "Entrecôte de bœuf à la bordelaise, moelle poêlée et pommes grenaille", "allergens": "lait, sulfites"}, {"dish_type": "plat", "name": "Magret de canard rôti, sauce au miel et aux épices, purée de patates douces", "allergens": "lait"}, {"dish_type": "dessert", "name": "Cannelés de Bordeaux tièdes et crème glacée vanille", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Mille-feuille vanille, caramel au beurre salé", "allergens": "gluten, lait, oeufs"}]
+    dishes: [{"dish_type": "entree", "name": "Salade périgourdine, gésiers confits, noix et vinaigre de Xérès", "allergens": "fruits à coque, sulfites"}, {"dish_type": "entree", "name": "Marbré de légumes du marché, vinaigrette à la noisette et fromage de chèvre", "allergens": "lait, fruits à coque"}, {"dish_type": "plat", "name": "Entrecôte de bœuf à la bordelaise, moelle poêlée et pommes grenaille", "allergens": "lait, sulfites"}, {"dish_type": "plat", "name": "Souris d'agneau confite aux sarments, haricots tarbais et jus au vin rouge", "allergens": "sulfites"}, {"dish_type": "dessert", "name": "Cannelés de Bordeaux tièdes et crème glacée vanille", "allergens": "gluten, lait, oeufs"}, {"dish_type": "dessert", "name": "Mille-feuille vanille, caramel au beurre salé", "allergens": "gluten, lait, oeufs"}]
   },
   "fete-vegetale": {
     id: "fete-vegetale",
@@ -115,7 +115,7 @@ const MENUS_PAR_DEFAUT = {
     minimum: 10,
     stock: 3,
     conditions_text: "Commande au minimum 14 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
-    dishes: [{"dish_type": "entree", "name": "Tartare de betteraves et pomme verte, crème d'amande et pickles", "allergens": "fruits à coque"}, {"dish_type": "entree", "name": "Velouté de topinambour à l'huile de noisette et chips de panais", "allergens": "fruits à coque"}, {"dish_type": "plat", "name": "Wellington de légumes d'automne, jus aux champignons et purée de pois chiches", "allergens": "gluten"}, {"dish_type": "plat", "name": "Risotto de cèpes à la crème d'avoine et éclats de noisette", "allergens": "gluten, fruits à coque"}, {"dish_type": "dessert", "name": "Tarte au chocolat noir et sel de Guérande, crème de coco", "allergens": "gluten, fruits à coque"}, {"dish_type": "dessert", "name": "Poire pochée au vin épicé et sablé amande", "allergens": "gluten, fruits à coque, sulfites"}]
+    dishes: [{"dish_type": "entree", "name": "Tartare de betteraves et pomme verte, crème d'amande et pickles", "allergens": "fruits à coque"}, {"dish_type": "entree", "name": "Velouté de panais et lait de coco, huile de noisette et chips de patate douce", "allergens": "fruits à coque"}, {"dish_type": "plat", "name": "Wellington de légumes d'automne, jus aux champignons et purée de pois chiches", "allergens": "gluten"}, {"dish_type": "plat", "name": "Gnocchis de patate douce, crème de sésame noir et pousses de moutarde", "allergens": "gluten, sésame"}, {"dish_type": "dessert", "name": "Tarte au chocolat noir et sel de Guérande, crème de coco", "allergens": "gluten, fruits à coque"}, {"dish_type": "dessert", "name": "Poire pochée au vin épicé et sablé amande", "allergens": "gluten, fruits à coque, sulfites"}]
   }
 };
 
