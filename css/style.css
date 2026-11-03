@@ -2724,3 +2724,20 @@ main.contact-page > .contact-layout > .contact-form-panel {
   margin-top: 0.75rem;
   width: 100%;
 }
+
+.lien-evitement {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  background: var(--terracotta-dark);
+  transform: translateY(-120%);
+}
+
+.lien-evitement:focus {
+  transform: translateY(0);
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
