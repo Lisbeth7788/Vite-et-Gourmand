@@ -11,7 +11,6 @@ DELETE FROM order_status_history;
 DELETE FROM orders;
 DELETE FROM messages;
 DELETE FROM password_reset_tokens;
-DELETE FROM employee_shifts;
 DELETE FROM employee_tasks;
 DELETE FROM employee_reports;
 DELETE FROM payslips;
