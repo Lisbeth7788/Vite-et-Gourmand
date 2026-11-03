@@ -1,7 +1,7 @@
 -- Remise à zéro des données de test (anciennes commandes du temps du restaurant).
--- Conserve : les menus et leurs plats, les comptes administrateur et employés, les horaires.
+-- Conserve : les menus et leurs plats, TOUS les comptes (clients, employés, administrateur) et les horaires.
 -- Supprime : commandes, suivis, avis, messages, jetons de mot de passe,
--- comptes clients et données de planning/paie des employés.
+-- et données de planning/paie des employés.
 -- À importer dans phpMyAdmin (local, puis Hostinger). Action définitive.
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -15,7 +15,6 @@ DELETE FROM employee_shifts;
 DELETE FROM employee_tasks;
 DELETE FROM employee_reports;
 DELETE FROM payslips;
-DELETE FROM users WHERE role = 'client';
 
 SET FOREIGN_KEY_CHECKS = 1;
 
