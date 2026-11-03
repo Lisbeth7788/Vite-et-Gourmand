@@ -89,8 +89,10 @@
       font-size: 11px;
       font-weight: 700;
     }
+    .desktop .topbar { padding-right: 4mm; padding-left: 4mm; font-size: 10px; }
     .brand { white-space: nowrap; letter-spacing: .02em; }
     .nav { display: flex; gap: 5mm; color: #fff8f4; font-weight: 500; }
+    .desktop .nav { gap: 3mm; white-space: nowrap; }
     .page-content { padding: 7mm; }
     .desktop .page-content { padding: 5mm 8mm; }
     .hero {
@@ -170,6 +172,7 @@
     .desktop .catalog-cards { grid-template-columns: repeat(3, 1fr); }
     .catalog-cards .photo { min-height: 20mm; }
     .catalog-cards .card-body { padding: 2mm; }
+    .catalog-cards .price { font-size: 9px; white-space: nowrap; }
     .order-layout { display: grid; grid-template-columns: 1.3fr .7fr; gap: 5mm; }
     .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2mm; }
     .form-field.full { grid-column: 1 / -1; }
@@ -324,9 +327,9 @@
               <div><span class="field-label">Personnes</span><div class="field-value">Nombre minimum</div></div>
             </div>
             <div class="cards catalog-cards">
-              <article class="card"><div class="photo">Photo du menu</div><div class="card-body"><p class="card-title">Menu classique</p><p class="card-meta">Entrée · plat · dessert</p><p class="price">À partir de 24 € / personne</p></div></article>
-              <article class="card"><div class="photo">Photo du menu</div><div class="card-body"><p class="card-title">Menu de saison</p><p class="card-meta">Cuisine fraîche et locale</p><p class="price">À partir de 32 € / personne</p></div></article>
-              <article class="card"><div class="photo">Photo du menu</div><div class="card-body"><p class="card-title">Menu de fête</p><p class="card-meta">Une proposition généreuse</p><p class="price">À partir de 38 € / personne</p></div></article>
+              <article class="card"><div class="photo">Photo du menu</div><div class="card-body"><p class="card-title">Menu classique</p><p class="card-meta">Entrée · plat · dessert</p><p class="price">24 € / pers.</p></div></article>
+              <article class="card"><div class="photo">Photo du menu</div><div class="card-body"><p class="card-title">Menu de saison</p><p class="card-meta">Cuisine fraîche et locale</p><p class="price">32 € / pers.</p></div></article>
+              <article class="card"><div class="photo">Photo du menu</div><div class="card-body"><p class="card-title">Menu de fête</p><p class="card-meta">Une proposition généreuse</p><p class="price">38 € / pers.</p></div></article>
             </div>
           </div>
         </div>
