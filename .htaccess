@@ -1,5 +1,8 @@
 Options -Indexes
 
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .css .js .json .xml .txt
+
 <FilesMatch "^\.(env|git)|.*\.sql$">
   Require all denied
 </FilesMatch>
