@@ -2015,6 +2015,8 @@ main > .page-intro ~ .contact-form-panel {
 }
 
 /* Horaires d'ouverture (deux groupes) */
+.actions-ligne { display: flex; gap: 0.5rem; justify-content: center; }
+.actions-ligne .button { font-size: 0.75rem; min-width: 5.5rem; padding: 0.25rem 0.7rem; text-align: center; }
 #horaires-liste { margin: 0 auto; max-width: 34rem; }
 .horaires-groupes { display: grid; gap: 0.35rem; list-style: none; margin: 0; padding: 0; }
 .horaires-groupe { align-items: center; background: #f6f1ee; border-radius: 999px; display: grid; gap: 0.6rem; grid-template-columns: 9.5rem 1fr auto; padding: 0.25rem 0.3rem 0.25rem 1rem; }
