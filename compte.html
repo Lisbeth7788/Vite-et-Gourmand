@@ -18,16 +18,16 @@
     <div class="page-intro"><p class="eyebrow">Espace client</p><h1>Mes événements</h1><p id="account-identity">Vérification de votre session...</p></div>
     <nav class="admin-nav" aria-label="Sections de mon espace">
       <ol>
-        <li><a href="#commandes" data-section="commandes" aria-current="page">Mes événements</a></li>
-        <li><a href="#profil" data-section="profil">Mes coordonnées</a></li>
+        <li><a href="#profil" data-section="profil" aria-current="page">Mon profil</a></li>
+        <li><a href="#commandes" data-section="commandes">Mes événements</a></li>
         <li><a href="#activite" data-section="activite">Mon activité</a></li>
       </ol>
     </nav>
-    <section id="section-profil" class="form-section profil-carte" aria-labelledby="profile-title" hidden>
+    <section id="section-profil" class="form-section profil-carte" aria-labelledby="profile-title">
       <div class="profil-entete">
         <span class="profil-avatar" id="profile-avatar" aria-hidden="true">?</span>
         <div>
-          <h2 id="profile-title">Mes coordonnées</h2>
+          <h2 id="profile-title">Mon profil</h2>
           <p class="profil-sous-titre">Elles nous servent à confirmer votre événement et à organiser la livraison.</p>
         </div>
       </div>
@@ -69,7 +69,7 @@
         </details>
       </div>
     </section>
-    <section id="section-commandes" class="form-section" aria-labelledby="account-orders-title">
+    <section id="section-commandes" class="form-section" aria-labelledby="account-orders-title" hidden>
       <div id="account-next" class="evenement-prochain" hidden></div>
       <div class="evenements-entete">
         <h2 id="account-orders-title">Mes réceptions et cérémonies</h2>
@@ -100,6 +100,6 @@
   </footer>
 
   <script type="module" src="js/script.js?v=selecteur-admin"></script>
-  <script type="module" src="js/account.js?v=4818e949"></script>
+  <script type="module" src="js/account.js?v=cc38d241"></script>
 </body>
 </html>
