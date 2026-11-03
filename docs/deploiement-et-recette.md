@@ -22,17 +22,20 @@ Cocher chaque ligne après l'avoir testée.
 - [ ] Accueil, navigation et pied de page (horaires, mentions légales, CGV).
 - [ ] Menus : filtres par prix, thème, régime et nombre de personnes, sans rechargement.
 - [ ] Détail d'un menu : plats, allergènes, conditions bien visibles.
-- [ ] Inscription (mot de passe de 10 caractères avec majuscule, minuscule, chiffre et caractère spécial).
-- [ ] Connexion, déconnexion, mot de passe oublié (lien reçu par e-mail).
-- [ ] Réservation refusée sans connexion.
-- [ ] Commande : adresse, ville, distance hors Bordeaux, détail du prix (menu, remise de 10 %, livraison) avant validation.
-- [ ] Paiement en ligne d'une réservation.
-- [ ] Espace client : liste, annulation avant acceptation, suivi du statut, avis.
+- [x] Inscription (mot de passe de 10 caractères avec majuscule, minuscule, chiffre et caractère spécial). Testé en local le 3 novembre 2026.
+- [x] Connexion et déconnexion. Testé en local le 3 novembre 2026.
+- [ ] Mot de passe oublié (lien reçu par e-mail).
+- [x] Réservation refusée sans connexion. Testé en local le 3 novembre 2026.
+- [x] Commande : adresse, ville, distance hors Bordeaux, détail du prix (menu, remise de 10 %, livraison). Testé en local le 3 novembre 2026.
+- [x] Paiement en ligne d'une réservation. Testé en local le 3 novembre 2026.
+- [x] Client : modification et annulation d'une réservation. Testé en local le 3 novembre 2026.
+- [x] Accessibilité : aucun défaut détecté par l'outil automatique axe-core (WCAG 2.1 AA) sur 13 pages publiques le 3 novembre 2026. Le contrôle manuel (clavier, lecteur d'écran, zoom 200 %) reste à faire.
+- [ ] Espace client : liste, suivi du statut, avis (la liste et l'annulation sont déjà testées en local).
 - [ ] Espace administrateur : messages, réservations (changement de statut), avis (publier ou refuser), activité.
 - [ ] Menus : ajouter un menu avec plats et allergènes, le retrouver sur le site, le supprimer.
 - [ ] Horaires : modifier un jour, vérifier le pied de page.
 - [ ] Comptes employés : créer, désactiver (la connexion doit alors échouer).
-- [ ] Client : modifier une réservation, puis donner un avis sur une réservation terminée.
+- [ ] Client : donner un avis sur une réservation terminée.
 - [ ] Espace employé : connexion avec `employe`, accès aux réservations, aux avis et aux menus.
 - [ ] Formulaire de contact et réception de l'e-mail.
 - [ ] Affichage sur téléphone, au clavier et avec un zoom à 200 %.
