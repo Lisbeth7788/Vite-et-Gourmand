@@ -2,8 +2,17 @@
 
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../config/menu_images.php';
+require_once __DIR__ . '/../../config/maj_menus.php';
 requireRole(['admin', 'employe']);
 assurerTableImages($pdo);
+
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
+    try {
+        assurerMenusTraiteur($pdo);
+    } catch (Throwable $erreur) {
+        error_log('Mise à jour automatique des menus impossible : ' . $erreur->getMessage());
+    }
+}
 
 const TYPES_PLATS = ['entree' => 'entrees', 'plat' => 'plats', 'dessert' => 'desserts'];
 
