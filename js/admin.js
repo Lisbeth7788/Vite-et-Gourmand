@@ -19,9 +19,12 @@ const statusLabels = {
 
 const nomsMenus = {
   'marche-bordeaux': 'Le marché de Bordeaux',
-  'formule-soir': 'La Table du Soir',
-  'formule-etudiant': 'Le Campus Gourmand',
-  'menu-enfant': 'Le Petit Gourmet'
+  'reveillon': 'Le réveillon généreux',
+  'dejeuner-paques': 'Le déjeuner de Pâques',
+  'cocktail-dinatoire': 'Le cocktail dînatoire',
+  'buffet-entreprise': 'Le buffet d\'entreprise',
+  'banquet-mariage': 'Le banquet de mariage',
+  'fete-vegetale': 'La fête végétale'
 };
 
 async function demanderJson(url, options = {}) {

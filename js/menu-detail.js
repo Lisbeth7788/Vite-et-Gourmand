@@ -1,33 +1,96 @@
-const CONDITIONS_MENUS = 'Commande une semaine à l’avance. Annulation 24 h avant la prestation.';
-
-const creerMenu = (id, name, price, theme, description, image, stock, plats) => ({
-  id,
-  name,
-  price,
-  theme,
-  regime: 'classique',
-  description,
-  image_path: image,
-  minimum: 1,
-  stock,
-  conditions_text: CONDITIONS_MENUS,
-  dishes: ['entree', 'plat', 'dessert'].map((dish_type, i) => ({ dish_type, name: plats[i][0], allergens: plats[i][1] }))
-});
-
-// Copie de secours : le titre reste personnalisé même si la base de données n'est pas à jour.
+// Copie de secours : le menu reste affiché même si la base de données n'est pas à jour.
 const MENUS_PAR_DEFAUT = {
-  'marche-bordeaux': creerMenu('marche-bordeaux', 'Le marché de Bordeaux', 24, 'Midi',
-    'La formule du 12h00, composée chaque jour avec les produits de saison et du jour.', 'images/images/menu-marche.jpg', 5,
-    [['Entrée du jour selon le marché', 'selon les produits du jour'], ['Plat du jour selon le marché', 'selon les produits du jour'], ['Dessert du jour selon le marché', 'selon les produits du jour']]),
-  'formule-soir': creerMenu('formule-soir', 'La Table du Soir', 34, 'Soir',
-    'Une formule généreuse et raffinée pour vos dîners.', 'images/images/menu-reveillon.jpg', 4,
-    [['Tartare de saumon, avocat et citron vert', 'poisson'], ['Magret de canard laqué au miel et gingembre, patates douces rôties', 'aucun allergène majeur déclaré'], ['Cœur coulant au chocolat et mangue fraîche', 'gluten, lait, oeufs']]),
-  'formule-etudiant': creerMenu('formule-etudiant', 'Le Campus Gourmand', 15, 'Étudiant',
-    'Une formule complète à petit prix pour les étudiants et les repas de groupe.', 'images/images/menu-printemps.jpg', 10,
-    [['Samossas de légumes et chutney de mangue', 'gluten'], ['Poulet tikka masala et riz basmati', 'lait'], ['Riz au lait de coco et fruits de la passion', 'fruits à coque']]),
-  'menu-enfant': creerMenu('menu-enfant', 'Le Petit Gourmet', 12, 'Enfant',
-    'Un repas adapté aux plus jeunes, avec des plats simples et gourmands.', 'images/images/menu-vegetal.jpg', 10,
-    [['Bâtonnets de légumes et sauce yaourt-citron', 'lait'], ['Wrap de poulet croustillant et frites de patate douce', 'gluten, oeufs'], ['Brochette de fruits exotiques et chocolat fondu', 'lait']])
+  "marche-bordeaux": {
+    id: "marche-bordeaux",
+    name: "Le marché de Bordeaux",
+    price: 24,
+    theme: "Classique",
+    regime: "classique",
+    description: "Un repas de famille ou entre amis, composé avec les produits de saison du marché.",
+    image_path: "images/images/menu-marche.jpg",
+    minimum: 6,
+    stock: 5,
+    conditions_text: "Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
+    dishes: [{"dish_type": "entree", "name": "Salade de chèvre frais et légumes de saison", "allergens": "lait, fruits à coque"}, {"dish_type": "plat", "name": "Bœuf braisé, pommes de terre grenaille et légumes rôtis", "allergens": "aucun allergène majeur déclaré"}, {"dish_type": "dessert", "name": "Tarte fine aux pommes caramélisées", "allergens": "gluten, lait, oeufs"}]
+  },
+  "reveillon": {
+    id: "reveillon",
+    name: "Le réveillon généreux",
+    price: 38,
+    theme: "Noël",
+    regime: "classique",
+    description: "Une sélection festive pour réunir vos proches autour de la table de Noël.",
+    image_path: "images/images/menu-reveillon.jpg",
+    minimum: 8,
+    stock: 4,
+    conditions_text: "Commande au minimum 14 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
+    dishes: [{"dish_type": "entree", "name": "Velouté de courge et éclats de noisette", "allergens": "fruits à coque"}, {"dish_type": "plat", "name": "Volaille rôtie, marrons et légumes de fête", "allergens": "aucun allergène majeur déclaré"}, {"dish_type": "dessert", "name": "Bûche chocolat et vanille", "allergens": "gluten, lait, oeufs"}]
+  },
+  "dejeuner-paques": {
+    id: "dejeuner-paques",
+    name: "Le déjeuner de Pâques",
+    price: 34,
+    theme: "Pâques",
+    regime: "classique",
+    description: "Le repas de Pâques en famille : agneau tendre et desserts au chocolat.",
+    image_path: "images/images/menu-printemps.jpg",
+    minimum: 6,
+    stock: 5,
+    conditions_text: "Commande au minimum 10 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
+    dishes: [{"dish_type": "entree", "name": "Asperges vertes, œuf mollet et copeaux de parmesan", "allergens": "oeufs, lait"}, {"dish_type": "plat", "name": "Gigot d'agneau rôti au thym, gratin dauphinois", "allergens": "lait"}, {"dish_type": "dessert", "name": "Nid de Pâques au chocolat et fruits rouges", "allergens": "gluten, lait, oeufs"}]
+  },
+  "cocktail-dinatoire": {
+    id: "cocktail-dinatoire",
+    name: "Le cocktail dînatoire",
+    price: 28,
+    theme: "Événement",
+    regime: "classique",
+    description: "Une sélection de pièces salées et sucrées à partager debout, idéale pour inaugurations, vernissages et anniversaires.",
+    image_path: "images/images/menu-marche.jpg",
+    minimum: 20,
+    stock: 6,
+    conditions_text: "Commande au minimum 10 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures. Prévoir une table ou un buffet pour la mise en place.",
+    dishes: [{"dish_type": "entree", "name": "Verrines de saumon fumé et fromage frais, mini-quiches", "allergens": "poisson, lait, gluten, oeufs"}, {"dish_type": "plat", "name": "Brochettes de poulet mariné, mini-burgers et navettes garnies", "allergens": "gluten, lait, sésame"}, {"dish_type": "dessert", "name": "Mignardises, mini-tartelettes et verrines de fruits", "allergens": "gluten, lait, oeufs, fruits à coque"}]
+  },
+  "buffet-entreprise": {
+    id: "buffet-entreprise",
+    name: "Le buffet d'entreprise",
+    price: 26,
+    theme: "Événement",
+    regime: "classique",
+    description: "Un buffet froid complet pour vos séminaires, réunions et repas d'équipe.",
+    image_path: "images/images/menu-marche.jpg",
+    minimum: 15,
+    stock: 8,
+    conditions_text: "Commande au minimum 7 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
+    dishes: [{"dish_type": "entree", "name": "Salades composées de saison et assortiment de charcuteries", "allergens": "céleri, moutarde"}, {"dish_type": "plat", "name": "Filet de volaille froid, saumon en bellevue et crudités", "allergens": "poisson, oeufs"}, {"dish_type": "dessert", "name": "Plateau de fromages et salade de fruits frais", "allergens": "lait"}]
+  },
+  "banquet-mariage": {
+    id: "banquet-mariage",
+    name: "Le banquet de mariage",
+    price: 55,
+    theme: "Événement",
+    regime: "classique",
+    description: "Un repas de réception en trois services pour célébrer le plus beau jour, avec dressage soigné.",
+    image_path: "images/images/menu-reveillon.jpg",
+    minimum: 40,
+    stock: 3,
+    conditions_text: "Commande au minimum 21 jours avant la prestation. Dégustation possible sur rendez-vous. Conservation au réfrigérateur et consommation sous 24 heures.",
+    dishes: [{"dish_type": "entree", "name": "Foie gras maison, chutney de figues et pain d'épices", "allergens": "gluten, fruits à coque"}, {"dish_type": "plat", "name": "Filet de bœuf sauce au poivre, gratin et légumes glacés", "allergens": "lait, gluten"}, {"dish_type": "dessert", "name": "Pièce montée de choux et caramel", "allergens": "gluten, lait, oeufs"}]
+  },
+  "fete-vegetale": {
+    id: "fete-vegetale",
+    name: "La fête végétale",
+    price: 32,
+    theme: "Événement",
+    regime: "vegan",
+    description: "Une formule entièrement végétale pour vos événements professionnels ou privés.",
+    image_path: "images/images/menu-vegetal.jpg",
+    minimum: 10,
+    stock: 3,
+    conditions_text: "Commande au minimum 10 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
+    dishes: [{"dish_type": "entree", "name": "Gaspacho de petits pois et croustillant de pois chiches", "allergens": "aucun allergène majeur déclaré"}, {"dish_type": "plat", "name": "Curry de légumes et lentilles corail, riz basmati", "allergens": "aucun allergène majeur déclaré"}, {"dish_type": "dessert", "name": "Mousse au chocolat noir et lait de coco", "allergens": "aucun allergène majeur déclaré"}]
+  }
 };
 
 const pageDetail = document.querySelector('#menu-detail');
@@ -47,7 +110,6 @@ if (pageDetail) {
           menu = menuParDefaut;
         }
         if (!menu) throw new Error('Menu introuvable.');
-        if (menuParDefaut) menu = { ...menu, conditions_text: CONDITIONS_MENUS, minimum: 1 };
         document.title = `${menu.name} - Vite et Gourmand`;
         document.querySelector('#menu-detail-category').textContent = `${menu.theme} · ${menu.regime}`;
         document.querySelector('#menu-detail-title').textContent = menu.name;
