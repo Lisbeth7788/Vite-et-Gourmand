@@ -2207,7 +2207,6 @@ main > .page-intro ~ .contact-form-panel {
 .pastille-service{background:#dff1e1;color:#1f6b35}
 .pastille-repos{background:#eee9e3;color:#5a4d40}
 
-@media (max-width:800px){#planning-simule{max-width:100%}}
 
 .bloc-semaine{margin-bottom:3rem}
 .bloc-semaine + .bloc-semaine{padding-top:2rem;border-top:2px dashed var(--line,#e6dccf)}
@@ -2379,7 +2378,6 @@ main > .page-intro ~ .contact-form-panel {
 
   main .form-section > *,
   .section-menu-edition,
-  #planning-simule,
   #order-list,
   #activity-summary,
   #activity-days,

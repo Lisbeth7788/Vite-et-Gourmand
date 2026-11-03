@@ -25,7 +25,6 @@ Si une page ne montre pas la dernière version, faire **Ctrl + F5** pour vider l
 
 ## Bon à savoir
 
-- Le planning de l'équipe est enregistré dans la table `team_planning`, créée automatiquement à la première utilisation.
 - Le fichier `.env` ne doit jamais être publié ni ajouté à GitHub.
 - Les comptes de test doivent être supprimés ou voir leur mot de passe changé avant la vraie ouverture.
 
@@ -34,5 +33,5 @@ Si une page ne montre pas la dernière version, faire **Ctrl + F5** pour vider l
 - Public : `api/menus.php`, `api/contact.php`, `api/reviews.php`.
 - Connexion : `api/auth/` (inscription, connexion, déconnexion, mot de passe oublié, session).
 - Client : `api/orders.php` (réservation), `api/paiement.php`, `api/user/` (profil, réservations, activité).
-- Employé : `api/employee/espace.php`, `api/employee/planning-equipe.php` (lecture).
-- Administrateur : `api/admin/` (messages, réservations, avis, activité, statistiques, comptes employés) et `api/employee/planning-equipe.php` (modification).
+- Employé : `api/employee/espace.php`.
+- Administrateur : `api/admin/` (messages, réservations, avis, activité, statistiques, comptes employés).
