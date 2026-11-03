@@ -51,5 +51,5 @@ VALUES
 ON DUPLICATE KEY UPDATE name = VALUES(name), allergens = VALUES(allergens);
 
 -- Retire les anciens menus de type restaurant (sans commande liée).
-DELETE FROM menu_dishes WHERE menu_id IN ('formule-soir','formule-etudiant','menu-enfant','jardin-printemps','cocktail-dinatoire','buffet-entreprise') AND menu_id NOT IN (SELECT menu_id FROM orders);
-DELETE FROM menus WHERE id IN ('formule-soir','formule-etudiant','menu-enfant','jardin-printemps','cocktail-dinatoire','buffet-entreprise') AND id NOT IN (SELECT menu_id FROM orders);
+DELETE FROM menu_dishes WHERE menu_id IN ('formule-soir','formule-etudiant','menu-enfant','jardin-printemps','buffet-entreprise') AND menu_id NOT IN (SELECT menu_id FROM orders);
+DELETE FROM menus WHERE id IN ('formule-soir','formule-etudiant','menu-enfant','jardin-printemps','buffet-entreprise') AND id NOT IN (SELECT menu_id FROM orders);
