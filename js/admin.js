@@ -21,8 +21,10 @@ const nomsMenus = {
   'marche-bordeaux': 'Le marché de Bordeaux',
   'reveillon': 'Le réveillon généreux',
   'dejeuner-paques': 'Le déjeuner de Pâques',
-  'cocktail-dinatoire': 'Le cocktail dînatoire',
-  'buffet-entreprise': 'Le buffet d\'entreprise',
+  'cocktail-dinatoire': 'Le cocktail de cérémonie',
+  'repas-anniversaire': 'Le repas d\'anniversaire',
+  'brunch-naissance': 'Le brunch de naissance',
+  'bapteme-communion': 'Le repas de baptême et de communion',
   'banquet-mariage': 'Le banquet de mariage',
   'fete-vegetale': 'La fête végétale'
 };
