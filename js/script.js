@@ -528,7 +528,7 @@ async function afficherHorairesPiedDePage() {
   if (!liste) return;
   try {
     const reponse = await fetch('api/horaires.php');
-    if (!reponse.ok) throw new Error('Les horaires du restaurant n’ont pas pu être chargés.');
+    if (!reponse.ok) throw new Error('Les horaires du traiteur n’ont pas pu être chargés.');
     const jours = await reponse.json();
     if (!Array.isArray(jours) || !jours.length) return;
     liste.replaceChildren(...jours.map((jour) => {
