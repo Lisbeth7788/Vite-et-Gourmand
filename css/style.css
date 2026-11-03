@@ -2049,6 +2049,30 @@ main > .page-intro ~ .contact-form-panel {
   .reservation-resume { grid-column: 1; grid-row: 2; }
 }
 
+#account-orders { max-width: 44rem; }
+.evenements-entete { align-items: center; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: space-between; margin: 0 auto 1rem; max-width: 44rem; }
+.evenements-entete h2 { margin: 0; }
+.evenement-prochain { background: var(--paper); border: 1px solid var(--line); border-left: 6px solid var(--terracotta); border-radius: 12px; margin: 0 auto 1.5rem; max-width: 44rem; padding: 1.25rem 1.5rem; }
+.evenement-prochain[hidden] { display: none; }
+.evenement-prochain h2 { margin: 0.2rem 0; }
+.evenement-date { font-weight: 700; margin: 0; text-transform: capitalize; }
+.evenement-delai { color: var(--terracotta-dark); font-weight: 700; margin: 0.2rem 0 0.8rem; }
+.evenement-carte .reservation-resume { text-transform: capitalize; }
+.evenement-carte .reservation-detail { text-align: left; }
+.frise-suivi { counter-reset: etape; display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0.6rem 0; padding: 0; }
+.frise-suivi li { background: var(--cream); border-radius: 999px; font-size: 0.78rem; opacity: 0.75; padding: 0.25rem 0.7rem; }
+.frise-suivi li::before { content: '○ '; }
+.frise-suivi li.fait { background: var(--sage); color: #fff; opacity: 1; }
+.frise-suivi li.fait::before { content: '✓ '; }
+.frise-suivi li.actuel { background: var(--terracotta); color: #fff; font-weight: 700; opacity: 1; }
+.frise-suivi li.actuel::before { content: '● '; }
+.evenement-annule { color: var(--terracotta-dark); font-weight: 700; }
+.evenement-infos { display: grid; gap: 0.6rem 1.5rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); margin: 0.8rem 0; }
+.evenement-infos dt { font-size: 0.75rem; letter-spacing: 0.05em; opacity: 0.8; text-transform: uppercase; }
+.evenement-infos dd { font-weight: 700; margin: 0; }
+.evenement-historique summary { cursor: pointer; font-weight: 700; }
+.evenement-vide { background: var(--paper); border: 1px dashed var(--line); border-radius: 12px; padding: 1.5rem; text-align: center; }
+
 #account-activity { margin: 0 auto; max-width: 40rem; }
 .activite-liste { display: grid; gap: 0.3rem; list-style: none; margin: 0; padding: 0; }
 .activite-ligne { align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; display: grid; font-size: 0.85rem; gap: 0.6rem; grid-template-columns: 6.5rem 1fr auto; padding: 0.4rem 0.7rem; }
