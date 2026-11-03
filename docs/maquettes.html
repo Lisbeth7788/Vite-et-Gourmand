@@ -92,7 +92,7 @@
     .brand { white-space: nowrap; letter-spacing: .02em; }
     .nav { display: flex; gap: 5mm; color: #fff8f4; font-weight: 500; }
     .page-content { padding: 7mm; }
-    .desktop .page-content { padding: 7mm 10mm; }
+    .desktop .page-content { padding: 5mm 8mm; }
     .hero {
       display: grid;
       min-height: 49mm;
@@ -168,13 +168,14 @@
       font-size: 10px;
     }
     .desktop .catalog-cards { grid-template-columns: repeat(3, 1fr); }
-    .catalog-cards .photo { min-height: 31mm; }
-    .order-layout { display: grid; grid-template-columns: 1.3fr .7fr; gap: 8mm; }
-    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3mm; }
+    .catalog-cards .photo { min-height: 20mm; }
+    .catalog-cards .card-body { padding: 2mm; }
+    .order-layout { display: grid; grid-template-columns: 1.3fr .7fr; gap: 5mm; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2mm; }
     .form-field.full { grid-column: 1 / -1; }
-    .form-field .field-value { min-height: 10mm; }
+    .form-field .field-value { min-height: 7mm; }
     .summary {
-      padding: 5mm;
+      padding: 3mm;
       border: 1px solid var(--line);
       border-radius: 2mm;
       background: var(--soft);
@@ -184,7 +185,7 @@
       display: flex;
       justify-content: space-between;
       gap: 4mm;
-      margin: 3mm 0;
+      margin: 2mm 0;
       color: var(--muted);
       font-size: 10px;
     }
