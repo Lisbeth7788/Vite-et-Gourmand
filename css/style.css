@@ -2573,3 +2573,76 @@ a.button,
 .champ-formulaire select {
   border-radius: 999px;
 }
+
+/* Espacement uniforme entre les contenants et entre les boutons */
+:root {
+  --espace: 1.5rem;
+  --espace-petit: 0.75rem;
+}
+
+main.catalogue-page,
+main.admin-page,
+main.auth-page,
+main.order-page,
+main.contact-page,
+main.legal-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace);
+  padding-bottom: var(--espace);
+}
+
+main.catalogue-page > :not(.page-intro),
+main.admin-page > :not(.page-intro),
+main.auth-page > :not(.page-intro),
+main.order-page > :not(.page-intro),
+main.contact-page > :not(.page-intro),
+main.legal-page > :not(.page-intro) {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+main.catalogue-page > .page-intro ~ .form-section,
+main.legal-page > .page-intro ~ .legal-content,
+main.contact-page > .page-intro ~ .contact-form-panel {
+  margin-top: 0;
+}
+
+.form-section > * + *,
+.formulaire-menu > * + * {
+  margin-top: var(--espace-petit);
+}
+
+.form-section .button,
+.form-section form > .button,
+.contact-form-panel .button,
+.auth-layout .button {
+  margin-top: var(--espace-petit);
+}
+
+.actions-ligne,
+.actions-paiement,
+.actions-menu,
+.profil-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-petit);
+  justify-content: center;
+}
+
+.actions-ligne,
+.actions-menu {
+  margin-top: 0;
+}
+
+.actions-ligne .button,
+.actions-menu .button {
+  margin: 0;
+}
+
+.menus-admin,
+#account-orders,
+#order-list,
+#activity-list {
+  gap: var(--espace-petit);
+}
