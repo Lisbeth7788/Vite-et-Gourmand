@@ -55,7 +55,7 @@ Ces mots de passe sont des mots de passe de test : il faut les changer avant une
 ## Organisation des fichiers
 
 - `index.html`, `menus.html`, `menu-detail.html`, `contact.html` : pages publiques.
-- `connexion.html`, `inscription.html`, `compte.html`, `reservation.html` : espace client (`commande.html` redirige vers `reservation.html`).
+- `connexion.html`, `inscription.html`, `compte.html`, `reservation.html` : espace client.
 - `employe-connexion.html`, `espace-employe.html` : espace employé.
 - `admin-connexion.html`, `admin.html`, `admin-reservations.html`, `admin-avis.html`, `admin-activite.html`, `admin-employes.html` : espace administrateur.
 - `api/` : routes PHP qui répondent en JSON.

@@ -28,8 +28,8 @@ function Update-AssetVersions {
 
 $pageNames = @{
     'index.html' = "la page d'accueil"; 'menus.html' = 'la page des menus'; 'menu-detail.html' = "la page détail d'un menu"
-    'commande.html' = 'la page de commande'; 'compte.html' = 'la page compte'; 'admin.html' = 'la page admin'
-    'connexion.html' = 'la page de connexion'; 'inscription.html' = 'la page de création de compte'; 'admin-connexion.html' = 'la connexion administrateur'; 'contact.html' = 'la page contact'; 'histoire.html' = 'la page à propos'
+    'compte.html' = 'la page compte'; 'admin.html' = 'la page admin'
+    'connexion.html' = 'la page de connexion'; 'inscription.html' = 'la page de création de compte'; 'admin-connexion.html' = 'la connexion administrateur'; 'contact.html' = 'la page contact'
     'cgv.html' = 'les CGV'; 'mentions-legales.html' = 'les mentions légales'; 'confidentialite.html' = 'la page confidentialité'
     'admin-avis.html' = "la gestion des avis"; 'admin-reservations.html' = "la gestion des réservations"
 }
