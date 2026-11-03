@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Mise à jour du dossier projet - Vite et Gourmand</title>
+  <style>
+    @page { size: A4; margin: 18mm; }
+    body { color: #302b28; font: 10.5pt/1.42 "Segoe UI", Arial, sans-serif; }
+    h1, h2 { color: #8f3f2b; }
+    h1 { margin: 0 0 6px; border-bottom: 3px solid #bd5b3b; padding-bottom: 8px; font-size: 21pt; }
+    h2 { margin: 16px 0 5px; font-size: 13pt; }
+    p { margin: 6px 0; }
+    ul { margin: 5px 0 9px; padding-left: 20px; }
+    li { margin: 4px 0; }
+    .important { padding: 10px 13px; background: #f9f4f1; border-left: 4px solid #bd5b3b; }
+    .warning { padding: 10px 13px; background: #f8ece8; border-left: 4px solid #9c3e32; }
+    .small { color: #6b625d; font-size: 9pt; }
+  </style>
+</head>
+<body>
+  <h1>Mise à jour du dossier projet</h1>
+  <p><strong>Vite et Gourmand — version du 3 novembre 2026</strong></p>
+  <p class="important">Cette page complète et remplace les passages plus anciens du dossier qui décrivent un plafond de personnes, des créneaux fixes, l'absence de filtres ou de galerie, ou un espace employé avec planning. La référence ci-dessous est le fonctionnement de la version actuelle du site.</p>
+
+  <h2>Réservation, prix et paiement</h2>
+  <ul>
+    <li>Le nombre de personnes n'a pas de plafond applicatif ; il doit être au moins égal au minimum indiqué pour le menu.</li>
+    <li>Une remise de 10 % est appliquée lorsque la commande atteint le minimum du menu plus cinq personnes.</li>
+    <li>La livraison est gratuite à Bordeaux. Hors Bordeaux, elle coûte 5 € plus 0,59 € par kilomètre ; le client indique la distance dans le formulaire.</li>
+    <li>Le client choisit librement l'heure de livraison. Les horaires modifiables dans l'espace de gestion sont ceux affichés dans le pied de page, et ne constituent pas des créneaux imposés.</li>
+    <li>Le paiement par carte est une simulation : aucune transaction bancaire réelle n'est effectuée et les données de carte ne sont pas conservées.</li>
+  </ul>
+
+  <h2>Menus et galerie</h2>
+  <p>Un menu peut avoir plusieurs images. Dans l'administration, une image est saisie par ligne ; la première sert de couverture. La composition, les allergènes, les conditions, le stock, le thème, le régime et les horaires sont gérables depuis l'espace employé ou administrateur.</p>
+
+  <h2>Commandes et espaces de gestion</h2>
+  <ul>
+    <li>Les réservations sont filtrables par statut et par adresse e-mail du client.</li>
+    <li>Les statuts disponibles sont : en attente, acceptée, en préparation, en cours de livraison, livrée, retour du matériel, terminée et annulée. Une annulation demande un motif et le mode de contact du client.</li>
+    <li>L'espace employé permet de gérer les réservations, les avis, les menus et les horaires ; il ne comporte pas de planning d'équipe.</li>
+    <li>L'administrateur peut aussi gérer les messages, les comptes employés (création, désactivation, réactivation et suppression) et les statistiques.</li>
+    <li>La page Activité présente les statistiques par menu : comparaison du nombre de réservations et du chiffre d'affaires, avec filtres par menu et période. Les données détaillées sont stockées dans MongoDB.</li>
+  </ul>
+
+  <h2>Comptes et configuration</h2>
+  <p>Le jeu de données fournit un compte de démonstration par rôle, dont un compte employé partagé. L'administrateur peut créer d'autres comptes employés ; l'e-mail de création ne transmet pas leur mot de passe. La création d'un compte administrateur depuis le site n'est pas proposée.</p>
+  <p>Les e-mails de bienvenue, de confirmation et de changement de statut nécessitent une configuration SMTP valide. Les statistiques par menu nécessitent MongoDB et son extension PHP. Leur fonctionnement sur l'hébergement doit être confirmé lors de la recette.</p>
+
+  <h2>Pièces de dépôt à ne pas confondre</h2>
+  <ul>
+    <li>Le dossier projet décrit la conception et les réalisations ; il ne remplace pas le manuel d'utilisation demandé séparément.</li>
+    <li>Le dépôt ECF demande aussi la copie Word ou Excel fournie par Studi, remplie et nommée selon l'énoncé.</li>
+    <li>Les maquettes sont dans un PDF séparé : trois écrans ordinateur et trois écrans mobile. La charte graphique indique la palette et les polices Nunito et Fraunces utilisées dans le site.</li>
+  </ul>
+  <p class="warning"><strong>À confirmer avant la remise :</strong> joindre la copie officielle Studi remplie, vérifier la limite de taille du dépôt et terminer les vérifications de déploiement (base SQL, SMTP, MongoDB, branche principale et partage du tableau de suivi).</p>
+  <p class="small">Identifiants de démonstration : voir le manuel d'utilisation. Ne pas utiliser ces mots de passe en production.</p>
+</body>
+</html>

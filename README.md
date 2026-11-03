@@ -38,9 +38,9 @@ Ces comptes sont créés par `sql/comptes-ecf.sql` (à exécuter après `sql/sch
 ## Que peut faire chaque profil ?
 
 - **Visiteur** : voir l'accueil, les menus (avec filtres), le détail d'un menu, l'histoire du traiteur (sur l'accueil), et envoyer un message.
-- **Client** : créer un compte, commander un menu à livrer (remise de 10 % et frais de livraison calculés), modifier sa commande avant acceptation, payer en ligne, suivre ses commandes, les annuler tant qu'elles ne sont pas acceptées, puis donner un avis.
+- **Client** : créer un compte, commander un menu à livrer (remise de 10 % et frais de livraison calculés), modifier sa commande avant acceptation, suivre ses commandes, les annuler tant qu'elles ne sont pas acceptées, puis donner un avis. Le paiement par carte est une simulation : aucun débit réel n'est effectué.
 - **Employé** : traiter les commandes (statuts, annulation avec motif), valider ou refuser les avis, gérer les menus (plats, allergènes, stock) et les horaires.
-- **Administrateur** : traiter les messages, les commandes (statuts) et les avis, voir l'activité, tout ce que fait un employé, créer ou désactiver des comptes employés.
+- **Administrateur** : traiter les messages, les commandes (statuts) et les avis, voir les statistiques par menu, tout ce que fait un employé, créer, désactiver, réactiver ou supprimer des comptes employés.
 
 ## Sécurité mise en place
 
@@ -57,7 +57,7 @@ Ces comptes sont créés par `sql/comptes-ecf.sql` (à exécuter après `sql/sch
 - `index.html`, `menus.html`, `menu-detail.html`, `contact.html` : pages publiques.
 - `connexion.html`, `inscription.html`, `compte.html`, `reservation.html` : espace client.
 - `employe-connexion.html`, `espace-employe.html` : espace employé.
-- `admin-connexion.html`, `admin.html`, `admin-reservations.html`, `admin-avis.html`, `admin-activite.html`, `admin-employes.html` : espace administrateur.
+- `admin-connexion.html`, `admin.html`, `admin-reservations.html`, `admin-avis.html`, `admin-activite.html`, `admin-menus.html`, `admin-comptes.html` : espace administrateur.
 - `api/` : routes PHP qui répondent en JSON.
 - `config/` : connexion à la base, sessions, fonctions communes.
 - `css/`, `js/`, `images/`, `fonts/` : mise en forme, scripts, images, polices.
@@ -69,6 +69,8 @@ Ces comptes sont créés par `sql/comptes-ecf.sql` (à exécuter après `sql/sch
 - [Documentation technique](docs/documentation-technique.md)
 - [Déploiement et recette](docs/deploiement-et-recette.md) et [DEPLOYMENT.md](DEPLOYMENT.md)
 - [Gestion de projet](docs/gestion-projet.md)
+- [Manuel d'utilisation](docs/manuel-utilisation.html) (version PDF à remettre séparément)
+- [Charte graphique](docs/charte-graphique.pdf) et [maquettes](docs/maquettes.pdf)
 - [Liens de livraison](docs/liens-livraison.md)
 - [Contrôle final avant envoi](docs/controle-final.md)
 

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manuel d'utilisation - Vite et Gourmand</title>
+  <style>
+    @page { size: A4; margin: 18mm; }
+    :root { color-scheme: light; }
+    body { margin: 0 auto; max-width: 760px; color: #302b28; font: 11pt/1.5 "Segoe UI", Arial, sans-serif; }
+    h1, h2, h3 { color: #8f3f2b; }
+    h1 { margin: 0 0 8px; font-size: 25pt; }
+    h2 { margin-top: 24px; padding-bottom: 5px; border-bottom: 2px solid #bd5b3b; font-size: 17pt; }
+    h3 { margin: 16px 0 6px; font-size: 13pt; }
+    a { color: #8f3f2b; }
+    .cover { display: flex; min-height: 245mm; flex-direction: column; justify-content: center; page-break-after: always; }
+    .eyebrow { color: #6b625d; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .callout { margin: 14px 0; padding: 12px 16px; border-left: 4px solid #bd5b3b; background: #f9f4f1; }
+    .warning { border-color: #9c3e32; background: #f8ece8; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px; border: 1px solid #d8cfc6; text-align: left; vertical-align: top; }
+    th { background: #eee8df; }
+    code { padding: 1px 4px; background: #f3eee9; }
+    .page { page-break-before: always; }
+    .small { color: #6b625d; font-size: 9.5pt; }
+    @media print { body { max-width: none; } }
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <p class="eyebrow">Guide des parcours</p>
+    <h1>Manuel d'utilisation</h1>
+    <p><strong>Vite et Gourmand</strong> — application de commande et de gestion d'un traiteur à Bordeaux.</p>
+    <p>Ce manuel explique les parcours visiteur, client, employé et administrateur, ainsi que les limites de la version de démonstration.</p>
+    <p><a href="https://lightblue-yak-778177.hostingersite.com">Ouvrir l'application en ligne</a></p>
+    <p class="small">Version préparée le 3 novembre 2026.</p>
+  </header>
+
+  <section>
+    <h2>Comptes de démonstration</h2>
+    <p>Les trois profils peuvent se connecter avec le mot de passe de démonstration ci-dessous.</p>
+    <table>
+      <thead><tr><th>Profil</th><th>Identifiant</th><th>Mot de passe</th><th>Page</th></tr></thead>
+      <tbody>
+        <tr><td>Client</td><td>client@vite-et-gourmand.fr</td><td>Azerty2026!</td><td><code>connexion.html</code></td></tr>
+        <tr><td>Employé</td><td>employe@vite-et-gourmand.fr</td><td>Azerty2026!</td><td><code>employe-connexion.html</code></td></tr>
+        <tr><td>Administrateur</td><td>admin@vite-et-gourmand.fr</td><td>Azerty2026!</td><td><code>admin-connexion.html</code></td></tr>
+      </tbody>
+    </table>
+    <p class="callout warning"><strong>Démo uniquement :</strong> les paiements par carte sont simulés et aucun montant n'est débité. N'utilisez pas de vraie carte bancaire. Changez ou supprimez ces identifiants avant une utilisation réelle.</p>
+    <p>Les e-mails de bienvenue, de confirmation et de changement de statut nécessitent une configuration SMTP valide sur l'hébergement. Les statistiques par menu nécessitent MongoDB.</p>
+  </section>
+
+  <section>
+    <h2>Visiter le site et choisir un menu</h2>
+    <ol>
+      <li>Depuis l'accueil, ouvrez <strong>Menus</strong> pour consulter les offres.</li>
+      <li>Utilisez les filtres de prix, de thème, de régime et de nombre minimal de personnes ; la liste se met à jour sans rechargement.</li>
+      <li>Ouvrez un menu pour consulter sa description, ses plats, ses allergènes, ses conditions et ses images.</li>
+      <li>Choisissez <strong>Commander ce menu</strong>. La connexion est nécessaire pour accéder à la réservation.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Créer un compte client</h2>
+    <ol>
+      <li>Sur la page de connexion, remplissez les informations personnelles et l'adresse e-mail.</li>
+      <li>Choisissez un mot de passe d'au moins 10 caractères, contenant une majuscule, une minuscule, un chiffre et un caractère spécial.</li>
+      <li>Après l'inscription, un e-mail de bienvenue est envoyé si la messagerie du site est configurée.</li>
+      <li>En cas d'oubli, utilisez le lien de réinitialisation et suivez le lien reçu par e-mail.</li>
+    </ol>
+  </section>
+
+  <section class="page">
+    <h2>Réserver et payer</h2>
+    <ol>
+      <li>Connectez-vous puis ouvrez le menu à commander. Il est présélectionné dans le formulaire.</li>
+      <li>Vérifiez les coordonnées reprises depuis votre compte, puis indiquez la date, l'heure, l'adresse, la ville et le nombre de personnes.</li>
+      <li>Le nombre de personnes doit atteindre le minimum du menu. Une remise de 10 % est appliquée à partir de cinq personnes au-delà de ce minimum.</li>
+      <li>La livraison est gratuite à Bordeaux. Hors Bordeaux, elle coûte 5 € plus 0,59 € par kilomètre ; indiquez la distance demandée par le formulaire.</li>
+      <li>Vérifiez le détail du prix avant de valider la commande. Un e-mail de confirmation est envoyé si le SMTP fonctionne.</li>
+      <li>Le paiement de démonstration affiche une étape carte, mais ne transmet ni ne conserve de données bancaires et ne débite aucun compte.</li>
+    </ol>
+    <p class="callout"><strong>Modification :</strong> tant que la commande n'est pas acceptée, vous pouvez la modifier ou l'annuler depuis <strong>Mon compte</strong>. Le choix du menu ne peut pas être modifié.</p>
+  </section>
+
+  <section>
+    <h2>Suivre une commande et déposer un avis</h2>
+    <ol>
+      <li>Dans <strong>Mon compte</strong>, consultez vos réservations et l'historique de leurs statuts.</li>
+      <li>Après acceptation, suivez les étapes de préparation et de livraison depuis la même page.</li>
+      <li>Si le statut indique un retour de matériel, contactez le traiteur dans le délai indiqué dans le message et les conditions générales.</li>
+      <li>Quand la commande est terminée, déposez une note de 1 à 5 et un commentaire. L'avis est visible sur l'accueil après validation par l'équipe.</li>
+    </ol>
+  </section>
+
+  <section class="page">
+    <h2>Espace employé</h2>
+    <p>Connectez-vous avec le compte employé de démonstration. Depuis <strong>Mon espace employé</strong>, ouvrez les raccourcis de gestion.</p>
+    <ul>
+      <li><strong>Réservations :</strong> filtrez par statut ou par adresse e-mail du client, consultez les détails et mettez à jour le statut. Une annulation exige un motif et le mode de contact du client.</li>
+      <li><strong>Avis :</strong> publiez ou refusez les avis soumis par les clients.</li>
+      <li><strong>Menus et horaires :</strong> créez, modifiez ou supprimez un menu, sa composition, ses allergènes, son stock, ses conditions et sa galerie. Saisissez une image par ligne ; la première est l'image de couverture. Les horaires du pied de page sont également modifiables.</li>
+    </ul>
+    <p class="small">L'employé ne peut pas consulter les messages du formulaire de contact ni gérer les comptes employés.</p>
+  </section>
+
+  <section>
+    <h2>Espace administrateur</h2>
+    <p>L'administrateur dispose des fonctions de l'employé et des accès suivants :</p>
+    <ul>
+      <li><strong>Messages :</strong> consultez et supprimez les demandes envoyées par le formulaire de contact.</li>
+      <li><strong>Comptes employés :</strong> créez un compte en indiquant son adresse e-mail et son mot de passe provisoire ; le message envoyé à l'employé ne contient pas ce mot de passe. Désactivez, réactivez ou supprimez un compte existant.</li>
+      <li><strong>Activité :</strong> consultez l'activité générale du site et les statistiques par menu. Choisissez un menu et une période pour comparer le nombre de réservations et le chiffre d'affaires ; les statistiques par menu utilisent MongoDB.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Aide et points à retenir</h2>
+    <ul>
+      <li>Les horaires affichés dans le pied de page sont modifiables ; l'heure de livraison est saisie librement dans le formulaire.</li>
+      <li>Un e-mail absent peut indiquer que le serveur SMTP n'est pas configuré ; vérifiez aussi les courriers indésirables.</li>
+      <li>Si les statistiques ne s'affichent pas, MongoDB ou son extension PHP peut ne pas être configurée.</li>
+      <li>Pour une utilisation réelle, remplacez les mots de passe de démonstration, activez HTTPS et configurez la messagerie et MongoDB.</li>
+    </ul>
+    <p>Application : <a href="https://lightblue-yak-778177.hostingersite.com">lightblue-yak-778177.hostingersite.com</a></p>
+  </section>
+</body>
+</html>

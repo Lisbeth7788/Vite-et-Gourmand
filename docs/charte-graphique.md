@@ -1,6 +1,6 @@
 # Charte graphique - Vite et Gourmand
 
-## Identite
+## Identité
 
 Vite et Gourmand est un traiteur bordelais chaleureux, accessible et professionnel. L'interface doit donner envie de decouvrir les menus tout en restant lisible pour une commande rapide.
 
@@ -18,14 +18,14 @@ Vite et Gourmand est un traiteur bordelais chaleureux, accessible et professionn
 
 ## Typographie
 
-- Titres : Playfair Display, avec Georgia en remplacement.
-- Texte courant : police sans serif lisible.
+- Titres : Fraunces, avec Georgia en remplacement.
+- Texte courant : Nunito, avec Segoe UI ou une police sans empattement en remplacement.
 - Les titres restent proportionnes au contenu et au mobile.
 
 ## Responsive
 
 Sur ordinateur, la navigation est horizontale et les cartes utilisent plusieurs colonnes. Sous 760 pixels, la navigation et les grilles passent en colonne unique.
 
-## Accessibilite
+## Accessibilité
 
 Les images ont un texte alternatif, les formulaires utilisent des labels et les messages dynamiques sont annonces lorsque cela est necessaire. Le contraste et la navigation au clavier doivent etre verifies avant livraison.
