@@ -156,7 +156,7 @@ VALUES
   (4, 'Jeudi', '9h00 - 19h00'),
   (5, 'Vendredi', '9h00 - 19h00'),
   (6, 'Samedi', '9h00 - 18h00'),
-  (7, 'Dimanche', 'Ferm? (livraisons sur demande)')
+  (7, 'Dimanche', 'Fermé (livraisons sur demande)')
 ON DUPLICATE KEY UPDATE day_name = VALUES(day_name), opening_hours = VALUES(opening_hours);
 
 CREATE TABLE IF NOT EXISTS order_status_history (
