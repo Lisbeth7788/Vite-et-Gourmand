@@ -2015,8 +2015,10 @@ main > .page-intro ~ .contact-form-panel {
 }
 
 /* Horaires d'ouverture (deux groupes) */
-.actions-ligne { display: flex; gap: 0.5rem; justify-content: center; }
-.actions-ligne .button { font-size: 0.75rem; min-width: 5.5rem; padding: 0.25rem 0.7rem; text-align: center; }
+.actions-ligne { align-items: center; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; padding: 0 0.4rem; }
+.actions-ligne .button { flex: 1 1 4.5rem; font-size: 0.72rem; max-width: 5.5rem; padding: 0.2rem 0.5rem; text-align: center; }
+#menu-liste .tableau-activite { width: 100%; }
+#menu-liste .tableau-activite th:last-child, #menu-liste .tableau-activite td:last-child { width: 28%; }
 #horaires-liste { margin: 0 auto; max-width: 34rem; }
 .horaires-groupes { display: grid; gap: 0.35rem; list-style: none; margin: 0; padding: 0; }
 .horaires-groupe { align-items: center; background: #f6f1ee; border-radius: 999px; display: grid; gap: 0.6rem; grid-template-columns: 9.5rem 1fr auto; padding: 0.25rem 0.3rem 0.25rem 1rem; }
