@@ -167,7 +167,9 @@ async function initialiserAdministration() {
     const session = await demanderJson('api/auth/session.php');
     const role = session.user.role;
     if (!['admin', 'employe'].includes(role)) throw new Error('Accès réservé à l’équipe.');
-    if (role !== 'admin') {
+    if (role === 'admin') {
+      document.querySelectorAll('[data-employe-only]').forEach((element) => { element.hidden = true; });
+    } else {
       if (document.body.hasAttribute('data-admin-only')) {
         window.location.href = 'admin-reservations.html';
         return;
