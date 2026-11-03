@@ -41,6 +41,23 @@ formulaireMenu.addEventListener('submit', async (evenement) => {
 
 formulaireMenu.addEventListener('reset', () => { formulaireMenu.elements.id.value = ''; });
 
+document.querySelector('#menus-maj')?.addEventListener('click', async (evenement) => {
+  const message = 'Cette action remplace les menus par les nouveaux menus de traiteur ET supprime toutes les commandes, avis et messages existants. Continuer ?';
+  if (!window.confirm(message)) return;
+  const bouton = evenement.currentTarget;
+  const retour = document.querySelector('#menus-maj-retour');
+  bouton.disabled = true;
+  try {
+    const resultat = await demanderJson('api/admin/menus-maj.php', { method: 'POST' });
+    annoncer(retour, resultat.message, false);
+    await chargerMenus();
+  } catch (error_) {
+    annoncer(retour, error_.message, true);
+  } finally {
+    bouton.disabled = false;
+  }
+});
+
 listeMenus.addEventListener('click', async (evenement) => {
   const modifier = evenement.target.closest('[data-menu-modifier]');
   const supprimer = evenement.target.closest('[data-menu-supprimer]');
