@@ -24,6 +24,7 @@ async function chargerMenus() {
 function remplirFormulaire(menu) {
   const champs = { id: menu.id, name: menu.name, price: menu.price, minimum_people: menu.minimum_people, stock: menu.stock, theme: menu.theme, regime: menu.regime, images: menu.images, description: menu.description, conditions_text: menu.conditions_text || '', entrees: menu.plats.entrees, plats: menu.plats.plats, desserts: menu.plats.desserts };
   Object.entries(champs).forEach(([nom, valeur]) => { formulaireMenu.elements[nom].value = valeur ?? ''; });
+  document.getElementById('menu-details').open = true;
   formulaireMenu.scrollIntoView({ behavior: 'smooth' });
 }
 

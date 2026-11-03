@@ -39,7 +39,8 @@
     </nav>
 
     <section class="form-section section-menu-edition" aria-labelledby="menu-form-title">
-      <h2 id="menu-form-title">Ajouter ou modifier un menu</h2>
+      <details id="menu-details" class="menu-repliable">
+      <summary><h2 id="menu-form-title">Ajouter ou modifier un menu</h2></summary>
       <form id="menu-form" class="formulaire-menu">
         <input type="hidden" name="id">
         <fieldset>
@@ -77,6 +78,7 @@
         </div>
       </form>
       <output id="menu-retour" class="message-formulaire"></output>
+      </details>
     </section>
 
     <section class="form-section" aria-labelledby="menu-liste-title">
@@ -117,6 +119,6 @@
 
   <script type="module" src="js/script.js?v=selecteur-admin"></script>
   <script src="js/admin.js?v=e5af1948"></script>
-  <script type="module" src="js/admin-menus.js?v=175dc738"></script>
+  <script type="module" src="js/admin-menus.js?v=d6e56fbc"></script>
 </body>
 </html>
