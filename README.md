@@ -29,9 +29,9 @@ Projet réalisé dans le cadre de la formation Développeur Web et Web Mobile.
 
 | Espace | Page de connexion | Identifiant | Mot de passe |
 | --- | --- | --- | --- |
-| Client | `connexion.html` | `client@vite-et-gourmand.fr` | `azerty11` |
-| Employé | `employe-connexion.html` | `employe@vite-et-gourmand.fr` | `azerty11` |
-| Administrateur | `admin-connexion.html` | `admin@vite-et-gourmand.fr` | `azerty11` |
+| Client | `connexion.html` | `client@vite-et-gourmand.fr` | `Azerty2026!` |
+| Employé | `employe-connexion.html` | `employe@vite-et-gourmand.fr` | `Azerty2026!` |
+| Administrateur | `admin-connexion.html` | `admin@vite-et-gourmand.fr` | `Azerty2026!` |
 
 Ces comptes sont créés par `sql/comptes-ecf.sql` (à exécuter après `sql/schema.sql`). Ce sont des mots de passe de démonstration : il faut les changer avant une vraie mise en ligne.
 
