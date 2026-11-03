@@ -1981,10 +1981,10 @@ main > .page-intro ~ .contact-form-panel {
 
 /* Formulaire d'édition d'un menu */
 .section-menu-edition { background: #fff; border: 0; border-radius: 20px; box-shadow: 0 6px 24px rgba(60, 40, 20, 0.07); margin-left: auto; margin-right: auto; max-width: 75%; padding: 1.4rem 1.6rem; }
-.section-menu-edition h2 { font-size: 1.15rem; margin: 0 0 1rem; text-align: left; }
+.section-menu-edition h2 { font-size: 1.15rem; margin: 0 0 1rem; text-align: center; }
 .formulaire-menu { display: grid; gap: 1.2rem; }
 .formulaire-menu fieldset { border: 0; display: grid; gap: 0.7rem; margin: 0; padding: 0; }
-.formulaire-menu legend { color: var(--muted); float: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 0.1rem; padding: 0; text-transform: uppercase; width: 100%; }
+.formulaire-menu legend { color: var(--muted); float: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 0.1rem; padding: 0; text-align: center; text-transform: uppercase; width: 100%; }
 .formulaire-menu legend + * { clear: both; }
 .formulaire-menu legend small { font-weight: 400; letter-spacing: 0; margin-left: 0.5rem; text-transform: none; }
 .ligne-menu { display: grid; gap: 0.7rem 0.8rem; }
@@ -1993,17 +1993,17 @@ main > .page-intro ~ .contact-form-panel {
 .ligne-menu-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .ligne-menu .champ-large { grid-column: span 2; }
 .formulaire-menu .champ-formulaire { margin: 0; }
-.formulaire-menu .champ-formulaire label { color: var(--muted); font-size: 0.75rem; font-weight: 600; margin-bottom: 0.2rem; padding-left: 0.8rem; text-align: left; }
+.formulaire-menu .champ-formulaire label { color: var(--muted); font-size: 0.75rem; font-weight: 600; margin-bottom: 0.2rem; text-align: center; }
 .formulaire-menu .champ-formulaire input,
 .formulaire-menu .champ-formulaire select,
-.formulaire-menu .champ-formulaire textarea { background: #f6f1ee; border: 1px solid transparent; box-shadow: none; font-size: 0.85rem; text-align: left; transition: background 0.15s, border-color 0.15s; width: 100%; }
+.formulaire-menu .champ-formulaire textarea { background: #f6f1ee; border: 1px solid transparent; box-shadow: none; font-size: 0.85rem; text-align: center; transition: background 0.15s, border-color 0.15s; width: 100%; }
 .formulaire-menu .champ-formulaire input,
 .formulaire-menu .champ-formulaire select { border-radius: 999px; padding: 0.4rem 0.9rem; }
 .formulaire-menu .champ-formulaire textarea { border-radius: 18px; padding: 0.5rem 0.9rem; }
 .formulaire-menu .champ-formulaire input:focus,
 .formulaire-menu .champ-formulaire select:focus,
 .formulaire-menu .champ-formulaire textarea:focus { background: #fff; border-color: var(--terracotta); outline: none; }
-.actions-menu { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: flex-end; }
+.actions-menu { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
 .actions-menu .button { font-size: 0.82rem; padding: 0.4rem 1.2rem; }
 @media (max-width: 900px) {
   .section-menu-edition { max-width: 100%; }
