@@ -2669,3 +2669,60 @@ main.contact-page > .page-intro ~ .contact-form-panel {
 .filtres-menus label { font-size: 0.75rem; }
 .filtres-menus input, .filtres-menus select { background: #f6f1ee; border: 1px solid transparent; border-radius: 999px; font-size: 0.85rem; padding: 0.4rem 0.8rem; text-align: center; width: 100%; box-sizing: border-box; }
 #filtre-resultat { text-align: center; margin: 0 0 var(--espace, 1.5rem); }
+/* Page d'accueil : contenants centrés sur trois quarts de la largeur, espacés de façon uniforme */
+main:not([class]) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace, 1.5rem);
+  padding-bottom: var(--espace, 1.5rem);
+}
+
+main:not([class]) > section:not(.hero) {
+  border-radius: var(--rayon-carte, 18px);
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: none;
+  width: 75%;
+}
+
+main:not([class]) > .history-story,
+main:not([class]) > .history-values,
+main:not([class]) > .menus-section,
+main:not([class]) > .login-section,
+main:not([class]) > .contact-section {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+main:not([class]) > .reviews-section {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+main:not([class]) .section-heading,
+main:not([class]) .values-list {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.history-values .section-heading { margin-bottom: 1.5rem; }
+
+.history-values .values-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: center;
+  max-width: 100%;
+}
+
+.history-values .value-item {
+  text-align: center;
+}
+
+main:not([class]) > section:not(.hero) > .button,
+main:not([class]) .section-heading .button {
+  margin-top: var(--espace-petit, 0.75rem);
+}
+
+@media (max-width: 800px) {
+  main:not([class]) > section:not(.hero) { width: 92%; }
+  .history-values .values-list { grid-template-columns: 1fr; }
+  .history-story { grid-template-columns: 1fr; }
+}
