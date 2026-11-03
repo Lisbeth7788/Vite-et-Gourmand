@@ -29,11 +29,11 @@ Projet réalisé dans le cadre de la formation Développeur Web et Web Mobile.
 
 | Espace | Page de connexion | Identifiant | Mot de passe |
 | --- | --- | --- | --- |
-| Client | `connexion.html` | `test@vite-et-gourmand.fr` | voir `sql/schema.sql` |
-| Employé | `employe-connexion.html` | `employe` | `VIETETGOURMAND` (majuscules ou minuscules acceptées) |
-| Administrateur | `admin-connexion.html` | `admin@vite-et-gourmand.fr` | voir `sql/schema.sql` |
+| Client | `connexion.html` | `client@vite-et-gourmand.fr` | `azerty11` |
+| Employé | `employe-connexion.html` | `employe@vite-et-gourmand.fr` | `azerty11` |
+| Administrateur | `admin-connexion.html` | `admin@vite-et-gourmand.fr` | `azerty11` |
 
-Ces mots de passe sont des mots de passe de test : il faut les changer avant une vraie mise en ligne.
+Ces comptes sont créés par `sql/comptes-ecf.sql` (à exécuter après `sql/schema.sql`). Ce sont des mots de passe de démonstration : il faut les changer avant une vraie mise en ligne.
 
 ## Que peut faire chaque profil ?
 
