@@ -37,7 +37,7 @@ Ces mots de passe sont des mots de passe de test : il faut les changer avant une
 
 ## Que peut faire chaque profil ?
 
-- **Visiteur** : voir l'accueil, les menus (avec filtres), le détail d'un menu, l'histoire du traiteur, et envoyer un message.
+- **Visiteur** : voir l'accueil, les menus (avec filtres), le détail d'un menu, l'histoire du traiteur (sur l'accueil), et envoyer un message.
 - **Client** : créer un compte, commander un menu à livrer (remise de 10 % et frais de livraison calculés), modifier sa commande avant acceptation, payer en ligne, suivre ses commandes, les annuler tant qu'elles ne sont pas acceptées, puis donner un avis.
 - **Employé** : traiter les commandes (statuts, annulation avec motif), valider ou refuser les avis, gérer les menus (plats, allergènes, stock) et les horaires.
 - **Administrateur** : traiter les messages, les commandes (statuts) et les avis, voir l'activité, tout ce que fait un employé, créer ou désactiver des comptes employés.
@@ -54,7 +54,7 @@ Ces mots de passe sont des mots de passe de test : il faut les changer avant une
 
 ## Organisation des fichiers
 
-- `index.html`, `menus.html`, `menu-detail.html`, `histoire.html`, `contact.html` : pages publiques.
+- `index.html`, `menus.html`, `menu-detail.html`, `contact.html` : pages publiques.
 - `connexion.html`, `inscription.html`, `compte.html`, `reservation.html` : espace client (`commande.html` redirige vers `reservation.html`).
 - `employe-connexion.html`, `espace-employe.html` : espace employé.
 - `admin-connexion.html`, `admin.html`, `admin-reservations.html`, `admin-avis.html`, `admin-activite.html`, `admin-employes.html` : espace administrateur.
