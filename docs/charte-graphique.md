@@ -6,16 +6,15 @@ Vite et Gourmand est un traiteur bordelais chaleureux, accessible et professionn
 
 ## Palette
 
-- Terracotta principale : `#bd5b3b`, boutons et actions.
-- Terracotta foncee : `#8f3f2b`, titres et accents.
-- Bordeaux : `#5c2730`, bandeaux et informations importantes.
-- Fond clair : `#f9f4f1`, fond general.
-- Fond secondaire : `#eee8df`, panneaux et zones de regroupement.
-- Texte principal : `#302b28`.
-- Texte secondaire : `#6b625d`.
-- Vert de validation : `#2f7d57`.
-- Or des notes : `#d49b32`.
+Couleurs reprises de la feuille de style du site (css/style.css), assez foncées pour respecter le contraste 4,5:1.
 
+- Texte et terracotta : `#7a4626`, texte, boutons et liens.
+- Terracotta foncée : `#5e3519`, survols et accents.
+- Sauge : `#667763`.
+- Papier : `#f9f4f1`, fond général.
+- Crème : `#e7dbd5`, panneaux et zones de regroupement.
+- Lignes : `#ddccc4`, séparateurs.
+- Or des notes : `#f2b705`.
 ## Typographie
 
 - Titres : Fraunces, avec Georgia en remplacement.
