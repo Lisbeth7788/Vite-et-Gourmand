@@ -7,12 +7,22 @@ $methode = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 if ($methode === 'PATCH') {
     requireRole(['admin', 'employe']);
     $data = requestData();
-    $jour = (int) ($data['day_of_week'] ?? 0);
     $horaires = trim((string) ($data['opening_hours'] ?? ''));
-    if ($jour < 1 || $jour > 7 || $horaires === '' || mb_strlen($horaires) > 120) {
+    $jours = isset($data['days']) && is_array($data['days'])
+        ? array_map('intval', $data['days'])
+        : [(int) ($data['day_of_week'] ?? 0)];
+    foreach ($jours as $jour) {
+        if ($jour < 1 || $jour > 7) {
+            jsonResponse(['error' => 'Jour ou horaires invalides.'], 400);
+        }
+    }
+    if ($jours === [] || $horaires === '' || mb_strlen($horaires) > 120) {
         jsonResponse(['error' => 'Jour ou horaires invalides.'], 400);
     }
-    $pdo->prepare('UPDATE business_hours SET opening_hours = ? WHERE day_of_week = ?')->execute([$horaires, $jour]);
+    $requete = $pdo->prepare('UPDATE business_hours SET opening_hours = ? WHERE day_of_week = ?');
+    foreach ($jours as $jour) {
+        $requete->execute([$horaires, $jour]);
+    }
     jsonResponse(['message' => 'Horaires enregistrés.']);
 }
 

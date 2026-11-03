@@ -2014,6 +2014,16 @@ main > .page-intro ~ .contact-form-panel {
   .ligne-menu .champ-large { grid-column: auto; }
 }
 
+/* Horaires d'ouverture (deux groupes) */
+#horaires-liste { margin: 0 auto; max-width: 34rem; }
+.horaires-groupes { display: grid; gap: 0.6rem; }
+.horaires-groupe { align-items: end; display: grid; gap: 0.6rem; grid-template-columns: 1fr auto; }
+.horaires-groupe label { color: var(--muted); font-size: 0.75rem; font-weight: 600; text-align: center; }
+.horaires-groupe .champ-horaire { background: #f6f1ee; border: 1px solid transparent; border-radius: 999px; box-shadow: none; display: block; font-size: 0.85rem; margin-top: 0.2rem; padding: 0.4rem 0.9rem; text-align: center; width: 100%; }
+.horaires-groupe .champ-horaire:focus { background: #fff; border-color: var(--terracotta); outline: none; }
+.horaires-groupe .button { font-size: 0.8rem; padding: 0.4rem 1rem; }
+@media (max-width: 560px) { .horaires-groupe { grid-template-columns: 1fr; } }
+
 /* Raccourcis de l'espace employé */
 .employe-raccourcis { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); list-style: none; margin: 1.25rem auto 0; max-width: 44rem; padding: 0; }
 .employe-raccourcis a { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; color: var(--terracotta); display: flex; flex-direction: column; gap: 0.35rem; height: 100%; padding: 1rem 1.1rem; text-decoration: none; transition: border-color 0.15s, transform 0.15s; }

@@ -74,18 +74,27 @@ listeMenus.addEventListener('click', async (evenement) => {
   }
 });
 
+const groupesHoraires = [
+  { titre: 'Du lundi au vendredi', jours: [1, 2, 3, 4, 5] },
+  { titre: 'Samedi et dimanche', jours: [6, 7] }
+];
+
 async function chargerHoraires() {
   const jours = await fetch('api/horaires.php').then((reponse) => reponse.json());
-  listeHoraires.innerHTML = '<table class="tableau-activite"><thead><tr><th>Jour</th><th>Horaires</th><th>Action</th></tr></thead><tbody>' +
-    jours.map((jour) => '<tr><td><strong>' + echapperHtml(jour.day_name) + '</strong></td><td><input class="champ-horaire" aria-label="Horaires du ' + echapperHtml(jour.day_name) + '" value="' + echapperHtml(jour.opening_hours) + '" maxlength="120"></td><td><button class="button button-small" type="button" data-horaire-jour="' + Number(jour.day_of_week) + '">Enregistrer</button></td></tr>').join('') + '</tbody></table>';
+  listeHoraires.innerHTML = '<div class="horaires-groupes">' + groupesHoraires.map((groupe) => {
+    const premier = jours.find((jour) => Number(jour.day_of_week) === groupe.jours[0]);
+    return '<div class="horaires-groupe"><label>' + groupe.titre +
+      '<input class="champ-horaire" value="' + echapperHtml(premier ? premier.opening_hours : '') + '" maxlength="120"></label>' +
+      '<button class="button button-small" type="button" data-horaire-jours="' + groupe.jours.join(',') + '">Enregistrer</button></div>';
+  }).join('') + '</div>';
 }
 
 listeHoraires.addEventListener('click', async (evenement) => {
-  const bouton = evenement.target.closest('[data-horaire-jour]');
+  const bouton = evenement.target.closest('[data-horaire-jours]');
   if (!bouton) return;
-  const saisie = bouton.closest('tr').querySelector('.champ-horaire');
+  const saisie = bouton.closest('.horaires-groupe').querySelector('.champ-horaire');
   try {
-    const resultat = await demanderJson('api/horaires.php', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ day_of_week: bouton.dataset.horaireJour, opening_hours: saisie.value }) });
+    const resultat = await demanderJson('api/horaires.php', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ days: bouton.dataset.horaireJours.split(',').map(Number), opening_hours: saisie.value }) });
     annoncer(retourHoraires, resultat.message, false);
   } catch (error_) {
     annoncer(retourHoraires, error_.message, true);
