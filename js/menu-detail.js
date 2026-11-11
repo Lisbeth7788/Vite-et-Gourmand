@@ -7,7 +7,7 @@ const MENUS_PAR_DEFAUT = {
     theme: "Événement",
     regime: "classique",
     description: "Le grand repas de réception en cinq temps, pensé pour le plus beau jour : produits d'exception, dressage à l'assiette et pièce montée signature.",
-    image_path: "images/images/menu-reveillon.jpg",
+    image_path: "images/images/menu-banquet-mariage.jpg",
     minimum: 40,
     stock: 3,
     conditions_text: "Commande au minimum 30 jours avant la prestation. Dégustation offerte sur rendez-vous. Service et dressage assurés par notre équipe. Conservation au réfrigérateur et consommation sous 24 heures.",
@@ -20,7 +20,7 @@ const MENUS_PAR_DEFAUT = {
     theme: "Événement",
     regime: "classique",
     description: "Un dîner raffiné pour célébrer un anniversaire, avec un entremets sur mesure aux couleurs de la fête.",
-    image_path: "images/images/menu-printemps.jpg",
+    image_path: "images/images/menu-repas-anniversaire.jpg",
     minimum: 10,
     stock: 6,
     conditions_text: "Commande au minimum 10 jours avant la prestation. Message et parfum de l'entremets à préciser à la commande. Conservation au réfrigérateur et consommation sous 24 heures.",
@@ -33,7 +33,7 @@ const MENUS_PAR_DEFAUT = {
     theme: "Événement",
     regime: "classique",
     description: "Un brunch délicat et généreux pour accueillir bébé en famille : salé fin, douceurs et pièces festives en dragées.",
-    image_path: "images/images/menu-marche.jpg",
+    image_path: "images/images/menu-brunch-naissance.jpg",
     minimum: 8,
     stock: 5,
     conditions_text: "Commande au minimum 10 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
@@ -46,7 +46,7 @@ const MENUS_PAR_DEFAUT = {
     theme: "Événement",
     regime: "classique",
     description: "Un repas de fête délicat pour un baptême, une communion ou une confirmation, avec un gâteau blanc personnalisable.",
-    image_path: "images/images/menu-reveillon.jpg",
+    image_path: "images/images/menu-bapteme-communion.jpg",
     minimum: 12,
     stock: 4,
     conditions_text: "Commande au minimum 21 jours avant la prestation. Personnalisation du gâteau possible (couleurs, dragées). Conservation au réfrigérateur et consommation sous 24 heures.",
@@ -59,7 +59,7 @@ const MENUS_PAR_DEFAUT = {
     theme: "Événement",
     regime: "classique",
     description: "Un cocktail de 14 pièces par personne, salées et sucrées, à partager debout : idéal pour un vin d'honneur, une réception ou une inauguration.",
-    image_path: "images/images/menu-marche.jpg",
+    image_path: "images/images/menu-cocktail-dinatoire.jpg",
     minimum: 20,
     stock: 6,
     conditions_text: "Commande au minimum 14 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures. Prévoir des tables hautes ou un buffet pour la mise en place.",
@@ -72,7 +72,7 @@ const MENUS_PAR_DEFAUT = {
     theme: "Noël",
     regime: "classique",
     description: "Un menu de Noël gastronomique, des produits de fête à la bûche signature, pour une table inoubliable.",
-    image_path: "images/images/menu-reveillon.jpg",
+    image_path: "images/images/menu-noel.jpg",
     minimum: 8,
     stock: 4,
     conditions_text: "Commande au minimum 21 jours avant la prestation. Réservation conseillée dès novembre. Conservation au réfrigérateur et consommation sous 24 heures.",
@@ -85,7 +85,7 @@ const MENUS_PAR_DEFAUT = {
     theme: "Pâques",
     regime: "classique",
     description: "Le repas de Pâques en famille revisité : printemps en entrée, agneau de lait au four et desserts au chocolat.",
-    image_path: "images/images/menu-printemps.jpg",
+    image_path: "images/images/menu-dejeuner-paques.jpg",
     minimum: 6,
     stock: 5,
     conditions_text: "Commande au minimum 14 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
@@ -98,7 +98,7 @@ const MENUS_PAR_DEFAUT = {
     theme: "Classique",
     regime: "classique",
     description: "Un dîner de famille ou entre amis, inspiré de la cuisine bordelaise : produits du Sud-Ouest, sauces au vin et desserts maison.",
-    image_path: "images/images/menu-marche.jpg",
+    image_path: "images/images/menu-marche-bordeaux.jpg",
     minimum: 6,
     stock: 5,
     conditions_text: "Commande au minimum 10 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
@@ -111,7 +111,7 @@ const MENUS_PAR_DEFAUT = {
     theme: "Événement",
     regime: "vegan",
     description: "Une gastronomie 100 % végétale : produits de saison travaillés comme à la grande table, sans aucun produit animal.",
-    image_path: "images/images/menu-vegetal.jpg",
+    image_path: "images/images/menu-fete-vegetale.jpg",
     minimum: 10,
     stock: 3,
     conditions_text: "Commande au minimum 14 jours avant la prestation. Conservation au réfrigérateur et consommation sous 24 heures.",
@@ -148,7 +148,7 @@ if (pageDetail) {
         const vignettes = document.querySelector('#menu-detail-thumbnails');
         const afficherImage = (chemin, numero) => {
           image.src = chemin;
-          image.alt = `${menu.name} - photo ${numero}`;
+          image.alt = `Illustration du menu ${menu.name} - photo ${numero}`;
           vignettes.querySelectorAll('button').forEach((bouton, i) => bouton.setAttribute('aria-current', String(i === numero - 1)));
         };
         vignettes.replaceChildren();

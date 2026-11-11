@@ -3,6 +3,14 @@
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/menu_images.php';
 
+try {
+    assurerTableImages($pdo);
+    actualiserPhotosMenus($pdo);
+} catch (Throwable $erreur) {
+    error_log('Mise à jour des photos des menus impossible : ' . $erreur->getMessage());
+    jsonResponse(['error' => 'Les menus sont temporairement indisponibles.'], 500);
+}
+
 $menuId = trim((string) ($_GET['id'] ?? ''));
 if ($menuId !== '') {
     $query = $pdo->prepare(
@@ -21,7 +29,6 @@ if ($menuId !== '') {
     );
     $dishes->execute([$menuId]);
     $menu['dishes'] = $dishes->fetchAll();
-    assurerTableImages($pdo);
     $menu['images'] = imagesDuMenu($pdo, $menuId, (string) $menu['image_path']);
     jsonResponse($menu);
 }
