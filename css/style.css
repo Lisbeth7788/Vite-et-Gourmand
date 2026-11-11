@@ -1036,6 +1036,26 @@ form {
   align-self: center;
 }
 
+.catalogue-page .menu-placeholder-image {
+  aspect-ratio: 16 / 10;
+  display: block;
+  flex: none;
+  height: auto;
+  min-height: 0;
+  object-fit: cover;
+  width: 100%;
+}
+
+.catalogue-page .catalogue-card-content {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 761px) {
+  .catalogue-page .catalogue-grid {
+    grid-auto-rows: 1fr;
+  }
+}
+
 .actions-paiement {
   display: flex;
   flex-wrap: wrap;
