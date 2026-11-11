@@ -12,6 +12,28 @@ function pagePourEspace(role) {
   return { admin: 'admin.html', employe: 'admin-reservations.html', client: 'index.html' }[role] || 'index.html';
 }
 
+function pageDeRetour() {
+  const redirect = new URLSearchParams(window.location.search).get('redirect');
+  if (!redirect) return null;
+
+  try {
+    const destination = new URL(redirect, window.location.href);
+    const repertoire = new URL('.', window.location.href).pathname;
+    const page = destination.pathname.slice(repertoire.length);
+    if (destination.origin === window.location.origin
+        && destination.pathname.startsWith(repertoire)
+        && /^[a-z0-9-]+\.html$/i.test(page)
+        && !['connexion.html', 'inscription.html'].includes(page.toLowerCase())) {
+      return destination.pathname + destination.search + destination.hash;
+    }
+  } catch (error) {
+    console.warn('Adresse de retour invalide :', error);
+    return null;
+  }
+  console.warn('Adresse de retour refusée.');
+  return null;
+}
+
 function ajouterLienEspace(liste, role, liensConnexion) {
   if (!['client', 'employe'].includes(role) || liste.querySelector('.lien-espace-client')) return;
   const element = document.createElement('li');
@@ -56,7 +78,7 @@ async function actualiserLienConnexion() {
     }
     const role = session.data?.user?.role;
     if (panneauConnexion && role) {
-      window.location.replace(pagePourEspace(role));
+      window.location.replace(role === 'client' && loginForm ? pageDeRetour() || pagePourEspace(role) : pagePourEspace(role));
       return;
     }
     const liste = document.querySelector('.main-navigation ul');
@@ -272,6 +294,16 @@ const passwordToggles = document.querySelectorAll('.password-toggle');
 const choixNotes = document.querySelectorAll('.choix-note');
 const approvedReviews = document.querySelector('#approved-reviews');
 
+if (loginForm || registerForm) {
+  const pageRetour = pageDeRetour();
+  const lienAutreFormulaire = document.querySelector(loginForm
+    ? '.auth-switch a[href="inscription.html"]'
+    : '.auth-switch a[href="connexion.html"]');
+  if (pageRetour && lienAutreFormulaire) {
+    lienAutreFormulaire.search = new URLSearchParams({ redirect: pageRetour }).toString();
+  }
+}
+
 if (approvedReviews) {
   async function chargerAvisApprouves() {
     try {
@@ -434,7 +466,7 @@ if (loginForm) {
           // L'enregistrement est facultatif.
         }
       }
-      window.location.href = 'index.html';
+      window.location.href = pageDeRetour() || 'index.html';
     } catch (error) {
       showFormFeedback(loginForm, friendlyError(error), true);
     }
