@@ -29,7 +29,7 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 1. **Joindre le dossier projet corrigé** : les deux dernières pages du PDF actualisent les passages rédigés avant les dernières évolutions.
 2. **Joindre le manuel d'utilisation PDF** : [docs/manuel-utilisation.pdf](manuel-utilisation.pdf) présente les parcours actuels et les identifiants de démonstration.
 3. **Compléter la copie officielle ECF** téléchargée depuis Studi, puis la nommer selon l'énoncé. Ce modèle n'est pas dans le dépôt.
-4. **Importer les SQL sur Hostinger** : `sql/schema.sql` puis `sql/comptes-ecf.sql`.
+4. **Base en ligne** : ne pas réimporter les fichiers SQL sur la base existante. `sql/comptes-ecf.sql` est réservé à une installation locale neuve, avec des mots de passe publics.
 5. **Configurer MongoDB et le SMTP sur Hostinger** : sans eux, les statistiques et les e-mails ne fonctionneront pas.
 6. **Vérifier la branche `develop`** : la fusionner dans `main` après tests (bonnes pratiques Git demandées).
 7. **Partager le Trello** en lecture avec le correcteur.

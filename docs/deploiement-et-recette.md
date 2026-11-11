@@ -2,15 +2,15 @@
 
 ## Variables à configurer
 
-`APP_ENV`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, `MONGODB_URI`, `MONGODB_DATABASE`.
+`APP_ENV`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, `MONGODB_URI`, `MONGODB_DATABASE`, `MONGODB_COLLECTION`.
 
 Ne jamais publier `.env`, les mots de passe ou le dossier local `mongo-data`.
 
 ## Étapes de déploiement (Hostinger)
 
 1. Créer la base MySQL et son utilisateur.
-2. Importer `sql/schema.sql` puis `sql/comptes-ecf.sql` (encodage `utf8mb4`).
-3. Configurer MongoDB, l'extension PHP `mongodb` et l'envoi d'e-mails.
+2. Pour une base neuve, importer `sql/schema.sql` (encodage `utf8mb4`). Ne pas importer `sql/comptes-ecf.sql` en ligne : il est réservé à une installation locale neuve et ses mots de passe sont publics.
+3. Configurer MongoDB, l'extension PHP `mongodb` et l'envoi d'e-mails. Si MongoDB tourne sur un VPS séparé, remplacer `127.0.0.1` par l'URI privée du VPS ; limiter le pare-feu MongoDB au serveur web et ne jamais ouvrir le port à tout Internet.
 4. Envoyer les fichiers (ou relier le dépôt GitHub, branche `main`).
 5. Activer HTTPS.
 6. Faire la recette ci-dessous sur l'adresse publique.

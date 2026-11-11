@@ -18,6 +18,7 @@ function analyticsManager()
                 $classeGestionnaire = 'MongoDB\\Driver\\Manager';
                 $manager = new $classeGestionnaire($uri);
             } catch (Throwable $error) {
+                error_log('Configuration MongoDB invalide.');
                 $manager = null;
             }
         }
@@ -26,26 +27,49 @@ function analyticsManager()
     return $manager;
 }
 
+function configurationStatistiques(): array
+{
+    $base = getenv('MONGODB_DATABASE') ?: 'vite_et_gourmand';
+    $collection = getenv('MONGODB_COLLECTION') ?: 'order_analytics';
+    if (!in_array($collection, ['order_analytics', 'statistiques_commandes'], true)) {
+        throw new RuntimeException('Collection de statistiques MongoDB non reconnue.');
+    }
+
+    return [
+        'espace' => $base . '.' . $collection,
+        'francais' => $collection === 'statistiques_commandes'
+    ];
+}
+
 function recordOrderAnalytics(string $orderId, string $menuId, float $total, string $serviceDate): void
 {
     $manager = analyticsManager();
     if (!$manager) {
+        error_log('Statistiques MongoDB indisponibles : connexion non configurée.');
         return;
     }
 
     try {
+        $configuration = configurationStatistiques();
         $classeOperations = 'MongoDB\\Driver\\BulkWrite';
         $classeDate = 'MongoDB\\BSON\\UTCDateTime';
         $operations = new $classeOperations();
-        $operations->insert([
+        $document = $configuration['francais'] ? [
+            'id_commande' => $orderId,
+            'id_menu' => $menuId,
+            'total' => $total,
+            'date_prestation' => $serviceDate,
+            'date_creation' => new $classeDate()
+        ] : [
             'order_id' => $orderId,
             'menu_id' => $menuId,
             'total' => $total,
             'service_date' => $serviceDate,
             'created_at' => new $classeDate()
-        ]);
-        $manager->executeBulkWrite('vite_et_gourmand.order_analytics', $operations);
+        ];
+        $operations->insert($document);
+        $manager->executeBulkWrite($configuration['espace'], $operations);
     } catch (Throwable $error) {
-        error_log('Echec de l’écriture des statistiques MongoDB : ' . $error->getMessage());
+        error_log('Échec de l’écriture des statistiques MongoDB.');
     }
 }

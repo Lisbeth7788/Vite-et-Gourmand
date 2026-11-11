@@ -1,5 +1,5 @@
 const formulaire = document.querySelector('#filtres-menus');
-const liste = document.querySelector('#menu-list');
+const liste = document.querySelector('#liste-menus');
 const resultat = document.querySelector('#filtre-resultat');
 let cartes = [];
 
@@ -54,27 +54,27 @@ function creerCarte(menu) {
   }
   const euros = (montant) => `${montant.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
   const carte = document.createElement('article');
-  carte.className = 'catalogue-card';
+  carte.className = 'carte-catalogue';
   carte.dataset.price = prix;
   carte.dataset.people = minimum;
   carte.dataset.theme = normaliser(menu.theme);
   carte.dataset.regime = normaliser(menu.regime);
 
   const image = document.createElement('img');
-  image.className = 'menu-placeholder-image';
+  image.className = 'image-carte-menu';
   image.src = menu.image_path || 'images/images/menu-marche.jpg';
   image.alt = `Illustration du menu ${menu.name}`;
   image.loading = 'lazy';
   const contenu = document.createElement('div');
-  contenu.className = 'catalogue-card-content';
+  contenu.className = 'contenu-carte-catalogue';
   const meta = document.createElement('p');
-  meta.className = 'menu-meta';
+  meta.className = 'informations-menu';
   meta.append(texte('strong', `${euros(prix)} par personne`), document.createElement('br'),
     `À partir de ${minimum} personne${minimum > 1 ? 's' : ''}`, document.createElement('br'),
     `${euros(prix * minimum)} pour ${minimum} personne${minimum > 1 ? 's' : ''}`);
-  const lien = texte('a', 'Voir le détail', 'button button-small');
+  const lien = texte('a', 'Voir le détail', 'bouton bouton-petit');
   lien.href = `menu-detail.html?menu=${encodeURIComponent(menu.id)}`;
-  contenu.append(texte('p', menu.theme, 'card-tag'), texte('h3', menu.name),
+  contenu.append(texte('p', menu.theme, 'etiquette-carte'), texte('h3', menu.name),
     texte('p', menu.description), meta, lien);
   if (stock <= 0) contenu.insertBefore(texte('p', 'Indisponible actuellement'), lien);
   carte.append(image, contenu);

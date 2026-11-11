@@ -1,5 +1,5 @@
-const formulaireAdmin = document.querySelector('#admin-login-form');
-const retourAdmin = document.querySelector('#admin-login-feedback');
+const formulaireAdmin = document.querySelector('#formulaire-connexion-admin');
+const retourAdmin = document.querySelector('#retour-connexion-admin');
 
 function afficherRetourAdmin(message, erreur = false) {
   retourAdmin.textContent = message;
@@ -26,4 +26,3 @@ formulaireAdmin.addEventListener('submit', async (event) => {
     afficherRetourAdmin(error_.message, true);
   }
 });
-

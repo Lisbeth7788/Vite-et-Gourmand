@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Comptes employés - Espace de gestion - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=contact-moderne">
+  <link rel="stylesheet" href="css/style.css?v=d7d5cab5">
 </head>
 <body data-admin-only>
   <a class="lien-evitement" href="#contenu-principal">Aller au contenu principal</a>
-  <header class="site-header">
+  <header class="entete-site">
     <a class="logo" href="index.html">Vite et Gourmand</a>
-    <nav class="main-navigation" aria-label="Navigation principale">
+    <nav class="navigation-principale" aria-label="Navigation principale">
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="menus.html">Menus</a></li>
@@ -20,14 +20,14 @@
     </nav>
   </header>
 
-  <main id="contenu-principal" class="catalogue-page admin-page">
-    <div class="page-intro">
-      <p class="eyebrow">Espace professionnel</p>
+  <main id="contenu-principal" class="page-catalogue page-admin">
+    <div class="introduction-page">
+      <p class="sur-titre">Espace professionnel</p>
       <h1>Comptes employés</h1>
       <p id="admin-identity">Vérification de votre session...</p>
     </div>
 
-    <nav class="admin-nav" aria-label="Espace de gestion">
+    <nav class="navigation-admin" aria-label="Espace de gestion">
       <ol>
         <li data-employe-only><a href="espace-employe.html">Gérer le site</a></li>
         <li data-admin-only><a href="admin.html">Messages</a></li>
@@ -39,7 +39,7 @@
       </ol>
     </nav>
 
-    <section class="form-section" aria-labelledby="employee-create-title">
+    <section class="section-formulaire" aria-labelledby="employee-create-title">
       <h2 id="employee-create-title">Créer un compte employé</h2>
       <p class="aide-section">L'employé reçoit un e-mail qui ne contient pas le mot de passe : donnez-le-lui vous-même.</p>
       <form id="employee-form" class="grille-formulaire">
@@ -49,24 +49,24 @@
         <div class="champ-formulaire"><label for="employee-email">E-mail (identifiant)</label><input id="employee-email" name="email" type="email" required></div>
         <div class="champ-formulaire"><label for="employee-job">Poste</label><select id="employee-job" name="job_title" required><option value="patron">Patron</option><option value="chef">Chef</option><option value="sous-chef">Sous-chef</option><option value="commis">Commis</option><option value="serveur">Serveur</option><option value="plongeur">Plongeur</option><option value="livreur">Livreur</option></select></div>
         <div class="champ-formulaire"><label for="employee-password">Mot de passe provisoire</label><input id="employee-password" name="password" type="password" minlength="10" autocomplete="new-password" required><small>10 caractères minimum, une majuscule, une minuscule, un chiffre et un caractère spécial.</small></div>
-        <button class="button button-small" type="submit">Créer le compte</button>
+        <button class="bouton bouton-petit" type="submit">Créer le compte</button>
       </form>
       <output id="employee-feedback" class="message-formulaire"></output>
     </section>
 
-    <section class="form-section" aria-labelledby="employee-list-title">
+    <section class="section-formulaire" aria-labelledby="employee-list-title">
       <h2 id="employee-list-title">Comptes employés</h2>
       <p class="aide-section">Désactivez un compte quand la personne quitte l'entreprise : elle ne pourra plus se connecter.</p>
-      <div id="employee-list" class="table-responsive"></div>
+      <div id="employee-list" class="tableau-adaptatif"></div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="pied-site">
     <div>
       <p>&copy; 2026 Vite et Gourmand</p>
       <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
     </div>
-    <div class="opening-hours">
+    <div class="horaires-ouverture">
       <h2>Horaires</h2>
       <dl>
         <div><dt>Lun - Ven</dt><dd>11h30 - 14h00 / 18h00 - 22h00</dd></div>
@@ -80,7 +80,7 @@
     </nav>
   </footer>
 
-  <script type="module" src="js/script.js?v=horaires-simples"></script>
-  <script src="js/admin.js?v=bdfd39f4"></script>
+  <script type="module" src="js/script.js?v=a942639c"></script>
+  <script src="js/admin.js?v=a9782a1c"></script>
 </body>
 </html>

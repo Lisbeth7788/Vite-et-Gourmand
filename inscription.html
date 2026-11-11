@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Création de compte Vite et Gourmand.">
   <title>Créer un compte - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=contact-moderne">
+  <link rel="stylesheet" href="css/style.css?v=d7d5cab5">
 </head>
 <body>
   <a class="lien-evitement" href="#contenu-principal">Aller au contenu principal</a>
-  <header class="site-header">
+  <header class="entete-site">
     <a class="logo" href="index.html" aria-label="Vite et Gourmand - Accueil">Vite et Gourmand</a>
-    <nav class="main-navigation" aria-label="Navigation principale">
+    <nav class="navigation-principale" aria-label="Navigation principale">
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="menus.html">Nos menus</a></li>
@@ -21,72 +21,72 @@
     </nav>
   </header>
 
-  <main id="contenu-principal" class="auth-page">
-    <div class="page-intro">
-      <p class="eyebrow">Votre espace</p>
+  <main id="contenu-principal" class="page-authentification">
+    <div class="introduction-page">
+      <p class="sur-titre">Votre espace</p>
       <h1>Créer un compte</h1>
       <p>Créez votre compte client pour réserver vos menus.</p>
     </div>
 
-    <div class="auth-layout">
-      <section id="register-panel" class="auth-panel" aria-labelledby="register-title">
-        <p class="eyebrow">Première commande ?</p>
-        <h2 id="register-title">Créer un compte</h2>
-        <form id="register-form" action="#" method="post">
+    <div class="disposition-authentification">
+      <section id="panneau-inscription" class="panneau-authentification" aria-labelledby="titre-inscription">
+        <p class="sur-titre">Première commande ?</p>
+        <h2 id="titre-inscription">Créer un compte</h2>
+        <form id="formulaire-inscription" action="#" method="post">
           <div class="grille-formulaire">
             <div class="champ-formulaire">
-              <label for="register-first-name">Prénom</label>
-              <input id="register-first-name" name="first_name" type="text" autocomplete="given-name" required>
+              <label for="prenom-inscription">Prénom</label>
+              <input id="prenom-inscription" name="first_name" type="text" autocomplete="given-name" required>
             </div>
             <div class="champ-formulaire">
-              <label for="register-last-name">Nom</label>
-              <input id="register-last-name" name="last_name" type="text" autocomplete="family-name" required>
+              <label for="nom-inscription">Nom</label>
+              <input id="nom-inscription" name="last_name" type="text" autocomplete="family-name" required>
             </div>
           </div>
           <div class="champ-formulaire">
-            <label for="register-phone">Numéro de téléphone</label>
-            <input id="register-phone" name="phone" type="tel" autocomplete="tel" pattern="(?:\+33|0)[1-9](?:[ .-]?\d{2}){4}" title="Saisissez un numéro français, par exemple 06 12 34 56 78." required>
+            <label for="telephone-inscription">Numéro de téléphone</label>
+            <input id="telephone-inscription" name="phone" type="tel" autocomplete="tel" pattern="(?:\+33|0)[1-9](?:[ .-]?\d{2}){4}" title="Saisissez un numéro français, par exemple 06 12 34 56 78." required>
           </div>
           <div class="champ-formulaire">
-            <label for="register-email">Adresse e-mail</label>
-            <input id="register-email" name="email" type="email" autocomplete="email" required>
+            <label for="email-inscription">Adresse e-mail</label>
+            <input id="email-inscription" name="email" type="email" autocomplete="email" required>
           </div>
           <div class="champ-formulaire">
-            <label for="register-address">Adresse postale</label>
-            <textarea id="register-address" name="address" rows="3" autocomplete="street-address" required></textarea>
+            <label for="adresse-inscription">Adresse postale</label>
+            <textarea id="adresse-inscription" name="address" rows="3" autocomplete="street-address" required></textarea>
           </div>
           <div class="champ-formulaire">
-            <label for="register-password">Mot de passe</label>
-            <div class="password-input">
-              <input id="register-password" name="password" type="password" minlength="10" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{10,}" aria-describedby="password-help" autocomplete="new-password" required>
-              <button class="password-toggle" type="button" aria-label="Afficher le mot de passe" aria-pressed="false"><span aria-hidden="true">&#128065;&#65038;</span></button>
+            <label for="mot-de-passe-inscription">Mot de passe</label>
+            <div class="champ-mot-de-passe">
+              <input id="mot-de-passe-inscription" name="password" type="password" minlength="10" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{10,}" aria-describedby="aide-mot-de-passe" autocomplete="new-password" required>
+              <button class="bascule-mot-de-passe" type="button" aria-label="Afficher le mot de passe" aria-pressed="false"><span aria-hidden="true">&#128065;&#65038;</span></button>
             </div>
-            <small id="password-help">10 caractères minimum, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
+            <small id="aide-mot-de-passe">10 caractères minimum, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
           </div>
           <div class="champ-formulaire">
-            <label for="register-password-confirm">Confirmer le mot de passe</label>
-            <div class="password-input">
-              <input id="register-password-confirm" name="password_confirmation" type="password" autocomplete="new-password" required>
-              <button class="password-toggle" type="button" aria-label="Afficher le mot de passe" aria-pressed="false"><span aria-hidden="true">&#128065;&#65038;</span></button>
+            <label for="confirmation-mot-de-passe">Confirmer le mot de passe</label>
+            <div class="champ-mot-de-passe">
+              <input id="confirmation-mot-de-passe" name="password_confirmation" type="password" autocomplete="new-password" required>
+              <button class="bascule-mot-de-passe" type="button" aria-label="Afficher le mot de passe" aria-pressed="false"><span aria-hidden="true">&#128065;&#65038;</span></button>
             </div>
           </div>
-          <div class="checkbox-field">
-            <input id="privacy-consent" name="privacy_consent" type="checkbox" required>
-            <label for="privacy-consent">J'accepte la politique de confidentialité.</label>
+          <div class="champ-case-a-cocher">
+            <input id="accord-confidentialite" name="privacy_consent" type="checkbox" required>
+            <label for="accord-confidentialite">J'accepte la politique de confidentialité.</label>
           </div>
-          <button class="button" type="submit">Créer mon compte</button>
+          <button class="bouton" type="submit">Créer mon compte</button>
         </form>
-        <p class="auth-switch">Déjà un compte ? <a href="connexion.html">Se connecter</a></p>
+        <p class="changement-authentification">Déjà un compte ? <a href="connexion.html">Se connecter</a></p>
       </section>
     </div>
   </main>
 
-  <footer class="site-footer">
+  <footer class="pied-site">
     <div>
       <p>&copy; 2026 Vite et Gourmand</p>
       <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
     </div>
-    <div class="opening-hours">
+    <div class="horaires-ouverture">
       <h2>Horaires</h2>
       <dl>
         <div><dt>Lun - Ven</dt><dd>11h30 - 14h00 / 18h00 - 22h00</dd></div>
@@ -99,6 +99,6 @@
       <a href="confidentialite.html">Politique de confidentialité</a>
     </nav>
   </footer>
-  <script type="module" src="js/script.js?v=retour-connexion"></script>
+  <script type="module" src="js/script.js?v=a942639c"></script>
 </body>
 </html>

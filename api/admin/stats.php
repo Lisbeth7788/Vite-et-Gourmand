@@ -9,24 +9,26 @@ if (!$manager) {
     jsonResponse(['error' => 'MongoDB n’est pas configurée.'], 503);
 }
 
-$match = [];
-if (!empty($_GET['menu'])) {
-    $match['menu_id'] = $_GET['menu'];
-}
-if (!empty($_GET['from'])) {
-    $match['service_date']['$gte'] = $_GET['from'];
-}
-if (!empty($_GET['to'])) {
-    $match['service_date']['$lte'] = $_GET['to'];
-}
-
-$classeRequeteMongo = 'MongoDB\\Driver\\Query';
-$query = new $classeRequeteMongo($match);
 $grouped = [];
 try {
-    $cursor = $manager->executeQuery('vite_et_gourmand.order_analytics', $query);
+    $configuration = configurationStatistiques();
+    $champMenu = $configuration['francais'] ? 'id_menu' : 'menu_id';
+    $champDate = $configuration['francais'] ? 'date_prestation' : 'service_date';
+    $match = [];
+    if (!empty($_GET['menu'])) {
+        $match[$champMenu] = $_GET['menu'];
+    }
+    if (!empty($_GET['from'])) {
+        $match[$champDate]['$gte'] = $_GET['from'];
+    }
+    if (!empty($_GET['to'])) {
+        $match[$champDate]['$lte'] = $_GET['to'];
+    }
+    $classeRequeteMongo = 'MongoDB\\Driver\\Query';
+    $query = new $classeRequeteMongo($match);
+    $cursor = $manager->executeQuery($configuration['espace'], $query);
     foreach ($cursor as $row) {
-        $menu = (string) $row->menu_id;
+        $menu = (string) $row->$champMenu;
         if (!isset($grouped[$menu])) {
             $grouped[$menu] = ['menu' => $menu, 'orders' => 0, 'revenue' => 0];
         }
@@ -34,6 +36,7 @@ try {
         $grouped[$menu]['revenue'] += (float) $row->total;
     }
 } catch (Throwable $error) {
+    error_log('Lecture des statistiques MongoDB impossible.');
     jsonResponse(['error' => 'Lecture des statistiques impossible.'], 503);
 }
 $statistics = array_values($grouped);

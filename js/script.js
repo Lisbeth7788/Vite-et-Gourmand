@@ -6,7 +6,7 @@ function chargerSession() {
   return sessionPromise;
 }
 
-const panneauConnexion = document.querySelector('#login-panel, #employe-login-form, #admin-login-form');
+const panneauConnexion = document.querySelector('#panneau-connexion-client, #formulaire-connexion-employe, #formulaire-connexion-admin');
 
 function pagePourEspace(role) {
   return { admin: 'admin.html', employe: 'admin-reservations.html', client: 'index.html' }[role] || 'index.html';
@@ -68,7 +68,7 @@ function ajouterDeconnexion(liensConnexion) {
 }
 
 async function actualiserLienConnexion() {
-  const liensConnexion = [...document.querySelectorAll('.main-navigation a')]
+  const liensConnexion = [...document.querySelectorAll('.navigation-principale a')]
     .filter((lien) => lien.getAttribute('href')?.includes('connexion'));
   try {
     const session = await chargerSession();
@@ -81,7 +81,7 @@ async function actualiserLienConnexion() {
       window.location.replace(role === 'client' && loginForm ? pageDeRetour() || pagePourEspace(role) : pagePourEspace(role));
       return;
     }
-    const liste = document.querySelector('.main-navigation ul');
+    const liste = document.querySelector('.navigation-principale ul');
     if (!liste) return;
     if (document.body.dataset.modeEmploye !== undefined) return;
     ajouterLienEspace(liste, role, liensConnexion);
@@ -99,22 +99,22 @@ const menuChoice = document.querySelector('#order-menu');
 const peopleInput = document.querySelector('#order-people');
 
 function showToast(message, isError = false) {
-  let zone = document.querySelector('.toast-zone');
+  let zone = document.querySelector('.zone-notifications');
   if (!zone) {
     zone = document.createElement('div');
-    zone.className = 'toast-zone';
+    zone.className = 'zone-notifications';
     zone.setAttribute('role', 'status');
     zone.setAttribute('aria-live', 'polite');
     document.body.append(zone);
   }
 
   const toast = document.createElement('div');
-  toast.className = 'toast';
+  toast.className = 'notification';
   toast.dataset.state = isError ? 'error' : 'success';
   toast.textContent = message;
   zone.append(toast);
   setTimeout(() => {
-    toast.classList.add('is-leaving');
+    toast.classList.add('en-disparition');
     setTimeout(() => toast.remove(), 400);
   }, 4500);
 }
@@ -283,22 +283,22 @@ if (orderForm) {
   await verifierSessionCommande();
 }
 
-const registerForm = document.querySelector('#register-form');
-const loginForm = document.querySelector('#login-form');
-const resetForm = document.querySelector('#reset-form');
-const resetConfirmForm = document.querySelector('#reset-confirm-form');
+const registerForm = document.querySelector('#formulaire-inscription');
+const loginForm = document.querySelector('#formulaire-connexion-client');
+const resetForm = document.querySelector('#formulaire-reinitialisation');
+const resetConfirmForm = document.querySelector('#formulaire-confirmation-reinitialisation');
 const contactForm = document.querySelector('#contact-form');
 const formulaireAvis = document.querySelector('#formulaire-avis');
 const forms = document.querySelectorAll('form');
-const passwordToggles = document.querySelectorAll('.password-toggle');
+const passwordToggles = document.querySelectorAll('.bascule-mot-de-passe');
 const choixNotes = document.querySelectorAll('.choix-note');
 const approvedReviews = document.querySelector('#approved-reviews');
 
 if (loginForm || registerForm) {
   const pageRetour = pageDeRetour();
   const lienAutreFormulaire = document.querySelector(loginForm
-    ? '.auth-switch a[href="inscription.html"]'
-    : '.auth-switch a[href="connexion.html"]');
+    ? '.changement-authentification a[href="inscription.html"]'
+    : '.changement-authentification a[href="connexion.html"]');
   if (pageRetour && lienAutreFormulaire) {
     lienAutreFormulaire.search = new URLSearchParams({ redirect: pageRetour }).toString();
   }
@@ -352,23 +352,23 @@ function syncRegistrationPasswords() {
     return;
   }
 
-  const password = registerForm.querySelector('#register-password');
-  const confirmation = registerForm.querySelector('#register-password-confirm');
+  const password = registerForm.querySelector('#mot-de-passe-inscription');
+  const confirmation = registerForm.querySelector('#confirmation-mot-de-passe');
   confirmation.setCustomValidity(confirmation.value && password.value !== confirmation.value ? 'Les mots de passe ne correspondent pas.' : '');
 }
 
 function updateFormFieldState(field) {
   const hasValue = field.type === 'checkbox' ? field.checked : field.value.trim() !== '';
-  field.classList.toggle('is-valid', hasValue && field.checkValidity());
+  field.classList.toggle('est-valide', hasValue && field.checkValidity());
 }
 
 function refreshFormFieldState(field) {
-  if (field.id === 'register-password' || field.id === 'register-password-confirm') {
+  if (field.id === 'mot-de-passe-inscription' || field.id === 'confirmation-mot-de-passe') {
     syncRegistrationPasswords();
   }
   updateFormFieldState(field);
-  if (field.id === 'register-password') {
-    updateFormFieldState(registerForm.querySelector('#register-password-confirm'));
+  if (field.id === 'mot-de-passe-inscription') {
+    updateFormFieldState(registerForm.querySelector('#confirmation-mot-de-passe'));
   }
 }
 
@@ -381,7 +381,7 @@ forms.forEach((form) => {
 
 passwordToggles.forEach((toggle) => {
   toggle.addEventListener('click', () => {
-    const passwordInput = toggle.closest('.password-input').querySelector('input');
+    const passwordInput = toggle.closest('.champ-mot-de-passe').querySelector('input');
     const isVisible = passwordInput.type === 'text';
     passwordInput.type = isVisible ? 'password' : 'text';
     toggle.setAttribute('aria-label', isVisible ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
@@ -432,7 +432,7 @@ if (resetPanel) {
     resetForm.hidden = true;
     resetConfirmForm.hidden = false;
     resetConfirmForm.elements.token.value = resetToken;
-    const intro = resetPanel.querySelector('#reset-title + p');
+    const intro = resetPanel.querySelector('#titre-reinitialisation + p');
     if (intro) intro.textContent = 'Choisissez votre nouveau mot de passe (10 caractères minimum, avec une majuscule, une minuscule, un chiffre et un caractère spécial).';
     resetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else if (window.location.hash === '#password-reset') {
@@ -500,7 +500,7 @@ if (formulaireAvis) {
       }
       formulaireAvis.reset();
       mettreAJourEtoiles(formulaireAvis.querySelector('.choix-note'), 0);
-      formulaireAvis.querySelectorAll('.is-valid').forEach((field) => field.classList.remove('is-valid'));
+      formulaireAvis.querySelectorAll('.est-valide').forEach((field) => field.classList.remove('est-valide'));
       showFormFeedback(formulaireAvis, result.message || 'Merci pour votre avis.');
     } catch (error) {
       showFormFeedback(formulaireAvis, error.message, true);
@@ -510,7 +510,7 @@ if (formulaireAvis) {
 
 // Les horaires du pied de page viennent de la base : l'équipe peut les modifier.
 async function afficherHorairesPiedDePage() {
-  const liste = document.querySelector('.opening-hours dl');
+  const liste = document.querySelector('.horaires-ouverture dl');
   if (!liste) return;
   try {
     const reponse = await fetch('api/horaires.php');
@@ -536,7 +536,7 @@ async function afficherHorairesPiedDePage() {
     }));
     const openingHours = liste.parentElement;
     const details = document.createElement('details');
-    details.className = 'opening-hours-details';
+    details.className = 'details-horaires-ouverture';
     const summary = document.createElement('summary');
     summary.textContent = 'Afficher les horaires';
     details.append(summary, liste);

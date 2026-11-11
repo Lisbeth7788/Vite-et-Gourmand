@@ -17,7 +17,7 @@ async function chargerMenus() {
     ? '<ul class="menus-admin">' + menus.map((menu) =>
       '<li class="menu-admin-ligne"><div class="menu-admin-titre"><strong>' + echapperHtml(menu.name) + '</strong><span>' + echapperHtml(menu.theme) + ' · ' + echapperHtml(menu.regime) + '</span></div>' +
       '<dl class="menu-admin-infos"><div><dt>Prix</dt><dd>' + Number(menu.price).toFixed(2) + ' €</dd></div><div><dt>Minimum</dt><dd>' + Number(menu.minimum_people) + ' pers.</dd></div><div><dt>Stock</dt><dd>' + Number(menu.stock) + ' en stock</dd></div></dl>' +
-      '<div class="actions-ligne"><button class="button button-small" type="button" data-menu-modifier="' + echapperHtml(menu.id) + '">Modifier</button><button class="button button-small bouton-secondaire" type="button" data-menu-supprimer="' + echapperHtml(menu.id) + '">Supprimer</button></div></li>').join('') + '</ul>'
+      '<div class="actions-ligne"><button class="bouton bouton-petit" type="button" data-menu-modifier="' + echapperHtml(menu.id) + '">Modifier</button><button class="bouton bouton-petit bouton-secondaire" type="button" data-menu-supprimer="' + echapperHtml(menu.id) + '">Supprimer</button></div></li>').join('') + '</ul>'
     : 'Aucun menu.';
 }
 
@@ -92,7 +92,7 @@ async function chargerHoraires() {
     const premier = jours.find((jour) => Number(jour.day_of_week) === groupe.jours[0]);
     return '<li class="horaires-groupe" data-jours="' + groupe.jours.join(',') + '"><span class="horaires-titre">' + groupe.titre +
       '</span><span class="horaires-valeur">' + echapperHtml(premier ? premier.opening_hours : '') + '</span>' +
-      '<button class="button button-small bouton-secondaire" type="button" data-horaire-action="modifier">Modifier</button></li>';
+      '<button class="bouton bouton-petit bouton-secondaire" type="button" data-horaire-action="modifier">Modifier</button></li>';
   }).join('') + '</ul>';
 }
 

@@ -11,25 +11,25 @@ try {
     jsonResponse(['error' => 'Les menus sont temporairement indisponibles.'], 500);
 }
 
-$menuId = trim((string) ($_GET['id'] ?? ''));
-if ($menuId !== '') {
-    $query = $pdo->prepare(
+$identifiantMenu = trim((string) ($_GET['id'] ?? ''));
+if ($identifiantMenu !== '') {
+    $requeteMenu = $pdo->prepare(
         'SELECT id, name, price, minimum_people AS minimum, theme, regime, description,
                 image_path, conditions_text, stock
          FROM menus WHERE id = ?'
     );
-    $query->execute([$menuId]);
-    $menu = $query->fetch();
+    $requeteMenu->execute([$identifiantMenu]);
+    $menu = $requeteMenu->fetch();
     if (!$menu) {
         jsonResponse(['error' => 'Menu introuvable.'], 404);
     }
 
-    $dishes = $pdo->prepare(
+    $requetePlats = $pdo->prepare(
         'SELECT dish_type, name, allergens FROM menu_dishes WHERE menu_id = ? ORDER BY position'
     );
-    $dishes->execute([$menuId]);
-    $menu['dishes'] = $dishes->fetchAll();
-    $menu['images'] = imagesDuMenu($pdo, $menuId, (string) $menu['image_path']);
+    $requetePlats->execute([$identifiantMenu]);
+    $menu['dishes'] = $requetePlats->fetchAll();
+    $menu['images'] = imagesDuMenu($pdo, $identifiantMenu, (string) $menu['image_path']);
     jsonResponse($menu);
 }
 

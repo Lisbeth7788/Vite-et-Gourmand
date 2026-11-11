@@ -1,5 +1,5 @@
-const formulaireEmploye = document.querySelector('#employe-login-form');
-const retourEmploye = document.querySelector('#employe-login-feedback');
+const formulaireEmploye = document.querySelector('#formulaire-connexion-employe');
+const retourEmploye = document.querySelector('#retour-connexion-employe');
 
 formulaireEmploye.addEventListener('submit', async (event) => {
   event.preventDefault();

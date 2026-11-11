@@ -14,7 +14,7 @@ Le site est hébergé chez Hostinger. Il se met à jour à chaque `push` sur la 
 
 1. Créer une base MySQL et un utilisateur dédié (jamais `root`).
 2. Importer `sql/schema.sql` dans phpMyAdmin (encodage `utf8mb4`).
-3. Importer `sql/comptes-ecf.sql` pour créer les comptes de démonstration.
+3. Créer les comptes de démonstration en ligne séparément avec des mots de passe privés. Ne pas importer `sql/comptes-ecf.sql` en ligne : il est réservé à une installation locale neuve et ses mots de passe sont publics.
 4. Renseigner les variables de `.env.example` dans la configuration de l'hébergement : `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL`, `SMTP_*`, `MONGODB_*`.
 5. Envoyer les fichiers dans le dossier public (ou laisser Hostinger les récupérer depuis GitHub).
 6. Vérifier que le site s'ouvre en `https://` et tester chaque parcours (voir `docs/deploiement-et-recette.md`).

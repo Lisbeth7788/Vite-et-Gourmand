@@ -29,10 +29,10 @@ async function ouvrirPage({ page = 'connexion.html', redirect, session = false, 
   const document = {
     body: { append() {}, dataset: {} },
     querySelector(selector) {
-      if (selector === '#login-panel, #employe-login-form, #admin-login-form') return page === 'connexion.html' ? panneau : null;
-      if (selector === '#login-form') return page === 'connexion.html' ? form : null;
-      if (selector === '#register-form') return page === 'inscription.html' ? form : null;
-      if (selector.startsWith('.auth-switch a')) return lien;
+      if (selector === '#panneau-connexion-client, #formulaire-connexion-employe, #formulaire-connexion-admin') return page === 'connexion.html' ? panneau : null;
+      if (selector === '#formulaire-connexion-client') return page === 'connexion.html' ? form : null;
+      if (selector === '#formulaire-inscription') return page === 'inscription.html' ? form : null;
+      if (selector.startsWith('.changement-authentification a')) return lien;
       return null;
     },
     querySelectorAll() { return []; },

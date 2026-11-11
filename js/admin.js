@@ -48,7 +48,7 @@ async function chargerMessages() {
     messageList.textContent = 'Aucun message reçu.';
     return;
   }
-  messageList.innerHTML = `<table><caption>Messages envoyés depuis la page contact</caption><thead><tr><th>Date</th><th>De</th><th>Sujet</th><th>Message</th><th>Action</th></tr></thead><tbody>${messages.map((message) => `<tr><td>${echapperHtml(message.created_at)}</td><td><a href="mailto:${echapperHtml(message.email)}">${echapperHtml(message.email)}</a></td><td>${echapperHtml(message.title)}</td><td>${echapperHtml(message.description)}</td><td><button class="button button-small" type="button" data-delete-message="${Number(message.id)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`;
+  messageList.innerHTML = `<table><caption>Messages envoyés depuis la page contact</caption><thead><tr><th>Date</th><th>De</th><th>Sujet</th><th>Message</th><th>Action</th></tr></thead><tbody>${messages.map((message) => `<tr><td>${echapperHtml(message.created_at)}</td><td><a href="mailto:${echapperHtml(message.email)}">${echapperHtml(message.email)}</a></td><td>${echapperHtml(message.title)}</td><td>${echapperHtml(message.description)}</td><td><button class="bouton bouton-petit" type="button" data-delete-message="${Number(message.id)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`;
 }
 
 function carteReservation(order, options) {
@@ -92,7 +92,7 @@ async function chargerAvis() {
     return;
   }
   const statuts = { approved: 'Publié', rejected: 'Refusé', pending: 'En attente' };
-  reviewList.innerHTML = `<table><caption>Avis reçus</caption><thead><tr><th>Date</th><th>Note</th><th>Avis</th><th>Statut</th><th>Action</th></tr></thead><tbody>${avis.map((review) => `<tr><td>${echapperHtml(review.created_at)}</td><td>${'★'.repeat(Number(review.rating))}</td><td>${echapperHtml(review.comment)}</td><td>${statuts[review.status] || echapperHtml(review.status)}</td><td><button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="approved">Publier</button> <button class="button button-small" type="button" data-review-id="${Number(review.id)}" data-review-status="rejected">Refuser</button></td></tr>`).join('')}</tbody></table>`;
+  reviewList.innerHTML = `<table><caption>Avis reçus</caption><thead><tr><th>Date</th><th>Note</th><th>Avis</th><th>Statut</th><th>Action</th></tr></thead><tbody>${avis.map((review) => `<tr><td>${echapperHtml(review.created_at)}</td><td>${'★'.repeat(Number(review.rating))}</td><td>${echapperHtml(review.comment)}</td><td>${statuts[review.status] || echapperHtml(review.status)}</td><td><button class="bouton bouton-petit" type="button" data-review-id="${Number(review.id)}" data-review-status="approved">Publier</button> <button class="bouton bouton-petit" type="button" data-review-id="${Number(review.id)}" data-review-status="rejected">Refuser</button></td></tr>`).join('')}</tbody></table>`;
 }
 
 async function chargerActivite() {
@@ -137,7 +137,7 @@ async function chargerStatistiques() {
         return;
       }
       const maximum = Math.max(...stats.map((ligne) => ligne.orders));
-      resultat.innerHTML = '<table class="tableau-activite tableau-stats"><caption class="visually-hidden">Réservations et chiffre d’affaires par menu</caption><thead><tr><th>Menu</th><th>Réservations</th><th>Chiffre d’affaires</th></tr></thead><tbody>' +
+      resultat.innerHTML = '<table class="tableau-activite tableau-stats"><caption class="masque-visuellement">Réservations et chiffre d’affaires par menu</caption><thead><tr><th>Menu</th><th>Réservations</th><th>Chiffre d’affaires</th></tr></thead><tbody>' +
         stats.map((ligne) => '<tr><td><strong>' + echapperHtml(noms[ligne.menu] || ligne.menu) + '</strong></td><td><strong>' + ligne.orders + '</strong><div class="jauge"><div class="jauge-remplie jauge-libre" style="width:' + Math.round(ligne.orders * 100 / maximum) + '%"></div></div></td><td>' + Number(ligne.revenue).toFixed(2) + ' €</td></tr>').join('') + '</tbody></table>';
     } catch (erreur) {
       resultat.textContent = erreur.message;
@@ -158,7 +158,7 @@ function dateLongue(iso) {
 async function chargerEmployes() {
   const employes = await demanderJson('api/admin/employees.php');
   employeeList.innerHTML = employes.length
-    ? `<table><caption>Comptes employés</caption><thead><tr><th>Nom</th><th>Poste</th><th>Contact</th><th>État</th><th>Actions</th></tr></thead><tbody>${employes.map((employe) => `<tr><td>${echapperHtml(employe.first_name)} ${echapperHtml(employe.last_name)}</td><td>${echapperHtml(employe.job_title || '')}</td><td>${echapperHtml(employe.email)}<br>${echapperHtml(employe.phone)}</td><td>${Number(employe.is_active) ? 'Actif' : 'Désactivé'}</td><td><button class="button button-small" type="button" data-employee-toggle="${echapperHtml(employe.id)}" data-active="${Number(employe.is_active) ? 0 : 1}">${Number(employe.is_active) ? 'Désactiver' : 'Réactiver'}</button> <button class="button button-small bouton-secondaire" type="button" data-employee-delete="${echapperHtml(employe.id)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`
+    ? `<table><caption>Comptes employés</caption><thead><tr><th>Nom</th><th>Poste</th><th>Contact</th><th>État</th><th>Actions</th></tr></thead><tbody>${employes.map((employe) => `<tr><td>${echapperHtml(employe.first_name)} ${echapperHtml(employe.last_name)}</td><td>${echapperHtml(employe.job_title || '')}</td><td>${echapperHtml(employe.email)}<br>${echapperHtml(employe.phone)}</td><td>${Number(employe.is_active) ? 'Actif' : 'Désactivé'}</td><td><button class="bouton bouton-petit" type="button" data-employee-toggle="${echapperHtml(employe.id)}" data-active="${Number(employe.is_active) ? 0 : 1}">${Number(employe.is_active) ? 'Désactiver' : 'Réactiver'}</button> <button class="bouton bouton-petit bouton-secondaire" type="button" data-employee-delete="${echapperHtml(employe.id)}">Supprimer</button></td></tr>`).join('')}</tbody></table>`
     : 'Aucun compte employé.';
 }
 

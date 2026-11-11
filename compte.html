@@ -5,26 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Espace personnel Vite et Gourmand.">
   <title>Mon compte - Vite et Gourmand</title>
-  <link rel="stylesheet" href="css/style.css?v=contact-moderne">
+  <link rel="stylesheet" href="css/style.css?v=d7d5cab5">
 </head>
 <body>
   <a class="lien-evitement" href="#contenu-principal">Aller au contenu principal</a>
-  <header class="site-header">
+  <header class="entete-site">
     <a class="logo" href="index.html">Vite et Gourmand</a>
-    <nav class="main-navigation" aria-label="Navigation principale">
+    <nav class="navigation-principale" aria-label="Navigation principale">
       <ul><li><a href="index.html">Accueil</a></li><li><a href="menus.html">Menus</a></li><li><a href="reservation.html">Commander</a></li><li><a class="lien-espace-client" href="compte.html" aria-current="page">Mon espace client</a></li><li><a href="api/auth/logout.php">Déconnexion</a></li></ul>
     </nav>
   </header>
-  <main id="contenu-principal" class="catalogue-page">
-    <div class="page-intro"><p class="eyebrow">Espace client</p><h1>Mes événements</h1><p id="account-identity">Vérification de votre session...</p></div>
-    <nav class="admin-nav" aria-label="Sections de mon espace">
+  <main id="contenu-principal" class="page-catalogue">
+    <div class="introduction-page"><p class="sur-titre">Espace client</p><h1>Mes événements</h1><p id="account-identity">Vérification de votre session...</p></div>
+    <nav class="navigation-admin" aria-label="Sections de mon espace">
       <ol>
         <li><a href="#profil" data-section="profil" aria-current="page">Mon profil</a></li>
         <li><a href="#commandes" data-section="commandes">Mes événements</a></li>
         <li><a href="#activite" data-section="activite">Mon activité</a></li>
       </ol>
     </nav>
-    <section id="section-profil" class="form-section profil-carte" aria-labelledby="profile-title">
+    <section id="section-profil" class="section-formulaire profil-carte" aria-labelledby="profile-title">
       <div class="profil-entete">
         <span class="profil-avatar" id="profile-avatar" aria-hidden="true">?</span>
         <div>
@@ -49,44 +49,44 @@
           <div class="champ-formulaire"><label for="profile-address">Adresse</label><textarea id="profile-address" name="address" rows="3" autocomplete="street-address" required></textarea></div>
         </fieldset>
         <div class="profil-actions">
-          <button class="button" type="submit">Enregistrer</button>
+          <button class="bouton" type="submit">Enregistrer</button>
         </div>
       </form>
       <output id="profile-feedback" class="message-formulaire"></output>
       <div class="profil-options">
         <h3>Options du compte</h3>
         <div class="profil-options-liste">
-          <a class="button button-small" href="reservation.html">Organiser un événement</a>
-          <a class="button button-small bouton-secondaire" href="connexion.html?reset=1#password-reset">Changer mon mot de passe</a>
-          <a class="button button-small bouton-secondaire" href="api/auth/logout.php">Se déconnecter</a>
+          <a class="bouton bouton-petit" href="reservation.html">Organiser un événement</a>
+          <a class="bouton bouton-petit bouton-secondaire" href="connexion.html?reset=1#password-reset">Changer mon mot de passe</a>
+          <a class="bouton bouton-petit bouton-secondaire" href="api/auth/logout.php">Se déconnecter</a>
         </div>
         <details class="profil-suppression">
           <summary>Supprimer mon compte</summary>
           <form id="delete-account-form">
             <p>Cette action est définitive. Vos événements en attente seront annulés et vos informations personnelles effacées.</p>
             <div class="champ-formulaire"><label for="delete-password">Confirmez avec votre mot de passe</label><input id="delete-password" name="password" type="password" autocomplete="current-password" required></div>
-            <button class="button button-small" type="submit">Supprimer définitivement</button>
+            <button class="bouton bouton-petit" type="submit">Supprimer définitivement</button>
           </form>
         </details>
       </div>
     </section>
-    <section id="section-commandes" class="form-section" aria-labelledby="account-orders-title" hidden>
+    <section id="section-commandes" class="section-formulaire" aria-labelledby="account-orders-title" hidden>
       <div id="account-next" class="evenement-prochain" hidden></div>
       <div class="evenements-entete">
         <h2 id="account-orders-title">Mes réceptions et cérémonies</h2>
-        <a class="button button-small" href="menus.html">Organiser un nouvel événement</a>
+        <a class="bouton bouton-petit" href="menus.html">Organiser un nouvel événement</a>
       </div>
       <div id="account-orders" class="evenements-liste"></div>
     </section>
-    <section id="section-activite" class="form-section" aria-labelledby="account-activity-title" hidden><h2 id="account-activity-title">Historique de mon activité</h2><div id="account-activity" class="table-responsive"></div></section>
+    <section id="section-activite" class="section-formulaire" aria-labelledby="account-activity-title" hidden><h2 id="account-activity-title">Historique de mon activité</h2><div id="account-activity" class="tableau-adaptatif"></div></section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="pied-site">
     <div>
       <p>&copy; 2026 Vite et Gourmand</p>
       <p>Traiteur à Bordeaux, du lundi au dimanche.</p>
     </div>
-    <div class="opening-hours">
+    <div class="horaires-ouverture">
       <h2>Horaires</h2>
       <dl>
         <div><dt>Lun - Ven</dt><dd>11h30 - 14h00 / 18h00 - 22h00</dd></div>
@@ -100,7 +100,7 @@
     </nav>
   </footer>
 
-  <script type="module" src="js/script.js?v=horaires-simples"></script>
-  <script type="module" src="js/account.js?v=cc38d241"></script>
+  <script type="module" src="js/script.js?v=a942639c"></script>
+  <script type="module" src="js/account.js?v=54096c4e"></script>
 </body>
 </html>

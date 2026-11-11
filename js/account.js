@@ -42,7 +42,7 @@ function afficherActivite(activite) {
     return `<li class="activite-ligne"${index >= 8 ? ' hidden data-extra' : ''}><span class="activite-type">${echapperTexte(libellesActivite[evenement.type] || evenement.type)}</span><span class="activite-detail">${echapperTexte(detail)}${montant}</span><time class="activite-date">${echapperTexte(jour)} ${echapperTexte(heure.slice(0, 5))}</time></li>`;
   }).join('');
   const nombreCache = activite.length - 8;
-  const plus = nombreCache > 0 ? '<button class="button button-small activite-plus" type="button">Voir plus (' + nombreCache + ')</button>' : '';
+  const plus = nombreCache > 0 ? '<button class="bouton bouton-petit activite-plus" type="button">Voir plus (' + nombreCache + ')</button>' : '';
   activiteCompte.innerHTML = '<ul class="activite-liste">' + lignes + '</ul>' + plus;
   activiteCompte.querySelector('.activite-plus')?.addEventListener('click', (event) => {
     activiteCompte.querySelectorAll('[data-extra]').forEach((ligne) => { ligne.hidden = false; });
@@ -102,15 +102,15 @@ function formulaireModification(order, heure) {
     '<div class="champ-formulaire"><label>Ville <input name="city" type="text" value="' + echapperTexte(order.city || '') + '" required></label></div>' +
     '<div class="champ-formulaire"><label>Distance depuis Bordeaux (km) <input name="distance" type="number" min="0" step="0.1" value="' + Number(order.distance || 0) + '"></label></div>' +
     '<div class="champ-formulaire"><label>Téléphone <input name="phone" type="tel" value="' + echapperTexte(order.phone || '') + '" required></label></div>' +
-    '<button class="button button-small" type="submit">Enregistrer les modifications</button></form>' +
-    '<button class="button button-small bouton-secondaire" type="button" data-cancel-order="' + id + '">Annuler l\u2019événement</button>';
+    '<button class="bouton bouton-petit" type="submit">Enregistrer les modifications</button></form>' +
+    '<button class="bouton bouton-petit bouton-secondaire" type="button" data-cancel-order="' + id + '">Annuler l\u2019événement</button>';
 }
 
 function formulaireAvis(order) {
   return '<form class="grille-formulaire" data-review-order="' + echapperTexte(order.id) + '"><h3>Votre avis sur la prestation</h3>' +
     '<div class="champ-formulaire"><label>Note (1 à 5) <select name="rating" required><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></label></div>' +
     '<div class="champ-formulaire"><label>Commentaire <textarea name="comment" rows="3" required></textarea></label></div>' +
-    '<button class="button button-small" type="submit">Envoyer mon avis</button></form>';
+    '<button class="bouton bouton-petit" type="submit">Envoyer mon avis</button></form>';
 }
 
 function ligneReservation(order) {
@@ -151,7 +151,7 @@ function afficherProchain(orders) {
   const delai = jours === 0 ? 'C\u2019est aujourd\u2019hui !' : jours === 1 ? 'C\u2019est demain !' : 'Dans ' + jours + ' jours';
   const invites = Number(aVenir.people);
   bloc.hidden = false;
-  bloc.innerHTML = '<p class="eyebrow">Votre prochain événement</p>' +
+  bloc.innerHTML = '<p class="sur-titre">Votre prochain événement</p>' +
     '<h2>' + echapperTexte(aVenir.menu_name || aVenir.menu_id) + '</h2>' +
     '<p class="evenement-date">' + echapperTexte(formaterDate(aVenir.service_date)) + ' · ' + echapperTexte(String(aVenir.service_time).slice(0, 5)) + '</p>' +
     '<p class="evenement-delai">' + delai + ' · ' + invites + ' invité' + (invites > 1 ? 's' : '') + '</p>' + frise(aVenir);
@@ -176,7 +176,7 @@ async function chargerCompte() {
     const orders = await demanderCompte('api/user/orders.php');
     afficherProchain(orders);
     if (!orders.length) {
-      commandesCompte.innerHTML = '<div class="evenement-vide"><p>Vous n\u2019avez pas encore organisé d\u2019événement avec nous.</p><a class="button" href="menus.html">Découvrir nos menus de cérémonie</a></div>';
+      commandesCompte.innerHTML = '<div class="evenement-vide"><p>Vous n\u2019avez pas encore organisé d\u2019événement avec nous.</p><a class="bouton" href="menus.html">Découvrir nos menus de cérémonie</a></div>';
       return;
     }
     commandesCompte.innerHTML = orders.map(ligneReservation).join('');

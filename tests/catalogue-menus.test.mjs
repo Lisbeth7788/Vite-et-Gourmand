@@ -4,6 +4,8 @@ import test from 'node:test';
 import vm from 'node:vm';
 
 const script = await readFile(new URL('../js/menus-filtres.js', import.meta.url), 'utf8');
+const page = await readFile(new URL('../menus.html', import.meta.url), 'utf8');
+const styles = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
 
 async function charger(menus, disponible = true) {
   class Element {
@@ -21,7 +23,7 @@ async function charger(menus, disponible = true) {
     addEventListener(type, fonction) { this.listeners[type] = fonction; }
   }
   const elements = Object.fromEntries([
-    '#filtres-menus', '#menu-list', '#filtre-resultat', '#filtre-prix-max',
+    '#filtres-menus', '#liste-menus', '#filtre-resultat', '#filtre-prix-max',
     '#filtre-prix-min', '#filtre-prix-borne', '#filtre-personnes', '#filtre-theme', '#filtre-regime'
   ].map(id => [id, new Element()]));
   const context = vm.createContext({
@@ -42,7 +44,15 @@ const menu = {
 
 test('le catalogue affiche les données de la base et le prix minimum', async () => {
   const elements = await charger([menu]);
-  const carte = elements['#menu-list'].children[0];
+  const carte = elements['#liste-menus'].children[0];
+  assert.match(page, /id="liste-menus"/);
+  assert.equal(carte.className, 'carte-catalogue');
+  assert.equal(carte.children[0].className, 'image-carte-menu');
+  assert.equal(carte.children[1].className, 'contenu-carte-catalogue');
+  assert.equal(carte.children[1].children[4].className, 'bouton bouton-petit');
+  for (const classe of ['carte-catalogue', 'image-carte-menu', 'contenu-carte-catalogue', 'bouton', 'bouton-petit']) {
+    assert.match(styles, new RegExp(`\\.${classe}(?![\\w-])`), `Style manquant : ${classe}`);
+  }
   assert.equal(carte.dataset.price, 23);
   assert.equal(carte.dataset.theme, 'evenement');
   const contenu = carte.children[1];
@@ -54,7 +64,7 @@ test('le catalogue affiche les données de la base et le prix minimum', async ()
 
 test('les filtres et la disponibilité utilisent les données actuelles', async () => {
   const elements = await charger([menu, { ...menu, id: 'second', name: 'Autre', regime: 'classique', stock: 0 }]);
-  const cartes = elements['#menu-list'].children;
+  const cartes = elements['#liste-menus'].children;
   assert.equal(cartes[1].children[1].children[4].textContent, 'Indisponible actuellement');
   elements['#filtre-regime'].value = 'vegan';
   elements['#filtres-menus'].listeners.input();
@@ -68,6 +78,6 @@ test('les filtres et la disponibilité utilisent les données actuelles', async 
 
 test('une erreur de serveur ne présente pas de menus périmés', async () => {
   const elements = await charger([], false);
-  assert.equal(elements['#menu-list'].children.length, 0);
+  assert.equal(elements['#liste-menus'].children.length, 0);
   assert.match(elements['#filtre-resultat'].textContent, /temporairement indisponibles/);
 });
