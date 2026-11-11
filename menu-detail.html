@@ -24,26 +24,28 @@
   <main id="menu-detail" tabindex="-1" class="detail-page" aria-labelledby="menu-detail-title">
     <div class="detail-heading">
       <a class="back-link" href="menus.html">&larr; Retour aux menus</a>
-      <p class="eyebrow" id="menu-detail-category">Menu sélectionné</p>
-      <h1 id="menu-detail-title">Le marché de Bordeaux</h1>
-      <p id="menu-detail-description">Une formule équilibrée avec produits de saison, pensée pour les repas conviviaux.</p>
+      <p class="eyebrow" id="menu-detail-category"></p>
+      <h1 id="menu-detail-title">Chargement du menu...</h1>
+      <p id="menu-detail-description"></p>
     </div>
 
-    <div class="detail-layout">
+    <div class="detail-layout" hidden>
       <section class="detail-gallery" aria-label="Galerie du menu">
         <img class="detail-main-image" id="menu-detail-image" src="images/images/menu-marche.jpg" alt="Le marché de Bordeaux">
         <div class="detail-thumbnails" id="menu-detail-thumbnails"></div>
       </section>
 
       <aside class="detail-summary" aria-label="Résumé du menu">
-        <p class="detail-price" id="menu-detail-price">24 € <span>par personne</span></p>
-        <p><strong>Minimum :</strong> <span id="menu-detail-people">6 personnes</span></p>
-        <p><strong>Régime :</strong> <span id="menu-detail-regime">Classique</span></p>
-        <a id="menu-order-link" class="button" href="reservation.html?menu=marche-bordeaux">Commander ce menu</a>
+        <p class="detail-price" id="menu-detail-price"></p>
+        <p><strong>Minimum :</strong> <span id="menu-detail-people"></span></p>
+        <p id="menu-detail-total"></p>
+        <p><strong>Disponibilité :</strong> <span id="menu-detail-stock"></span></p>
+        <p><strong>Régime :</strong> <span id="menu-detail-regime"></span></p>
+        <a id="menu-order-link" class="button" href="menus.html" hidden>Commander ce menu</a>
       </aside>
     </div>
 
-    <div class="detail-information">
+    <div class="detail-information" hidden>
       <section aria-labelledby="composition-title">
         <h2 id="composition-title">Composition du menu</h2>
         <div class="dish-list">
@@ -94,6 +96,6 @@
   </footer>
 
   <script type="module" src="js/script.js?v=horaires-simples"></script>
-  <script src="js/menu-detail.js?v=photos-menus"></script>
+  <script src="js/menu-detail.js?v=infos-ecf"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@ Projet réalisé dans le cadre de la formation Développeur Web et Web Mobile.
 | Employé | `employe-connexion.html` | `employe@vite-et-gourmand.fr` | `Azerty2026!` |
 | Administrateur | `admin-connexion.html` | `admin@vite-et-gourmand.fr` | `Azerty2026!` |
 
-Ces comptes sont créés par `sql/comptes-ecf.sql` (à exécuter après `sql/schema.sql`). Ce sont des mots de passe de démonstration : il faut les changer avant une vraie mise en ligne.
+Ces comptes sont créés par `sql/comptes-ecf.sql` (à exécuter après `sql/schema.sql`) pour une installation de démonstration. Les accès du site en ligne doivent être vérifiés séparément avant de les transmettre au correcteur. Ce sont des mots de passe de démonstration : il faut les changer avant une vraie mise en ligne.
 
 ## Que peut faire chaque profil ?
 

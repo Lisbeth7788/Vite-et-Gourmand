@@ -14,19 +14,13 @@ const photos = {
   'fete-vegetale': 'menu-fete-vegetale.jpg'
 };
 
-test('chaque menu utilise la même photo dans le catalogue et les données de secours', async () => {
-  const [catalogue, details, schema, miseAJour] = await Promise.all([
-    readFile('menus.html', 'utf8'),
-    readFile('js/menu-detail.js', 'utf8'),
+test('chaque photo des menus existe et est définie dans les fichiers SQL', async () => {
+  const [schema, miseAJour] = await Promise.all([
     readFile('sql/schema.sql', 'utf8'),
     readFile('sql/mise-a-jour-menus.sql', 'utf8')
   ]);
   for (const [id, photo] of Object.entries(photos)) {
     const chemin = `images/images/${photo}`;
-    const carte = catalogue.split('<article class="catalogue-card"').find((bloc) => bloc.includes(`menu-detail.html?menu=${id}"`));
-    assert.ok(carte?.includes(`src="${chemin}"`), `Catalogue : ${id}`);
-    const detail = details.split(`"${id}": {`)[1]?.split('\n  },')[0];
-    assert.ok(detail?.includes(`image_path: "${chemin}"`), `Données de secours : ${id}`);
     for (const sql of [schema, miseAJour]) {
       const ligne = sql.split('\n').find((texte) => texte.trimStart().startsWith(`('${id}',`));
       assert.ok(ligne?.includes(`'${chemin}'`), `Données SQL : ${id}`);

@@ -17,6 +17,7 @@ Windows, XAMPP (Apache, PHP 8.2, MySQL), phpMyAdmin, Visual Studio Code, Git et 
 2. Les scripts `js/` appellent les routes PHP du dossier `api/` avec `fetch`.
 3. Les routes PHP vérifient la session, le rôle et les données, puis lisent ou écrivent dans MySQL.
 4. Elles répondent en JSON et la page se met à jour sans rechargement.
+5. Le catalogue et les fiches de menu lisent les données actuelles de MySQL ; les filtres de prix utilisent le prix par personne. Le prix pour le nombre minimal de personnes est également affiché.
 
 ## Rôles et droits
 

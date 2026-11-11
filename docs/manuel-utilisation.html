@@ -33,12 +33,12 @@
     <p><strong>Vite et Gourmand</strong> — application de commande et de gestion d'un traiteur à Bordeaux.</p>
     <p>Ce manuel explique les parcours visiteur, client, employé et administrateur, ainsi que les limites de la version de démonstration.</p>
     <p><a href="https://lightblue-yak-778177.hostingersite.com">Ouvrir l'application en ligne</a></p>
-    <p class="small">Version préparée le 3 novembre 2026.</p>
+    <p class="small">Version mise à jour le 11 novembre 2026.</p>
   </header>
 
   <section>
     <h2>Comptes de démonstration</h2>
-    <p>Les trois profils peuvent se connecter avec le mot de passe de démonstration ci-dessous.</p>
+    <p>Ces comptes sont créés pour une installation locale par le fichier SQL de démonstration. Sur le site en ligne, leurs identifiants doivent être vérifiés avant de les communiquer au correcteur.</p>
     <table>
       <thead><tr><th>Profil</th><th>Identifiant</th><th>Mot de passe</th><th>Page</th></tr></thead>
       <tbody>
@@ -48,15 +48,15 @@
       </tbody>
     </table>
     <p class="callout warning"><strong>Démo uniquement :</strong> les paiements par carte sont simulés et aucun montant n'est débité. N'utilisez pas de vraie carte bancaire. Changez ou supprimez ces identifiants avant une utilisation réelle.</p>
-    <p>Les e-mails de bienvenue, de confirmation et de changement de statut nécessitent une configuration SMTP valide sur l'hébergement. Les statistiques par menu nécessitent MongoDB.</p>
+    <p>Les e-mails nécessitent un service d'envoi fonctionnel sur l'hébergement. Les statistiques par menu nécessitent MongoDB et son extension PHP. Leur fonctionnement doit être vérifié en ligne.</p>
   </section>
 
   <section>
     <h2>Visiter le site et choisir un menu</h2>
     <ol>
       <li>Depuis l'accueil, ouvrez <strong>Menus</strong> pour consulter les offres.</li>
-      <li>Utilisez les filtres de prix, de thème, de régime et de nombre minimal de personnes ; la liste se met à jour sans rechargement.</li>
-      <li>Ouvrez un menu pour consulter sa description, ses plats, ses allergènes, ses conditions et ses images.</li>
+      <li>Utilisez les filtres de prix par personne, de thème, de régime et de nombre de personnes ; la liste se met à jour sans rechargement.</li>
+      <li>Ouvrez un menu pour consulter sa description, ses plats, ses allergènes, ses conditions, ses images, sa disponibilité et le prix pour le nombre minimal de personnes.</li>
       <li>Choisissez <strong>Commander ce menu</strong>. Si vous devez vous connecter, vous retrouverez ensuite la réservation avec le menu choisi.</li>
     </ol>
   </section>
@@ -64,7 +64,7 @@
   <section>
     <h2>Créer un compte client</h2>
     <ol>
-      <li>Sur la page de connexion, choisissez <strong>Créer un compte</strong>, puis remplissez les informations personnelles et l'adresse e-mail. Après l'inscription, connectez-vous pour reprendre votre réservation.</li>
+      <li>Sur la page de connexion, choisissez <strong>Créer un compte</strong>, puis remplissez les informations personnelles et l'adresse e-mail. Après l'inscription, revenez à la page de connexion pour reprendre votre réservation avec votre nouvelle session.</li>
       <li>Choisissez un mot de passe d'au moins 10 caractères, contenant une majuscule, une minuscule, un chiffre et un caractère spécial.</li>
       <li>Après l'inscription, un e-mail de bienvenue est envoyé si la messagerie du site est configurée.</li>
       <li>En cas d'oubli, utilisez le lien de réinitialisation et suivez le lien reçu par e-mail.</li>
@@ -78,7 +78,7 @@
       <li>Vérifiez les coordonnées reprises depuis votre compte, puis indiquez la date, l'heure, l'adresse, la ville et le nombre de personnes.</li>
       <li>Le nombre de personnes doit atteindre le minimum du menu. Une remise de 10 % est appliquée à partir de cinq personnes au-delà de ce minimum.</li>
       <li>La livraison est gratuite à Bordeaux. Hors Bordeaux, elle coûte 5 € plus 0,59 € par kilomètre ; indiquez la distance demandée par le formulaire.</li>
-      <li>Vérifiez le détail du prix avant de valider la commande. Un e-mail de confirmation est envoyé si le SMTP fonctionne.</li>
+      <li>Vérifiez le détail du prix avant de valider la commande. Un e-mail de confirmation est envoyé si le service d'envoi fonctionne.</li>
       <li>Le paiement de démonstration affiche une étape carte, mais ne transmet ni ne conserve de données bancaires et ne débite aucun compte.</li>
     </ol>
     <p class="callout"><strong>Modification :</strong> tant que la commande n'est pas acceptée, vous pouvez la modifier ou l'annuler depuis <strong>Mon compte</strong>. Le choix du menu ne peut pas être modifié.</p>
