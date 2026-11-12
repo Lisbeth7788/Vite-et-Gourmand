@@ -110,7 +110,7 @@ verifier($apresModification === [
 $document = json_decode($documents['vite-et-gourmand:statistiques:commande:commande-1'], true, 512, JSON_THROW_ON_ERROR);
 verifier(
     array_keys($document) === ['id_commande', 'id_menu', 'total', 'date_prestation', 'statut'],
-    'Les documents NoSQL ne doivent contenir aucune donnée personnelle.'
+    'Les documents NoSQL ne doivent contenir que les champs analytiques autorisés.'
 );
 
 try {
@@ -118,5 +118,13 @@ try {
     throw new RuntimeException('Une date invalide aurait dû être refusée.');
 } catch (InvalidArgumentException $erreur) {
 }
+
+putenv('UPSTASH_REDIS_REST_URL');
+putenv('UPSTASH_REDIS_REST_TOKEN');
+putenv('APP_ENV=local');
+verifier(
+    synchroniserStatistiqueNoSQL($pdo, 'commande-1') === false,
+    'La synchronisation locale doit rester désactivée sans configuration Upstash.'
+);
 
 echo "Statistiques NoSQL Upstash vérifiées.\n";

@@ -2,6 +2,8 @@
 -- Conserve : les menus et leurs plats, TOUS les comptes (clients, employés, administrateur) et les horaires.
 -- Supprime : commandes, suivis, avis, messages, jetons de mot de passe,
 -- et données de planning/paie des employés.
+-- Les statistiques Upstash ne sont pas supprimées par ce script SQL :
+-- utiliser scripts/effacer-statistiques-nosql.php seulement si nécessaire.
 -- À importer dans phpMyAdmin (local, puis Hostinger). Action définitive.
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;

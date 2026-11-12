@@ -4,7 +4,7 @@
 
 Le sujet ECF demande une base relationnelle et une base non relationnelle. MongoDB est donné comme exemple de technologie NoSQL, sans être imposé. Le projet conserve les commandes dans MySQL/MariaDB et utilise Upstash Redis REST comme stockage NoSQL des statistiques.
 
-Chaque document analytique contient seulement l'identifiant de commande, le menu, le montant, la date de prestation et le statut. Aucune donnée personnelle n'est envoyée à Upstash. Les commandes existantes sont copiées au premier accès administrateur aux statistiques ; les nouvelles commandes, modifications et annulations sont synchronisées ensuite. Les réservations annulées ne sont pas comptées.
+Chaque document analytique contient seulement l'identifiant pseudonyme de commande, le menu, le montant, la date de prestation et le statut ; aucun nom ni coordonnée de client n'est envoyé à Upstash. Les commandes existantes sont copiées au premier accès administrateur aux statistiques ; les nouvelles commandes, modifications et annulations sont synchronisées ensuite. Les réservations annulées ne sont pas comptées.
 
 En production, la page des statistiques lit Upstash. Si la connexion au service est indisponible, l'API renvoie une erreur 503 et journalise l'erreur ; elle ne prétend pas afficher des statistiques synchronisées. En développement local, MySQL est utilisé si Upstash n'est pas configuré.
 
@@ -15,7 +15,7 @@ En production, la page des statistiques lit Upstash. Si la connexion au service 
 3. Renseigner `UPSTASH_REDIS_REST_URL` et `UPSTASH_REDIS_REST_TOKEN` dans le fichier privé `config/env.local.php` sur Hostinger. Ne jamais mettre ces valeurs dans Git ni les envoyer dans une conversation.
 4. Vérifier depuis Hostinger que les connexions HTTPS sortantes fonctionnent, puis ouvrir les statistiques dans l'administration. La première ouverture importe les commandes existantes de MySQL/MariaDB.
 
-L'API REST s'authentifie avec un jeton HTTPS ; elle ne nécessite pas d'adresse IP sortante fixe ni de règle d'accès MongoDB. La disponibilité des connexions HTTPS sortantes sur l'hébergement reste à vérifier en recette. Ne pas saisir de carte bancaire ni activer une offre payante sans décision préalable.
+L'API REST s'authentifie avec un jeton HTTPS ; il n'est pas nécessaire de configurer une liste blanche d'adresses IP. La disponibilité des connexions HTTPS sortantes sur l'hébergement reste à vérifier en recette. Ne pas saisir de carte bancaire ni activer une offre payante sans décision préalable.
 
 ## Tests et remise à zéro
 

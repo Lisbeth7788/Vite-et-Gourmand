@@ -2,7 +2,7 @@
 
 MySQL/MariaDB reste la source de vérité des commandes. En développement local, si Upstash n'est pas configuré, l'API calcule les statistiques directement depuis la table `orders`.
 
-En production, l'API utilise le stockage NoSQL Upstash Redis REST. Les données existantes y sont copiées automatiquement à la première consultation des statistiques ; les nouvelles commandes, modifications et annulations sont synchronisées ensuite. Aucun renseignement personnel n'est recopié.
+En production, l'API utilise le stockage NoSQL Upstash Redis REST. Les données existantes y sont copiées automatiquement à la première consultation des statistiques ; les nouvelles commandes, modifications et annulations sont synchronisées ensuite. Aucun nom ni coordonnée de client n'est recopié ; l'identifiant de commande pseudonyme reste présent.
 
 Les filtres de menu et de dates sont facultatifs, les dates sont incluses et les commandes annulées sont exclues.
 

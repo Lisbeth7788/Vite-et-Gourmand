@@ -147,6 +147,10 @@ function enregistrerStatistiqueNoSQL(PDO $pdo, string $identifiant, ?callable $t
 function synchroniserStatistiqueNoSQL(PDO $pdo, string $identifiant): bool
 {
     try {
+        if (configurationUpstash() === null && (getenv('APP_ENV') ?: 'local') !== 'production') {
+            return false;
+        }
+
         enregistrerStatistiqueNoSQL($pdo, $identifiant);
         return true;
     } catch (PDOException | RuntimeException | JsonException $erreur) {

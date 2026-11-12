@@ -4,7 +4,7 @@
 
 `APP_ENV`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`.
 
-Ne jamais publier `.env`, les mots de passe, le jeton Upstash ou le dossier local `mongo-data`.
+Ne jamais publier `.env`, les mots de passe ni le jeton Upstash.
 
 ## Étapes de déploiement (Hostinger)
 
