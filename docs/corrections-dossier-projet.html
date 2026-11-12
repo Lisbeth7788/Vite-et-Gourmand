@@ -40,12 +40,12 @@
     <li>Les statuts disponibles sont : en attente, acceptée, en préparation, en cours de livraison, livrée, retour du matériel, terminée et annulée. Une annulation demande un motif et le mode de contact du client.</li>
     <li>L'espace employé permet de gérer les réservations, les avis, les menus et les horaires ; il ne comporte pas de planning d'équipe.</li>
     <li>L'administrateur peut aussi gérer les messages, les comptes employés (création, désactivation, réactivation et suppression) et les statistiques.</li>
-    <li>La page Activité présente les statistiques par menu : comparaison du nombre de réservations et du chiffre d'affaires, avec filtres par menu et période. Elles sont calculées directement à partir des commandes stockées dans MySQL/MariaDB ; les commandes annulées sont exclues.</li>
+    <li>La page Activité présente les statistiques par menu : comparaison du nombre de réservations et du chiffre d'affaires, avec filtres par menu et période. MySQL/MariaDB conserve les commandes ; Upstash Redis REST fournit le stockage NoSQL des données analytiques. Les commandes annulées sont exclues.</li>
   </ul>
 
   <h2>Comptes et configuration</h2>
   <p>Le jeu de données fournit un compte de démonstration par rôle, dont un compte employé partagé. L'administrateur peut créer d'autres comptes employés ; l'e-mail de création ne transmet pas leur mot de passe. La création d'un compte administrateur depuis le site n'est pas proposée.</p>
-  <p>Les e-mails de bienvenue, de confirmation et de changement de statut nécessitent une configuration SMTP valide. Les statistiques par menu utilisent la base MySQL/MariaDB déjà configurée pour les commandes.</p>
+  <p>Les e-mails de bienvenue, de confirmation et de changement de statut nécessitent une configuration SMTP valide. Les statistiques par menu nécessitent aussi une base Upstash Redis REST configurée dans les variables privées de l'hébergement.</p>
 
   <h2>Pièces de dépôt à ne pas confondre</h2>
   <ul>

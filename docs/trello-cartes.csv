@@ -7,7 +7,7 @@ En cours;Developper le catalogue;Menus, details dynamiques, filtres et condition
 En cours;Developper l'authentification;Inscription, connexion, sessions et reinitialisation;Haute
 En cours;Developper la commande;Calcul, remise, livraison, stock et historique;Haute
 En cours;Developper les espaces;Compte client, employe et administrateur;Haute
-En cours;Ajouter les statistiques;MySQL/MariaDB, chiffre d'affaires, filtres et graphique;Haute
+En cours;Ajouter les statistiques;MySQL/MariaDB et Upstash Redis, chiffre d'affaires, filtres et graphique;Haute
 A tester;Tester les formulaires;Contact, commande, inscription et avis;Moyenne
 A tester;Tester la securite;Roles, sessions, mots de passe, SQL prepare et headers;Haute
 A tester;Faire la recette RGAA;Clavier, contraste, zoom, mobile et lecteur d'ecran;Haute

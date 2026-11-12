@@ -1,13 +1,21 @@
-# Statistiques par menu
+# Source SQL des statistiques
 
-Les statistiques sont calculées à la demande à partir des réservations de la table `orders` dans MySQL/MariaDB. Elles ne nécessitent ni base distincte ni extension PHP supplémentaire. Les réservations déjà présentes sont prises en compte sans migration.
+MySQL/MariaDB reste la source de vérité des commandes. En développement local, si Upstash n'est pas configuré, l'API calcule les statistiques directement depuis la table `orders`.
 
-L'API `api/admin/stats.php` regroupe le nombre de réservations et leur montant par menu. Les filtres de menu et de dates sont facultatifs, les bornes de dates sont incluses et les réservations annulées sont exclues.
+En production, l'API utilise le stockage NoSQL Upstash Redis REST. Les données existantes y sont copiées automatiquement à la première consultation des statistiques ; les nouvelles commandes, modifications et annulations sont synchronisées ensuite. Aucun renseignement personnel n'est recopié.
 
-La remise à zéro SQL supprime les réservations ; les statistiques correspondantes disparaissent donc également. Pour valider le calcul des statistiques sans toucher à une base de données existante, exécuter :
+Les filtres de menu et de dates sont facultatifs, les dates sont incluses et les commandes annulées sont exclues.
+
+Pour valider le calcul SQL local sans toucher à une base existante :
 
 ```sh
 php tests/statistiques-mysql.test.php
 ```
 
-Le fichier `config/env.local.php` ne demande aucune variable supplémentaire pour les statistiques : seules les informations de connexion MySQL/MariaDB du site sont nécessaires.
+Pour tester la synchronisation et le calcul NoSQL simulés :
+
+```sh
+php tests/statistiques-upstash.test.php
+```
+
+La configuration de production et le nettoyage du stockage NoSQL sont décrits dans [la procédure Upstash](statistiques-upstash.md).

@@ -45,11 +45,17 @@ sequenceDiagram
   participant Page as Page commande
   participant PHP as API PHP
   participant SQL as MySQL
+  participant NoSQL as Upstash Redis
   Client->>Page: Remplit le formulaire
   Page->>PHP: POST /api/orders.php
   PHP->>SQL: Verifie le menu et la session
   SQL-->>PHP: Prix et stock
   PHP->>SQL: Cree la commande et son historique
+  PHP->>SQL: Valide la transaction
+  PHP->>NoSQL: Synchronise le document analytique
+  NoSQL-->>PHP: Confirmation ou erreur journalisee
   PHP-->>Page: Confirmation et total
   Page-->>Client: Affiche le resultat
 ```
+
+En production, la page Activité lit les statistiques depuis Upstash Redis. La première lecture copie les commandes existantes depuis MySQL ; les erreurs de synchronisation sont inscrites dans le journal serveur sans annuler une commande enregistrée.

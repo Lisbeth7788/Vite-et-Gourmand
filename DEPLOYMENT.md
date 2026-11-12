@@ -6,6 +6,7 @@ Le site est hébergé chez Hostinger. Il se met à jour à chaque `push` sur la 
 
 - PHP 8.2 ou plus récent.
 - Une base MySQL / MariaDB.
+- Une base Upstash Redis accessible par son API REST HTTPS pour les statistiques.
 - Apache avec les fichiers `.htaccess` actifs.
 - HTTPS activé.
 
@@ -14,7 +15,7 @@ Le site est hébergé chez Hostinger. Il se met à jour à chaque `push` sur la 
 1. Créer une base MySQL et un utilisateur dédié (jamais `root`).
 2. Importer `sql/schema.sql` dans phpMyAdmin (encodage `utf8mb4`).
 3. Créer les comptes de démonstration en ligne séparément avec des mots de passe privés. Ne pas importer `sql/comptes-ecf.sql` en ligne : il est réservé à une installation locale neuve et ses mots de passe sont publics.
-4. Renseigner les variables de `.env.example` dans la configuration privée de l'hébergement : `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL` et `SMTP_*`. Les statistiques par menu utilisent directement les commandes enregistrées dans MySQL/MariaDB.
+4. Renseigner les variables de `.env.example` dans la configuration privée de l'hébergement : `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL`, `SMTP_*` et les deux variables `UPSTASH_REDIS_REST_*`. Les statistiques utilisent Upstash en production ; les commandes restent dans MySQL/MariaDB.
 5. Envoyer les fichiers dans le dossier public (ou laisser Hostinger les récupérer depuis GitHub).
 6. Vérifier que le site s'ouvre en `https://` et tester chaque parcours (voir `docs/deploiement-et-recette.md`).
 

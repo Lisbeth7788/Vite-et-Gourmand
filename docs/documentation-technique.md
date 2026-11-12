@@ -4,7 +4,8 @@
 
 - **HTML, CSS, JavaScript sans framework** : simple, accessible, facile à relire.
 - **PHP avec PDO** : le serveur reste simple et les requêtes préparées bloquent les injections SQL.
-- **MySQL / MariaDB** : stocke les comptes, menus, réservations, messages, avis, horaires et sert de source aux statistiques par menu.
+- **MySQL / MariaDB** : stocke les comptes, menus, réservations, messages, avis et horaires.
+- **Upstash Redis REST** : stockage NoSQL des documents analytiques de commande ; les statistiques en production sont lues depuis cette base.
 
 ## Environnement de travail
 
