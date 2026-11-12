@@ -4,8 +4,7 @@
 
 - **HTML, CSS, JavaScript sans framework** : simple, accessible, facile à relire.
 - **PHP avec PDO** : le serveur reste simple et les requêtes préparées bloquent les injections SQL.
-- **MySQL** : stocke les comptes, menus, réservations, messages, avis, horaires.
-- **MongoDB** : stocke les statistiques de réservations par menu (base non relationnelle, demandée par le sujet).
+- **MySQL / MariaDB** : stocke les comptes, menus, réservations, messages, avis, horaires et sert de source aux statistiques par menu.
 
 ## Environnement de travail
 

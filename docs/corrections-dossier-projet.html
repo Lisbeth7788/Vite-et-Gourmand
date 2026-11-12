@@ -40,12 +40,12 @@
     <li>Les statuts disponibles sont : en attente, acceptée, en préparation, en cours de livraison, livrée, retour du matériel, terminée et annulée. Une annulation demande un motif et le mode de contact du client.</li>
     <li>L'espace employé permet de gérer les réservations, les avis, les menus et les horaires ; il ne comporte pas de planning d'équipe.</li>
     <li>L'administrateur peut aussi gérer les messages, les comptes employés (création, désactivation, réactivation et suppression) et les statistiques.</li>
-    <li>La page Activité présente les statistiques par menu : comparaison du nombre de réservations et du chiffre d'affaires, avec filtres par menu et période. Les données détaillées sont stockées dans MongoDB.</li>
+    <li>La page Activité présente les statistiques par menu : comparaison du nombre de réservations et du chiffre d'affaires, avec filtres par menu et période. Elles sont calculées directement à partir des commandes stockées dans MySQL/MariaDB ; les commandes annulées sont exclues.</li>
   </ul>
 
   <h2>Comptes et configuration</h2>
   <p>Le jeu de données fournit un compte de démonstration par rôle, dont un compte employé partagé. L'administrateur peut créer d'autres comptes employés ; l'e-mail de création ne transmet pas leur mot de passe. La création d'un compte administrateur depuis le site n'est pas proposée.</p>
-  <p>Les e-mails de bienvenue, de confirmation et de changement de statut nécessitent une configuration SMTP valide. Les statistiques par menu nécessitent MongoDB et son extension PHP. Leur fonctionnement sur l'hébergement doit être confirmé lors de la recette.</p>
+  <p>Les e-mails de bienvenue, de confirmation et de changement de statut nécessitent une configuration SMTP valide. Les statistiques par menu utilisent la base MySQL/MariaDB déjà configurée pour les commandes.</p>
 
   <h2>Pièces de dépôt à ne pas confondre</h2>
   <ul>
@@ -53,7 +53,7 @@
     <li>Le dépôt ECF demande aussi la copie Word ou Excel fournie par Studi, remplie et nommée selon l'énoncé.</li>
     <li>Les maquettes sont dans un PDF séparé : trois écrans ordinateur et trois écrans mobile. La charte graphique indique la palette et les polices Nunito et Fraunces utilisées dans le site.</li>
   </ul>
-  <p class="warning"><strong>À confirmer avant la remise :</strong> joindre la copie officielle Studi remplie, vérifier la limite de taille du dépôt et terminer les vérifications de déploiement (base SQL, SMTP, MongoDB, branche principale et partage du tableau de suivi).</p>
+  <p class="warning"><strong>À confirmer avant la remise :</strong> joindre la copie officielle Studi remplie, vérifier la limite de taille du dépôt et terminer les vérifications de déploiement (base SQL, SMTP, branche principale et partage du tableau de suivi).</p>
   <p class="small">Identifiants de démonstration : voir le manuel d'utilisation. Ne pas utiliser ces mots de passe en production.</p>
 </body>
 </html>

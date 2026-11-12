@@ -45,13 +45,11 @@ sequenceDiagram
   participant Page as Page commande
   participant PHP as API PHP
   participant SQL as MySQL
-  participant NoSQL as MongoDB
   Client->>Page: Remplit le formulaire
   Page->>PHP: POST /api/orders.php
   PHP->>SQL: Verifie le menu et la session
   SQL-->>PHP: Prix et stock
   PHP->>SQL: Cree la commande et son historique
-  PHP->>NoSQL: Enregistre la statistique
   PHP-->>Page: Confirmation et total
   Page-->>Client: Affiche le resultat
 ```

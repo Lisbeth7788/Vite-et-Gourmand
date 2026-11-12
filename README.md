@@ -12,7 +12,7 @@ Projet réalisé dans le cadre de la formation Développeur Web et Web Mobile.
 | Interactions (filtres, formulaires) | JavaScript sans framework |
 | Serveur | PHP 8.2 |
 | Base de données principale | MySQL (accès avec PDO et requêtes préparées) |
-| Statistiques par menu | MongoDB (base non relationnelle) |
+| Statistiques par menu | MySQL / MariaDB |
 | Hébergement | Hostinger, déploiement depuis la branche `main` de GitHub |
 
 ## Installer le site sur son ordinateur
@@ -22,8 +22,7 @@ Projet réalisé dans le cadre de la formation Développeur Web et Web Mobile.
 3. Ouvrir phpMyAdmin (`http://localhost/phpmyadmin`) et importer le fichier `sql/schema.sql` (encodage `utf8mb4`).
 4. Importer ensuite `sql/comptes-ecf.sql` pour créer les comptes de démonstration.
 5. Copier les variables de `.env.example` dans la configuration PHP (ou dans `config/env.local.php`, modèle : `config/env.local.example.php`).
-6. Pour les statistiques : activer l'extension PHP `mongodb` dans `php.ini` et démarrer MongoDB.
-7. Ouvrir `http://localhost/Vite-et-Gourmand/index.html`.
+6. Ouvrir `http://localhost/Vite-et-Gourmand/index.html`.
 
 ## Comptes de test
 

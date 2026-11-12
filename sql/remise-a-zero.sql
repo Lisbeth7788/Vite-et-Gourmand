@@ -21,7 +21,3 @@ ALTER TABLE orders AUTO_INCREMENT = 1;
 ALTER TABLE order_status_history AUTO_INCREMENT = 1;
 ALTER TABLE reviews AUTO_INCREMENT = 1;
 ALTER TABLE messages AUTO_INCREMENT = 1;
-
--- Statistiques MongoDB (à lancer dans mongosh, pas dans phpMyAdmin) :
---   use vite_et_gourmand
---   db.order_analytics.deleteMany({})

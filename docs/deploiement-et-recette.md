@@ -2,7 +2,7 @@
 
 ## Variables à configurer
 
-`APP_ENV`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, `MONGODB_URI`, `MONGODB_DATABASE`, `MONGODB_COLLECTION`.
+`APP_ENV`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `CONTACT_EMAIL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`.
 
 Ne jamais publier `.env`, les mots de passe ou le dossier local `mongo-data`.
 
@@ -10,7 +10,7 @@ Ne jamais publier `.env`, les mots de passe ou le dossier local `mongo-data`.
 
 1. Créer la base MySQL et son utilisateur.
 2. Pour une base neuve, importer `sql/schema.sql` (encodage `utf8mb4`). Ne pas importer `sql/comptes-ecf.sql` en ligne : il est réservé à une installation locale neuve et ses mots de passe sont publics.
-3. Configurer MongoDB, l'extension PHP `mongodb` et l'envoi d'e-mails. Sur l'offre mutualisée, utiliser un service MongoDB externe, vérifier que l'extension et les connexions sortantes sont disponibles, puis renseigner son URI dans `config/env.local.php`. Ne pas utiliser `127.0.0.1` pour un service externe ; limiter son accès réseau à l'adresse sortante du serveur web. Voir [Statistiques MongoDB](statistiques-mongodb.md).
+3. Configurer l'envoi d'e-mails. Les statistiques par menu sont calculées à partir des commandes de la base MySQL/MariaDB ; aucun service ni extension supplémentaire n'est requis.
 4. Envoyer les fichiers (ou relier le dépôt GitHub, branche `main`).
 5. Activer HTTPS.
 6. Faire la recette ci-dessous sur l'adresse publique.
@@ -32,6 +32,7 @@ Cocher chaque ligne après l'avoir testée.
 - [x] Accessibilité : aucun défaut détecté par l'outil automatique axe-core (WCAG 2.1 AA) sur 13 pages publiques le 3 novembre 2026. Le contrôle manuel (clavier, lecteur d'écran, zoom 200 %) reste à faire.
 - [ ] Espace client : liste, suivi du statut, avis (la liste et l'annulation sont déjà testées en local).
 - [ ] Espace administrateur : messages, réservations (changement de statut), avis (publier ou refuser), activité.
+- [ ] Espace administrateur : vérifier les statistiques par menu et les filtres de dates.
 - [ ] Menus : ajouter un menu avec plats et allergènes, le retrouver sur le site, le supprimer.
 - [ ] Horaires : modifier un jour, vérifier le pied de page.
 - [ ] Comptes employés : créer, désactiver (la connexion doit alors échouer).

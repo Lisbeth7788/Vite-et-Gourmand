@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/../config/mongodb.php';
 require_once __DIR__ . '/../config/tarifs.php';
 requireRole(['client', 'employe', 'admin']);
 enforceRateLimit('orders', 10, 600, 'user-' . $_SESSION['user']['id']);
@@ -82,7 +81,6 @@ try {
     }
     $history = $pdo->prepare("INSERT INTO order_status_history (order_id, status, note) VALUES (?, 'pending', 'Commande reçue')");
     $history->execute([$id]);
-    recordOrderAnalytics($id, $menu['id'], $total, $data['date']);
     $pdo->commit();
 } catch (Throwable $error) {
     $pdo->rollBack();

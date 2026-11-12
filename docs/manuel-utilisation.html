@@ -48,7 +48,7 @@
       </tbody>
     </table>
     <p class="callout warning"><strong>Démo uniquement :</strong> les paiements par carte sont simulés et aucun montant n'est débité. N'utilisez pas de vraie carte bancaire. Changez ou supprimez ces identifiants avant une utilisation réelle.</p>
-    <p>Les e-mails nécessitent un service d'envoi fonctionnel sur l'hébergement. Les statistiques par menu nécessitent MongoDB et son extension PHP ; elles sont actuellement indisponibles sur le site en ligne.</p>
+    <p>Les e-mails nécessitent un service d'envoi fonctionnel sur l'hébergement. Les statistiques par menu sont calculées à partir des commandes enregistrées dans la base MySQL/MariaDB.</p>
   </section>
 
   <section>
@@ -111,7 +111,7 @@
     <ul>
       <li><strong>Messages :</strong> consultez et supprimez les demandes envoyées par le formulaire de contact.</li>
       <li><strong>Comptes employés :</strong> créez un compte en indiquant son adresse e-mail et son mot de passe provisoire ; le message envoyé à l'employé ne contient pas ce mot de passe. Désactivez, réactivez ou supprimez un compte existant.</li>
-      <li><strong>Activité :</strong> consultez l'activité générale du site et les statistiques par menu. Choisissez un menu et une période pour comparer le nombre de réservations et le chiffre d'affaires ; les statistiques par menu utilisent MongoDB.</li>
+      <li><strong>Activité :</strong> consultez l'activité générale du site et les statistiques par menu. Choisissez un menu et une période pour comparer le nombre de réservations et le chiffre d'affaires ; les commandes annulées ne sont pas comptabilisées.</li>
     </ul>
   </section>
 
@@ -120,8 +120,8 @@
     <ul>
       <li>Les horaires affichés dans le pied de page sont modifiables ; l'heure de livraison est saisie librement dans le formulaire.</li>
       <li>Un e-mail absent peut indiquer que le serveur SMTP n'est pas configuré ; vérifiez aussi les courriers indésirables.</li>
-      <li>Si les statistiques ne s'affichent pas, MongoDB ou son extension PHP peut ne pas être configurée.</li>
-      <li>Pour une utilisation réelle, remplacez les mots de passe de démonstration, activez HTTPS et configurez la messagerie et MongoDB.</li>
+      <li>Si les statistiques ne s'affichent pas, vérifiez que la base MySQL/MariaDB est disponible.</li>
+      <li>Pour une utilisation réelle, remplacez les mots de passe de démonstration, activez HTTPS et configurez la messagerie.</li>
     </ul>
     <p>Application : <a href="https://lightblue-yak-778177.hostingersite.com">lightblue-yak-778177.hostingersite.com</a></p>
   </section>
