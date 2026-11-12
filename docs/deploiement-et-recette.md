@@ -10,7 +10,7 @@ Ne jamais publier `.env`, les mots de passe, le jeton Upstash ou le dossier loca
 
 1. Créer la base MySQL et son utilisateur.
 2. Pour une base neuve, importer `sql/schema.sql` (encodage `utf8mb4`). Ne pas importer `sql/comptes-ecf.sql` en ligne : il est réservé à une installation locale neuve et ses mots de passe sont publics.
-3. Créer une base Upstash Redis REST gratuite et renseigner son URL HTTPS et son jeton dans `config/env.local.php`. Ne pas placer le jeton dans Git ni le partager. L'hébergement doit autoriser les connexions HTTPS sortantes ; aucune IP fixe n'est requise pour l'authentification par jeton.
+3. Créer une base Upstash Redis REST gratuite et renseigner son URL HTTPS et son jeton dans `config/env.local.php`. Ne pas placer le jeton dans Git ni le partager. L'hébergement doit autoriser les connexions HTTPS sortantes ; aucune IP fixe n'est requise pour l'authentification par jeton. Voir [la procédure Upstash](statistiques-upstash.md).
 4. Configurer l'envoi d'e-mails. MySQL/MariaDB reste la source des commandes ; la première consultation des statistiques copie les commandes existantes dans Upstash.
 5. Envoyer les fichiers (ou relier le dépôt GitHub, branche `main`).
 6. Activer HTTPS.

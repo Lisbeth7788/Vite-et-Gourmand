@@ -24,7 +24,7 @@ Projet réalisé dans le cadre de la formation Développeur Web et Web Mobile.
 5. Copier les variables de `.env.example` dans la configuration PHP (ou dans `config/env.local.php`, modèle : `config/env.local.example.php`).
 6. Ouvrir `http://localhost/Vite-et-Gourmand/index.html`.
 
-En local, les statistiques utilisent MySQL si Upstash n'est pas configuré. Pour la production et le critère NoSQL de l'ECF, créer une base Upstash Redis REST et renseigner ses deux variables privées ; voir [la procédure des statistiques NoSQL](docs/statistiques-mysql.md).
+En local, les statistiques utilisent MySQL si Upstash n'est pas configuré. Pour la production et le critère NoSQL de l'ECF, créer une base Upstash Redis REST et renseigner ses deux variables privées ; voir [la procédure des statistiques NoSQL](docs/statistiques-upstash.md).
 
 ## Comptes de test
 
