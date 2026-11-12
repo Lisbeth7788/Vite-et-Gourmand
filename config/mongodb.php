@@ -33,7 +33,10 @@ function analyticsManager()
 
     if (!$initialized) {
         $initialized = true;
-        $uri = getenv('MONGODB_URI') ?: 'mongodb://127.0.0.1:27017';
+        $uri = getenv('MONGODB_URI');
+        if (!$uri && (getenv('APP_ENV') ?: 'local') !== 'production') {
+            $uri = 'mongodb://127.0.0.1:27017';
+        }
         if (extension_loaded('mongodb') && $uri) {
             try {
                 $classeGestionnaire = 'MongoDB\\Driver\\Manager';

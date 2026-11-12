@@ -10,7 +10,7 @@ Ne jamais publier `.env`, les mots de passe ou le dossier local `mongo-data`.
 
 1. Créer la base MySQL et son utilisateur.
 2. Pour une base neuve, importer `sql/schema.sql` (encodage `utf8mb4`). Ne pas importer `sql/comptes-ecf.sql` en ligne : il est réservé à une installation locale neuve et ses mots de passe sont publics.
-3. Configurer MongoDB, l'extension PHP `mongodb` et l'envoi d'e-mails. Si MongoDB tourne sur un VPS séparé, remplacer `127.0.0.1` par l'URI privée du VPS ; limiter le pare-feu MongoDB au serveur web et ne jamais ouvrir le port à tout Internet.
+3. Configurer MongoDB, l'extension PHP `mongodb` et l'envoi d'e-mails. Sur l'offre mutualisée, utiliser un service MongoDB externe, vérifier que l'extension et les connexions sortantes sont disponibles, puis renseigner son URI dans `config/env.local.php`. Ne pas utiliser `127.0.0.1` pour un service externe ; limiter son accès réseau à l'adresse sortante du serveur web. Voir [Statistiques MongoDB](statistiques-mongodb.md).
 4. Envoyer les fichiers (ou relier le dépôt GitHub, branche `main`).
 5. Activer HTTPS.
 6. Faire la recette ci-dessous sur l'adresse publique.

@@ -14,4 +14,10 @@ if (!str_contains($details, '[URI MongoDB masquée]') || !str_contains($details,
     throw new RuntimeException('Les détails de diagnostic non sensibles doivent être conservés.');
 }
 
+putenv('APP_ENV=production');
+putenv('MONGODB_URI');
+if (analyticsManager() !== null) {
+    throw new RuntimeException('La production ne doit pas tenter une connexion MongoDB locale par défaut.');
+}
+
 echo "Détails MongoDB sensibles masqués.\n";
