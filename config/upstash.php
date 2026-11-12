@@ -57,14 +57,7 @@ function requeteUpstash(string $route, array $corps, ?callable $transport = null
         ]
     ]);
 
-    $avertissement = null;
-    set_error_handler(static function (int $niveau, string $message) use (&$avertissement): bool {
-        if ($niveau !== E_WARNING) {
-            return false;
-        }
-        $avertissement = $message;
-        return true;
-    });
+    set_error_handler(static fn (int $niveau): bool => $niveau === E_WARNING);
     try {
         $contenu = file_get_contents($url, false, $contexte);
     } finally {
@@ -236,4 +229,41 @@ function lireStatistiquesNoSQL(array $filtres, ?callable $transport = null): arr
     } while (count($identifiants) === $tailleLot);
 
     return aggregerDocumentsStatistiques($documents, $filtres);
+}
+
+function effacerStatistiquesNoSQL(?callable $transport = null): int
+{
+    $nombre = 0;
+    do {
+        $identifiants = commandeUpstash([
+            'ZRANGE',
+            'vite-et-gourmand:statistiques:dates',
+            '0',
+            '49'
+        ], $transport);
+        if (!is_array($identifiants)) {
+            throw new RuntimeException('L’index des dates NoSQL est invalide.');
+        }
+        if (!$identifiants) {
+            break;
+        }
+
+        $cles = array_map(
+            fn ($identifiant) => 'vite-et-gourmand:statistiques:commande:' . $identifiant,
+            $identifiants
+        );
+        transactionUpstash([
+            array_merge(['DEL'], $cles),
+            array_merge(['ZREM', 'vite-et-gourmand:statistiques:dates'], $identifiants)
+        ], $transport);
+        $nombre += count($identifiants);
+    } while (count($identifiants) === 50);
+
+    commandeUpstash([
+        'DEL',
+        'vite-et-gourmand:statistiques:dates',
+        'vite-et-gourmand:statistiques:initialise'
+    ], $transport);
+
+    return $nombre;
 }

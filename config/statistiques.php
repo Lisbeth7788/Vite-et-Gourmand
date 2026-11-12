@@ -40,16 +40,30 @@ function aggregerDocumentsStatistiques(array $documents, array $filtres): array
     $groupes = [];
 
     foreach ($documents as $document) {
-        if (!is_array($document) || ($document['statut'] ?? null) === 'cancelled') {
+        if (
+            !is_array($document)
+            || !isset($document['id_menu'], $document['date_prestation'], $document['total'], $document['statut'])
+            || !is_string($document['id_menu'])
+            || !is_string($document['date_prestation'])
+            || !is_numeric($document['total'])
+            || !is_string($document['statut'])
+        ) {
+            throw new RuntimeException('Un document de statistiques est invalide.');
+        }
+        if ($document['statut'] === 'cancelled') {
             continue;
         }
 
-        $menu = (string) ($document['id_menu'] ?? '');
-        $date = (string) ($document['date_prestation'] ?? '');
+        $menu = $document['id_menu'];
+        $date = $document['date_prestation'];
         if (
             $menu === ''
             || !dateStatistiqueValide($date)
-            || ($filtres['menu'] !== '' && $menu !== $filtres['menu'])
+        ) {
+            throw new RuntimeException('Un document de statistiques contient des données invalides.');
+        }
+        if (
+            ($filtres['menu'] !== '' && $menu !== $filtres['menu'])
             || ($filtres['debut'] !== '' && $date < $filtres['debut'])
             || ($filtres['fin'] !== '' && $date > $filtres['fin'])
         ) {
@@ -60,7 +74,7 @@ function aggregerDocumentsStatistiques(array $documents, array $filtres): array
             $groupes[$menu] = ['menu' => $menu, 'orders' => 0, 'revenue' => 0.0];
         }
         $groupes[$menu]['orders'] += 1;
-        $groupes[$menu]['revenue'] += (float) ($document['total'] ?? 0);
+        $groupes[$menu]['revenue'] += (float) $document['total'];
     }
 
     $statistiques = array_values($groupes);
