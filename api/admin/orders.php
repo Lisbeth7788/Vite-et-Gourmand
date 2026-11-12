@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../config/upstash.php';
 requireRole(['admin', 'employe']);
 
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
@@ -35,6 +36,8 @@ if ($method === 'PATCH') {
         $pdo->rollBack();
         jsonResponse(['error' => 'La mise à jour de la commande a échoué.'], 500);
     }
+
+    synchroniserStatistiqueNoSQL($pdo, trim($data['id']));
 
     $client = $pdo->prepare('SELECT email, first_name FROM orders WHERE id = ?');
     $client->execute([trim($data['id'])]);

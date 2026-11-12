@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/upstash.php';
 require_once __DIR__ . '/../config/tarifs.php';
 requireRole(['client', 'employe', 'admin']);
 enforceRateLimit('orders', 10, 600, 'user-' . $_SESSION['user']['id']);
@@ -86,6 +87,8 @@ try {
     $pdo->rollBack();
     jsonResponse(['error' => 'La commande n’a pas pu être enregistrée.'], 500);
 }
+
+synchroniserStatistiqueNoSQL($pdo, $id);
 
 @mail($data['email'], 'Confirmation de votre réservation', "Bonjour,\n\nNous avons bien reçu votre commande pour le {$data['date']} à {$data['time']} (" . (int) $people . " personnes).\nMenu : " . number_format($menuTotal, 2, ',', ' ') . " €\nRemise : -" . number_format($discount, 2, ',', ' ') . " €\nLivraison : " . number_format($delivery, 2, ',', ' ') . " €\nTotal : " . number_format($total, 2, ',', ' ') . " €.\n\nMerci de votre confiance, Vite et Gourmand.");
 

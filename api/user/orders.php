@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../config/upstash.php';
 requireRole(['client', 'employe', 'admin']);
 require_once __DIR__ . '/../../config/tarifs.php';
 
@@ -45,6 +46,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'PATCH') {
         $historiqueModif = $pdo->prepare("INSERT INTO order_status_history (order_id, status, note) VALUES (?, 'pending', 'Réservation modifiée par le client')");
         $historiqueModif->execute([$ligne['id']]);
         $pdo->commit();
+        synchroniserStatistiqueNoSQL($pdo, (string) $ligne['id']);
         jsonResponse(['message' => 'Réservation modifiée.']);
     }
 
@@ -61,6 +63,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'PATCH') {
     $history->execute([trim($data['id'])]);
     $stock = $pdo->prepare('UPDATE menus SET stock = stock + 1 WHERE id = (SELECT menu_id FROM orders WHERE id = ?)');
     $stock->execute([trim($data['id'])]);
+    synchroniserStatistiqueNoSQL($pdo, trim($data['id']));
     jsonResponse(['message' => 'Commande annulée.']);
 }
 

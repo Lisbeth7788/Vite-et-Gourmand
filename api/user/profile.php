@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../config/upstash.php';
 $user = requireRole(['client', 'employe', 'admin']);
 
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'PATCH') {
@@ -50,9 +51,10 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'DELETE') {
         // Les réservations en attente sont annulées et leur stock est restitué.
         $pending = $pdo->prepare("SELECT id, menu_id FROM orders WHERE user_id = ? AND status = 'pending'");
         $pending->execute([$user['id']]);
+        $commandesEnAttente = $pending->fetchAll(PDO::FETCH_ASSOC);
         $restore = $pdo->prepare('UPDATE menus SET stock = stock + 1 WHERE id = ?');
         $history = $pdo->prepare("INSERT INTO order_status_history (order_id, status, note) VALUES (?, 'cancelled', 'Compte supprimé par le client')");
-        foreach ($pending->fetchAll() as $order) {
+        foreach ($commandesEnAttente as $order) {
             $restore->execute([$order['menu_id']]);
             $history->execute([$order['id']]);
         }
@@ -66,6 +68,10 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'DELETE') {
     } catch (Throwable $error) {
         $pdo->rollBack();
         jsonResponse(['error' => 'Le compte n’a pas pu être supprimé.'], 500);
+    }
+
+    foreach ($commandesEnAttente as $commande) {
+        synchroniserStatistiqueNoSQL($pdo, (string) $commande['id']);
     }
 
     $_SESSION = [];

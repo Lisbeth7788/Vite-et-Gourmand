@@ -1,0 +1,239 @@
+<?php
+
+require_once __DIR__ . '/statistiques.php';
+
+function configurationUpstash(): ?array
+{
+    $url = trim(getenv('UPSTASH_REDIS_REST_URL') ?: '');
+    $token = getenv('UPSTASH_REDIS_REST_TOKEN') ?: '';
+    if ($url === '' && $token === '') {
+        return null;
+    }
+
+    $parties = parse_url($url);
+    if (
+        $url === ''
+        || $token === ''
+        || preg_match('/[\r\n]/', $token)
+        || !is_array($parties)
+        || ($parties['scheme'] ?? '') !== 'https'
+        || empty($parties['host'])
+        || isset($parties['user'])
+        || isset($parties['pass'])
+        || isset($parties['query'])
+        || isset($parties['fragment'])
+        || !in_array($parties['path'] ?? '', ['', '/'], true)
+    ) {
+        throw new RuntimeException('La configuration du service NoSQL est invalide.');
+    }
+
+    return ['url' => rtrim($url, '/'), 'token' => $token];
+}
+
+function requeteUpstash(string $route, array $corps, ?callable $transport = null): array
+{
+    $configuration = configurationUpstash();
+    if ($configuration === null) {
+        throw new RuntimeException('Le service NoSQL n’est pas configuré.');
+    }
+
+    if ($transport !== null) {
+        $reponse = $transport($route, $corps);
+        if (!is_array($reponse)) {
+            throw new RuntimeException('La réponse du service NoSQL est invalide.');
+        }
+        return $reponse;
+    }
+
+    $url = $configuration['url'] . ($route === '' ? '' : '/' . ltrim($route, '/'));
+    $contexte = stream_context_create([
+        'http' => [
+            'method' => 'POST',
+            'header' => "Content-Type: application/json\r\nAuthorization: Bearer {$configuration['token']}\r\n",
+            'content' => json_encode($corps, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),
+            'timeout' => 8,
+            'ignore_errors' => true,
+            'follow_location' => 0
+        ]
+    ]);
+
+    $avertissement = null;
+    set_error_handler(static function (int $niveau, string $message) use (&$avertissement): bool {
+        if ($niveau !== E_WARNING) {
+            return false;
+        }
+        $avertissement = $message;
+        return true;
+    });
+    try {
+        $contenu = file_get_contents($url, false, $contexte);
+    } finally {
+        restore_error_handler();
+    }
+
+    if ($contenu === false) {
+        throw new RuntimeException('Connexion au service NoSQL impossible.');
+    }
+
+    $ligneStatut = $http_response_header[0] ?? '';
+    if (!preg_match('/\s(\d{3})\s/', $ligneStatut, $statut) || (int) $statut[1] < 200 || (int) $statut[1] >= 300) {
+        throw new RuntimeException('Le service NoSQL a refusé la requête.');
+    }
+
+    $reponse = json_decode($contenu, true, 512, JSON_THROW_ON_ERROR);
+    if (!is_array($reponse) || array_key_exists('error', $reponse)) {
+        throw new RuntimeException('Le service NoSQL a renvoyé une erreur.');
+    }
+
+    return $reponse;
+}
+
+function commandeUpstash(array $commande, ?callable $transport = null): mixed
+{
+    $reponse = requeteUpstash('', $commande, $transport);
+    if (!array_key_exists('result', $reponse)) {
+        throw new RuntimeException('La réponse du service NoSQL ne contient pas de résultat.');
+    }
+
+    return $reponse['result'];
+}
+
+function transactionUpstash(array $commandes, ?callable $transport = null): array
+{
+    $reponses = requeteUpstash('multi-exec', $commandes, $transport);
+    if (count($reponses) !== count($commandes)) {
+        throw new RuntimeException('La transaction NoSQL n’a pas renvoyé tous ses résultats.');
+    }
+
+    $resultats = [];
+    foreach ($reponses as $reponse) {
+        if (!is_array($reponse) || !array_key_exists('result', $reponse) || array_key_exists('error', $reponse)) {
+            throw new RuntimeException('Une commande de la transaction NoSQL a échoué.');
+        }
+        $resultats[] = $reponse['result'];
+    }
+
+    return $resultats;
+}
+
+function commandesStatistiqueNoSQL(array $commande): array
+{
+    $identifiant = (string) ($commande['id'] ?? '');
+    $date = (string) ($commande['service_date'] ?? '');
+    if (!preg_match('/\A[a-zA-Z0-9_-]{1,64}\z/', $identifiant) || !dateStatistiqueValide($date)) {
+        throw new RuntimeException('Les données de la commande sont invalides pour le stockage NoSQL.');
+    }
+
+    $document = [
+        'id_commande' => $identifiant,
+        'id_menu' => (string) $commande['menu_id'],
+        'total' => (float) $commande['total'],
+        'date_prestation' => $date,
+        'statut' => (string) $commande['status']
+    ];
+    $cle = 'vite-et-gourmand:statistiques:commande:' . $identifiant;
+
+    return [
+        ['SET', $cle, json_encode($document, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)],
+        ['ZADD', 'vite-et-gourmand:statistiques:dates', (int) str_replace('-', '', $date), $identifiant]
+    ];
+}
+
+function enregistrerStatistiqueNoSQL(PDO $pdo, string $identifiant, ?callable $transport = null): void
+{
+    $requete = $pdo->prepare('SELECT id, menu_id, total, service_date, status FROM orders WHERE id = ?');
+    $requete->execute([$identifiant]);
+    $commande = $requete->fetch(PDO::FETCH_ASSOC);
+    if (!$commande) {
+        throw new RuntimeException('Commande introuvable pour la synchronisation NoSQL.');
+    }
+
+    transactionUpstash(commandesStatistiqueNoSQL($commande), $transport);
+}
+
+function synchroniserStatistiqueNoSQL(PDO $pdo, string $identifiant): bool
+{
+    try {
+        enregistrerStatistiqueNoSQL($pdo, $identifiant);
+        return true;
+    } catch (PDOException | RuntimeException | JsonException $erreur) {
+        error_log('Synchronisation des statistiques NoSQL impossible : ' . get_class($erreur) . ' : ' . $erreur->getMessage());
+        return false;
+    }
+}
+
+function initialiserStatistiquesNoSQL(PDO $pdo, ?callable $transport = null): void
+{
+    if (commandeUpstash(['GET', 'vite-et-gourmand:statistiques:initialise'], $transport) === '1') {
+        return;
+    }
+
+    $commandes = $pdo->query('SELECT id, menu_id, total, service_date, status FROM orders');
+    $lot = [];
+    while ($commande = $commandes->fetch(PDO::FETCH_ASSOC)) {
+        array_push($lot, ...commandesStatistiqueNoSQL($commande));
+        if (count($lot) >= 100) {
+            transactionUpstash($lot, $transport);
+            $lot = [];
+        }
+    }
+    if ($lot) {
+        transactionUpstash($lot, $transport);
+    }
+
+    if (commandeUpstash(['SET', 'vite-et-gourmand:statistiques:initialise', '1'], $transport) !== 'OK') {
+        throw new RuntimeException('L’initialisation des statistiques NoSQL a échoué.');
+    }
+}
+
+function lireStatistiquesNoSQL(array $filtres, ?callable $transport = null): array
+{
+    $filtresNormalises = normaliserFiltresStatistiques($filtres);
+    $debut = $filtresNormalises['debut'] === '' ? '-inf' : (string) (int) str_replace('-', '', $filtresNormalises['debut']);
+    $fin = $filtresNormalises['fin'] === '' ? '+inf' : (string) (int) str_replace('-', '', $filtresNormalises['fin']);
+    $documents = [];
+    $decalage = 0;
+    $tailleLot = 100;
+
+    do {
+        $identifiants = commandeUpstash([
+            'ZRANGEBYSCORE',
+            'vite-et-gourmand:statistiques:dates',
+            $debut,
+            $fin,
+            'LIMIT',
+            (string) $decalage,
+            (string) $tailleLot
+        ], $transport);
+        if (!is_array($identifiants)) {
+            throw new RuntimeException('L’index des dates NoSQL est invalide.');
+        }
+        if (!$identifiants) {
+            break;
+        }
+
+        $cles = array_map(
+            fn ($identifiant) => 'vite-et-gourmand:statistiques:commande:' . $identifiant,
+            $identifiants
+        );
+        $valeurs = commandeUpstash(array_merge(['MGET'], $cles), $transport);
+        if (!is_array($valeurs) || count($valeurs) !== count($cles)) {
+            throw new RuntimeException('Les commandes NoSQL n’ont pas pu être lues.');
+        }
+
+        foreach ($valeurs as $valeur) {
+            if (!is_string($valeur)) {
+                throw new RuntimeException('Une commande référencée est absente du stockage NoSQL.');
+            }
+            $document = json_decode($valeur, true, 512, JSON_THROW_ON_ERROR);
+            if (!is_array($document)) {
+                throw new RuntimeException('Un document de statistiques NoSQL est invalide.');
+            }
+            $documents[] = $document;
+        }
+
+        $decalage += count($identifiants);
+    } while (count($identifiants) === $tailleLot);
+
+    return aggregerDocumentsStatistiques($documents, $filtres);
+}
