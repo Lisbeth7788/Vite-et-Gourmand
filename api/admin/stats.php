@@ -36,7 +36,7 @@ try {
         $grouped[$menu]['revenue'] += (float) $row->total;
     }
 } catch (Throwable $error) {
-    error_log('Lecture des statistiques MongoDB impossible.');
+    journaliserErreurMongoDB('Lecture des statistiques MongoDB impossible', $error);
     jsonResponse(['error' => 'Lecture des statistiques impossible.'], 503);
 }
 $statistics = array_values($grouped);

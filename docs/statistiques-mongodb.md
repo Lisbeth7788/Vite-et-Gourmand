@@ -8,4 +8,4 @@ Configurer `MONGODB_URI`, `MONGODB_DATABASE` et `MONGODB_COLLECTION` dans la con
 
 Si MongoDB tourne sur un VPS séparé, `127.0.0.1` désigne l'hébergement du site, pas le VPS. Utiliser l'URI privée fournie pour le VPS, activer l'extension PHP `mongodb` sur l'hébergement web et limiter le pare-feu MongoDB aux connexions provenant du serveur web. Ne pas exposer le port MongoDB à tout Internet.
 
-Les statistiques dépendent de la disponibilité de MongoDB : une erreur d'écriture est inscrite dans le journal serveur, mais ne bloque pas la commande MySQL. Les commandes antérieures à la configuration ne sont pas recopiées automatiquement.
+Les statistiques dépendent de la disponibilité de MongoDB : une erreur d’écriture est inscrite dans le journal serveur, mais ne bloque pas la commande MySQL. Les erreurs de connexion et de lecture y indiquent aussi leur type et leur code; les URI et mots de passe sont masqués. Les commandes antérieures à la configuration ne sont pas recopiées automatiquement.

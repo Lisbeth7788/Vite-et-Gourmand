@@ -5,6 +5,27 @@ if (is_file($autoload)) {
     require_once $autoload;
 }
 
+function detailsErreurMongoDB(Throwable $error): string
+{
+    $message = preg_replace(
+        '/mongodb(?:\+srv)?:\/\/[^\s\'"]+/i',
+        '[URI MongoDB masquée]',
+        $error->getMessage()
+    );
+    $message = preg_replace(
+        '/\b(password|passwd|pwd)\b\s*([=:])\s*[^\s,;]+/i',
+        '$1$2[masqué]',
+        $message ?? ''
+    );
+
+    return get_class($error) . ' (code ' . $error->getCode() . '): ' . $message;
+}
+
+function journaliserErreurMongoDB(string $contexte, Throwable $error): void
+{
+    error_log($contexte . ' : ' . detailsErreurMongoDB($error));
+}
+
 function analyticsManager()
 {
     static $manager;
@@ -18,7 +39,7 @@ function analyticsManager()
                 $classeGestionnaire = 'MongoDB\\Driver\\Manager';
                 $manager = new $classeGestionnaire($uri);
             } catch (Throwable $error) {
-                error_log('Configuration MongoDB invalide.');
+                journaliserErreurMongoDB('Configuration MongoDB invalide', $error);
                 $manager = null;
             }
         }
@@ -70,6 +91,6 @@ function recordOrderAnalytics(string $orderId, string $menuId, float $total, str
         $operations->insert($document);
         $manager->executeBulkWrite($configuration['espace'], $operations);
     } catch (Throwable $error) {
-        error_log('Échec de l’écriture des statistiques MongoDB.');
+        journaliserErreurMongoDB('Échec de l’écriture des statistiques MongoDB', $error);
     }
 }
