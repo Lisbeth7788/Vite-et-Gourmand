@@ -9,7 +9,7 @@ function dateStatistiqueValide(string $date): bool
     return checkdate((int) $parties[2], (int) $parties[3], (int) $parties[1]);
 }
 
-function lireStatistiquesCommandes(PDO $pdo, array $filtres): array
+function normaliserFiltresStatistiques(array $filtres): array
 {
     foreach (['menu', 'from', 'to'] as $filtre) {
         if (isset($filtres[$filtre]) && !is_string($filtres[$filtre])) {
@@ -30,6 +30,51 @@ function lireStatistiquesCommandes(PDO $pdo, array $filtres): array
     if ($debut !== '' && $fin !== '' && $debut > $fin) {
         throw new InvalidArgumentException('La date de début doit précéder ou être égale à la date de fin.');
     }
+
+    return ['menu' => $menu, 'debut' => $debut, 'fin' => $fin];
+}
+
+function aggregerDocumentsStatistiques(array $documents, array $filtres): array
+{
+    $filtres = normaliserFiltresStatistiques($filtres);
+    $groupes = [];
+
+    foreach ($documents as $document) {
+        if (!is_array($document) || ($document['statut'] ?? null) === 'cancelled') {
+            continue;
+        }
+
+        $menu = (string) ($document['id_menu'] ?? '');
+        $date = (string) ($document['date_prestation'] ?? '');
+        if (
+            $menu === ''
+            || !dateStatistiqueValide($date)
+            || ($filtres['menu'] !== '' && $menu !== $filtres['menu'])
+            || ($filtres['debut'] !== '' && $date < $filtres['debut'])
+            || ($filtres['fin'] !== '' && $date > $filtres['fin'])
+        ) {
+            continue;
+        }
+
+        if (!isset($groupes[$menu])) {
+            $groupes[$menu] = ['menu' => $menu, 'orders' => 0, 'revenue' => 0.0];
+        }
+        $groupes[$menu]['orders'] += 1;
+        $groupes[$menu]['revenue'] += (float) ($document['total'] ?? 0);
+    }
+
+    $statistiques = array_values($groupes);
+    usort($statistiques, fn ($premier, $second) => ($second['orders'] <=> $premier['orders']) ?: ($premier['menu'] <=> $second['menu']));
+
+    return $statistiques;
+}
+
+function lireStatistiquesCommandes(PDO $pdo, array $filtres): array
+{
+    $filtres = normaliserFiltresStatistiques($filtres);
+    $menu = $filtres['menu'];
+    $debut = $filtres['debut'];
+    $fin = $filtres['fin'];
 
     $conditions = ["status <> 'cancelled'"];
     $parametres = [];
