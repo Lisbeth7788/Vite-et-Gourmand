@@ -9,4 +9,6 @@ return [
     'DB_NAME' => 'u000000000_vitegourmand',
     'DB_USER' => 'u000000000_vitegourmand',
     'DB_PASSWORD' => 'MOT_DE_PASSE_DE_LA_BASE',
+    'UPSTASH_REDIS_REST_URL' => '',
+    'UPSTASH_REDIS_REST_TOKEN' => '',
 ];
