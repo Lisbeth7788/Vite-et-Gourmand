@@ -13,8 +13,6 @@ function configurationUpstash(): ?array
     $parties = parse_url($url);
     if (
         $url === ''
-        || $token === ''
-        || preg_match('/[\r\n]/', $token)
         || !is_array($parties)
         || ($parties['scheme'] ?? '') !== 'https'
         || empty($parties['host'])
@@ -24,7 +22,11 @@ function configurationUpstash(): ?array
         || isset($parties['fragment'])
         || !in_array($parties['path'] ?? '', ['', '/'], true)
     ) {
-        throw new RuntimeException('La configuration du service NoSQL est invalide.');
+        throw new RuntimeException('L’adresse REST Upstash est absente ou invalide.');
+    }
+
+    if ($token === '' || preg_match('/[\r\n]/', $token)) {
+        throw new RuntimeException('Le jeton REST Upstash est absent ou contient un retour à la ligne.');
     }
 
     return ['url' => rtrim($url, '/'), 'token' => $token];

@@ -9,7 +9,7 @@ try {
     $configurationNoSQL = configurationUpstash();
 } catch (RuntimeException $error) {
     error_log('Configuration du service NoSQL invalide : ' . $error->getMessage());
-    jsonResponse(['error' => 'Configuration des statistiques indisponible.'], 503);
+    jsonResponse(['error' => 'Configuration des statistiques indisponible. ' . $error->getMessage()], 503);
 }
 
 if ($configurationNoSQL === null && (getenv('APP_ENV') ?: 'local') === 'production') {

@@ -11,6 +11,24 @@ function verifier(bool $condition, string $message): void
     }
 }
 
+foreach ([
+    ['', 'jeton-test', 'L’adresse REST Upstash est absente ou invalide.'],
+    ['https://test.upstash.io/chemin', 'jeton-test', 'L’adresse REST Upstash est absente ou invalide.'],
+    ['https://test.upstash.io', '', 'Le jeton REST Upstash est absent ou contient un retour à la ligne.'],
+    ['https://test.upstash.io', "jeton-test\nsuite", 'Le jeton REST Upstash est absent ou contient un retour à la ligne.']
+] as [$url, $token, $messageAttendu]) {
+    putenv('UPSTASH_REDIS_REST_URL=' . $url);
+    putenv('UPSTASH_REDIS_REST_TOKEN=' . $token);
+    try {
+        configurationUpstash();
+        throw new LogicException('La configuration invalide aurait dû être refusée.');
+    } catch (RuntimeException $erreur) {
+        verifier($erreur->getMessage() === $messageAttendu, 'Le diagnostic doit identifier le champ invalide sans révéler sa valeur.');
+    }
+}
+putenv('UPSTASH_REDIS_REST_URL=https://test.upstash.io');
+putenv('UPSTASH_REDIS_REST_TOKEN=jeton-test');
+
 $pdo = new PDO('sqlite::memory:', null, null, [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC

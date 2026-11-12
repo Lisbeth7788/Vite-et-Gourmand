@@ -17,6 +17,8 @@ En production, la page des statistiques lit Upstash. Si la connexion au service 
 
 L'API REST s'authentifie avec un jeton HTTPS ; il n'est pas nécessaire de configurer une liste blanche d'adresses IP. La disponibilité des connexions HTTPS sortantes sur l'hébergement reste à vérifier en recette. Ne pas saisir de carte bancaire ni activer une offre payante sans décision préalable.
 
+Si la configuration est invalide, les statistiques indiquent à l'administrateur si l'adresse REST ou le format du jeton doit être vérifié, sans afficher leurs valeurs.
+
 ## Tests et remise à zéro
 
 Le test automatisé simule l'API Upstash et ne nécessite ni compte ni accès réseau :
