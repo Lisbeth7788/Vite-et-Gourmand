@@ -103,7 +103,9 @@ verifier($filtrees === [
 $pdo->prepare("UPDATE orders SET status = 'cancelled' WHERE id = ?")->execute(['commande-2']);
 enregistrerStatistiqueNoSQL($pdo, 'commande-2', $transport);
 $apresModification = lireStatistiquesNoSQL(['menu' => 'buffet'], $transport);
-verifier($apresModification === [], 'La synchronisation doit prendre en compte l’annulation d’une commande.');
+verifier($apresModification === [
+    ['menu' => 'buffet', 'orders' => 1, 'revenue' => 100.25]
+], 'La synchronisation doit prendre en compte l’annulation d’une commande.');
 
 $document = json_decode($documents['vite-et-gourmand:statistiques:commande:commande-1'], true, 512, JSON_THROW_ON_ERROR);
 verifier(
