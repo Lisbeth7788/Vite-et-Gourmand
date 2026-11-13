@@ -508,7 +508,7 @@ if (formulaireAvis) {
   });
 }
 
-// Les horaires du pied de page viennent de la base : l'équipe peut les modifier.
+// Les horaires du pied de page viennent de la base.
 async function afficherHorairesPiedDePage() {
   const liste = document.querySelector('.horaires-ouverture dl');
   if (!liste) return;

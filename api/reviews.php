@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/avis.php';
 
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
     $reviews = $pdo->query(
@@ -11,6 +12,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
 
 requireRole(['client', 'employe', 'admin']);
 $data = requestData();
+$reservation = null;
+if (array_key_exists('order_id', $data)) {
+    if (!is_string($data['order_id']) || trim($data['order_id']) === '') {
+        jsonResponse(['error' => 'Réservation invalide.'], 400);
+    }
+    $reservation = trim($data['order_id']);
+}
 $comment = trim((string) ($data['comment'] ?? $data['message'] ?? ''));
 if ($comment === '' || !isset($data['rating'])) {
     jsonResponse(['error' => 'Note et commentaire obligatoires.'], 400);
@@ -21,18 +29,16 @@ if ($rating < 1 || $rating > 5 || strlen($comment) > 220) {
     jsonResponse(['error' => 'La note ou le commentaire est invalide.'], 400);
 }
 
-$order = $pdo->prepare(
-    "SELECT o.id FROM orders o
-     WHERE o.user_id = ? AND o.status = 'completed'
-       AND NOT EXISTS (SELECT 1 FROM reviews r WHERE r.order_id = o.id)
-     ORDER BY o.created_at DESC LIMIT 1"
-);
-$order->execute([$_SESSION['user']['id']]);
-$orderId = $order->fetchColumn();
-if (!$orderId) {
-    jsonResponse(['error' => 'Un avis est possible après une réservation terminée, une seule fois par réservation.'], 403);
+$pdo->beginTransaction();
+try {
+    enregistrerAvis($pdo, (string) $_SESSION['user']['id'], $reservation, $rating, $comment);
+    $pdo->commit();
+} catch (DomainException $error) {
+    $pdo->rollBack();
+    jsonResponse(['error' => $error->getMessage()], 403);
+} catch (PDOException $error) {
+    $pdo->rollBack();
+    error_log('Enregistrement de l’avis impossible : ' . $error->getMessage());
+    jsonResponse(['error' => 'Votre avis n’a pas pu être enregistré.'], 500);
 }
-
-$insert = $pdo->prepare('INSERT INTO reviews (user_id, order_id, rating, comment) VALUES (?, ?, ?, ?)');
-$insert->execute([$_SESSION['user']['id'], $orderId, $rating, $comment]);
 jsonResponse(['message' => 'Merci ! Votre avis sera visible après validation.'], 201);

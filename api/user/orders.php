@@ -50,19 +50,28 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'PATCH') {
         jsonResponse(['message' => 'Réservation modifiée.']);
     }
 
-    $query = $pdo->prepare(
-        "UPDATE orders SET status = 'cancelled', cancellation_reason = 'Annulation demandée par le client', cancellation_contact_method = 'espace client'
-         WHERE id = ? AND user_id = ? AND status = 'pending'"
-    );
-    $query->execute([trim($data['id']), $_SESSION['user']['id']]);
-    if (!$query->rowCount()) {
-        jsonResponse(['error' => 'Cette commande ne peut plus être annulée.'], 409);
-    }
+    $pdo->beginTransaction();
+    try {
+        $query = $pdo->prepare(
+            "UPDATE orders SET status = 'cancelled', cancellation_reason = 'Annulation demandée par le client', cancellation_contact_method = 'espace client'
+             WHERE id = ? AND user_id = ? AND status = 'pending'"
+        );
+        $query->execute([trim($data['id']), $_SESSION['user']['id']]);
+        if (!$query->rowCount()) {
+            $pdo->rollBack();
+            jsonResponse(['error' => 'Cette commande ne peut plus être annulée.'], 409);
+        }
 
-    $history = $pdo->prepare("INSERT INTO order_status_history (order_id, status, note) VALUES (?, 'cancelled', 'Annulation demandée par le client')");
-    $history->execute([trim($data['id'])]);
-    $stock = $pdo->prepare('UPDATE menus SET stock = stock + 1 WHERE id = (SELECT menu_id FROM orders WHERE id = ?)');
-    $stock->execute([trim($data['id'])]);
+        $history = $pdo->prepare("INSERT INTO order_status_history (order_id, status, note) VALUES (?, 'cancelled', 'Annulation demandée par le client')");
+        $history->execute([trim($data['id'])]);
+        $stock = $pdo->prepare('UPDATE menus SET stock = stock + 1 WHERE id = (SELECT menu_id FROM orders WHERE id = ?)');
+        $stock->execute([trim($data['id'])]);
+        $pdo->commit();
+    } catch (PDOException $error) {
+        $pdo->rollBack();
+        error_log('Annulation de la réservation impossible : ' . $error->getMessage());
+        jsonResponse(['error' => 'L’annulation de la commande a échoué.'], 500);
+    }
     synchroniserStatistiqueNoSQL($pdo, trim($data['id']));
     jsonResponse(['message' => 'Commande annulée.']);
 }

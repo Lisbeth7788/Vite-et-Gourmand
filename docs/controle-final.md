@@ -17,7 +17,7 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 - Statistiques par menu (réservations et chiffre d'affaires, filtres menu et période) ajoutées sur la page Activité de l'administrateur. MySQL/MariaDB stocke les commandes et Upstash Redis REST fournit le stockage NoSQL des statistiques.
 - `sitemap.xml` : les adresses `localhost` ont été remplacées par l'adresse publique.
 - Pages privées (administration, espace employé) : `noindex` ajouté pour qu'elles n'apparaissent pas dans Google.
-- **Menus et horaires** ([admin-menus.html](../admin-menus.html), accessible aux employés et à l'administrateur) : ajouter, modifier, supprimer un menu avec ses images, entrées, plats, desserts, allergènes, conditions et stock ; modifier les horaires affichés dans le pied de page.
+- **Menus** ([admin-menus.html](../admin-menus.html), accessible aux employés et à l'administrateur) : ajouter, modifier, supprimer un menu avec ses images, entrées, plats, desserts, allergènes, conditions et stock.
 - **Comptes employés** ([admin-comptes.html](../admin-comptes.html), administrateur) : créer un compte (e-mail envoyé sans le mot de passe), désactiver, réactiver ou supprimer.
 - **Espace client** : modification d'une réservation (tout sauf le menu) tant qu'elle n'est pas acceptée, et formulaire d'avis (note de 1 à 5 et commentaire) sur une réservation terminée.
 - **E-mails de statut** : statut « en attente du retour de matériel » (600 € après 10 jours ouvrés) et statut « terminée » (invitation à donner un avis).

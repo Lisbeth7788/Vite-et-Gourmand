@@ -49,7 +49,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'DELETE') {
     $pdo->beginTransaction();
     try {
         // Les réservations en attente sont annulées et leur stock est restitué.
-        $pending = $pdo->prepare("SELECT id, menu_id FROM orders WHERE user_id = ? AND status = 'pending'");
+        $pending = $pdo->prepare("SELECT id, menu_id FROM orders WHERE user_id = ? AND status = 'pending' FOR UPDATE");
         $pending->execute([$user['id']]);
         $commandesEnAttente = $pending->fetchAll(PDO::FETCH_ASSOC);
         $restore = $pdo->prepare('UPDATE menus SET stock = stock + 1 WHERE id = ?');

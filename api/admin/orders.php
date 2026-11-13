@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../config/upstash.php';
+require_once __DIR__ . '/../../config/reservations.php';
 requireRole(['admin', 'employe']);
 
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
@@ -19,21 +20,24 @@ if ($method === 'PATCH') {
 
     $pdo->beginTransaction();
     try {
-        $update = $pdo->prepare(
-            'UPDATE orders SET status = ?, cancellation_reason = ?, cancellation_contact_method = ? WHERE id = ?'
-        );
-        $update->execute([
+        modifierStatutReservation(
+            $pdo,
+            trim($data['id']),
             $data['status'],
             $data['status'] === 'cancelled' ? trim($data['reason']) : null,
             $data['status'] === 'cancelled' ? trim($data['contact_method']) : null,
-            trim($data['id'])
-        ]);
-
-        $history = $pdo->prepare('INSERT INTO order_status_history (order_id, status, note) VALUES (?, ?, ?)');
-        $history->execute([trim($data['id']), $data['status'], trim((string) ($data['note'] ?? '')) ?: null]);
+            trim((string) ($data['note'] ?? '')) ?: null
+        );
         $pdo->commit();
-    } catch (Throwable $error) {
+    } catch (OutOfBoundsException $error) {
         $pdo->rollBack();
+        jsonResponse(['error' => $error->getMessage()], 404);
+    } catch (DomainException $error) {
+        $pdo->rollBack();
+        jsonResponse(['error' => $error->getMessage()], 409);
+    } catch (PDOException $error) {
+        $pdo->rollBack();
+        error_log('Mise à jour de la réservation impossible : ' . $error->getMessage());
         jsonResponse(['error' => 'La mise à jour de la commande a échoué.'], 500);
     }
 
@@ -58,20 +62,7 @@ if ($method !== 'GET') {
     jsonResponse(['error' => 'Méthode non autorisée.'], 405);
 }
 
-$conditions = [];
-$parameters = [];
-if (!empty($_GET['status'])) {
-    $conditions[] = 'o.status = ?';
-    $parameters[] = $_GET['status'];
-}
-if (!empty($_GET['paiement']) && in_array($_GET['paiement'], ['paye', 'impaye'], true)) {
-    $conditions[] = 'o.statut_paiement = ?';
-    $parameters[] = $_GET['paiement'];
-}
-if (!empty($_GET['email'])) {
-    $conditions[] = 'o.email LIKE ?';
-    $parameters[] = '%' . $_GET['email'] . '%';
-}
+[$conditions, $parameters] = filtresReservations($_GET);
 $where = $conditions ? ' WHERE ' . implode(' AND ', $conditions) : '';
 
 $query = $pdo->prepare(

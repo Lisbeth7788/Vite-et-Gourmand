@@ -33,10 +33,11 @@ Cocher chaque ligne après l'avoir testée.
 - [x] Accessibilité : aucun défaut détecté par l'outil automatique axe-core (WCAG 2.1 AA) sur 13 pages publiques le 3 novembre 2026. Le contrôle manuel (clavier, lecteur d'écran, zoom 200 %) reste à faire.
 - [ ] Espace client : liste, suivi du statut, avis (la liste et l'annulation sont déjà testées en local).
 - [ ] Espace administrateur : messages, réservations (changement de statut), avis (publier ou refuser), activité.
+- [ ] Réservations : rechercher un client par nom ou e-mail, filtrer par statut puis effacer les filtres.
 - [ ] Espace administrateur : vérifier les statistiques par menu et les filtres de dates.
 - [ ] Vérifier la connexion Upstash depuis Hostinger et le premier chargement (copie initiale des commandes).
 - [ ] Menus : ajouter un menu avec plats et allergènes, le retrouver sur le site, le supprimer.
-- [ ] Horaires : modifier un jour, vérifier le pied de page.
+- [ ] Vérifier les horaires affichés dans le pied de page.
 - [ ] Comptes employés : créer, désactiver (la connexion doit alors échouer).
 - [ ] Client : donner un avis sur une réservation terminée.
 - [ ] Espace employé : connexion avec `employe`, accès aux réservations, aux avis et aux menus.

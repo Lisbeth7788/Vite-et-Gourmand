@@ -5,6 +5,8 @@ const reviewList = document.querySelector('#review-list');
 const activityList = document.querySelector('#activity-list');
 const employeeList = document.querySelector('#employee-list');
 const employeeForm = document.querySelector('#employee-form');
+const resultatReservations = document.querySelector('#resultat-reservations');
+let numeroChargementReservations = 0;
 
 const statusLabels = {
   pending: 'En attente',
@@ -67,12 +69,23 @@ function carteReservation(order, options) {
 }
 
 async function chargerCommandes() {
+  const numeroChargement = ++numeroChargementReservations;
   const parametres = new URLSearchParams();
   const statut = document.querySelector('#filtre-statut')?.value;
   const client = document.querySelector('#filtre-client')?.value.trim();
   if (statut) parametres.set('status', statut);
-  if (client) parametres.set('email', client);
-  const orders = await demanderJson('api/admin/orders.php' + (parametres.size ? '?' + parametres : ''));
+  if (client) parametres.set('client', client);
+  let orders;
+  try {
+    orders = await demanderJson('api/admin/orders.php' + (parametres.size ? '?' + parametres : ''));
+  } catch (error) {
+    if (numeroChargement !== numeroChargementReservations) return;
+    throw error;
+  }
+  if (numeroChargement !== numeroChargementReservations) return;
+  if (resultatReservations) {
+    resultatReservations.textContent = `${orders.length} réservation${orders.length === 1 ? '' : 's'} trouvée${orders.length === 1 ? '' : 's'}.`;
+  }
   if (!orders.length) {
     orderList.textContent = 'Aucune réservation trouvée.';
     return;
@@ -205,6 +218,7 @@ if (orderList) {
     try {
       await chargerCommandes();
     } catch (error) {
+      if (resultatReservations) resultatReservations.textContent = '';
       orderList.textContent = error.message;
     }
   };

@@ -2046,16 +2046,6 @@ main > .introduction-page ~ .panneau-formulaire-contact {
 .menu-admin-infos dt { color: var(--muted); font-size: 0.68rem; text-transform: uppercase; }
 .menu-admin-infos dd { font-size: 0.85rem; font-weight: 700; margin: 0; }
 @media (max-width: 560px) { .menu-admin-ligne { flex-direction: column; text-align: center; } .menu-admin-titre { flex-basis: auto; } }
-#horaires-liste { margin: 0 auto; max-width: 34rem; }
-.horaires-groupes { display: grid; gap: 0.35rem; list-style: none; margin: 0; padding: 0; }
-.horaires-groupe { align-items: center; background: #f6f1ee; border-radius: 999px; display: grid; gap: 0.6rem; grid-template-columns: 9.5rem 1fr auto; padding: 0.25rem 0.3rem 0.25rem 1rem; }
-.horaires-titre { color: var(--muted); font-size: 0.78rem; font-weight: 600; }
-.horaires-valeur { font-size: 0.85rem; }
-.horaires-groupe .champ-horaire { background: #fff; border: 1px solid var(--terracotta); border-radius: 999px; box-shadow: none; font-size: 0.85rem; padding: 0.25rem 0.8rem; width: 100%; }
-.horaires-groupe .champ-horaire:focus { outline: none; }
-.horaires-groupe .bouton { font-size: 0.75rem; padding: 0.25rem 0.9rem; }
-@media (max-width: 560px) { .horaires-groupe { border-radius: 18px; grid-template-columns: 1fr auto; } .horaires-titre { grid-column: 1 / -1; } }
-
 /* Raccourcis de l'espace employé */
 .employe-raccourcis { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); list-style: none; margin: 1.25rem auto 0; max-width: 44rem; padding: 0; }
 .employe-raccourcis a { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; color: var(--terracotta); display: flex; flex-direction: column; gap: 0.35rem; height: 100%; padding: 1rem 1.1rem; text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
@@ -2322,16 +2312,6 @@ main > .introduction-page ~ .panneau-formulaire-contact {
   font-weight: 700;
 }
 
-.champ-horaire {
-  width: 100%;
-  min-width: 14rem;
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #c9b8ae;
-  border-radius: 0.6rem;
-  font: inherit;
-  text-align: center;
-}
-
 [hidden] {
   display: none !important;
 }
@@ -2404,7 +2384,6 @@ main > .introduction-page ~ .panneau-formulaire-contact {
   #activity-list,
   #account-orders,
   #account-activity,
-  #horaires-liste,
   .menus-admin,
   .evenements-entete,
   .evenement-prochain,
@@ -2485,7 +2464,6 @@ a.bouton,
 .profil-carte,
 .evenement-prochain,
 .menu-admin-ligne,
-.horaires-groupe,
 .carte-catalogue,
 .panneau-reinitialisation,
 .contenu-legal,
@@ -2581,7 +2559,7 @@ main.page-contact > .introduction-page ~ .panneau-formulaire-contact {
   gap: var(--espace-petit);
 }
 
-/* Page « Menus et horaires » : liste en haut, formulaire replié juste en dessous */
+/* Page « Menus » : liste en haut, formulaire replié juste en dessous */
 .page-admin > section[aria-labelledby="menu-liste-title"] { order: 1; }
 .page-admin > .section-menu-edition { order: 2; }
 .page-admin > section[aria-labelledby="horaires-title"] { order: 3; }

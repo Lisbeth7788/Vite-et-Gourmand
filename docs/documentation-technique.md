@@ -25,7 +25,7 @@ Windows, XAMPP (Apache, PHP 8.2, MySQL), phpMyAdmin, Visual Studio Code, Git et 
 | --- | --- | --- |
 | Visiteur | pages publiques | consulter, contacter, s'inscrire |
 | Client (`client`) | compte, réservation | réserver, payer, annuler, donner un avis |
-| Employé (`employe`) | espace employé | réservations, avis, menus et horaires |
+| Employé (`employe`) | espace employé | réservations, avis et menus |
 | Administrateur (`admin`) | pages `admin-*` | tout, et gérer les comptes employés |
 
 Il n'est pas possible de créer un compte administrateur depuis le site.
