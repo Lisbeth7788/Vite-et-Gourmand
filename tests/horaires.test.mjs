@@ -5,7 +5,7 @@ import vm from 'node:vm';
 
 const script = await readFile(new URL('../js/admin-horaires.js', import.meta.url), 'utf8');
 
-async function ouvrirHoraires(echecEnregistrement = false) {
+async function ouvrirHoraires(echecEnregistrement = false, chargementImpossible = false) {
   class Element {
     constructor() { this.listeners = {}; this.dataset = {}; this.value = ''; this.disabled = true; this.options = []; }
     addEventListener(type, handler) { this.listeners[type] = handler; }
@@ -23,7 +23,7 @@ async function ouvrirHoraires(echecEnregistrement = false) {
   const requetes = [];
   const contexte = vm.createContext({
     document: { querySelector: (id) => elements[id], createElement: () => new Element() },
-    demanderJson: async (url, options) => {
+    demanderJson: chargementImpossible ? undefined : async (url, options) => {
       if (!options) return jours;
       requetes.push(JSON.parse(options.body));
       if (echecEnregistrement) throw new Error('Enregistrement impossible.');
@@ -62,4 +62,11 @@ test('un échec reste visible et la saisie est conservée', async () => {
   assert.equal(elements['#horaires-retour'].dataset.state, 'error');
   assert.equal(elements['#horaires-valeur'].value, 'Fermé');
   assert.equal(elements['#horaires-enregistrer'].disabled, false);
+});
+
+test('la page indique une erreur si le script de gestion ne charge pas', async () => {
+  const { elements } = await ouvrirHoraires(false, true);
+  assert.match(elements['#horaires-retour'].textContent, /page de gestion n’a pas pu être chargée/);
+  assert.equal(elements['#horaires-retour'].dataset.state, 'error');
+  assert.equal(elements['#horaires-enregistrer'].disabled, true);
 });

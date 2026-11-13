@@ -52,6 +52,7 @@ formulaire.addEventListener('submit', async (evenement) => {
 });
 
 try {
+  if (typeof demanderJson !== 'function') throw new Error('La page de gestion n’a pas pu être chargée. Réessayez plus tard.');
   jours = await demanderJson('api/horaires.php');
   if (!Array.isArray(jours) || jours.length !== 7) throw new Error('Les horaires de la semaine sont incomplets.');
   jours.forEach((jour) => {
