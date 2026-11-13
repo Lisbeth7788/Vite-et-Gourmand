@@ -25,27 +25,32 @@ Cocher chaque ligne après l'avoir testée.
 - [ ] Détail d'un menu : plats, allergènes, conditions bien visibles.
 - [x] Inscription (mot de passe de 10 caractères avec majuscule, minuscule, chiffre et caractère spécial). Testé en local le 3 novembre 2026.
 - [x] Connexion et déconnexion. Testé en local le 3 novembre 2026.
-- [ ] Mot de passe oublié (lien reçu par e-mail).
+- [x] Mot de passe oublié : réception de l'e-mail confirmée par Lisbeth.
 - [x] Réservation refusée sans connexion. Testé en local le 3 novembre 2026.
 - [x] Commande : adresse, ville, distance hors Bordeaux, détail du prix (menu, remise de 10 %, livraison). Testé en local le 3 novembre 2026.
-- [x] Paiement en ligne d'une réservation. Testé en local le 3 novembre 2026.
+- [x] Parcours de paiement simulé d'une réservation. Testé en local le 3 novembre 2026 ; aucun paiement réel n'est encaissé.
 - [x] Client : modification et annulation d'une réservation. Testé en local le 3 novembre 2026.
 - [x] Accessibilité : aucun défaut détecté par l'outil automatique axe-core (WCAG 2.1 AA) sur 13 pages publiques le 3 novembre 2026. Le contrôle manuel (clavier, lecteur d'écran, zoom 200 %) reste à faire.
 - [ ] Espace client : liste, suivi du statut, avis (la liste et l'annulation sont déjà testées en local).
 - [ ] Espace administrateur : messages, réservations (changement de statut), avis (publier ou refuser), activité.
 - [ ] Réservations : rechercher un client par nom ou e-mail, filtrer par statut puis effacer les filtres.
-- [ ] Espace administrateur : vérifier les statistiques par menu et les filtres de dates.
-- [ ] Vérifier la connexion Upstash depuis Hostinger et le premier chargement (copie initiale des commandes).
+- [x] Espace administrateur : statistiques par menu et filtres de dates vérifiés en ligne.
+- [x] Connexion Upstash depuis Hostinger et chargement des statistiques vérifiés en ligne.
 - [ ] Menus : ajouter un menu avec plats et allergènes, le retrouver sur le site, le supprimer.
 - [ ] Vérifier les horaires affichés dans le pied de page.
 - [ ] Comptes employés : créer, désactiver (la connexion doit alors échouer).
-- [ ] Client : donner un avis sur une réservation terminée.
-- [ ] Espace employé : connexion avec `employe`, accès aux réservations, aux avis et aux menus.
+- [x] Client : avis donné sur une réservation terminée. Refusé dans l'administration et absent du site public.
+- [x] Espace employé : connexion et accès aux réservations, aux avis et aux menus confirmés par Lisbeth.
 - [x] Site déployé chez Hostinger, envoi d'e-mails et parcours client testés en ligne avec une vraie adresse (tests faits par Lisbeth).
 - [x] Parcours client testé sur le site en ligne le 3 novembre 2026 : inscription, connexion, commande à Bordeaux et hors Bordeaux, remise de 10 %, paiement, annulation, droits d'accès, contact, suppression du compte de test. Stocks des menus inchangés après les tests.
 - [x] Accessibilité en ligne le 3 novembre 2026 : aucun défaut axe-core sur 13 pages, lecture à 320 px sans défilement horizontal, focus clavier visible, langue, titres et textes alternatifs présents. Un lien d'évitement « Aller au contenu principal » a ensuite été ajouté sur les 20 pages et testé en local (visible au clavier, saut vers le contenu) ; il est en ligne depuis le redéploiement du 3 novembre 2026. Il manque le contrôle au lecteur d'écran.
-- [ ] Formulaire de contact et réception de l'e-mail.
-- [ ] Affichage sur téléphone, au clavier et avec un zoom à 200 %.
+- [x] Formulaire de contact : réception de l'e-mail confirmée par Lisbeth.
+- [x] Affichage sur téléphone : fonctionnement confirmé par Lisbeth.
+- [ ] Contrôle manuel au clavier, avec un zoom à 200 % et au lecteur d'écran.
+
+Le 13 novembre 2026, un contrôle automatisé sur l'accueil, les menus, le contact et la connexion a vérifié le premier focus clavier et le lien d'évitement, ainsi que l'absence de débordement horizontal à une largeur de 640 pixels. Il ne remplace pas le contrôle manuel au clavier, au zoom à 200 % et au lecteur d'écran.
+
+Le test PHP de migration des photos reste à exécuter sur une base MySQL de test isolée et vide, jamais sur la base de production. Des erreurs HTTP 429 ont aussi été observées en production, notamment sur `session.php` et `horaires.php` lors du contrôle du 13 novembre ; leur cause et leur fréquence restent à confirmer.
 
 ## E-mails
 

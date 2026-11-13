@@ -33,12 +33,12 @@
     <p><strong>Vite et Gourmand</strong> — application de commande et de gestion d'un traiteur à Bordeaux.</p>
     <p>Ce manuel explique les parcours visiteur, client, employé et administrateur, ainsi que les limites de la version de démonstration.</p>
     <p><a href="https://lightblue-yak-778177.hostingersite.com">Ouvrir l'application en ligne</a></p>
-    <p class="small">Version mise à jour le 11 novembre 2026.</p>
+    <p class="small">Version mise à jour le 13 novembre 2026.</p>
   </header>
 
   <section>
     <h2>Comptes de démonstration</h2>
-    <p>Pour une installation locale neuve, ces comptes sont créés par le fichier SQL de démonstration. Sur le site en ligne, les mots de passe sont différents et sont communiqués séparément au correcteur ; ceux de ce tableau ne fonctionnent qu'en local.</p>
+    <p>Pour une installation locale neuve, ces comptes sont créés par le fichier SQL de démonstration. Les accès au site en ligne sont différents et doivent être communiqués séparément au correcteur.</p>
     <table>
       <thead><tr><th>Profil</th><th>Identifiant</th><th>Mot de passe</th><th>Page</th></tr></thead>
       <tbody>
@@ -48,7 +48,7 @@
       </tbody>
     </table>
     <p class="callout warning"><strong>Démo uniquement :</strong> les paiements par carte sont simulés et aucun montant n'est débité. N'utilisez pas de vraie carte bancaire. Changez ou supprimez ces identifiants avant une utilisation réelle.</p>
-    <p>Les e-mails nécessitent un service d'envoi fonctionnel sur l'hébergement. Les statistiques par menu utilisent les données analytiques synchronisées depuis les commandes ; si elles ne s'affichent pas, vérifiez la configuration du service NoSQL.</p>
+    <p>Les e-mails utilisent la messagerie de l'hébergement. Les statistiques par menu utilisent les données analytiques synchronisées depuis les commandes dans Upstash Redis ; si elles ne s'affichent pas, vérifiez la configuration du service NoSQL.</p>
   </section>
 
   <section>
@@ -98,7 +98,7 @@
     <h2>Espace employé</h2>
     <p>Connectez-vous avec le compte employé de démonstration. Depuis <strong>Mon espace employé</strong>, ouvrez les raccourcis de gestion.</p>
     <ul>
-      <li><strong>Réservations :</strong> filtrez par statut ou par adresse e-mail du client, consultez les détails et mettez à jour le statut. Une annulation exige un motif et le mode de contact du client.</li>
+      <li><strong>Réservations :</strong> filtrez par statut ou recherchez un client par nom ou adresse e-mail, puis utilisez « Rechercher » ou « Effacer ». Consultez les détails et mettez à jour le statut. Une annulation exige un motif et le mode de contact du client.</li>
       <li><strong>Avis :</strong> publiez ou refusez les avis soumis par les clients.</li>
       <li><strong>Menus :</strong> créez, modifiez ou supprimez un menu, sa composition, ses allergènes, son stock, ses conditions et sa galerie. Saisissez une image par ligne ; la première est l'image de couverture.</li>
     </ul>
@@ -118,8 +118,8 @@
   <section>
     <h2>Aide et points à retenir</h2>
     <ul>
-      <li>Les horaires affichés dans le pied de page sont modifiables ; l'heure de livraison est saisie librement dans le formulaire.</li>
-      <li>Un e-mail absent peut indiquer que le serveur SMTP n'est pas configuré ; vérifiez aussi les courriers indésirables.</li>
+      <li>Les horaires sont affichés dans le pied de page ; leur gestion ne figure pas sur la page Menus. L'heure de livraison est saisie librement dans le formulaire.</li>
+      <li>Si un e-mail n'arrive pas, vérifiez les courriers indésirables et la configuration de la messagerie de l'hébergement.</li>
       <li>Si les statistiques ne s'affichent pas, vérifiez la connexion à la base NoSQL et la configuration serveur.</li>
       <li>Pour une utilisation réelle, remplacez les mots de passe de démonstration, activez HTTPS et configurez la messagerie et le service NoSQL.</li>
     </ul>

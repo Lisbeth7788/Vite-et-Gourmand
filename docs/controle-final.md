@@ -26,11 +26,11 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 
 ## À faire avant l'envoi (hors code)
 
-1. **Joindre le dossier projet corrigé** : les deux dernières pages du PDF actualisent les passages rédigés avant les dernières évolutions.
+1. **Joindre le dossier projet** : vérifier que le PDF remis décrit bien l'application actuelle.
 2. **Joindre le manuel d'utilisation PDF** : [docs/manuel-utilisation.pdf](manuel-utilisation.pdf) présente les parcours actuels et les identifiants de démonstration.
-3. **Compléter la copie officielle ECF** téléchargée depuis Studi, puis la nommer selon l'énoncé. Ce modèle n'est pas dans le dépôt.
+3. **Compléter la copie officielle ECF** et transmettre les accès administrateur au correcteur selon les consignes Studi. Ne pas publier ces accès dans le dépôt.
 4. **Base en ligne** : ne pas réimporter les fichiers SQL sur la base existante. `sql/comptes-ecf.sql` est réservé à une installation locale neuve, avec des mots de passe publics.
-5. **Configurer Upstash et le SMTP sur Hostinger** : vérifier les connexions HTTPS sortantes et tester le premier chargement des statistiques. Le sujet ECF exige SQL et NoSQL ; MongoDB est une technologie possible, pas la seule.
+5. **Vérifier Upstash et le SMTP sur Hostinger** avant la remise. Le sujet ECF exige SQL et NoSQL ; MongoDB est une technologie possible, pas la seule.
 6. **Vérifier la branche `develop`** : la fusionner dans `main` après tests (bonnes pratiques Git demandées).
 7. **Partager le Trello** en lecture avec le correcteur.
 8. **Lancer la recette** : `docs/deploiement-et-recette.md`.
@@ -39,7 +39,7 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 
 - Le site suit le **modèle traiteur** du sujet : livraison à l'adresse du client, remise de 10 % (minimum du menu plus 5 personnes), frais de livraison hors Bordeaux (5 € plus 0,59 € par km, distance saisie par le client) et statut de retour de matériel (600 € après 10 jours ouvrés). Il n'y a plus de plafond de personnes ni de créneaux.
 - **Galerie d'images** : plusieurs images peuvent être enregistrées par menu ; la première sert d'image de couverture.
-- **Horaires** : les horaires du pied de page sont modifiables par l'employé ou l'administrateur ; le client saisit librement l'heure de livraison.
+- **Horaires** : les horaires restent affichés dans le pied de page ; leur gestion a été retirée de la page Menus. Le client saisit librement l'heure de livraison.
 - **Paiement** : le parcours de carte est simulé ; aucun prestataire bancaire ne débite réellement la carte.
 - Le filtre des réservations par statut et par client est présent dans la page Réservations.
-- Un seul **compte employé** partagé (`employe`) est fourni pour la démonstration ; l'administrateur peut en créer d'autres depuis « 7. Comptes employés ».
+- Un seul **compte employé** partagé (`employe`) est fourni pour la démonstration ; l'administrateur peut en créer d'autres depuis la page Comptes employés.
