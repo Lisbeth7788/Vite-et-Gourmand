@@ -37,7 +37,7 @@ Cocher chaque ligne après l'avoir testée.
 - [x] Espace administrateur : statistiques par menu et filtres de dates vérifiés en ligne.
 - [x] Connexion Upstash depuis Hostinger et chargement des statistiques vérifiés en ligne.
 - [ ] Menus : ajouter un menu avec plats et allergènes, le retrouver sur le site, le supprimer.
-- [ ] Vérifier les horaires affichés dans le pied de page.
+- [x] Horaires : en base locale isolée, modification par un employé, persistance après rechargement et affichage public du jour modifié ; modification par un administrateur et refus pour un visiteur ou un client. Vérification en production à réaliser après déploiement.
 - [ ] Comptes employés : créer, désactiver (la connexion doit alors échouer).
 - [x] Client : avis donné sur une réservation terminée. Refusé dans l'administration et absent du site public.
 - [x] Espace employé : connexion et accès aux réservations, aux avis et aux menus confirmés par Lisbeth.
@@ -50,7 +50,7 @@ Cocher chaque ligne après l'avoir testée.
 
 Le 13 novembre 2026, un contrôle automatisé sur l'accueil, les menus, le contact et la connexion a vérifié le premier focus clavier et le lien d'évitement, ainsi que l'absence de débordement horizontal à une largeur de 640 pixels. Il ne remplace pas le contrôle manuel au clavier, au zoom à 200 % et au lecteur d'écran.
 
-Le test PHP de migration des photos reste à exécuter sur une base MySQL de test isolée et vide, jamais sur la base de production. Des erreurs HTTP 429 ont aussi été observées en production, notamment sur `session.php` et `horaires.php` lors du contrôle du 13 novembre ; leur cause et leur fréquence restent à confirmer.
+Le test PHP de migration des photos a été exécuté le 13 novembre 2026 sur une base MySQL locale isolée et vide. Des erreurs HTTP 429 ont aussi été observées en production, notamment sur `session.php` et `horaires.php` lors du contrôle du 13 novembre ; leur cause et leur fréquence restent à confirmer.
 
 ## E-mails
 

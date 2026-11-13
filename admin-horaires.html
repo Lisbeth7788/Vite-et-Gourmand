@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Horaires - Espace de gestion - Vite et Gourmand</title>
+  <link rel="stylesheet" href="css/style.css?v=d7d5cab5">
+</head>
+<body>
+  <a class="lien-evitement" href="#contenu-principal">Aller au contenu principal</a>
+  <header class="entete-site">
+    <a class="logo" href="index.html">Vite et Gourmand</a>
+    <nav class="navigation-principale" aria-label="Navigation principale">
+      <ul><li><a href="index.html">Accueil</a></li><li><a href="menus.html">Menus</a></li><li><a href="api/auth/logout.php">Déconnexion</a></li></ul>
+    </nav>
+  </header>
+  <main id="contenu-principal" class="page-catalogue page-admin">
+    <div class="introduction-page">
+      <p class="sur-titre">Espace professionnel</p>
+      <h1>Horaires d'ouverture</h1>
+      <p id="admin-identity">Vérification de votre session...</p>
+    </div>
+    <nav class="navigation-admin" aria-label="Espace de gestion">
+      <ol>
+        <li data-employe-only><a href="espace-employe.html">Gérer le site</a></li>
+        <li data-admin-only><a href="admin.html">Messages</a></li>
+        <li><a href="admin-reservations.html">Réservations</a></li>
+        <li><a href="admin-avis.html">Avis</a></li>
+        <li data-admin-only><a href="admin-activite.html">Activité</a></li>
+        <li><a href="admin-menus.html">Menus</a></li>
+        <li><a href="admin-horaires.html" aria-current="page">Horaires</a></li>
+        <li data-admin-only><a href="admin-comptes.html">Comptes employés</a></li>
+      </ol>
+    </nav>
+    <section class="section-formulaire" aria-labelledby="horaires-titre">
+      <h2 id="horaires-titre">Modifier les horaires</h2>
+      <p>Choisissez un jour et indiquez ses horaires, ou « Fermé ». Ils apparaissent dans le pied de page du site.</p>
+      <form id="horaires-form" class="formulaire-menu">
+        <div class="champ-formulaire">
+          <label for="horaires-jour">Jour</label>
+          <select id="horaires-jour" name="jour" required disabled></select>
+        </div>
+        <div class="champ-formulaire">
+          <label for="horaires-valeur">Horaires d'ouverture</label>
+          <input id="horaires-valeur" name="horaires" maxlength="120" required disabled placeholder="Exemple : 9h00 - 18h00 ou Fermé">
+        </div>
+        <div class="actions-menu"><button class="bouton bouton-petit" id="horaires-enregistrer" type="submit" disabled>Enregistrer</button></div>
+      </form>
+      <output id="horaires-retour" class="message-formulaire" aria-live="polite"></output>
+    </section>
+  </main>
+  <script type="module" src="js/script.js?v=horaires"></script>
+  <script src="js/admin.js?v=gestion-fiable"></script>
+  <script type="module" src="js/admin-horaires.js?v=horaires"></script>
+</body>
+</html>

@@ -39,7 +39,7 @@ Contrôle du projet fait le 1er novembre 2026, comparé au sujet de l'ECF et au 
 
 - Le site suit le **modèle traiteur** du sujet : livraison à l'adresse du client, remise de 10 % (minimum du menu plus 5 personnes), frais de livraison hors Bordeaux (5 € plus 0,59 € par km, distance saisie par le client) et statut de retour de matériel (600 € après 10 jours ouvrés). Il n'y a plus de plafond de personnes ni de créneaux.
 - **Galerie d'images** : plusieurs images peuvent être enregistrées par menu ; la première sert d'image de couverture.
-- **Horaires** : les horaires restent affichés dans le pied de page ; leur gestion a été retirée de la page Menus. Le client saisit librement l'heure de livraison.
+- **Horaires** : l'employé et l'administrateur peuvent modifier les horaires de chaque jour depuis la page Horaires. Le client saisit librement l'heure de livraison.
 - **Paiement** : le parcours de carte est simulé ; aucun prestataire bancaire ne débite réellement la carte.
 - Le filtre des réservations par statut et par client est présent dans la page Réservations.
 - Un seul **compte employé** partagé (`employe`) est fourni pour la démonstration ; l'administrateur peut en créer d'autres depuis la page Comptes employés.

@@ -516,16 +516,12 @@ async function afficherHorairesPiedDePage() {
     const reponse = await fetch('api/horaires.php');
     if (!reponse.ok) throw new Error('Les horaires du traiteur n’ont pas pu être chargés.');
     const jours = await reponse.json();
-    if (!Array.isArray(jours) || !jours.length) return;
-    const groupes = [
-      ['Semaine (lun. - ven.)', jours.find((jour) => Number(jour.day_of_week) === 1) || jours[0]],
-      ['Week-end (sam. - dim.)', jours.find((jour) => Number(jour.day_of_week) === 6) || jours.at(-1)]
-    ];
-    liste.replaceChildren(...groupes.map(([titre, jour]) => {
+    if (!Array.isArray(jours) || jours.length !== 7) throw new Error('Les horaires de la semaine sont incomplets.');
+    liste.replaceChildren(...jours.map((jour) => {
       const ligne = document.createElement('div');
       const nom = document.createElement('dt');
       const horaires = document.createElement('dd');
-      nom.textContent = titre;
+      nom.textContent = jour.day_name;
       (typeof jour.opening_hours === 'string' ? jour.opening_hours : '').split('/').forEach((plage) => {
         const periode = document.createElement('span');
         periode.textContent = plage.trim();
@@ -542,7 +538,14 @@ async function afficherHorairesPiedDePage() {
     details.append(summary, liste);
     openingHours.append(details);
   } catch (error) {
-    console.warn('Conservation des horaires de secours du pied de page :', error);
+    console.warn('Chargement des horaires du pied de page impossible :', error);
+    const ligne = document.createElement('div');
+    const nom = document.createElement('dt');
+    const horaires = document.createElement('dd');
+    nom.textContent = 'Horaires';
+    horaires.textContent = 'Temporairement indisponibles';
+    ligne.append(nom, horaires);
+    liste.replaceChildren(ligne);
   }
 }
 
