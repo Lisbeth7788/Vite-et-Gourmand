@@ -519,7 +519,7 @@ async function afficherHorairesPiedDePage() {
     if (!Array.isArray(jours) || !jours.length) return;
     const groupes = [
       ['Semaine (lun. - ven.)', jours.find((jour) => Number(jour.day_of_week) === 1) || jours[0]],
-      ['Week-end (sam. - dim.)', jours.find((jour) => Number(jour.day_of_week) === 6) || jours[jours.length - 1]]
+      ['Week-end (sam. - dim.)', jours.find((jour) => Number(jour.day_of_week) === 6) || jours.at(-1)]
     ];
     liste.replaceChildren(...groupes.map(([titre, jour]) => {
       const ligne = document.createElement('div');

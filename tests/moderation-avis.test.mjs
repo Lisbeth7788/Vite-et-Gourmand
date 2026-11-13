@@ -16,7 +16,7 @@ for (const role of ['admin', 'employe']) {
       document: {
         querySelector: id => id === '#review-list' ? liste : id === '#admin-identity' ? identite : null,
         querySelectorAll: () => [],
-        body: { hasAttribute: () => false }
+        body: { dataset: {} }
       },
       window: { location: {}, alert: message => { throw new Error(message); } },
       URLSearchParams,

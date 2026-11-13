@@ -30,7 +30,7 @@ async function ouvrir(role, attendre = async () => {}) {
     document: {
       querySelector: id => elements[id] || null,
       querySelectorAll: () => [],
-      body: { hasAttribute: () => false }
+      body: { dataset: {} }
     },
     window: { location: {}, alert() {}, confirm: () => false },
     URLSearchParams,

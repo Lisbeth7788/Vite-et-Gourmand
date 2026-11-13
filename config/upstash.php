@@ -2,6 +2,10 @@
 
 require_once __DIR__ . '/statistiques.php';
 
+class ExceptionUpstash extends RuntimeException
+{
+}
+
 function configurationUpstash(): ?array
 {
     $url = trim(getenv('UPSTASH_REDIS_REST_URL') ?: '');
@@ -22,11 +26,11 @@ function configurationUpstash(): ?array
         || isset($parties['fragment'])
         || !in_array($parties['path'] ?? '', ['', '/'], true)
     ) {
-        throw new RuntimeException('L’adresse REST Upstash est absente ou invalide.');
+        throw new ExceptionUpstash('L’adresse REST Upstash est absente ou invalide.');
     }
 
     if ($token === '' || preg_match('/[\r\n]/', $token)) {
-        throw new RuntimeException('Le jeton REST Upstash est absent ou contient un retour à la ligne.');
+        throw new ExceptionUpstash('Le jeton REST Upstash est absent ou contient un retour à la ligne.');
     }
 
     return ['url' => rtrim($url, '/'), 'token' => $token];
@@ -36,13 +40,13 @@ function requeteUpstash(string $route, array $corps, ?callable $transport = null
 {
     $configuration = configurationUpstash();
     if ($configuration === null) {
-        throw new RuntimeException('Le service NoSQL n’est pas configuré.');
+        throw new ExceptionUpstash('Le service NoSQL n’est pas configuré.');
     }
 
     if ($transport !== null) {
         $reponse = $transport($route, $corps);
         if (!is_array($reponse)) {
-            throw new RuntimeException('La réponse du service NoSQL est invalide.');
+            throw new ExceptionUpstash('La réponse du service NoSQL est invalide.');
         }
         return $reponse;
     }
@@ -67,17 +71,17 @@ function requeteUpstash(string $route, array $corps, ?callable $transport = null
     }
 
     if ($contenu === false) {
-        throw new RuntimeException('Connexion au service NoSQL impossible.');
+        throw new ExceptionUpstash('Connexion au service NoSQL impossible.');
     }
 
     $ligneStatut = $http_response_header[0] ?? '';
     if (!preg_match('/\s(\d{3})\s/', $ligneStatut, $statut) || (int) $statut[1] < 200 || (int) $statut[1] >= 300) {
-        throw new RuntimeException('Le service NoSQL a refusé la requête.');
+        throw new ExceptionUpstash('Le service NoSQL a refusé la requête.');
     }
 
     $reponse = json_decode($contenu, true, 512, JSON_THROW_ON_ERROR);
     if (!is_array($reponse) || array_key_exists('error', $reponse)) {
-        throw new RuntimeException('Le service NoSQL a renvoyé une erreur.');
+        throw new ExceptionUpstash('Le service NoSQL a renvoyé une erreur.');
     }
 
     return $reponse;
@@ -87,7 +91,7 @@ function commandeUpstash(array $commande, ?callable $transport = null): mixed
 {
     $reponse = requeteUpstash('', $commande, $transport);
     if (!array_key_exists('result', $reponse)) {
-        throw new RuntimeException('La réponse du service NoSQL ne contient pas de résultat.');
+        throw new ExceptionUpstash('La réponse du service NoSQL ne contient pas de résultat.');
     }
 
     return $reponse['result'];
@@ -97,13 +101,13 @@ function transactionUpstash(array $commandes, ?callable $transport = null): arra
 {
     $reponses = requeteUpstash('multi-exec', $commandes, $transport);
     if (count($reponses) !== count($commandes)) {
-        throw new RuntimeException('La transaction NoSQL n’a pas renvoyé tous ses résultats.');
+        throw new ExceptionUpstash('La transaction NoSQL n’a pas renvoyé tous ses résultats.');
     }
 
     $resultats = [];
     foreach ($reponses as $reponse) {
         if (!is_array($reponse) || !array_key_exists('result', $reponse) || array_key_exists('error', $reponse)) {
-            throw new RuntimeException('Une commande de la transaction NoSQL a échoué.');
+            throw new ExceptionUpstash('Une commande de la transaction NoSQL a échoué.');
         }
         $resultats[] = $reponse['result'];
     }
@@ -116,7 +120,7 @@ function commandesStatistiqueNoSQL(array $commande): array
     $identifiant = (string) ($commande['id'] ?? '');
     $date = (string) ($commande['service_date'] ?? '');
     if (!preg_match('/\A[a-zA-Z0-9_-]{1,64}\z/', $identifiant) || !dateStatistiqueValide($date)) {
-        throw new RuntimeException('Les données de la commande sont invalides pour le stockage NoSQL.');
+        throw new ExceptionUpstash('Les données de la commande sont invalides pour le stockage NoSQL.');
     }
 
     $document = [
@@ -140,7 +144,7 @@ function enregistrerStatistiqueNoSQL(PDO $pdo, string $identifiant, ?callable $t
     $requete->execute([$identifiant]);
     $commande = $requete->fetch(PDO::FETCH_ASSOC);
     if (!$commande) {
-        throw new RuntimeException('Commande introuvable pour la synchronisation NoSQL.');
+        throw new ExceptionUpstash('Commande introuvable pour la synchronisation NoSQL.');
     }
 
     transactionUpstash(commandesStatistiqueNoSQL($commande), $transport);
@@ -181,8 +185,33 @@ function initialiserStatistiquesNoSQL(PDO $pdo, ?callable $transport = null): vo
     }
 
     if (commandeUpstash(['SET', 'vite-et-gourmand:statistiques:initialise', '1'], $transport) !== 'OK') {
-        throw new RuntimeException('L’initialisation des statistiques NoSQL a échoué.');
+        throw new ExceptionUpstash('L’initialisation des statistiques NoSQL a échoué.');
     }
+}
+
+function lireDocumentsStatistiques(array $identifiants, ?callable $transport): array
+{
+    $cles = array_map(
+        fn ($identifiant) => 'vite-et-gourmand:statistiques:commande:' . $identifiant,
+        $identifiants
+    );
+    $valeurs = commandeUpstash(array_merge(['MGET'], $cles), $transport);
+    if (!is_array($valeurs) || count($valeurs) !== count($cles)) {
+        throw new ExceptionUpstash('Les commandes NoSQL n’ont pas pu être lues.');
+    }
+
+    $documents = [];
+    foreach ($valeurs as $valeur) {
+        if (!is_string($valeur)) {
+            throw new ExceptionUpstash('Une commande référencée est absente du stockage NoSQL.');
+        }
+        $document = json_decode($valeur, true, 512, JSON_THROW_ON_ERROR);
+        if (!is_array($document)) {
+            throw new ExceptionUpstash('Un document de statistiques NoSQL est invalide.');
+        }
+        $documents[] = $document;
+    }
+    return $documents;
 }
 
 function lireStatistiquesNoSQL(array $filtres, ?callable $transport = null): array
@@ -205,31 +234,13 @@ function lireStatistiquesNoSQL(array $filtres, ?callable $transport = null): arr
             (string) $tailleLot
         ], $transport);
         if (!is_array($identifiants)) {
-            throw new RuntimeException('L’index des dates NoSQL est invalide.');
+            throw new ExceptionUpstash('L’index des dates NoSQL est invalide.');
         }
         if (!$identifiants) {
             break;
         }
 
-        $cles = array_map(
-            fn ($identifiant) => 'vite-et-gourmand:statistiques:commande:' . $identifiant,
-            $identifiants
-        );
-        $valeurs = commandeUpstash(array_merge(['MGET'], $cles), $transport);
-        if (!is_array($valeurs) || count($valeurs) !== count($cles)) {
-            throw new RuntimeException('Les commandes NoSQL n’ont pas pu être lues.');
-        }
-
-        foreach ($valeurs as $valeur) {
-            if (!is_string($valeur)) {
-                throw new RuntimeException('Une commande référencée est absente du stockage NoSQL.');
-            }
-            $document = json_decode($valeur, true, 512, JSON_THROW_ON_ERROR);
-            if (!is_array($document)) {
-                throw new RuntimeException('Un document de statistiques NoSQL est invalide.');
-            }
-            $documents[] = $document;
-        }
+        array_push($documents, ...lireDocumentsStatistiques($identifiants, $transport));
 
         $decalage += count($identifiants);
     } while (count($identifiants) === $tailleLot);
@@ -248,7 +259,7 @@ function effacerStatistiquesNoSQL(?callable $transport = null): int
             '49'
         ], $transport);
         if (!is_array($identifiants)) {
-            throw new RuntimeException('L’index des dates NoSQL est invalide.');
+            throw new ExceptionUpstash('L’index des dates NoSQL est invalide.');
         }
         if (!$identifiants) {
             break;

@@ -3,6 +3,11 @@
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/upstash.php';
 require_once __DIR__ . '/../config/tarifs.php';
+
+class ExceptionStockIndisponible extends RuntimeException
+{
+}
+
 requireRole(['client', 'employe', 'admin']);
 enforceRateLimit('orders', 10, 600, 'user-' . $_SESSION['user']['id']);
 
@@ -78,7 +83,7 @@ try {
     $stockUpdate = $pdo->prepare('UPDATE menus SET stock = stock - 1 WHERE id = ? AND stock > 0');
     $stockUpdate->execute([$menu['id']]);
     if ($stockUpdate->rowCount() !== 1) {
-        throw new RuntimeException('Stock indisponible.');
+        throw new ExceptionStockIndisponible('Stock indisponible.');
     }
     $history = $pdo->prepare("INSERT INTO order_status_history (order_id, status, note) VALUES (?, 'pending', 'Commande reçue')");
     $history->execute([$id]);
